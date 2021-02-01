@@ -2,38 +2,13 @@ import React, { useState } from 'react'
 import './Workouts.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock, faRuler } from '@fortawesome/free-solid-svg-icons'
-import firebase from '../firebase'
-
-interface Workout {
-  id: string,
-  name: string,
-  description: string,
-  updatedAt: string,
-  durationType: string,
-  workoutTime: string,
-  workoutDistance: string
-}
+import * as workoutMeta from '../../network/workoutMeta'
 
 const Workouts = (props: { userId: string }) => {
-
-  const [workouts, setWorkouts] = useState<Array<Workout>>([])
+  const [workouts, setWorkouts] = useState<Array<workoutMeta.WorkoutMetadata>>([])
 
   React.useEffect(() => {
-
-    firebase.database().ref('users/' + props.userId + '/workouts').orderByChild('name').once('value').then(function (snapshot) {
-      snapshot.forEach(child => {
-        setWorkouts(workouts => [...workouts, {
-          id: child.key || "",
-          name: child.val().name || "No name",
-          description: child.val().description,
-          updatedAt: child.val().updatedAt,
-          durationType: child.val().durationType,
-          workoutTime: child.val().workoutTime,
-          workoutDistance: child.val().workoutDistance
-        }
-        ])
-      });
-    })
+    workoutMeta.fetchAll(props.userId).then(setWorkouts);
   }, [props.userId])
 
   return (

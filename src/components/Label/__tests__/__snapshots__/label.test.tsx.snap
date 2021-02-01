@@ -1,0 +1,187 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Label> for cycling ramp, renders: duration, power-range, %FTP-range, cadence 1`] = `
+<div
+  className="label"
+>
+  <div>
+    <FontAwesomeIcon
+      fixedWidth={true}
+      icon="faClock"
+    />
+     
+    01:40
+  </div>
+  <div>
+    <FontAwesomeIcon
+      fixedWidth={true}
+      icon="faBolt"
+    />
+     
+    100 W
+     - 
+    200 W
+  </div>
+  <div>
+    50%
+     - 
+    100%
+     FTP
+  </div>
+  <div
+    className="cadence-row"
+  >
+    <label
+      className="cadenceLabel"
+    >
+      Cadence
+    </label>
+    <input
+      className="textField cadence"
+      max="150"
+      min="40"
+      name="cadence"
+      onChange={[Function]}
+      onClick={[Function]}
+      step="5"
+      type="number"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`<Label> for cycling, renders: duration, power, w/kg, %FTP, cadence 1`] = `
+<div
+  className="label"
+>
+  <div>
+    <FontAwesomeIcon
+      fixedWidth={true}
+      icon="faClock"
+    />
+     
+    01:40
+  </div>
+  <div>
+    <FontAwesomeIcon
+      fixedWidth={true}
+      icon="faBolt"
+    />
+     
+    250 W
+  </div>
+  <div>
+    3.3 W/kg
+     · 
+    125%
+     FTP
+  </div>
+  <div
+    className="cadence-row"
+  >
+    <label
+      className="cadenceLabel"
+    >
+      Cadence
+    </label>
+    <input
+      className="textField cadence"
+      max="150"
+      min="40"
+      name="cadence"
+      onChange={[Function]}
+      onClick={[Function]}
+      step="5"
+      type="number"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`<Label> for running (in distance mode), renders: duration, distance, %pace, pace type 1`] = `
+<div
+  className="label"
+>
+  <div>
+    <FontAwesomeIcon
+      fixedWidth={true}
+      icon="faClock"
+    />
+     
+    01:40
+  </div>
+  <div>
+    <FontAwesomeIcon
+      fixedWidth={true}
+      icon="faRuler"
+    />
+     
+    1250 m
+  </div>
+  <div>
+    125%
+     
+    10K pace
+  </div>
+</div>
+`;
+
+exports[`<Label> for running ramp, renders: duration, distance, %pace-range, pace type 1`] = `
+<div
+  className="label"
+>
+  <div>
+    <FontAwesomeIcon
+      fixedWidth={true}
+      icon="faClock"
+    />
+     
+    01:40
+  </div>
+  <div>
+    <FontAwesomeIcon
+      fixedWidth={true}
+      icon="faRuler"
+    />
+     
+    750 m
+  </div>
+  <div>
+    50%
+     to 
+    100%
+     
+    10K pace
+  </div>
+</div>
+`;
+
+exports[`<Label> for running, renders: duration, distance, %pace, pace type 1`] = `
+<div
+  className="label"
+>
+  <div>
+    <FontAwesomeIcon
+      fixedWidth={true}
+      icon="faClock"
+    />
+     
+    01:40
+  </div>
+  <div>
+    <FontAwesomeIcon
+      fixedWidth={true}
+      icon="faRuler"
+    />
+     
+    1250 m
+  </div>
+  <div>
+    125%
+     
+    10K pace
+  </div>
+</div>
+`;

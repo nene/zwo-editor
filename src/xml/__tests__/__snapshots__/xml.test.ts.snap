@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`XML creates and parses an empty workout 1`] = `
+"<workout_file>
+  <author>John Doe</author>
+  <name>Sample Workout</name>
+  <description>Some intervals for your pleasure (or pain).</description>
+  <sportType>bike</sportType>
+  <durationType>time</durationType>
+  <tags>
+    <tag name=\\"RECOVERY\\"/>
+    <tag name=\\"INTERVALS\\"/>
+  </tags>
+  <workout/>
+</workout_file>"
+`;
+
+exports[`XML creates and parses bike workout (with cadence) 1`] = `
+"<workout_file>
+  <author>Eddy Merckx</author>
+  <name>Cycling Workout</name>
+  <description>Featuring a mixture of different interval types.</description>
+  <sportType>bike</sportType>
+  <durationType>time</durationType>
+  <tags/>
+  <workout>
+    <Warmup Duration=\\"600\\" PowerLow=\\"0.3\\" PowerHigh=\\"0.75\\" pace=\\"0\\" Cadence=\\"80\\"/>
+    <SteadyState Duration=\\"300\\" Power=\\"0.8\\" pace=\\"0\\" Cadence=\\"90\\"/>
+    <IntervalsT Repeat=\\"4\\" OnDuration=\\"30\\" OffDuration=\\"60\\" OnPower=\\"1.2\\" OffPower=\\"0.6\\" pace=\\"0\\" Cadence=\\"100\\" CadenceResting=\\"60\\"/>
+    <Ramp Duration=\\"60\\" PowerLow=\\"0.8\\" PowerHigh=\\"1.5\\" pace=\\"0\\" Cadence=\\"90\\"/>
+    <free Duration=\\"1200\\" FlatRoad=\\"0\\"/>
+    <Cooldown Duration=\\"600\\" PowerLow=\\"0.7\\" PowerHigh=\\"0.3\\" pace=\\"0\\" Cadence=\\"85\\"/>
+  </workout>
+</workout_file>"
+`;
+
+exports[`XML creates and parses bike workout (without cadence) 1`] = `
+"<workout_file>
+  <author>Eddy Merckx</author>
+  <name>Cycling Workout</name>
+  <description>Featuring a mixture of different interval types.</description>
+  <sportType>bike</sportType>
+  <durationType>time</durationType>
+  <tags/>
+  <workout>
+    <Warmup Duration=\\"600\\" PowerLow=\\"0.3\\" PowerHigh=\\"0.75\\" pace=\\"0\\">
+      <textevent timeoffset=\\"0\\" message=\\"Welcome to the workout!\\"/>
+    </Warmup>
+    <SteadyState Duration=\\"300\\" Power=\\"0.8\\" pace=\\"0\\">
+      <textevent timeoffset=\\"150\\" message=\\"This is just a warmup still\\"/>
+    </SteadyState>
+    <IntervalsT Repeat=\\"4\\" OnDuration=\\"30\\" OffDuration=\\"60\\" OnPower=\\"1.2\\" OffPower=\\"0.6\\" pace=\\"0\\">
+      <textevent timeoffset=\\"0\\" message=\\"It's the first one of four sprint efforts\\"/>
+      <textevent timeoffset=\\"270\\" message=\\"It's the first one of four sprint efforts\\"/>
+    </IntervalsT>
+    <Ramp Duration=\\"60\\" PowerLow=\\"0.8\\" PowerHigh=\\"1.5\\" pace=\\"0\\">
+      <textevent timeoffset=\\"0\\" message=\\"As a bonus, we'll ramp up really hard :)\\"/>
+    </Ramp>
+    <free Duration=\\"1200\\" FlatRoad=\\"0\\">
+      <textevent timeoffset=\\"600\\" message=\\"Ride as hard as you can for 20 minutes!\\"/>
+    </free>
+    <Cooldown Duration=\\"600\\" PowerLow=\\"0.7\\" PowerHigh=\\"0.3\\" pace=\\"0\\">
+      <textevent timeoffset=\\"590\\" message=\\"This was it. See you next time.\\"/>
+    </Cooldown>
+  </workout>
+</workout_file>"
+`;
+
+exports[`XML creates and parses run workout (distance-based) 1`] = `
+"<workout_file>
+  <author>Carl Lewis</author>
+  <name>Run Workout</name>
+  <description>Featuring a mixture of different interval types.</description>
+  <sportType>run</sportType>
+  <durationType>distance</durationType>
+  <tags/>
+  <workout>
+    <Warmup Duration=\\"1000\\" PowerLow=\\"0.3\\" PowerHigh=\\"0.75\\" pace=\\"4\\">
+      <textevent timeoffset=\\"0\\" message=\\"Welcome to the workout!\\"/>
+    </Warmup>
+    <SteadyState Duration=\\"600\\" Power=\\"0.8\\" pace=\\"3\\">
+      <textevent timeoffset=\\"300\\" message=\\"This is just a warmup still\\"/>
+    </SteadyState>
+    <IntervalsT Repeat=\\"4\\" OnDuration=\\"200\\" OffDuration=\\"400\\" OnPower=\\"1.2\\" OffPower=\\"0.6\\" pace=\\"1\\">
+      <textevent timeoffset=\\"0\\" message=\\"It's the first one of four sprint efforts\\"/>
+      <textevent timeoffset=\\"1800\\" message=\\"It's the first one of four sprint efforts\\"/>
+    </IntervalsT>
+    <Ramp Duration=\\"600\\" PowerLow=\\"0.8\\" PowerHigh=\\"1.5\\" pace=\\"0\\">
+      <textevent timeoffset=\\"0\\" message=\\"As a bonus, we'll ramp up really hard :)\\"/>
+    </Ramp>
+    <Cooldown Duration=\\"1000\\" PowerLow=\\"0.7\\" PowerHigh=\\"0.3\\" pace=\\"2\\">
+      <textevent timeoffset=\\"800\\" message=\\"This was it. See you next time.\\"/>
+    </Cooldown>
+  </workout>
+</workout_file>"
+`;
+
+exports[`XML creates and parses run workout (duration-based) 1`] = `
+"<workout_file>
+  <author>Carl Lewis</author>
+  <name>Run Workout</name>
+  <description>Featuring a mixture of different interval types.</description>
+  <sportType>run</sportType>
+  <durationType>time</durationType>
+  <tags/>
+  <workout>
+    <Warmup Duration=\\"600\\" PowerLow=\\"0.3\\" PowerHigh=\\"0.75\\" pace=\\"4\\">
+      <textevent timeoffset=\\"0\\" message=\\"Welcome to the workout!\\"/>
+    </Warmup>
+    <SteadyState Duration=\\"300\\" Power=\\"0.8\\" pace=\\"3\\">
+      <textevent timeoffset=\\"150\\" message=\\"This is just a warmup still\\"/>
+    </SteadyState>
+    <IntervalsT Repeat=\\"4\\" OnDuration=\\"30\\" OffDuration=\\"60\\" OnPower=\\"1.2\\" OffPower=\\"0.6\\" pace=\\"1\\">
+      <textevent timeoffset=\\"0\\" message=\\"It's the first one of four sprint efforts\\"/>
+      <textevent timeoffset=\\"270\\" message=\\"It's the first one of four sprint efforts\\"/>
+    </IntervalsT>
+    <Ramp Duration=\\"60\\" PowerLow=\\"0.8\\" PowerHigh=\\"1.5\\" pace=\\"0\\">
+      <textevent timeoffset=\\"0\\" message=\\"As a bonus, we'll ramp up really hard :)\\"/>
+    </Ramp>
+    <Cooldown Duration=\\"600\\" PowerLow=\\"0.7\\" PowerHigh=\\"0.3\\" pace=\\"2\\">
+      <textevent timeoffset=\\"590\\" message=\\"This was it. See you next time.\\"/>
+    </Cooldown>
+  </workout>
+</workout_file>"
+`;
+
+exports[`XML excludes instructions past the end of workout 1`] = `
+"<workout_file>
+  <author>Who Knows</author>
+  <name>Borderline instruction</name>
+  <description>Checking instruction positions.</description>
+  <sportType>bike</sportType>
+  <durationType>time</durationType>
+  <tags/>
+  <workout>
+    <SteadyState Duration=\\"300\\" Power=\\"0.8\\" pace=\\"0\\">
+      <textevent timeoffset=\\"0\\" message=\\"Are we there yet?\\"/>
+      <textevent timeoffset=\\"299\\" message=\\"Almost there!\\"/>
+    </SteadyState>
+  </workout>
+</workout_file>"
+`;
