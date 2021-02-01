@@ -872,29 +872,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
     setDurationType(newSportType === "bike" ? "time" : "distance");
   }
 
-  function transformTextToWorkout(textValue: string) {
-
-    // reset each time
-    setBars([])
-
-    // 2 minutes block at 112% FTP
-    // 2 minutes block at 330 W
-    // 30 seconds block at ..
-
-    //console.log(textValue);
-
-    const workoutBlocks = textValue.split('\n')
-    workoutBlocks.forEach((workoutBlock) => {
-      if(workoutBlock.includes("block")){
-        // generate a steady state block
-        addBar(1, 300)
-        
-      }
-      
-    })
-    
-  }
-
   return (
     // Adding tabIndex allows div element to receive keyboard events
     <div className="container" onKeyDown={handleKeyPress} tabIndex={0}>
@@ -1017,7 +994,7 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
               </select>
             }
           </div>
-        }        
+        }
         <div className='canvas' ref={canvasRef}>          
           {actionId &&
             <div className='fader' style={{width: canvasRef.current?.scrollWidth}} onClick={() => setActionId(undefined)}></div>
