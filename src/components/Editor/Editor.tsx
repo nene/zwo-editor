@@ -13,7 +13,6 @@ import { ReactComponent as WarmupLogo } from '../../assets/warmup.svg'
 import { ReactComponent as IntervalLogo } from '../../assets/interval.svg'
 import { ReactComponent as SteadyLogo } from '../../assets/steady.svg'
 import firebase, { auth } from '../../network/firebase'
-import * as workoutMeta from '../../network/workoutMeta'
 import SaveForm from '../Forms/SaveForm'
 import Head from '../Head/Head'
 import { RouteComponentProps } from 'react-router-dom';
@@ -45,12 +44,9 @@ import Notification, { NotificationMessage } from './Notification'
 import { SportType } from '../../types/SportType'
 import createMode from '../../modes/createMode'
 import { workoutDuration } from '../../utils/duration'
-import * as format from '../../utils/format'
 import { Duration } from '../../types/Length'
 import DistanceAxis from '../Axis/DistanceAxis'
 import { LengthType } from '../../types/LengthType'
-import { workoutDistance } from '../../utils/distance'
-import RunMode from '../../modes/RunMode'
 
 type TParams = { id: string };
 
@@ -74,7 +70,7 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
 
   const [savePopupIsVisile, setSavePopupVisibility] = useState(false)
 
-  const [user, setUser] = useState<firebase.User | null>(null)
+  const [, setUser] = useState<firebase.User | null>(null)
 
   const canvasRef = useRef<HTMLInputElement>(null);
   const segmentsRef = useRef<HTMLInputElement>(null);
@@ -220,10 +216,7 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
     setSavePopupVisibility(true)
   }
 
-  async function save() {
-    const mode = getMode();
-    showMessage({ className: 'loading', text: 'Saving..' })
-
+  function createZwoFile() {
     const xml = createWorkoutXml({
       author,
       name,
@@ -233,41 +226,13 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
       tags,
       intervals,
       instructions,
-    }, mode);
+    }, getMode());
 
-    const file = new Blob([xml], { type: 'application/xml' })
-
-    // save to cloud (firebase) if logged in
-    if (user) {
-      try {
-        await workoutMeta.update(user, {
-          id: id,
-          name: name,
-          description: description,
-          updatedAt: Date(),
-          sportType: sportType,
-          durationType: lengthType,
-          workoutTime: format.duration(workoutDuration(intervals, mode)),
-          workoutDistance: mode instanceof RunMode ? format.distance(workoutDistance(intervals, mode)) : "",
-        });
-        //upload to s3  
-        upload(id, file)
-        hideMessage()
-      } catch (error) {
-        console.log(error);
-        showMessage({ className: 'error', text: 'Cannot save this' })
-      }
-    } else {
-      // download workout without saving
-      hideMessage()
-    }
-
-    return file
+    return new Blob([xml], { type: 'application/xml' })
   }
 
   function downloadWorkout() {
-
-    const tempFile = save()
+    const tempFile = createZwoFile()
     const url = window.URL.createObjectURL(tempFile)
 
     var a = document.createElement("a")
