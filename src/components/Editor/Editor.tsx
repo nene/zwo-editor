@@ -14,7 +14,6 @@ import { ReactComponent as IntervalLogo } from '../../assets/interval.svg'
 import { ReactComponent as SteadyLogo } from '../../assets/steady.svg'
 import SaveForm from '../Forms/SaveForm'
 import Head from '../Head/Head'
-import { RouteComponentProps } from 'react-router-dom';
 import RunningTimesEditor from './RunningTimesEditor'
 import LeftRightToggle from './LeftRightToggle'
 import createWorkoutXml from '../../xml/createWorkoutXml'
@@ -43,11 +42,7 @@ import { Duration } from '../../types/Length'
 import DistanceAxis from '../Axis/DistanceAxis'
 import { LengthType } from '../../types/LengthType'
 
-type TParams = { id: string };
-
-const Editor = ({ match }: RouteComponentProps<TParams>) => {
-  const [id, setId] = useState(match.params.id === "new" ? (storage.getId() || generateId()) : match.params.id)
-
+const Editor = () => {
   const [name, setName] = useState(storage.getName())
   const [description, setDescription] = useState(storage.getDescription())
   const [author, setAuthor] = useState(storage.getAuthor())
@@ -74,17 +69,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
   }, [sportType, ftp, weight, runningTimes, lengthType]);
 
   useEffect(() => {
-    if (id === storage.getId()) {
-      // user refreshed the page
-    } else {
-      // treat this as new workout
-      loadWorkout(createEmptyWorkout(sportType, lengthType))
-    }
-
-    window.history.replaceState('', '', `/editor/${id}`)
-  }, [id, sportType, lengthType, getMode])
-
-  useEffect(() => {
     storage.setName(name)
     storage.setDescription(description)
     storage.setAuthor(author)
@@ -101,10 +85,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
     setSegmentsWidth(segmentsRef.current?.scrollWidth || 1320)
   }, [segmentsRef, intervals, ftp, instructions, weight, name, description, author, tags, sportType, lengthType, runningTimes])
 
-  function generateId() {
-    return Math.random().toString(36).substr(2, 16)
-  }
-
   function loadWorkout(workout: Workout) {
     setSportType(workout.sportType)
     setLengthType(workout.lengthType)
@@ -117,7 +97,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
   }
 
   function newWorkout() {
-    setId(generateId())
     loadWorkout(createEmptyWorkout(sportType, lengthType))
   }
 
@@ -198,7 +177,7 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
     document.body.appendChild(a)
     a.style.display = "none"
     a.href = url
-    a.download = `${id}.zwo`
+    a.download = `workout.zwo`
     a.click()
     window.URL.revokeObjectURL(url)
   }
@@ -291,7 +270,7 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
       onLeftPress={() => selectedId && setIntervals(updateIntervalDuration(selectedId, new Duration(-5), intervals, getMode()))}
       onRightPress={() => selectedId && setIntervals(updateIntervalDuration(selectedId, new Duration(5), intervals, getMode()))}
     >
-      <Head id={id} name={name} description={description} />
+      <Head name={name} description={description} />
 
       {savePopupIsVisile &&
         <Popup width="500px" dismiss={() => setSavePopupVisibility(false)}>

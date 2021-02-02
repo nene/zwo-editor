@@ -7,13 +7,6 @@ import { PaceType } from '../types/PaceType';
 import { LengthType } from '../types/LengthType';
 import { Distance, Duration } from '../types/Length';
 
-export function getId(): string | null {
-  return localStorage.getItem('id');
-}
-export function setId(id: string) {
-  localStorage.setItem('id', id);
-}
-
 function convertLengths(obj: {[k: string]: any}) {
   for (const [k, v] of Object.entries(obj)) {
     if (typeof v === "object" && typeof v.seconds === "number") {
