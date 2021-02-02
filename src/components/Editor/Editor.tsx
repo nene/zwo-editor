@@ -268,12 +268,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
     return file
   }
 
-  function logout() {
-    console.log('logout');
-
-    auth.signOut().then(() => setUser(null))
-  }
-
   function downloadWorkout() {
 
     const tempFile = save()
@@ -401,12 +395,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
               onDescriptionChange={setDescription}
               onAuthorChange={setAuthor}
               onTagsChange={setTags}
-              onSave={() => {
-                save()
-                setSavePopupVisibility(false)
-              }}
-              onDismiss={() => setSavePopupVisibility(false)}
-              onLogout={logout}
             />
             :
             renderRegistrationForm()

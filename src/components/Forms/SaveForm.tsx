@@ -12,9 +12,6 @@ interface SaveFormProps {
   onDescriptionChange: (value: string) => void;
   onAuthorChange: (value: string) => void;
   onTagsChange: (value: string[]) => void;
-  onSave: () => void;
-  onDismiss: () => void;
-  onLogout: () => void;
 }
 
 export default function SaveForm(props: SaveFormProps) {
@@ -43,11 +40,6 @@ export default function SaveForm(props: SaveFormProps) {
             onCheckboxChange={() => props.onTagsChange(addOrRemoveTag(props.tags, tagName))}
           />
         ))}
-      </div>
-      <div className="form-control">
-        <button className="btn btn-primary" onClick={props.onSave}>Save</button>
-        <button className="btn" onClick={props.onDismiss}>Dismiss</button>
-        <button onClick={props.onLogout}>Logout</button>
       </div>
     </div>
   )
