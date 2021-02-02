@@ -24,7 +24,6 @@ import ReactGA from 'react-ga';
 import RunningTimesEditor from './RunningTimesEditor'
 import LeftRightToggle from './LeftRightToggle'
 import createWorkoutXml from '../../xml/createWorkoutXml'
-import ShareForm from '../Forms/ShareForm'
 import { PaceType } from '../../types/PaceType'
 import PaceSelector from './PaceSelector'
 import { Interval } from '../../types/Interval'
@@ -77,7 +76,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
   const [selectedId, setSelectedId] = useState<string | undefined>(undefined)
 
   const [savePopupIsVisile, setSavePopupVisibility] = useState(false)
-  const [sharePopupIsVisile, setSharePopupVisibility] = useState(false)
 
   const [user, setUser] = useState<firebase.User | null>(null)
   const [visibleForm, setVisibleForm] = useState('login') // default form is login
@@ -238,16 +236,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
         showMessage({ className: 'error', text: 'Cannot delete workout' })
       }
     }
-  }
-
-  function shareWorkout() {
-    if (user) {
-      save()
-      setSharePopupVisibility(true)
-    } else {
-      saveWorkout()
-    }
-
   }
 
   async function save() {
@@ -450,11 +438,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
           }
         </Popup>
       }
-      {sharePopupIsVisile &&
-        <Popup width="500px" dismiss={() => setSharePopupVisibility(false)}>
-          <ShareForm id={id} onDismiss={() => setSharePopupVisibility(false)} />
-        </Popup>
-      }
       <div className="info">
         <Title name={name} author={author} description={description} />
         <div className="workout">
@@ -544,7 +527,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
         <IconButton label="Download" icon={faDownload} onClick={downloadWorkout} />
         <UploadButton onUpload={handleUpload} />
         <IconButton label="Workouts" icon={faList} onClick={() => setShowWorkouts(true)} />
-        <IconButton label="Share" icon={faShareAlt} onClick={shareWorkout} />
       </div>
       <Footer />
     </Keyboard>
