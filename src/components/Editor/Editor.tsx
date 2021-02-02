@@ -12,7 +12,6 @@ import { ReactComponent as WarmdownLogo } from '../../assets/warmdown.svg'
 import { ReactComponent as WarmupLogo } from '../../assets/warmup.svg'
 import { ReactComponent as IntervalLogo } from '../../assets/interval.svg'
 import { ReactComponent as SteadyLogo } from '../../assets/steady.svg'
-import firebase, { auth } from '../../network/firebase'
 import SaveForm from '../Forms/SaveForm'
 import Head from '../Head/Head'
 import { RouteComponentProps } from 'react-router-dom';
@@ -67,8 +66,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
 
   const [savePopupIsVisile, setSavePopupVisibility] = useState(false)
 
-  const [, setUser] = useState<firebase.User | null>(null)
-
   const canvasRef = useRef<HTMLInputElement>(null);
   const segmentsRef = useRef<HTMLInputElement>(null);
   const [segmentsWidth, setSegmentsWidth] = useState(1320);
@@ -86,12 +83,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
       // treat this as new workout
       loadWorkout(createEmptyWorkout(sportType, lengthType))
     }
-
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        setUser(user)
-      }
-    });
 
     window.history.replaceState('', '', `/editor/${id}`)
   }, [id, sportType, lengthType, getMode])
