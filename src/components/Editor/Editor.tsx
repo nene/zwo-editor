@@ -15,8 +15,6 @@ import { ReactComponent as SteadyLogo } from '../../assets/steady.svg'
 import firebase, { auth } from '../../network/firebase'
 import * as workoutMeta from '../../network/workoutMeta'
 import SaveForm from '../Forms/SaveForm'
-import SignupForm from '../Forms/SignupForm'
-import LoginForm from '../Forms/LoginForm'
 import Head from '../Head/Head'
 import { RouteComponentProps } from 'react-router-dom';
 import ReactGA from 'react-ga';
@@ -77,7 +75,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
   const [savePopupIsVisile, setSavePopupVisibility] = useState(false)
 
   const [user, setUser] = useState<firebase.User | null>(null)
-  const [visibleForm, setVisibleForm] = useState('login') // default form is login
 
   const canvasRef = useRef<HTMLInputElement>(null);
   const segmentsRef = useRef<HTMLInputElement>(null);
@@ -325,14 +322,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
     />
   )
 
-  const renderRegistrationForm = () => {
-    if (visibleForm === 'login') {
-      return <LoginForm login={setUser} showSignup={() => setVisibleForm('signup')} dismiss={() => setSavePopupVisibility(false)} />
-    } else {
-      return <SignupForm signUp={setUser} showLogin={() => setVisibleForm('login')} dismiss={() => setSavePopupVisibility(false)} />
-    }
-  }
-
   function setPace(pace: PaceType, id: string) {
     const index = intervals.findIndex(interval => interval.id === id)
 
@@ -385,20 +374,16 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
 
       {savePopupIsVisile &&
         <Popup width="500px" dismiss={() => setSavePopupVisibility(false)}>
-          {user ?
-            <SaveForm
-              name={name}
-              description={description}
-              author={author}
-              tags={tags}
-              onNameChange={setName}
-              onDescriptionChange={setDescription}
-              onAuthorChange={setAuthor}
-              onTagsChange={setTags}
-            />
-            :
-            renderRegistrationForm()
-          }
+          <SaveForm
+            name={name}
+            description={description}
+            author={author}
+            tags={tags}
+            onNameChange={setName}
+            onDescriptionChange={setDescription}
+            onAuthorChange={setAuthor}
+            onTagsChange={setTags}
+          />
         </Popup>
       }
       <div className="info">
