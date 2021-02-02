@@ -36,7 +36,6 @@ import ColorButton from '../Button/ColorButton'
 import Button from '../Button/Button'
 import ActionButton from '../Button/ActionButton'
 import * as storage from '../../storage/storage';
-import Notification, { NotificationMessage } from './Notification'
 import { SportType } from '../../types/SportType'
 import createMode from '../../modes/createMode'
 import { workoutDuration } from '../../utils/duration'
@@ -69,8 +68,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
   const canvasRef = useRef<HTMLInputElement>(null);
   const segmentsRef = useRef<HTMLInputElement>(null);
   const [segmentsWidth, setSegmentsWidth] = useState(1320);
-
-  const [message, setMessage] = useState<NotificationMessage>({ text: "", className: "", visible: false });
 
   const getMode = useCallback(() => {
     return createMode({sportType, ftp, weight, runningTimes, lengthType});
@@ -122,14 +119,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
   function newWorkout() {
     setId(generateId())
     loadWorkout(createEmptyWorkout(sportType, lengthType))
-  }
-
-  function showMessage({ text, className }: NotificationMessage) {
-    setMessage({ text, className, visible: true })
-  }
-
-  function hideMessage() {
-    setMessage((message) => ({ ...message, visible: false }))
   }
 
   function updateInterval(updatedInterval: Interval) {
@@ -303,8 +292,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
       onRightPress={() => selectedId && setIntervals(updateIntervalDuration(selectedId, new Duration(5), intervals, getMode()))}
     >
       <Head id={id} name={name} description={description} />
-
-      <Notification {...message} onClose={hideMessage} />
 
       {savePopupIsVisile &&
         <Popup width="500px" dismiss={() => setSavePopupVisibility(false)}>
