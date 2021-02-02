@@ -7,7 +7,7 @@ import Popup from '../Popup/Popup'
 import Footer from '../Footer/Footer'
 import TimeAxis from '../Axis/TimeAxis'
 import ZoneAxis from '../Axis/ZoneAxis'
-import { faTrash, faArrowRight, faArrowLeft, faFile, faSave, faDownload, faComment, faBicycle, faCopy, faBiking, faRunning, faClock, faRuler } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faArrowRight, faArrowLeft, faFile, faDownload, faComment, faBicycle, faCopy, faBiking, faRunning, faClock, faRuler } from '@fortawesome/free-solid-svg-icons'
 import { ReactComponent as WarmdownLogo } from '../../assets/warmdown.svg'
 import { ReactComponent as WarmupLogo } from '../../assets/warmup.svg'
 import { ReactComponent as IntervalLogo } from '../../assets/interval.svg'
@@ -150,10 +150,6 @@ const Editor = () => {
     setSelectedId(undefined)
   }
 
-  function saveWorkout() {
-    setSavePopupVisibility(true)
-  }
-
   function createZwoFile() {
     const xml = createWorkoutXml({
       author,
@@ -287,7 +283,7 @@ const Editor = () => {
         </Popup>
       }
       <div className="info">
-        <Title name={name} author={author} description={description} />
+        <Title name={name} author={author} description={description} onClick={() => setSavePopupVisibility(true)} />
         <div className="workout">
           <Stats intervals={intervals} ftp={ftp} mode={getMode()} />
           {sportType === 'run' &&
@@ -370,7 +366,6 @@ const Editor = () => {
           <NumberField name="weight" label={"Body Weight (kg)"} value={weight} onChange={setWeight} />
         }
         <IconButton label="New" icon={faFile} onClick={() => { if (window.confirm('Are you sure you want to create a new workout?')) newWorkout() }} />
-        <IconButton label="Save" icon={faSave} onClick={saveWorkout} />
         <IconButton label="Download" icon={faDownload} onClick={downloadWorkout} />
         <UploadButton onUpload={handleUpload} />
       </div>

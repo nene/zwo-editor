@@ -17,7 +17,7 @@ interface SaveFormProps {
 export default function SaveForm(props: SaveFormProps) {
   return (
     <div>
-      <h2>Save Workout</h2>
+      <h2>Workout metadata</h2>
       <div className="form-control">
         <label htmlFor="name">Workout Title</label>
         <input type="text" name="name" placeholder="Workout title" value={props.name} onChange={(e) => props.onNameChange(e.target.value)} />

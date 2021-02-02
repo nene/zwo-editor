@@ -246,6 +246,7 @@ label {
 
 .info > .title {
   flex: 1;
+  cursor: pointer;
 }
 
 .info > .title > h1 {
