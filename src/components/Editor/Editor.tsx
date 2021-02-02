@@ -5,10 +5,9 @@ import GenericBar from '../Bar/GenericBar'
 import InstructionEditor from '../InstructionEditor/InstructionEditor'
 import Popup from '../Popup/Popup'
 import Footer from '../Footer/Footer'
-import Workouts from '../Workouts/Workouts'
 import TimeAxis from '../Axis/TimeAxis'
 import ZoneAxis from '../Axis/ZoneAxis'
-import { faTrash, faArrowRight, faArrowLeft, faFile, faSave, faDownload, faComment, faBicycle, faCopy, faShareAlt, faList, faBiking, faRunning, faClock, faRuler } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faArrowRight, faArrowLeft, faFile, faSave, faDownload, faComment, faBicycle, faCopy, faBiking, faRunning, faClock, faRuler } from '@fortawesome/free-solid-svg-icons'
 import { ReactComponent as WarmdownLogo } from '../../assets/warmdown.svg'
 import { ReactComponent as WarmupLogo } from '../../assets/warmup.svg'
 import { ReactComponent as IntervalLogo } from '../../assets/interval.svg'
@@ -85,8 +84,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
   const [segmentsWidth, setSegmentsWidth] = useState(1320);
 
   const [message, setMessage] = useState<NotificationMessage>({ text: "", className: "", visible: false });
-
-  const [showWorkouts, setShowWorkouts] = useState(false)
 
   const getMode = useCallback(() => {
     return createMode({sportType, ftp, weight, runningTimes, lengthType});
@@ -404,16 +401,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
 
       <Notification {...message} onClose={hideMessage} />
 
-      {showWorkouts &&
-        <Popup width="500px" dismiss={() => setShowWorkouts(false)}>
-          {user ?
-            <Workouts userId={user.uid} />
-            :
-            renderRegistrationForm()
-          }
-        </Popup>
-      }
-
       {savePopupIsVisile &&
         <Popup width="500px" dismiss={() => setSavePopupVisibility(false)}>
           {user ?
@@ -526,7 +513,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
         <IconButton label="Delete" icon={faTrash} onClick={() => { if (window.confirm('Are you sure you want to delete this workout?')) deleteWorkout() }} />
         <IconButton label="Download" icon={faDownload} onClick={downloadWorkout} />
         <UploadButton onUpload={handleUpload} />
-        <IconButton label="Workouts" icon={faList} onClick={() => setShowWorkouts(true)} />
       </div>
       <Footer />
     </Keyboard>
