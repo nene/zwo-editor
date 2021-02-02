@@ -26,7 +26,6 @@ import { Interval } from '../../types/Interval'
 import { createInstruction, Instruction } from '../../types/Instruction'
 import intervalFactory from '../../interval/intervalFactory'
 import parseWorkoutXml from '../../xml/parseWorkoutXml'
-import upload from '../../network/upload'
 import download from '../../network/download'
 import { createEmptyWorkout, Workout } from '../../types/Workout'
 import { moveInterval, updateIntervalDuration, updateIntervalIntensity } from '../../interval/intervalUtils'
@@ -255,8 +254,7 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
     newWorkout()
 
     try {
-      await upload(id, file);
-      loadWorkout(parseWorkoutXml(await download(id), getMode()));
+      loadWorkout(parseWorkoutXml(await file.text(), getMode()));
     } catch (e) {
       console.error(e);
     }
