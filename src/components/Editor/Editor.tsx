@@ -223,18 +223,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
     setSavePopupVisibility(true)
   }
 
-  async function deleteWorkout() {
-    if (user) {
-      try {
-        await workoutMeta.remove(user, id);
-        newWorkout()
-      } catch(error) {
-        console.log(error);
-        showMessage({ className: 'error', text: 'Cannot delete workout' })
-      }
-    }
-  }
-
   async function save() {
     const mode = getMode();
     showMessage({ className: 'loading', text: 'Saving..' })
@@ -510,7 +498,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
         }
         <IconButton label="New" icon={faFile} onClick={() => { if (window.confirm('Are you sure you want to create a new workout?')) newWorkout() }} />
         <IconButton label="Save" icon={faSave} onClick={saveWorkout} />
-        <IconButton label="Delete" icon={faTrash} onClick={() => { if (window.confirm('Are you sure you want to delete this workout?')) deleteWorkout() }} />
         <IconButton label="Download" icon={faDownload} onClick={downloadWorkout} />
         <UploadButton onUpload={handleUpload} />
       </div>
