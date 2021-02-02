@@ -16,7 +16,6 @@ import firebase, { auth } from '../../network/firebase'
 import SaveForm from '../Forms/SaveForm'
 import Head from '../Head/Head'
 import { RouteComponentProps } from 'react-router-dom';
-import ReactGA from 'react-ga';
 import RunningTimesEditor from './RunningTimesEditor'
 import LeftRightToggle from './LeftRightToggle'
 import createWorkoutXml from '../../xml/createWorkoutXml'
@@ -95,9 +94,6 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
     });
 
     window.history.replaceState('', '', `/editor/${id}`)
-
-    ReactGA.initialize('UA-55073449-9');
-    ReactGA.pageview(window.location.pathname + window.location.search);
   }, [id, sportType, lengthType, getMode])
 
   useEffect(() => {

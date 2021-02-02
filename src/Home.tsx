@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 import './Home.css'
 import Icon from './assets/icon.png'
@@ -6,17 +6,10 @@ import Facebook from './assets/facebook.png'
 import Twitter from './assets/twitter.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBolt, faLaptop, faCloud, faPiggyBank, faRunning, faBiking } from '@fortawesome/free-solid-svg-icons'
-import ReactGA from 'react-ga';
 import { Helmet } from "react-helmet";
 import Footer from './components/Footer/Footer'
 
 export default function Home() {
-
-  useEffect(() => {
-    ReactGA.initialize('UA-55073449-9');
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  })
-
   function shareOnFacebook() {
     window.open(
       'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('https://www.zwiftworkout.com/'),
