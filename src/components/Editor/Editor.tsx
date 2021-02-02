@@ -26,7 +26,6 @@ import { Interval } from '../../types/Interval'
 import { createInstruction, Instruction } from '../../types/Instruction'
 import intervalFactory from '../../interval/intervalFactory'
 import parseWorkoutXml from '../../xml/parseWorkoutXml'
-import download from '../../network/download'
 import { createEmptyWorkout, Workout } from '../../types/Workout'
 import { moveInterval, updateIntervalDuration, updateIntervalIntensity } from '../../interval/intervalUtils'
 import Keyboard from '../Keyboard/Keyboard'
@@ -82,27 +81,12 @@ const Editor = ({ match }: RouteComponentProps<TParams>) => {
   }, [sportType, ftp, weight, runningTimes, lengthType]);
 
   useEffect(() => {
-    showMessage({ className: 'loading', text: 'Loading..' })
-
-    download(id).then((xml) => {
-      try {
-        // workout exist on server
-        loadWorkout(parseWorkoutXml(xml, getMode()));
-        storage.setId(id)
-      } catch (e) {
-        // workout doesn't exist on cloud 
-        if (id === storage.getId()) {
-          // user refreshed the page
-        } else {
-          // treat this as new workout
-          loadWorkout(createEmptyWorkout(sportType, lengthType))
-        }
-
-        storage.setId(id)
-      }
-      //finished loading
-      hideMessage()
-    })
+    if (id === storage.getId()) {
+      // user refreshed the page
+    } else {
+      // treat this as new workout
+      loadWorkout(createEmptyWorkout(sportType, lengthType))
+    }
 
     auth.onAuthStateChanged(user => {
       if (user) {
