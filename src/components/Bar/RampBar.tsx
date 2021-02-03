@@ -1,11 +1,25 @@
 import React, { useState } from 'react'
-import './RampBar.css'
+import styled from 'styled-components';
 import { zoneColor, ZoneColor, Zones, ZonesArray } from '../../types/Zones'
 import { Resizable } from 're-resizable'
 import Label from '../Label/Label'
 import { RampInterval } from '../../types/Interval'
 import { intensityMultiplier } from './multipliers'
 import { WorkoutMode } from '../../modes/WorkoutMode'
+
+const Container = styled.div`
+  position: relative;
+`;
+
+const Ramp = styled.div`
+  display: flex;
+  align-items: flex-end;
+`;
+
+const ResizableRamp = styled(Resizable)`
+  border-top: 1px dotted gray;
+  z-index: 5;
+`;
 
 interface IDictionary {
   [index: string]: number;
@@ -55,7 +69,7 @@ const RampBar = ({interval, mode, ...props}: RampBarProps) => {
   }
 
   return (
-    <div className='segment'
+    <Container
       onMouseEnter={() => setShowLabel(true)}
       onMouseLeave={() => setShowLabel(false)}
       style={props.selected ? {zIndex:1}: {}}
@@ -68,9 +82,8 @@ const RampBar = ({interval, mode, ...props}: RampBarProps) => {
           onCadenceChange={(cadence: number)=> handleCadenceChange(cadence)}
         />
       }
-      <div className='trapeze' onClick={() => props.onClick(interval.id)}>
-        <Resizable
-          className='trapeze-component'
+      <Ramp onClick={() => props.onClick(interval.id)}>
+        <ResizableRamp
           size={{
             width: width / 2,
             height: startHeight,
@@ -83,9 +96,8 @@ const RampBar = ({interval, mode, ...props}: RampBarProps) => {
           onResizeStop={(e, direction, ref, d) => handleStartResizeStop(d.height)}
           onResize={(e, direction, ref, d) => handleStartResize(d.height)}          
         >
-        </Resizable>
-        <Resizable
-          className='trapeze-component'
+        </ResizableRamp>
+        <ResizableRamp
           size={{
             width: width / 2,
             height: endHeight,
@@ -98,13 +110,30 @@ const RampBar = ({interval, mode, ...props}: RampBarProps) => {
           onResizeStop={(e, direction, ref, d) => handleEndResizeStop(d.width, d.height)}
           onResize={(e, direction, ref, d) => handleEndResize(d.width, d.height)}
         >
-        </Resizable>
-      </div>
+        </ResizableRamp>
+      </Ramp>
       <Rainbow interval={interval} startHeight={startHeight} endHeight={endHeight} />
       <SvgPolygons width={width} startHeight={startHeight} endHeight={endHeight} />
-    </div>
+    </Container>
   );
 }
+
+const RampColors = styled.div`
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  display: flex;
+`;
+
+const Color = styled.div`
+  &:first-child {
+    border-bottom-left-radius: 5px;
+  }
+  &:last-child {
+    border-bottom-right-radius: 5px;
+  }
+`;
 
 const Rainbow: React.FC<{interval: RampInterval, startHeight: number, endHeight: number}> = ({interval, startHeight, endHeight}) => {
   const trapezeHeight = endHeight > startHeight ? endHeight : startHeight;
@@ -112,14 +141,14 @@ const Rainbow: React.FC<{interval: RampInterval, startHeight: number, endHeight:
   const flexDirection = endHeight > startHeight ? 'row' : 'row-reverse';
 
   return (
-    <div className='trapeze-colors' style={{ height: trapezeHeight, flexDirection: flexDirection, backgroundColor: zoneColor(interval.startIntensity) }}>
-      <div className='color' style={{ backgroundColor: ZoneColor.GRAY, width: `${(bars['Z1'] * 100 / Math.abs(interval.endIntensity - interval.startIntensity))}%` }}></div>
-      <div className='color' style={{ backgroundColor: ZoneColor.BLUE, width: `${(bars['Z2'] * 100 / Math.abs(interval.endIntensity - interval.startIntensity))}%` }}></div>
-      <div className='color' style={{ backgroundColor: ZoneColor.GREEN, width: `${(bars['Z3'] * 100 / Math.abs(interval.endIntensity - interval.startIntensity))}%` }}></div>
-      <div className='color' style={{ backgroundColor: ZoneColor.YELLOW, width: `${(bars['Z4'] * 100 / Math.abs(interval.endIntensity - interval.startIntensity))}%` }}></div>
-      <div className='color' style={{ backgroundColor: ZoneColor.ORANGE, width: `${(bars['Z5'] * 100 / Math.abs(interval.endIntensity - interval.startIntensity))}%` }}></div>
-      <div className='color' style={{ backgroundColor: ZoneColor.RED, width: `${(bars['Z6'] * 100 / Math.abs(interval.endIntensity - interval.startIntensity))}%` }}></div>
-    </div>
+    <RampColors style={{ height: trapezeHeight, flexDirection: flexDirection, backgroundColor: zoneColor(interval.startIntensity) }}>
+      <Color style={{ backgroundColor: ZoneColor.GRAY, width: `${(bars['Z1'] * 100 / Math.abs(interval.endIntensity - interval.startIntensity))}%` }} />
+      <Color style={{ backgroundColor: ZoneColor.BLUE, width: `${(bars['Z2'] * 100 / Math.abs(interval.endIntensity - interval.startIntensity))}%` }} />
+      <Color style={{ backgroundColor: ZoneColor.GREEN, width: `${(bars['Z3'] * 100 / Math.abs(interval.endIntensity - interval.startIntensity))}%` }} />
+      <Color style={{ backgroundColor: ZoneColor.YELLOW, width: `${(bars['Z4'] * 100 / Math.abs(interval.endIntensity - interval.startIntensity))}%` }} />
+      <Color style={{ backgroundColor: ZoneColor.ORANGE, width: `${(bars['Z5'] * 100 / Math.abs(interval.endIntensity - interval.startIntensity))}%` }} />
+      <Color style={{ backgroundColor: ZoneColor.RED, width: `${(bars['Z6'] * 100 / Math.abs(interval.endIntensity - interval.startIntensity))}%` }} />
+    </RampColors>
   );
 };
 
@@ -142,6 +171,21 @@ function calculateColors(start: number, end: number): IDictionary {
   return bars
 }
 
+const RampSvg = styled.svg`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+`;
+
+const TransparentPolygon = styled.polygon`
+  fill: transparent;
+`;
+
+const HiddenPolygon = styled.polygon`
+  fill:white;
+  display: hidden;
+`;
+
 const SvgPolygons: React.FC<{width: number, startHeight: number, endHeight: number}> = ({width, startHeight, endHeight}) => {
   const trapezeHeight = endHeight > startHeight ? endHeight : startHeight;
   const trapezeTop = endHeight > startHeight ? (endHeight - startHeight) : (startHeight - endHeight);
@@ -151,10 +195,10 @@ const SvgPolygons: React.FC<{width: number, startHeight: number, endHeight: numb
   const vertexD = endHeight > startHeight ? 0 : trapezeTop;
 
   return (
-    <svg height={`${trapezeHeight}`} width={`${width}`} className='trapeze-svg-container'>
-      <polygon points={`0,${vertexA} 0,${trapezeHeight} ${width},${trapezeHeight} ${width},${vertexD}`} className='trapeze-svg' />
-      <polygon points={`0,0 ${vertexB},${trapezeTop} ${width},0`} className='trapeze-svg-off' />
-    </svg>
+    <RampSvg height={`${trapezeHeight}`} width={`${width}`}>
+      <TransparentPolygon points={`0,${vertexA} 0,${trapezeHeight} ${width},${trapezeHeight} ${width},${vertexD}`} />
+      <HiddenPolygon points={`0,0 ${vertexB},${trapezeTop} ${width},0`} />
+    </RampSvg>
   );
 };
 
