@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import './SteadyBar.css'
+import styled from 'styled-components';
 import { zoneColor, Zones } from '../../types/Zones'
 import { Resizable } from 're-resizable'
 import Label from '../Label/Label'
 import { SteadyInterval } from '../../types/Interval'
 import { intensityMultiplier } from './multipliers'
 import { WorkoutMode } from '../../modes/WorkoutMode'
+
+const Container = styled.div`
+  position: relative;
+`;
+
+const RoundedResizable = styled(Resizable)`
+  border-radius: 10px;
+  border: 1px solid white;
+`;
 
 interface SteadyBarProps {
   interval: SteadyInterval;
@@ -51,7 +60,7 @@ const SteadyBar = ({interval, mode, ...props}: SteadyBarProps) => {
   }
 
   return (
-    <div className='segment'
+    <Container
       onMouseEnter={() => setShowLabel(true)}
       onMouseLeave={() => setShowLabel(false)}
       onClick={() => props.onClick(interval.id)}
@@ -64,8 +73,7 @@ const SteadyBar = ({interval, mode, ...props}: SteadyBarProps) => {
           onCadenceChange={(cadence: number)=> handleCadenceChange(cadence)}
         />
       }
-      <Resizable
-        className='bar'
+      <RoundedResizable
         size={{
           width: mode.lengthToWidth(interval.length),
           height: mode.intensityToHeight(interval.intensity),
@@ -79,9 +87,8 @@ const SteadyBar = ({interval, mode, ...props}: SteadyBarProps) => {
         onResize={(e, direction, ref, d) => notifyChange(d.width, d.height)}
         style={style}
       >
-      </Resizable>
-    </div>
-
+      </RoundedResizable>
+    </Container>
   );
 }
 
