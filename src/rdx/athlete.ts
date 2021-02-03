@@ -14,7 +14,7 @@ const initialState: AthleteState = {
   runningTimes: [0, 0, 0, 0, 0],
 };
 
-const athleteSlice = createSlice({
+const slice = createSlice({
   name: 'athlete',
   initialState,
   reducers: {
@@ -24,8 +24,8 @@ const athleteSlice = createSlice({
   },
 });
 
-export const reducer = athleteSlice.reducer;
-export const { setFtp, setWeight, setRunningTimes } = athleteSlice.actions;
+export const reducer = slice.reducer;
+export const { setFtp, setWeight, setRunningTimes } = slice.actions;
 
 const selectAthlete = (state: RootState) => state.athlete;
 export const selectFtp = createSelector(selectAthlete, (a) => a.ftp);

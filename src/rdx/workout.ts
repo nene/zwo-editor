@@ -21,7 +21,7 @@ const initialState: WorkoutState = {
   lengthType: "time",
 };
 
-const workoutSlice = createSlice({
+const slice = createSlice({
   name: 'workout',
   initialState,
   reducers: {
@@ -34,8 +34,8 @@ const workoutSlice = createSlice({
   },
 });
 
-export const reducer = workoutSlice.reducer;
-export const { setName, setAuthor, setDescription, setTags, setSportType, setLengthType } = workoutSlice.actions;
+export const reducer = slice.reducer;
+export const { setName, setAuthor, setDescription, setTags, setSportType, setLengthType } = slice.actions;
 
 const selectWorkout = (state: RootState) => state.workout;
 export const selectName = createSelector(selectWorkout, (w) => w.name);

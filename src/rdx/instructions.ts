@@ -8,7 +8,7 @@ type InstructionsState = Instruction[];
 
 const initialState: InstructionsState = [];
 
-const instructionsSlice = createSlice({
+const slice = createSlice({
   name: 'instructions',
   initialState,
   reducers: {
@@ -24,7 +24,7 @@ const instructionsSlice = createSlice({
   },
 });
 
-export const reducer = instructionsSlice.reducer;
-export const { setInstructions } = instructionsSlice.actions;
+export const reducer = slice.reducer;
+export const { setInstructions } = slice.actions;
 
 export const selectInstructions = (state: RootState) => state.instructions;

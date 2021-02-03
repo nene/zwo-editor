@@ -8,7 +8,7 @@ type IntervalsState = Interval[];
 
 const initialState: IntervalsState = [];
 
-const intervalsSlice = createSlice({
+const slice = createSlice({
   name: 'intervals',
   initialState,
   reducers: {
@@ -24,7 +24,7 @@ const intervalsSlice = createSlice({
   },
 });
 
-export const reducer = intervalsSlice.reducer;
-export const { setIntervals } = intervalsSlice.actions;
+export const reducer = slice.reducer;
+export const { setIntervals } = slice.actions;
 
 export const selectIntervals = (state: RootState) => state.intervals;
