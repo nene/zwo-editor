@@ -1,8 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`InstructionEditor renders correctly 1`] = `
+.c0 {
+  position: absolute;
+}
+
+.c1 {
+  position: absolute;
+  top: 30px;
+  left: 0px;
+  right: 0;
+  height: 90vh;
+  width: 1px;
+  border-left: 1px dotted gray;
+  z-index: 0;
+}
+
 <div
-  className="draggable-item react-draggable"
+  className="c0 react-draggable"
   onMouseDown={[Function]}
   onMouseUp={[Function]}
   onTouchEnd={[Function]}
@@ -37,7 +52,7 @@ exports[`InstructionEditor renders correctly 1`] = `
     />
   </svg>
   <div
-    className="line"
+    className="c1"
   />
 </div>
 `;

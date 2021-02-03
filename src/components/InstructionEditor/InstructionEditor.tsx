@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import Draggable from 'react-draggable'
+import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComment, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
-import './InstructionEditor.css'
 import { Instruction } from '../../types/Instruction'
 import * as format from '../../utils/format'
 import { Duration, Length } from '../../types/Length'
@@ -16,6 +16,26 @@ interface InstructionEditorProps {
   index: number;
   mode: WorkoutMode;
 }
+
+const DraggableItem = styled.div`
+  position: absolute;
+`;
+
+const EditorContainer = styled.div`
+  position: relative;
+  padding: 5px;
+`;
+
+const VerticalLine = styled.div`
+  position: absolute;
+  top: 30px;
+  left: 0px;
+  right: 0;
+  height: 90vh;
+  width: 1px;
+  border-left: 1px dotted gray;  
+  z-index: 0;
+`;
 
 const roundingPrecision = { meters: 10, seconds: 5 };
 
@@ -71,17 +91,17 @@ const InstructionEditor = (props: InstructionEditorProps) => {
       onStop={(e, data) => handleTouch(data.x)}
       onDrag={(e, data) => handleDragging(data.x)}      
     >
-      <div className="draggable-item">
+      <DraggableItem>
         <FontAwesomeIcon style={{display:'block',opacity:0.7}} icon={faComment} size="lg" fixedWidth className="handle" onMouseDown={() => setShowInput(!showInput)} />        
         {showInput &&
-        <div className="edit">
+        <EditorContainer>
           <FontAwesomeIcon icon={faTrashAlt} fixedWidth className="delete" style={{ color: 'gray' }} onClick={() => handleDelete()} />
           <span style={{fontSize:'13px'}} data-testid='time'>{renderOffset(props.instruction.offset)}</span>                  
           <textarea name="comment" value={text} style={{display:'block', padding:'5px', width:'250px',backgroundColor:'white'}} onChange={e => handleInputChange(e.target.value)} />        
-        </div>
+        </EditorContainer>
         }
-        <div className="line"></div>
-      </div>
+        <VerticalLine />
+      </DraggableItem>
     </Draggable>
   )
 }
