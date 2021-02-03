@@ -1,29 +1,25 @@
-import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { REHYDRATE } from 'redux-persist';
 import { Interval } from '../types/Interval';
 import { RootState } from './store';
 import { convertLengths } from '../storage/storage';
 
-interface IntervalsState {
-  intervals: Interval[];
-}
+type IntervalsState = Interval[];
 
-const initialState: IntervalsState = { intervals: [] };
+const initialState: IntervalsState = [];
 
 const intervalsSlice = createSlice({
   name: 'intervals',
   initialState,
   reducers: {
-    setIntervals: (state, action: PayloadAction<Interval[]>) => ({ intervals: action.payload }),
+    setIntervals: (state, action: PayloadAction<Interval[]>) => action.payload,
   },
   extraReducers: {
     [REHYDRATE]: (state, action: PayloadAction<{intervals: IntervalsState}>) => {
-      if (!action.payload.intervals) {
+      if (!(action.payload?.intervals instanceof Array)) {
         return state;
       }
-      return {
-        intervals: action.payload.intervals.intervals.map(convertLengths) as Interval[],
-      };
+      return action.payload.intervals.map(convertLengths) as Interval[];
     },
   },
 });
@@ -31,5 +27,4 @@ const intervalsSlice = createSlice({
 export const reducer = intervalsSlice.reducer;
 export const { setIntervals } = intervalsSlice.actions;
 
-const selectBase = (state: RootState) => state.intervals;
-export const selectIntervals = createSelector(selectBase, (s) => s.intervals);
+export const selectIntervals = (state: RootState) => state.intervals;
