@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createSelector } from '@reduxjs/toolkit';
 import { RootState } from './store';
 
 interface AthleteState {
@@ -23,5 +23,6 @@ const athleteSlice = createSlice({
 export const reducer = athleteSlice.reducer;
 export const { setFtp, setWeight } = athleteSlice.actions;
 
-export const selectFtp = (state: RootState) => state.athlete.ftp;
-export const selectWeight = (state: RootState) => state.athlete.weight;
+const selectAthlete = (state: RootState) => state.athlete;
+export const selectFtp = createSelector(selectAthlete, (a) => a.ftp);
+export const selectWeight = createSelector(selectAthlete, (a) => a.weight);

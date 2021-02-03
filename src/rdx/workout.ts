@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createSelector } from '@reduxjs/toolkit';
 import { RootState } from './store';
 
 interface WorkoutState {
@@ -29,7 +29,8 @@ const workoutSlice = createSlice({
 export const reducer = workoutSlice.reducer;
 export const { setName, setAuthor, setDescription, setTags } = workoutSlice.actions;
 
-export const selectName = (state: RootState) => state.workout.name;
-export const selectAuthor = (state: RootState) => state.workout.author;
-export const selectDescription = (state: RootState) => state.workout.description;
-export const selectTags = (state: RootState) => state.workout.tags;
+const selectWorkout = (state: RootState) => state.workout;
+export const selectName = createSelector(selectWorkout, (w) => w.name);
+export const selectAuthor = createSelector(selectWorkout, (w) => w.author);
+export const selectDescription = createSelector(selectWorkout, (w) => w.description);
+export const selectTags = createSelector(selectWorkout, (w) => w.tags);
