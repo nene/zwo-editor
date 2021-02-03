@@ -62,7 +62,7 @@ const Editor = () => {
 
   const canvasRef = useRef<HTMLInputElement>(null);
   const segmentsRef = useRef<HTMLInputElement>(null);
-  const [segmentsWidth, setSegmentsWidth] = useState(1320);
+  const [xAxisWidth, setXAxisWidth] = useState(1320);
 
   const getMode = useCallback(() => {
     return createMode({sportType, ftp, weight, runningTimes, lengthType});
@@ -82,7 +82,7 @@ const Editor = () => {
     storage.setWeight(weight)
     storage.setRunningTimes(runningTimes)
 
-    setSegmentsWidth(segmentsRef.current?.scrollWidth || 1320)
+    setXAxisWidth(segmentsRef.current?.scrollWidth || 1320)
   }, [segmentsRef, intervals, ftp, instructions, weight, name, description, author, tags, sportType, lengthType, runningTimes])
 
   function loadWorkout(workout: Workout) {
@@ -334,7 +334,7 @@ const Editor = () => {
             {instructions.map((instruction, index) => renderInstruction(instruction, index))}
           </div>
 
-          {lengthType === "time" ? <TimeAxis width={segmentsWidth} /> : <DistanceAxis width={segmentsWidth} />}
+          {lengthType === "time" ? <TimeAxis width={xAxisWidth} /> : <DistanceAxis width={xAxisWidth} />}
         </div>
         <ZoneAxis />
       </div>
