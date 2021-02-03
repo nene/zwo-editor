@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { REHYDRATE } from 'redux-persist';
 import { RootState } from './store';
-import { convertLengths } from './rehydrate';
+import { rehydrateLengths } from './rehydrate';
 import { Instruction } from '../types/Instruction';
 
 const initialState: Instruction[] = [];
@@ -13,11 +13,8 @@ const slice = createSlice({
     setInstructions: (state, action: PayloadAction<Instruction[]>) => action.payload,
   },
   extraReducers: {
-    [REHYDRATE]: (state, action: PayloadAction<{instructions: Instruction[]}>) => {
-      if (!(action.payload?.instructions instanceof Array)) {
-        return state;
-      }
-      return action.payload.instructions.map(convertLengths) as Instruction[];
+    [REHYDRATE]: (state, action: PayloadAction<{instructions?: Instruction[]}>) => {
+      return rehydrateLengths(action.payload?.instructions);
     },
   },
 });

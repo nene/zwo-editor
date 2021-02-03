@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { REHYDRATE } from 'redux-persist';
 import { Interval } from '../types/Interval';
 import { RootState } from './store';
-import { convertLengths } from './rehydrate';
+import { rehydrateLengths } from './rehydrate';
 
 const initialState: Interval[] = [];
 
@@ -13,11 +13,8 @@ const slice = createSlice({
     setIntervals: (state, action: PayloadAction<Interval[]>) => action.payload,
   },
   extraReducers: {
-    [REHYDRATE]: (state, action: PayloadAction<{intervals: Interval[]}>) => {
-      if (!(action.payload?.intervals instanceof Array)) {
-        return state;
-      }
-      return action.payload.intervals.map(convertLengths) as Interval[];
+    [REHYDRATE]: (state, action: PayloadAction<{intervals?: Interval[]}>) => {
+      return rehydrateLengths(action.payload?.intervals);
     },
   },
 });
