@@ -29,7 +29,7 @@ const workoutSlice = createSlice({
 export const reducer = workoutSlice.reducer;
 export const { setName, setAuthor, setDescription, setTags } = workoutSlice.actions;
 
-export const nameSelector = (state: RootState) => state.workout.name;
-export const authorSelector = (state: RootState) => state.workout.author;
-export const descriptionSelector = (state: RootState) => state.workout.description;
-export const tagsSelector = (state: RootState) => state.workout.tags;
+export const selectName = (state: RootState) => state.workout.name;
+export const selectAuthor = (state: RootState) => state.workout.author;
+export const selectDescription = (state: RootState) => state.workout.description;
+export const selectTags = (state: RootState) => state.workout.tags;

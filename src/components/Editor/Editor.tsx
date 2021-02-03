@@ -42,7 +42,7 @@ import { workoutDuration } from '../../utils/duration'
 import { Duration } from '../../types/Length'
 import DistanceAxis from '../Axis/DistanceAxis'
 import { LengthType } from '../../types/LengthType'
-import { authorSelector, descriptionSelector, nameSelector, setName, setAuthor, setDescription, tagsSelector, setTags } from '../../rdx/workout'
+import { selectAuthor, selectDescription, selectName, setName, setAuthor, setDescription, selectTags, setTags } from '../../rdx/workout'
 import { RootState } from '../../rdx/store';
 
 interface EditorProps {
@@ -386,10 +386,10 @@ const Editor = (props: EditorProps) => {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  name: nameSelector(state),
-  author: authorSelector(state),
-  description: descriptionSelector(state),
-  tags: tagsSelector(state),
+  name: selectName(state),
+  author: selectAuthor(state),
+  description: selectDescription(state),
+  tags: selectTags(state),
 });
 
 const mapDispatchToProps = {
