@@ -1,4 +1,4 @@
-import { createSlice, createSelector } from '@reduxjs/toolkit';
+import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit';
 import { RunningTimes } from '../types/RunningTimes';
 import { RootState } from './store';
 
@@ -18,9 +18,9 @@ const athleteSlice = createSlice({
   name: 'athlete',
   initialState,
   reducers: {
-    setFtp: (state, action) => ({ ...state, ftp: action.payload }),
-    setWeight: (state, action) => ({ ...state, weight: action.payload }),
-    setRunningTimes: (state, action) => ({ ...state, runningTimes: action.payload }),
+    setFtp: (state, action: PayloadAction<number>) => ({ ...state, ftp: action.payload }),
+    setWeight: (state, action: PayloadAction<number>) => ({ ...state, weight: action.payload }),
+    setRunningTimes: (state, action: PayloadAction<number[]>) => ({ ...state, runningTimes: action.payload }),
   },
 });
 

@@ -1,4 +1,4 @@
-import { createSlice, createSelector } from '@reduxjs/toolkit';
+import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
 
 interface WorkoutState {
@@ -19,10 +19,10 @@ const workoutSlice = createSlice({
   name: 'workout',
   initialState,
   reducers: {
-    setName: (state, action) => ({ ...state, name: action.payload }),
-    setAuthor: (state, action) => ({ ...state, author: action.payload }),
-    setDescription: (state, action) => ({ ...state, description: action.payload }),
-    setTags: (state, action) => ({ ...state, tags: action.payload }),
+    setName: (state, action: PayloadAction<string>) => ({ ...state, name: action.payload }),
+    setAuthor: (state, action: PayloadAction<string>) => ({ ...state, author: action.payload }),
+    setDescription: (state, action: PayloadAction<string>) => ({ ...state, description: action.payload }),
+    setTags: (state, action: PayloadAction<string[]>) => ({ ...state, tags: action.payload }),
   },
 });
 
