@@ -44,16 +44,21 @@ import DistanceAxis from '../Axis/DistanceAxis'
 import { LengthType } from '../../types/LengthType'
 import { selectAuthor, selectDescription, selectName, setName, setAuthor, setDescription, selectTags, setTags } from '../../rdx/workout'
 import { RootState } from '../../rdx/store';
+import { selectFtp, selectWeight, setFtp, setWeight } from '../../rdx/athlete';
 
 interface EditorProps {
   name: string;
   author: string;
   description: string;
   tags: string[];
+  ftp: number;
+  weight: number;
   setName: (name: string) => void;
   setAuthor: (name: string) => void;
   setDescription: (name: string) => void;
   setTags: (tags: string[]) => void;
+  setFtp: (ftp: number) => void;
+  setWeight: (weight: number) => void;
 }
 
 const Editor = (props: EditorProps) => {
@@ -67,8 +72,8 @@ const Editor = (props: EditorProps) => {
   const [intervals, setIntervals] = useState(storage.getIntervals())
   const [instructions, setInstructions] = useState(storage.getInstructions())
 
-  const [ftp, setFtp] = useState(storage.getFtp())
-  const [weight, setWeight] = useState(storage.getWeight())
+  const {ftp, setFtp} = props;
+  const {weight, setWeight} = props;
   const [runningTimes, setRunningTimes] = useState(storage.getRunningTimes())
 
   const [selectedId, setSelectedId] = useState<string | undefined>(undefined)
@@ -89,12 +94,10 @@ const Editor = (props: EditorProps) => {
     storage.setIntervals(intervals)
     storage.setInstructions(instructions)
 
-    storage.setFtp(ftp)
-    storage.setWeight(weight)
     storage.setRunningTimes(runningTimes)
 
     setXAxisWidth(segmentsRef.current?.scrollWidth || 1320)
-  }, [segmentsRef, intervals, ftp, instructions, weight, tags, sportType, lengthType, runningTimes])
+  }, [segmentsRef, intervals, instructions, tags, sportType, lengthType, runningTimes])
 
   function loadWorkout(workout: Workout) {
     setSportType(workout.sportType)
@@ -390,6 +393,8 @@ const mapStateToProps = (state: RootState) => ({
   author: selectAuthor(state),
   description: selectDescription(state),
   tags: selectTags(state),
+  ftp: selectFtp(state),
+  weight: selectWeight(state),
 });
 
 const mapDispatchToProps = {
@@ -397,6 +402,8 @@ const mapDispatchToProps = {
   setAuthor,
   setDescription,
   setTags,
+  setFtp,
+  setWeight,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor)
