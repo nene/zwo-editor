@@ -11,6 +11,7 @@ const slice = createSlice({
   initialState,
   reducers: {
     setIntervals: (state, action: PayloadAction<Interval[]>) => action.payload,
+    addInterval: (state, action: PayloadAction<Interval>) => [...state, action.payload],
   },
   extraReducers: {
     [REHYDRATE]: (state, action: PayloadAction<{intervals?: Interval[]}>) => {
@@ -20,6 +21,6 @@ const slice = createSlice({
 });
 
 export const reducer = slice.reducer;
-export const { setIntervals } = slice.actions;
+export const { setIntervals, addInterval } = slice.actions;
 
 export const selectIntervals = (state: RootState) => state.intervals;

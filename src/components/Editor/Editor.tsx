@@ -45,8 +45,8 @@ import { selectAuthor, selectDescription, selectName, setName, setAuthor, setDes
 import { RootState } from '../../rdx/store';
 import { selectFtp, selectRunningTimes, selectWeight, setFtp, setRunningTimes, setWeight } from '../../rdx/athlete';
 import { RunningTimes } from '../../types/RunningTimes';
-import { selectIntervals, setIntervals } from '../../rdx/intervals';
-import { selectInstructions, setInstructions } from '../../rdx/instructions';
+import { addInterval, selectIntervals, setIntervals } from '../../rdx/intervals';
+import { addInstruction, selectInstructions, setInstructions } from '../../rdx/instructions';
 
 interface EditorProps {
   name: string;
@@ -70,7 +70,9 @@ interface EditorProps {
   setWeight: (weight: number) => void;
   setRunningTimes: (runningTimes: RunningTimes) => void;
   setIntervals: (intervals: Interval[]) => void;
+  addInterval: (interval: Interval) => void;
   setInstructions: (instructions: Instruction[]) => void;
+  addInstruction: (instruction: Instruction) => void;
 }
 
 const Editor = (props: EditorProps) => {
@@ -87,6 +89,8 @@ const Editor = (props: EditorProps) => {
   const {ftp, setFtp} = props;
   const {weight, setWeight} = props;
   const {runningTimes, setRunningTimes} = props;
+
+  const {addInterval, addInstruction} = props;
 
   const [selectedId, setSelectedId] = useState<string | undefined>(undefined)
 
@@ -134,14 +138,6 @@ const Editor = (props: EditorProps) => {
     } else {
       setSelectedId(id)
     }
-  }
-
-  function addInterval(interval: Interval) {
-    setIntervals([...intervals, interval]);
-  }
-
-  function addInstruction(instruction: Instruction) {
-    setInstructions([...instructions, instruction]);
   }
 
   function updateInstruction(instruction: Instruction) {
@@ -418,7 +414,9 @@ const mapDispatchToProps = {
   setWeight,
   setRunningTimes,
   setIntervals,
+  addInterval,
   setInstructions,
+  addInstruction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor)

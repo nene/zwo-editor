@@ -11,6 +11,7 @@ const slice = createSlice({
   initialState,
   reducers: {
     setInstructions: (state, action: PayloadAction<Instruction[]>) => action.payload,
+    addInstruction: (state, action: PayloadAction<Instruction>) => [...state, action.payload],
   },
   extraReducers: {
     [REHYDRATE]: (state, action: PayloadAction<{instructions?: Instruction[]}>) => {
@@ -20,6 +21,6 @@ const slice = createSlice({
 });
 
 export const reducer = slice.reducer;
-export const { setInstructions } = slice.actions;
+export const { setInstructions, addInstruction } = slice.actions;
 
 export const selectInstructions = (state: RootState) => state.instructions;
