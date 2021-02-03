@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBolt, faLaptop, faCloud, faPiggyBank, faRunning, faBiking } from '@fortawesome/free-solid-svg-icons'
 import { Helmet } from "react-helmet";
 import Footer from './components/Footer/Footer'
-import { PUBLIC_URL } from './const';
+import { GITHUB_URL, PUBLIC_URL } from './const';
 
 export default function Home() {
   return (
@@ -59,7 +59,7 @@ export default function Home() {
           </div>
           <div className="contact">
             <h3>Support</h3>
-            <p>If you'd like to report for a bug or ask for a new feature please use my <a href="https://github.com/breiko83/zwo-editor" target="blank">github repository</a>.</p>
+            <p>If you'd like to report for a bug or ask for a new feature please use my <a href={GITHUB_URL} target="blank">github repository</a>.</p>
           </div>
         </div>
       </div>
