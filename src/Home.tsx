@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBolt, faLaptop, faCloud, faPiggyBank, faRunning, faBiking } from '@fortawesome/free-solid-svg-icons'
 import { Helmet } from "react-helmet";
 import Footer from './components/Footer/Footer'
-import { SITE_URL } from './const';
+import { PUBLIC_URL } from './const';
 
 export default function Home() {
   return (
@@ -15,8 +15,8 @@ export default function Home() {
         <meta name="description" content="Edit and share your Zwift workouts directly from your browser" />
         <meta property="og:title" content="Zwift Workout Editor" />
         <meta property="og:description" content="Edit and share your Zwift workouts directly from your browser" />
-        <link rel="canonical" href={SITE_URL} />  
-        <meta property="og:url" content={SITE_URL} />      
+        <link rel="canonical" href={PUBLIC_URL} />  
+        <meta property="og:url" content={PUBLIC_URL} />      
       </Helmet>
       <div className="hero">
         <img src={Icon} alt="logo" width="100" />

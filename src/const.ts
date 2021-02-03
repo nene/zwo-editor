@@ -1,1 +1,1 @@
-export const SITE_URL = "https://www.zwiftworkout.com/";
+export const PUBLIC_URL = "https://www.zwiftworkout.com/";
