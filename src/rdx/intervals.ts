@@ -17,12 +17,12 @@ const intervalsSlice = createSlice({
     setIntervals: (state, action: PayloadAction<Interval[]>) => ({ intervals: action.payload }),
   },
   extraReducers: {
-    [REHYDRATE]: (state, action: PayloadAction<IntervalsState>) => {
-      if ((action as any).key !== 'intervals') {
+    [REHYDRATE]: (state, action: PayloadAction<{intervals: IntervalsState}>) => {
+      if (!action.payload.intervals) {
         return state;
       }
       return {
-        intervals: action.payload.intervals.map(convertLengths) as Interval[],
+        intervals: action.payload.intervals.intervals.map(convertLengths) as Interval[],
       };
     },
   },
