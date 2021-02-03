@@ -42,7 +42,7 @@ import { workoutDuration } from '../../utils/duration'
 import { Duration } from '../../types/Length'
 import DistanceAxis from '../Axis/DistanceAxis'
 import { LengthType } from '../../types/LengthType'
-import { selectAuthor, selectDescription, selectName, setName, setAuthor, setDescription, selectTags, setTags } from '../../rdx/workout'
+import { selectAuthor, selectDescription, selectName, setName, setAuthor, setDescription, selectTags, setTags, selectSportType, selectLengthType, setSportType, setLengthType } from '../../rdx/workout'
 import { RootState } from '../../rdx/store';
 import { selectFtp, selectRunningTimes, selectWeight, setFtp, setRunningTimes, setWeight } from '../../rdx/athlete';
 import { RunningTimes } from '../../types/RunningTimes';
@@ -52,6 +52,8 @@ interface EditorProps {
   author: string;
   description: string;
   tags: string[];
+  sportType: SportType;
+  lengthType: LengthType;
   ftp: number;
   weight: number;
   runningTimes: RunningTimes;
@@ -59,6 +61,8 @@ interface EditorProps {
   setAuthor: (author: string) => void;
   setDescription: (description: string) => void;
   setTags: (tags: string[]) => void;
+  setSportType: (sportType: SportType) => void;
+  setLengthType: (sportType: LengthType) => void;
   setFtp: (ftp: number) => void;
   setWeight: (weight: number) => void;
   setRunningTimes: (runningTimes: RunningTimes) => void;
@@ -69,9 +73,9 @@ const Editor = (props: EditorProps) => {
   const {description, setDescription} = props;
   const {author, setAuthor} = props;
   const {tags, setTags} = props;
+  const {sportType, setSportType} = props;
+  const {lengthType, setLengthType} = props;
 
-  const [sportType, setSportType] = useState(storage.getSportType())
-  const [lengthType, setLengthType] = useState(storage.getLengthType());
   const [intervals, setIntervals] = useState(storage.getIntervals())
   const [instructions, setInstructions] = useState(storage.getInstructions())
 
@@ -92,13 +96,11 @@ const Editor = (props: EditorProps) => {
   }, [sportType, ftp, weight, runningTimes, lengthType]);
 
   useEffect(() => {
-    storage.setSportType(sportType)
-    storage.setLengthType(lengthType)
     storage.setIntervals(intervals)
     storage.setInstructions(instructions)
 
     setXAxisWidth(segmentsRef.current?.scrollWidth || 1320)
-  }, [segmentsRef, intervals, instructions, tags, sportType, lengthType])
+  }, [segmentsRef, intervals, instructions, tags])
 
   function loadWorkout(workout: Workout) {
     setSportType(workout.sportType)
@@ -394,6 +396,8 @@ const mapStateToProps = (state: RootState) => ({
   author: selectAuthor(state),
   description: selectDescription(state),
   tags: selectTags(state),
+  sportType: selectSportType(state),
+  lengthType: selectLengthType(state),
   ftp: selectFtp(state),
   weight: selectWeight(state),
   runningTimes: selectRunningTimes(state),
@@ -404,6 +408,8 @@ const mapDispatchToProps = {
   setAuthor,
   setDescription,
   setTags,
+  setSportType,
+  setLengthType,
   setFtp,
   setWeight,
   setRunningTimes,
