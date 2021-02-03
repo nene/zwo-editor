@@ -1,7 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBolt, faClock, faRuler } from '@fortawesome/free-solid-svg-icons'
-import './Label.css'
+import styled from 'styled-components';
 import { FreeInterval, RampInterval, SteadyInterval } from '../../types/Interval'
 import { WorkoutMode } from '../../modes/WorkoutMode'
 import BikeMode from '../../modes/BikeMode'
@@ -16,14 +16,29 @@ interface LabelProps {
 
 const Label = ({ mode, ...props }: LabelProps) => {
   return (
-    <div className='label'>
+    <LabelContainer>
       <div>
         <FontAwesomeIcon icon={faClock} fixedWidth /> {format.duration(mode.intervalDuration(props.interval))}
       </div>
       {mode instanceof BikeMode ? <BikeData mode={mode} {...props} /> : <RunData mode={mode} {...props} />}
-    </div>
+    </LabelContainer>
   );
 };
+
+const LabelContainer = styled.div`
+  position: absolute;
+  z-index: 100;
+  top: -95px;
+  left: 0;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 150px;
+  border-radius: 5px;
+  margin: 5px 0;
+  text-align: center;
+  font-size: 14px; 
+  padding: 5px;
+`;
 
 function BikeData({ interval, mode, onCadenceChange }: LabelProps & { mode: BikeMode }) {
   return (
@@ -48,10 +63,10 @@ function BikeData({ interval, mode, onCadenceChange }: LabelProps & { mode: Bike
           </div>
         </>
       }
-      <div className="cadence-row">
-        <label className="cadenceLabel">Cadence</label>
+      <CadenceRow>
+        <CadenceLabel>Cadence</CadenceLabel>
         <CadenceInput cadence={interval.cadence} onCadenceChange={onCadenceChange} />
-      </div>
+      </CadenceRow>
     </>
   );
 }
@@ -76,20 +91,33 @@ function RunData({ interval, mode }: LabelProps & { mode: RunMode }) {
   );
 }
 
-function CadenceInput({cadence, onCadenceChange}: {cadence: number, onCadenceChange: (v: number) => void}) {
-  return (
-    <input
-      type="number"
-      min="40"
-      max="150"
-      step="5"
-      name="cadence"
-      value={cadence || ''}
-      onChange={(e) => {onCadenceChange(parseInt(e.target.value))}}
-      onClick={(e)=> {e.stopPropagation()}}
-      className="textField cadence"
-    />
-  );
-}
+const CadenceRow = styled.div`
+  display: flex;
+`;
+
+const CadenceLabel = styled.label`
+  font-size: 14px;
+  flex: 1;
+`;
+
+type CadenceInputProps = { cadence: number, onCadenceChange: (v: number) => void };
+
+const CadenceInput = styled.input.attrs<CadenceInputProps>((props) => ({
+  type: "number",
+  min: "40",
+  max: "150",
+  step: "5",
+  value: props.cadence || '',
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => {props.onCadenceChange(parseInt(e.target.value))},
+  onClick: (e: React.MouseEvent<HTMLInputElement>)=> {e.stopPropagation()},
+}))<CadenceInputProps>`
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 0;
+  border-bottom: 0px solid white;
+  font-size: 14px;
+  min-width: 1px;
+  flex: 1;
+`;
 
 export default Label

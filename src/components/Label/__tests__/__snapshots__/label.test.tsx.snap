@@ -1,8 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Label> for cycling ramp, renders: duration, power-range, %FTP-range, cadence 1`] = `
+.c0 {
+  position: absolute;
+  z-index: 100;
+  top: -95px;
+  left: 0;
+  color: white;
+  background-color: rgba(0,0,0,0.7);
+  width: 150px;
+  border-radius: 5px;
+  margin: 5px 0;
+  text-align: center;
+  font-size: 14px;
+  padding: 5px;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c2 {
+  font-size: 14px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.c3 {
+  background-color: rgba(255,255,255,0.1);
+  color: white;
+  border: 0;
+  border-bottom: 0px solid white;
+  font-size: 14px;
+  min-width: 1px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
 <div
-  className="label"
+  className="c0"
 >
   <div>
     <FontAwesomeIcon
@@ -29,18 +70,18 @@ exports[`<Label> for cycling ramp, renders: duration, power-range, %FTP-range, c
      FTP
   </div>
   <div
-    className="cadence-row"
+    className="c1"
   >
     <label
-      className="cadenceLabel"
+      className="c2"
     >
       Cadence
     </label>
     <input
-      className="textField cadence"
+      className="c3"
       max="150"
       min="40"
-      name="cadence"
+      onCadenceChange={[Function]}
       onChange={[Function]}
       onClick={[Function]}
       step="5"
@@ -52,8 +93,49 @@ exports[`<Label> for cycling ramp, renders: duration, power-range, %FTP-range, c
 `;
 
 exports[`<Label> for cycling, renders: duration, power, w/kg, %FTP, cadence 1`] = `
+.c0 {
+  position: absolute;
+  z-index: 100;
+  top: -95px;
+  left: 0;
+  color: white;
+  background-color: rgba(0,0,0,0.7);
+  width: 150px;
+  border-radius: 5px;
+  margin: 5px 0;
+  text-align: center;
+  font-size: 14px;
+  padding: 5px;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c2 {
+  font-size: 14px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.c3 {
+  background-color: rgba(255,255,255,0.1);
+  color: white;
+  border: 0;
+  border-bottom: 0px solid white;
+  font-size: 14px;
+  min-width: 1px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
 <div
-  className="label"
+  className="c0"
 >
   <div>
     <FontAwesomeIcon
@@ -78,18 +160,18 @@ exports[`<Label> for cycling, renders: duration, power, w/kg, %FTP, cadence 1`] 
      FTP
   </div>
   <div
-    className="cadence-row"
+    className="c1"
   >
     <label
-      className="cadenceLabel"
+      className="c2"
     >
       Cadence
     </label>
     <input
-      className="textField cadence"
+      className="c3"
       max="150"
       min="40"
-      name="cadence"
+      onCadenceChange={[Function]}
       onChange={[Function]}
       onClick={[Function]}
       step="5"
@@ -101,8 +183,23 @@ exports[`<Label> for cycling, renders: duration, power, w/kg, %FTP, cadence 1`] 
 `;
 
 exports[`<Label> for running (in distance mode), renders: duration, distance, %pace, pace type 1`] = `
+.c0 {
+  position: absolute;
+  z-index: 100;
+  top: -95px;
+  left: 0;
+  color: white;
+  background-color: rgba(0,0,0,0.7);
+  width: 150px;
+  border-radius: 5px;
+  margin: 5px 0;
+  text-align: center;
+  font-size: 14px;
+  padding: 5px;
+}
+
 <div
-  className="label"
+  className="c0"
 >
   <div>
     <FontAwesomeIcon
@@ -129,8 +226,23 @@ exports[`<Label> for running (in distance mode), renders: duration, distance, %p
 `;
 
 exports[`<Label> for running ramp, renders: duration, distance, %pace-range, pace type 1`] = `
+.c0 {
+  position: absolute;
+  z-index: 100;
+  top: -95px;
+  left: 0;
+  color: white;
+  background-color: rgba(0,0,0,0.7);
+  width: 150px;
+  border-radius: 5px;
+  margin: 5px 0;
+  text-align: center;
+  font-size: 14px;
+  padding: 5px;
+}
+
 <div
-  className="label"
+  className="c0"
 >
   <div>
     <FontAwesomeIcon
@@ -159,8 +271,23 @@ exports[`<Label> for running ramp, renders: duration, distance, %pace-range, pac
 `;
 
 exports[`<Label> for running, renders: duration, distance, %pace, pace type 1`] = `
+.c0 {
+  position: absolute;
+  z-index: 100;
+  top: -95px;
+  left: 0;
+  color: white;
+  background-color: rgba(0,0,0,0.7);
+  width: 150px;
+  border-radius: 5px;
+  margin: 5px 0;
+  text-align: center;
+  font-size: 14px;
+  padding: 5px;
+}
+
 <div
-  className="label"
+  className="c0"
 >
   <div>
     <FontAwesomeIcon
