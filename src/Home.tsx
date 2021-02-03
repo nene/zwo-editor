@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Home.css'
 import Icon from './assets/icon.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBolt, faLaptop, faCloud, faPiggyBank, faRunning, faBiking } from '@fortawesome/free-solid-svg-icons'
+import { faBolt, faLaptop, faPiggyBank, faRunning, faBiking } from '@fortawesome/free-solid-svg-icons'
 import { Helmet } from "react-helmet";
 import Footer from './components/Footer/Footer'
 import { GITHUB_URL, PUBLIC_URL } from './const';
@@ -38,10 +38,6 @@ export default function Home() {
           <div>
             <h3><FontAwesomeIcon icon={faLaptop} fixedWidth /> CPU Friendly</h3>
             <p>Edit your workout files outside Zwift - don't overload you computer</p>
-          </div>
-          <div>
-            <h3><FontAwesomeIcon icon={faCloud} fixedWidth /> Share</h3>
-            <p>Easily share your workout files with your friends</p>
           </div>
           <div>
             <h3><FontAwesomeIcon icon={faPiggyBank} fixedWidth /> Open Source</h3>
