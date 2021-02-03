@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux';
 import './Editor.css'
 import { ZoneColor, Zones } from '../../types/Zones'
@@ -36,7 +36,6 @@ import ColorButton from '../Button/ColorButton'
 import Button from '../Button/Button'
 import ActionButton from '../Button/ActionButton'
 import { SportType } from '../../types/SportType'
-import createMode from '../../modes/createMode'
 import { workoutDuration } from '../../utils/duration'
 import { Duration } from '../../types/Length'
 import DistanceAxis from '../Axis/DistanceAxis'
@@ -47,6 +46,8 @@ import { selectFtp, selectRunningTimes, selectWeight, setFtp, setRunningTimes, s
 import { RunningTimes } from '../../types/RunningTimes';
 import { addInterval, selectIntervals, setIntervals } from '../../rdx/intervals';
 import { addInstruction, selectInstructions, setInstructions } from '../../rdx/instructions';
+import { WorkoutMode } from '../../modes/WorkoutMode';
+import { selectMode } from '../../rdx/mode';
 
 interface EditorProps {
   name: string;
@@ -60,6 +61,7 @@ interface EditorProps {
   runningTimes: RunningTimes;
   intervals: Interval[];
   instructions: Instruction[];
+  mode: WorkoutMode,
   setName: (name: string) => void;
   setAuthor: (author: string) => void;
   setDescription: (description: string) => void;
@@ -90,6 +92,7 @@ const Editor = (props: EditorProps) => {
   const {weight, setWeight} = props;
   const {runningTimes, setRunningTimes} = props;
 
+  const {mode} = props;
   const {addInterval, addInstruction} = props;
 
   const [selectedId, setSelectedId] = useState<string | undefined>(undefined)
@@ -99,10 +102,6 @@ const Editor = (props: EditorProps) => {
   const canvasRef = useRef<HTMLInputElement>(null);
   const segmentsRef = useRef<HTMLInputElement>(null);
   const [xAxisWidth, setXAxisWidth] = useState(1320);
-
-  const getMode = useCallback(() => {
-    return createMode({sportType, ftp, weight, runningTimes, lengthType});
-  }, [sportType, ftp, weight, runningTimes, lengthType]);
 
   useEffect(() => {
     setXAxisWidth(segmentsRef.current?.scrollWidth || 1320)
@@ -175,7 +174,7 @@ const Editor = (props: EditorProps) => {
       tags,
       intervals,
       instructions,
-    }, getMode());
+    }, mode);
 
     return new Blob([xml], { type: 'application/xml' })
   }
@@ -204,7 +203,7 @@ const Editor = (props: EditorProps) => {
     newWorkout()
 
     try {
-      loadWorkout(parseWorkoutXml(await file.text(), getMode()));
+      loadWorkout(parseWorkoutXml(await file.text(), mode));
     } catch (e) {
       console.error(e);
     }
@@ -215,7 +214,7 @@ const Editor = (props: EditorProps) => {
       <GenericBar
         key={interval.id}
         interval={interval}
-        mode={getMode()}
+        mode={mode}
         onChange={updateInterval}
         onClick={toggleSelection}
         selected={interval.id === selectedId}
@@ -227,11 +226,11 @@ const Editor = (props: EditorProps) => {
     <InstructionEditor
       key={instruction.id}
       instruction={instruction}
-      width={workoutDuration(intervals, getMode()).seconds / 3}
+      width={workoutDuration(intervals, mode).seconds / 3}
       onChange={updateInstruction}
       onDelete={deleteInstruction}
       index={index}
-      mode={getMode()}
+      mode={mode}
     />
   )
 
@@ -278,8 +277,8 @@ const Editor = (props: EditorProps) => {
       onBackspacePress={() => selectedId && removeInterval(selectedId)}
       onUpPress={() => selectedId && setIntervals(updateIntervalIntensity(selectedId, 0.01, intervals))}
       onDownPress={() => selectedId && setIntervals(updateIntervalIntensity(selectedId, -0.01, intervals))}
-      onLeftPress={() => selectedId && setIntervals(updateIntervalDuration(selectedId, new Duration(-5), intervals, getMode()))}
-      onRightPress={() => selectedId && setIntervals(updateIntervalDuration(selectedId, new Duration(5), intervals, getMode()))}
+      onLeftPress={() => selectedId && setIntervals(updateIntervalDuration(selectedId, new Duration(-5), intervals, mode))}
+      onRightPress={() => selectedId && setIntervals(updateIntervalDuration(selectedId, new Duration(5), intervals, mode))}
     >
       <Head name={name} description={description} />
 
@@ -300,7 +299,7 @@ const Editor = (props: EditorProps) => {
       <div className="info">
         <Title name={name} author={author} description={description} onClick={() => setSavePopupVisibility(true)} />
         <div className="workout">
-          <Stats intervals={intervals} ftp={ftp} mode={getMode()} />
+          <Stats intervals={intervals} ftp={ftp} mode={mode} />
           {sportType === 'run' &&
             <LeftRightToggle<"time","distance">
               label="Duration Type"
@@ -356,24 +355,24 @@ const Editor = (props: EditorProps) => {
       <div className='cta'>
         {sportType === "bike" ?
           <div>
-            <ColorButton label="Z1" color={ZoneColor.GRAY} onClick={() => addInterval(intervalFactory.steady({ intensity: 0.5 }, getMode()))} />
-            <ColorButton label="Z2" color={ZoneColor.BLUE} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z2.min }, getMode()))} />
-            <ColorButton label="Z3" color={ZoneColor.GREEN} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z3.min }, getMode()))} />
-            <ColorButton label="Z4" color={ZoneColor.YELLOW} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z4.min }, getMode()))} />
-            <ColorButton label="Z5" color={ZoneColor.ORANGE} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z5.min }, getMode()))} />
-            <ColorButton label="Z6" color={ZoneColor.RED} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z6.min }, getMode()))} />
+            <ColorButton label="Z1" color={ZoneColor.GRAY} onClick={() => addInterval(intervalFactory.steady({ intensity: 0.5 }, mode))} />
+            <ColorButton label="Z2" color={ZoneColor.BLUE} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z2.min }, mode))} />
+            <ColorButton label="Z3" color={ZoneColor.GREEN} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z3.min }, mode))} />
+            <ColorButton label="Z4" color={ZoneColor.YELLOW} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z4.min }, mode))} />
+            <ColorButton label="Z5" color={ZoneColor.ORANGE} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z5.min }, mode))} />
+            <ColorButton label="Z6" color={ZoneColor.RED} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z6.min }, mode))} />
           </div>
           :
-          <Button onClick={() => addInterval(intervalFactory.steady({}, getMode()))}><SteadyLogo className="btn-icon" /> Steady Pace</Button>
+          <Button onClick={() => addInterval(intervalFactory.steady({}, mode))}><SteadyLogo className="btn-icon" /> Steady Pace</Button>
         }
 
-        <Button onClick={() => addInterval(intervalFactory.ramp({ startIntensity: 0.25, endIntensity: 0.75 }, getMode()))}><WarmupLogo className="btn-icon" /> Warm up</Button>
-        <Button onClick={() => addInterval(intervalFactory.ramp({ startIntensity: 0.75, endIntensity: 0.25 }, getMode()))}><WarmdownLogo className="btn-icon" /> Cool down</Button>
-        <Button onClick={() => addInterval(intervalFactory.repetition({}, getMode()))}><IntervalLogo className="btn-icon" /> Interval</Button>
+        <Button onClick={() => addInterval(intervalFactory.ramp({ startIntensity: 0.25, endIntensity: 0.75 }, mode))}><WarmupLogo className="btn-icon" /> Warm up</Button>
+        <Button onClick={() => addInterval(intervalFactory.ramp({ startIntensity: 0.75, endIntensity: 0.25 }, mode))}><WarmdownLogo className="btn-icon" /> Cool down</Button>
+        <Button onClick={() => addInterval(intervalFactory.repetition({}, mode))}><IntervalLogo className="btn-icon" /> Interval</Button>
         {sportType === "bike" &&
-          <IconButton label="Free Ride" icon={faBicycle} onClick={() => addInterval(intervalFactory.free({}, getMode()))} />
+          <IconButton label="Free Ride" icon={faBicycle} onClick={() => addInterval(intervalFactory.free({}, mode))} />
         }
-        <IconButton label="Text Event" icon={faComment} onClick={() => addInstruction(createInstruction({}, getMode()))} />
+        <IconButton label="Text Event" icon={faComment} onClick={() => addInstruction(createInstruction({}, mode))} />
         {sportType === "bike" &&
           <NumberField name="ftp" label={"FTP (W)"} value={ftp} onChange={setFtp} />
         }
@@ -401,6 +400,7 @@ const mapStateToProps = (state: RootState) => ({
   runningTimes: selectRunningTimes(state),
   intervals: selectIntervals(state),
   instructions: selectInstructions(state),
+  mode: selectMode(state),
 });
 
 const mapDispatchToProps = {
