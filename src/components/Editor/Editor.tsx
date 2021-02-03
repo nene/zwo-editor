@@ -35,7 +35,6 @@ import IconButton from '../Button/IconButton'
 import ColorButton from '../Button/ColorButton'
 import Button from '../Button/Button'
 import ActionButton from '../Button/ActionButton'
-import * as storage from '../../storage/storage';
 import { SportType } from '../../types/SportType'
 import createMode from '../../modes/createMode'
 import { workoutDuration } from '../../utils/duration'
@@ -47,6 +46,7 @@ import { RootState } from '../../rdx/store';
 import { selectFtp, selectRunningTimes, selectWeight, setFtp, setRunningTimes, setWeight } from '../../rdx/athlete';
 import { RunningTimes } from '../../types/RunningTimes';
 import { selectIntervals, setIntervals } from '../../rdx/intervals';
+import { selectInstructions, setInstructions } from '../../rdx/instructions';
 
 interface EditorProps {
   name: string;
@@ -59,6 +59,7 @@ interface EditorProps {
   weight: number;
   runningTimes: RunningTimes;
   intervals: Interval[];
+  instructions: Instruction[];
   setName: (name: string) => void;
   setAuthor: (author: string) => void;
   setDescription: (description: string) => void;
@@ -69,6 +70,7 @@ interface EditorProps {
   setWeight: (weight: number) => void;
   setRunningTimes: (runningTimes: RunningTimes) => void;
   setIntervals: (intervals: Interval[]) => void;
+  setInstructions: (instructions: Instruction[]) => void;
 }
 
 const Editor = (props: EditorProps) => {
@@ -80,7 +82,7 @@ const Editor = (props: EditorProps) => {
   const {lengthType, setLengthType} = props;
 
   const {intervals, setIntervals} = props;
-  const [instructions, setInstructions] = useState(storage.getInstructions())
+  const {instructions, setInstructions} = props;
 
   const {ftp, setFtp} = props;
   const {weight, setWeight} = props;
@@ -99,10 +101,8 @@ const Editor = (props: EditorProps) => {
   }, [sportType, ftp, weight, runningTimes, lengthType]);
 
   useEffect(() => {
-    storage.setInstructions(instructions)
-
     setXAxisWidth(segmentsRef.current?.scrollWidth || 1320)
-  }, [segmentsRef, instructions])
+  }, [segmentsRef])
 
   function loadWorkout(workout: Workout) {
     setSportType(workout.sportType)
@@ -141,7 +141,7 @@ const Editor = (props: EditorProps) => {
   }
 
   function addInstruction(instruction: Instruction) {
-    setInstructions(instructions => [...instructions, instruction]);
+    setInstructions([...instructions, instruction]);
   }
 
   function updateInstruction(instruction: Instruction) {
@@ -404,6 +404,7 @@ const mapStateToProps = (state: RootState) => ({
   weight: selectWeight(state),
   runningTimes: selectRunningTimes(state),
   intervals: selectIntervals(state),
+  instructions: selectInstructions(state),
 });
 
 const mapDispatchToProps = {
@@ -417,6 +418,7 @@ const mapDispatchToProps = {
   setWeight,
   setRunningTimes,
   setIntervals,
+  setInstructions,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor)
