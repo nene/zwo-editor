@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { connect } from 'react-redux';
 import './Editor.css'
 import { ZoneColor, Zones } from '../../types/Zones'
 import GenericBar from '../Bar/GenericBar'
@@ -41,11 +42,23 @@ import { workoutDuration } from '../../utils/duration'
 import { Duration } from '../../types/Length'
 import DistanceAxis from '../Axis/DistanceAxis'
 import { LengthType } from '../../types/LengthType'
+import { authorSelector, descriptionSelector, nameSelector, setName, setAuthor, setDescription } from '../../rdx/workout'
+import { RootState } from '../../rdx/store';
 
-const Editor = () => {
-  const [name, setName] = useState(storage.getName())
-  const [description, setDescription] = useState(storage.getDescription())
-  const [author, setAuthor] = useState(storage.getAuthor())
+interface EditorProps {
+  name: string;
+  author: string;
+  description: string;
+  setName: (name: string) => void;
+  setAuthor: (name: string) => void;
+  setDescription: (name: string) => void;
+}
+
+const Editor = (props: EditorProps) => {
+  const {name, setName} = props;
+  const {description, setDescription} = props;
+  const {author, setAuthor} = props;
+
   const [tags, setTags] = useState(storage.getTags())
   const [sportType, setSportType] = useState(storage.getSportType())
   const [lengthType, setLengthType] = useState(storage.getLengthType());
@@ -374,4 +387,16 @@ const Editor = () => {
   )
 }
 
-export default Editor
+const mapStateToProps = (state: RootState) => ({
+  name: nameSelector(state),
+  author: authorSelector(state),
+  description: descriptionSelector(state),
+});
+
+const mapDispatchToProps = {
+  setName,
+  setAuthor,
+  setDescription,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Editor)
