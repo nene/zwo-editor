@@ -1,19 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SteadyBar> renders 1`] = `
+.c0 {
+  position: relative;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c2 {
+  border-top: 1px dotted gray;
+  z-index: 5;
+}
+
+.c3 {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4:first-child {
+  border-bottom-left-radius: 5px;
+}
+
+.c4:last-child {
+  border-bottom-right-radius: 5px;
+}
+
+.c5 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.c6 {
+  fill: transparent;
+}
+
+.c7 {
+  fill: white;
+  display: hidden;
+}
+
 <div
-  className="segment"
+  className="c0"
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   style={Object {}}
 >
   <div
-    className="trapeze"
+    className="c1"
     onClick={[Function]}
   >
     <Resizable
-      className="trapeze-component"
+      className="c2"
       enable={
         Object {
           "right": true,
@@ -39,7 +93,7 @@ exports[`<SteadyBar> renders 1`] = `
       }
     />
     <Resizable
-      className="trapeze-component"
+      className="c2"
       enable={
         Object {
           "right": true,
@@ -66,7 +120,7 @@ exports[`<SteadyBar> renders 1`] = `
     />
   </div>
   <div
-    className="trapeze-colors"
+    className="c3"
     style={
       Object {
         "backgroundColor": "#0E90D4",
@@ -76,7 +130,7 @@ exports[`<SteadyBar> renders 1`] = `
     }
   >
     <div
-      className="color"
+      className="c4"
       style={
         Object {
           "backgroundColor": "#807F80",
@@ -85,7 +139,7 @@ exports[`<SteadyBar> renders 1`] = `
       }
     />
     <div
-      className="color"
+      className="c4"
       style={
         Object {
           "backgroundColor": "#0E90D4",
@@ -94,7 +148,7 @@ exports[`<SteadyBar> renders 1`] = `
       }
     />
     <div
-      className="color"
+      className="c4"
       style={
         Object {
           "backgroundColor": "#00C46A",
@@ -103,7 +157,7 @@ exports[`<SteadyBar> renders 1`] = `
       }
     />
     <div
-      className="color"
+      className="c4"
       style={
         Object {
           "backgroundColor": "#FFCB00",
@@ -112,7 +166,7 @@ exports[`<SteadyBar> renders 1`] = `
       }
     />
     <div
-      className="color"
+      className="c4"
       style={
         Object {
           "backgroundColor": "#FF6430",
@@ -121,7 +175,7 @@ exports[`<SteadyBar> renders 1`] = `
       }
     />
     <div
-      className="color"
+      className="c4"
       style={
         Object {
           "backgroundColor": "#E90000",
@@ -131,16 +185,16 @@ exports[`<SteadyBar> renders 1`] = `
     />
   </div>
   <svg
-    className="trapeze-svg-container"
+    className="c5"
     height="225.25"
     width="16.666666666666668"
   >
     <polygon
-      className="trapeze-svg"
+      className="c6"
       points="0,74 0,225.25 16.666666666666668,225.25 16.666666666666668,0"
     />
     <polygon
-      className="trapeze-svg-off"
+      className="c7"
       points="0,0 0,74 16.666666666666668,0"
     />
   </svg>
@@ -148,8 +202,62 @@ exports[`<SteadyBar> renders 1`] = `
 `;
 
 exports[`<SteadyBar> renders with Label when selected 1`] = `
+.c0 {
+  position: relative;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c2 {
+  border-top: 1px dotted gray;
+  z-index: 5;
+}
+
+.c3 {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4:first-child {
+  border-bottom-left-radius: 5px;
+}
+
+.c4:last-child {
+  border-bottom-right-radius: 5px;
+}
+
+.c5 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.c6 {
+  fill: transparent;
+}
+
+.c7 {
+  fill: white;
+  display: hidden;
+}
+
 <div
-  className="segment"
+  className="c0"
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
@@ -184,11 +292,11 @@ exports[`<SteadyBar> renders with Label when selected 1`] = `
     onCadenceChange={[Function]}
   />
   <div
-    className="trapeze"
+    className="c1"
     onClick={[Function]}
   >
     <Resizable
-      className="trapeze-component"
+      className="c2"
       enable={
         Object {
           "right": true,
@@ -214,7 +322,7 @@ exports[`<SteadyBar> renders with Label when selected 1`] = `
       }
     />
     <Resizable
-      className="trapeze-component"
+      className="c2"
       enable={
         Object {
           "right": true,
@@ -241,7 +349,7 @@ exports[`<SteadyBar> renders with Label when selected 1`] = `
     />
   </div>
   <div
-    className="trapeze-colors"
+    className="c3"
     style={
       Object {
         "backgroundColor": "#0E90D4",
@@ -251,7 +359,7 @@ exports[`<SteadyBar> renders with Label when selected 1`] = `
     }
   >
     <div
-      className="color"
+      className="c4"
       style={
         Object {
           "backgroundColor": "#807F80",
@@ -260,7 +368,7 @@ exports[`<SteadyBar> renders with Label when selected 1`] = `
       }
     />
     <div
-      className="color"
+      className="c4"
       style={
         Object {
           "backgroundColor": "#0E90D4",
@@ -269,7 +377,7 @@ exports[`<SteadyBar> renders with Label when selected 1`] = `
       }
     />
     <div
-      className="color"
+      className="c4"
       style={
         Object {
           "backgroundColor": "#00C46A",
@@ -278,7 +386,7 @@ exports[`<SteadyBar> renders with Label when selected 1`] = `
       }
     />
     <div
-      className="color"
+      className="c4"
       style={
         Object {
           "backgroundColor": "#FFCB00",
@@ -287,7 +395,7 @@ exports[`<SteadyBar> renders with Label when selected 1`] = `
       }
     />
     <div
-      className="color"
+      className="c4"
       style={
         Object {
           "backgroundColor": "#FF6430",
@@ -296,7 +404,7 @@ exports[`<SteadyBar> renders with Label when selected 1`] = `
       }
     />
     <div
-      className="color"
+      className="c4"
       style={
         Object {
           "backgroundColor": "#E90000",
@@ -306,16 +414,16 @@ exports[`<SteadyBar> renders with Label when selected 1`] = `
     />
   </div>
   <svg
-    className="trapeze-svg-container"
+    className="c5"
     height="225.25"
     width="16.666666666666668"
   >
     <polygon
-      className="trapeze-svg"
+      className="c6"
       points="0,74 0,225.25 16.666666666666668,225.25 16.666666666666668,0"
     />
     <polygon
-      className="trapeze-svg-off"
+      className="c7"
       points="0,0 0,74 16.666666666666668,0"
     />
   </svg>

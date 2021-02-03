@@ -1,15 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<FreeBar> renders 1`] = `
+.c0 {
+  position: relative;
+}
+
+.c1 {
+  border: 1px solid white;
+  background-image: url('test-file-stub');
+}
+
 <div
-  className="segment"
+  className="c0"
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   style={Object {}}
 >
   <Resizable
-    className="freeRide"
+    className="c1"
     enable={
       Object {
         "right": true,
@@ -37,8 +46,17 @@ exports[`<FreeBar> renders 1`] = `
 `;
 
 exports[`<FreeBar> renders with label when selected 1`] = `
+.c0 {
+  position: relative;
+}
+
+.c1 {
+  border: 1px solid white;
+  background-image: url('test-file-stub');
+}
+
 <div
-  className="segment"
+  className="c0"
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
@@ -70,7 +88,7 @@ exports[`<FreeBar> renders with label when selected 1`] = `
     onCadenceChange={[Function]}
   />
   <Resizable
-    className="freeRide"
+    className="c1"
     enable={
       Object {
         "right": true,

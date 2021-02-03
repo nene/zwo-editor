@@ -1,9 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RepetitionBar> renders using SteadyBar components 1`] = `
+.c0 {
+  position: absolute;
+  margin-top: -30px;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
 <div>
   <div
-    className="buttons"
+    className="c0"
   >
     <button
       onClick={[Function]}
@@ -17,7 +36,7 @@ exports[`<RepetitionBar> renders using SteadyBar components 1`] = `
     </button>
   </div>
   <div
-    className="intervals"
+    className="c1"
   >
     <SteadyBar
       interval={

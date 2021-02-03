@@ -2,6 +2,7 @@ import React from 'react';
 import RepetitionBar from '../RepetitionBar';
 import renderer from 'react-test-renderer';
 import '@testing-library/jest-dom/extend-expect'
+import 'jest-styled-components';
 import intervalFactory from '../../../interval/intervalFactory';
 import createMode from '../../../modes/createMode';
 import { Duration } from '../../../types/Length';

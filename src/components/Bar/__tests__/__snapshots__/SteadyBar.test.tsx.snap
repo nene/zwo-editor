@@ -1,15 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SteadyBar> renders 1`] = `
+.c0 {
+  position: relative;
+}
+
+.c1 {
+  border-radius: 10px;
+  border: 1px solid white;
+}
+
 <div
-  className="segment"
+  className="c0"
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   style={Object {}}
 >
   <Resizable
-    className="bar"
+    className="c1"
     enable={
       Object {
         "right": true,
@@ -43,8 +52,17 @@ exports[`<SteadyBar> renders 1`] = `
 `;
 
 exports[`<SteadyBar> renders with Label when selected and showLabel=true 1`] = `
+.c0 {
+  position: relative;
+}
+
+.c1 {
+  border-radius: 10px;
+  border: 1px solid white;
+}
+
 <div
-  className="segment"
+  className="c0"
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
@@ -78,7 +96,7 @@ exports[`<SteadyBar> renders with Label when selected and showLabel=true 1`] = `
     onCadenceChange={[Function]}
   />
   <Resizable
-    className="bar"
+    className="c1"
     enable={
       Object {
         "right": true,
@@ -112,8 +130,17 @@ exports[`<SteadyBar> renders with Label when selected and showLabel=true 1`] = `
 `;
 
 exports[`<SteadyBar> renders without Label when selected, but showLabel=false 1`] = `
+.c0 {
+  position: relative;
+}
+
+.c1 {
+  border-radius: 10px;
+  border: 1px solid white;
+}
+
 <div
-  className="segment"
+  className="c0"
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
@@ -124,7 +151,7 @@ exports[`<SteadyBar> renders without Label when selected, but showLabel=false 1`
   }
 >
   <Resizable
-    className="bar"
+    className="c1"
     enable={
       Object {
         "right": true,
