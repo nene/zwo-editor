@@ -1,10 +1,21 @@
 import React, { useMemo, useState } from 'react'
 import SteadyBar from './SteadyBar'
-import './RepetitionBar.css'
+import styled from 'styled-components'
 import { RepetitionInterval, SteadyInterval } from '../../types/Interval'
 import { WorkoutMode } from '../../modes/WorkoutMode'
 import intervalFactory from '../../interval/intervalFactory'
 import { range } from 'ramda'
+
+const Buttons = styled.div`
+  position: absolute;
+  margin-top: -30px;
+`;
+
+const SubIntervals = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+`;
 
 interface RepetitionBarProps {
   interval: RepetitionInterval;
@@ -99,10 +110,13 @@ const RepetitionBar = ({interval, ...props}: RepetitionBarProps) => {
 
   return (
     <div>
-      <div className='buttons'><button onClick={handleAddInterval}>+</button><button onClick={handleRemoveInterval}>-</button></div>
-      <div className='repetition-bar'>
+      <Buttons>
+        <button onClick={handleAddInterval}>+</button>
+        <button onClick={handleRemoveInterval}>-</button>
+      </Buttons>
+      <SubIntervals>
         {subIntervals.map((sub, index) => renderBar(sub, index === 0 || index === subIntervals.length - 1))}
-      </div>
+      </SubIntervals>
     </div>
   )
 }
