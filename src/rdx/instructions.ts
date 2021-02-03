@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { REHYDRATE } from 'redux-persist';
 import { RootState } from './store';
-import { convertLengths } from '../storage/storage';
+import { convertLengths } from './rehydrate';
 import { Instruction } from '../types/Instruction';
 
 type InstructionsState = Instruction[];

@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { REHYDRATE } from 'redux-persist';
 import { Interval } from '../types/Interval';
 import { RootState } from './store';
-import { convertLengths } from '../storage/storage';
+import { convertLengths } from './rehydrate';
 
 type IntervalsState = Interval[];
 
