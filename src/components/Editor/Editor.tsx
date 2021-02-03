@@ -82,9 +82,6 @@ const Editor = (props: EditorProps) => {
   }, [sportType, ftp, weight, runningTimes, lengthType]);
 
   useEffect(() => {
-    storage.setName(name)
-    storage.setDescription(description)
-    storage.setAuthor(author)
     storage.setTags(tags)
     storage.setSportType(sportType)
     storage.setLengthType(lengthType)
@@ -96,7 +93,7 @@ const Editor = (props: EditorProps) => {
     storage.setRunningTimes(runningTimes)
 
     setXAxisWidth(segmentsRef.current?.scrollWidth || 1320)
-  }, [segmentsRef, intervals, ftp, instructions, weight, name, description, author, tags, sportType, lengthType, runningTimes])
+  }, [segmentsRef, intervals, ftp, instructions, weight, tags, sportType, lengthType, runningTimes])
 
   function loadWorkout(workout: Workout) {
     setSportType(workout.sportType)
