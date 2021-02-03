@@ -1,7 +1,6 @@
 import React from 'react';
 import InstructionEditor from '../InstructionEditor';
 import renderer from 'react-test-renderer';
-import '@testing-library/jest-dom/extend-expect'
 import { createInstruction } from '../../../types/Instruction';
 import createMode from '../../../modes/createMode';
 import { Duration } from '../../../types/Length';

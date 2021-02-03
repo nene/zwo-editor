@@ -1,7 +1,6 @@
 import React from 'react';
 import Label from '../Label';
 import renderer from 'react-test-renderer';
-import '@testing-library/jest-dom/extend-expect'
 import { PaceType } from '../../../types/PaceType';
 import intervalFactory from '../../../interval/intervalFactory';
 import createMode from '../../../modes/createMode';

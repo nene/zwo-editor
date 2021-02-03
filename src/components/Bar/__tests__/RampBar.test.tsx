@@ -2,7 +2,6 @@ import React from 'react';
 import RampBar from '../RampBar';
 import { Zones } from '../../../types/Zones'
 import renderer from 'react-test-renderer';
-import '@testing-library/jest-dom/extend-expect'
 import intervalFactory from '../../../interval/intervalFactory';
 import createMode from '../../../modes/createMode';
 import { Duration } from '../../../types/Length';
