@@ -12,6 +12,6 @@
   border-left: 1px dotted gray;  
   z-index: 0;
 }
-.react-draggable {
+.draggable-item {
   position: absolute;
 }

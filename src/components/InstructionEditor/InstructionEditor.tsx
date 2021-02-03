@@ -71,7 +71,7 @@ const InstructionEditor = (props: InstructionEditorProps) => {
       onStop={(e, data) => handleTouch(data.x)}
       onDrag={(e, data) => handleDragging(data.x)}      
     >
-      <div style={{}}>
+      <div className="draggable-item">
         <FontAwesomeIcon style={{display:'block',opacity:0.7}} icon={faComment} size="lg" fixedWidth className="handle" onMouseDown={() => setShowInput(!showInput)} />        
         {showInput &&
         <div className="edit">
