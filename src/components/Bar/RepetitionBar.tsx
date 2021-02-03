@@ -100,7 +100,7 @@ const RepetitionBar = ({interval, ...props}: RepetitionBarProps) => {
   return (
     <div>
       <div className='buttons'><button onClick={handleAddInterval}>+</button><button onClick={handleRemoveInterval}>-</button></div>
-      <div className='intervals'>
+      <div className='repetition-bar'>
         {subIntervals.map((sub, index) => renderBar(sub, index === 0 || index === subIntervals.length - 1))}
       </div>
     </div>
