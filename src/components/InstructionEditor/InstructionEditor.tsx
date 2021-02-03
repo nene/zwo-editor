@@ -21,6 +21,16 @@ const DraggableItem = styled.div`
   position: absolute;
 `;
 
+const DragHandle = styled(FontAwesomeIcon).attrs(() => ({
+  icon: faComment,
+  size: "lg",
+  fixedWidth: true,
+  className: "handle", // Referenced by Draggable
+}))`
+  display: block;
+  opacity: 0.7;
+`;
+
 const EditorContainer = styled.div`
   position: relative;
   padding: 5px;
@@ -35,6 +45,24 @@ const VerticalLine = styled.div`
   width: 1px;
   border-left: 1px dotted gray;  
   z-index: 0;
+`;
+
+const Offset = styled.span`
+  font-size: 13px;
+`;
+
+const TextEditor = styled.textarea`
+  display: block;
+  padding: 5px;
+  width: 250px;
+  background-color: white;
+`;
+
+const DeleteButton = styled(FontAwesomeIcon).attrs(() => ({
+  icon: faTrashAlt,
+  fixedWidth: true,
+}))`
+  color: gray;
 `;
 
 const roundingPrecision = { meters: 10, seconds: 5 };
@@ -92,12 +120,12 @@ const InstructionEditor = (props: InstructionEditorProps) => {
       onDrag={(e, data) => handleDragging(data.x)}      
     >
       <DraggableItem>
-        <FontAwesomeIcon style={{display:'block',opacity:0.7}} icon={faComment} size="lg" fixedWidth className="handle" onMouseDown={() => setShowInput(!showInput)} />        
+        <DragHandle onMouseDown={() => setShowInput(!showInput)} />
         {showInput &&
         <EditorContainer>
-          <FontAwesomeIcon icon={faTrashAlt} fixedWidth className="delete" style={{ color: 'gray' }} onClick={() => handleDelete()} />
-          <span style={{fontSize:'13px'}} data-testid='time'>{renderOffset(props.instruction.offset)}</span>                  
-          <textarea name="comment" value={text} style={{display:'block', padding:'5px', width:'250px',backgroundColor:'white'}} onChange={e => handleInputChange(e.target.value)} />        
+          <DeleteButton onClick={() => handleDelete()} />
+          <Offset data-testid='time'>{renderOffset(props.instruction.offset)}</Offset>
+          <TextEditor value={text} onChange={e => handleInputChange(e.target.value)} />
         </EditorContainer>
         }
         <VerticalLine />
