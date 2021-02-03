@@ -4,9 +4,7 @@ import { Interval } from '../types/Interval';
 import { RootState } from './store';
 import { convertLengths } from './rehydrate';
 
-type IntervalsState = Interval[];
-
-const initialState: IntervalsState = [];
+const initialState: Interval[] = [];
 
 const slice = createSlice({
   name: 'intervals',
@@ -15,7 +13,7 @@ const slice = createSlice({
     setIntervals: (state, action: PayloadAction<Interval[]>) => action.payload,
   },
   extraReducers: {
-    [REHYDRATE]: (state, action: PayloadAction<{intervals: IntervalsState}>) => {
+    [REHYDRATE]: (state, action: PayloadAction<{intervals: Interval[]}>) => {
       if (!(action.payload?.intervals instanceof Array)) {
         return state;
       }

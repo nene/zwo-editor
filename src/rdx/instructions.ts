@@ -4,9 +4,7 @@ import { RootState } from './store';
 import { convertLengths } from './rehydrate';
 import { Instruction } from '../types/Instruction';
 
-type InstructionsState = Instruction[];
-
-const initialState: InstructionsState = [];
+const initialState: Instruction[] = [];
 
 const slice = createSlice({
   name: 'instructions',
@@ -15,7 +13,7 @@ const slice = createSlice({
     setInstructions: (state, action: PayloadAction<Instruction[]>) => action.payload,
   },
   extraReducers: {
-    [REHYDRATE]: (state, action: PayloadAction<{instructions: InstructionsState}>) => {
+    [REHYDRATE]: (state, action: PayloadAction<{instructions: Instruction[]}>) => {
       if (!(action.payload?.instructions instanceof Array)) {
         return state;
       }
