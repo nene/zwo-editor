@@ -124,7 +124,7 @@ const InstructionEditor = (props: InstructionEditorProps) => {
         {showInput &&
         <EditorContainer>
           <DeleteButton onClick={() => handleDelete()} />
-          <Offset data-testid='time'>{renderOffset(props.instruction.offset)}</Offset>
+          <Offset>{renderOffset(props.instruction.offset)}</Offset>
           <TextEditor value={text} onChange={e => handleInputChange(e.target.value)} />
         </EditorContainer>
         }
