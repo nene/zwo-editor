@@ -7,7 +7,7 @@ import { PaceType } from '../types/PaceType';
 import { LengthType } from '../types/LengthType';
 import { Distance, Duration } from '../types/Length';
 
-function convertLengths(obj: {[k: string]: any}) {
+export function convertLengths(obj: {[k: string]: any}) {
   for (const [k, v] of Object.entries(obj)) {
     if (typeof v === "object" && typeof v.seconds === "number") {
       obj[k] = new Duration(v.seconds);

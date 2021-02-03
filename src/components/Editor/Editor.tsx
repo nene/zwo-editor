@@ -46,6 +46,7 @@ import { selectAuthor, selectDescription, selectName, setName, setAuthor, setDes
 import { RootState } from '../../rdx/store';
 import { selectFtp, selectRunningTimes, selectWeight, setFtp, setRunningTimes, setWeight } from '../../rdx/athlete';
 import { RunningTimes } from '../../types/RunningTimes';
+import { selectIntervals, setIntervals } from '../../rdx/intervals';
 
 interface EditorProps {
   name: string;
@@ -57,6 +58,7 @@ interface EditorProps {
   ftp: number;
   weight: number;
   runningTimes: RunningTimes;
+  intervals: Interval[];
   setName: (name: string) => void;
   setAuthor: (author: string) => void;
   setDescription: (description: string) => void;
@@ -66,6 +68,7 @@ interface EditorProps {
   setFtp: (ftp: number) => void;
   setWeight: (weight: number) => void;
   setRunningTimes: (runningTimes: RunningTimes) => void;
+  setIntervals: (intervals: Interval[]) => void;
 }
 
 const Editor = (props: EditorProps) => {
@@ -76,7 +79,7 @@ const Editor = (props: EditorProps) => {
   const {sportType, setSportType} = props;
   const {lengthType, setLengthType} = props;
 
-  const [intervals, setIntervals] = useState(storage.getIntervals())
+  const {intervals, setIntervals} = props;
   const [instructions, setInstructions] = useState(storage.getInstructions())
 
   const {ftp, setFtp} = props;
@@ -96,11 +99,10 @@ const Editor = (props: EditorProps) => {
   }, [sportType, ftp, weight, runningTimes, lengthType]);
 
   useEffect(() => {
-    storage.setIntervals(intervals)
     storage.setInstructions(instructions)
 
     setXAxisWidth(segmentsRef.current?.scrollWidth || 1320)
-  }, [segmentsRef, intervals, instructions, tags])
+  }, [segmentsRef, instructions])
 
   function loadWorkout(workout: Workout) {
     setSportType(workout.sportType)
@@ -135,7 +137,7 @@ const Editor = (props: EditorProps) => {
   }
 
   function addInterval(interval: Interval) {
-    setIntervals(intervals => [...intervals, interval]);
+    setIntervals([...intervals, interval]);
   }
 
   function addInstruction(instruction: Instruction) {
@@ -401,6 +403,7 @@ const mapStateToProps = (state: RootState) => ({
   ftp: selectFtp(state),
   weight: selectWeight(state),
   runningTimes: selectRunningTimes(state),
+  intervals: selectIntervals(state),
 });
 
 const mapDispatchToProps = {
@@ -413,6 +416,7 @@ const mapDispatchToProps = {
   setFtp,
   setWeight,
   setRunningTimes,
+  setIntervals,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor)

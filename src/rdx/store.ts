@@ -1,6 +1,7 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { reducer as workoutReducer } from './workout';
 import { reducer as athleteReducer } from './athlete';
+import { reducer as intervalsReducer } from './intervals';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -13,6 +14,10 @@ const rootReducer = combineReducers({
     key: 'athlete',
     storage,
   }, athleteReducer),
+  intervals: persistReducer({
+    key: 'intervals',
+    storage,
+  }, intervalsReducer),
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
