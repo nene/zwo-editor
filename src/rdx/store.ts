@@ -4,18 +4,16 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 const rootReducer = combineReducers({
-  workout,
+  workout: persistReducer({
+    key: 'workout',
+    storage,
+  }, workout),
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
 
-const persistedReducer = persistReducer({
-  key: 'workout',
-  storage,
-}, rootReducer);
-
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
 });
 
-export const persistor =  persistStore(store);
+export const persistor = persistStore(store);

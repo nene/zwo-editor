@@ -42,24 +42,26 @@ import { workoutDuration } from '../../utils/duration'
 import { Duration } from '../../types/Length'
 import DistanceAxis from '../Axis/DistanceAxis'
 import { LengthType } from '../../types/LengthType'
-import { authorSelector, descriptionSelector, nameSelector, setName, setAuthor, setDescription } from '../../rdx/workout'
+import { authorSelector, descriptionSelector, nameSelector, setName, setAuthor, setDescription, tagsSelector, setTags } from '../../rdx/workout'
 import { RootState } from '../../rdx/store';
 
 interface EditorProps {
   name: string;
   author: string;
   description: string;
+  tags: string[];
   setName: (name: string) => void;
   setAuthor: (name: string) => void;
   setDescription: (name: string) => void;
+  setTags: (tags: string[]) => void;
 }
 
 const Editor = (props: EditorProps) => {
   const {name, setName} = props;
   const {description, setDescription} = props;
   const {author, setAuthor} = props;
+  const {tags, setTags} = props;
 
-  const [tags, setTags] = useState(storage.getTags())
   const [sportType, setSportType] = useState(storage.getSportType())
   const [lengthType, setLengthType] = useState(storage.getLengthType());
   const [intervals, setIntervals] = useState(storage.getIntervals())
@@ -82,7 +84,6 @@ const Editor = (props: EditorProps) => {
   }, [sportType, ftp, weight, runningTimes, lengthType]);
 
   useEffect(() => {
-    storage.setTags(tags)
     storage.setSportType(sportType)
     storage.setLengthType(lengthType)
     storage.setIntervals(intervals)
@@ -388,12 +389,14 @@ const mapStateToProps = (state: RootState) => ({
   name: nameSelector(state),
   author: authorSelector(state),
   description: descriptionSelector(state),
+  tags: tagsSelector(state),
 });
 
 const mapDispatchToProps = {
   setName,
   setAuthor,
   setDescription,
+  setTags,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor)
