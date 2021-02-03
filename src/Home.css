@@ -46,9 +46,6 @@ a {
   max-width: 250px;
   margin: 0 auto;
 }
-.blue {
-  background-color: #0E90D4;
-}
 .black {
   background-color: black;
 }
@@ -74,15 +71,6 @@ a {
   max-width: 300px;
   margin: 20px auto;  
   margin-top: 0;
-}
-.share {
-  text-align: center;
-  color: white;
-  padding: 50px;
-}
-
-.share > a {
-  padding: 20px;
 }
 
 @media (max-width: 720px) {

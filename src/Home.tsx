@@ -2,22 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import './Home.css'
 import Icon from './assets/icon.png'
-import Facebook from './assets/facebook.png'
-import Twitter from './assets/twitter.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBolt, faLaptop, faCloud, faPiggyBank, faRunning, faBiking } from '@fortawesome/free-solid-svg-icons'
 import { Helmet } from "react-helmet";
 import Footer from './components/Footer/Footer'
 
 export default function Home() {
-  function shareOnFacebook() {
-    window.open(
-      'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('https://www.zwiftworkout.com/'),
-      'facebook-share-dialog',
-      'width=626,height=436');
-    return false;
-  }
-
   return (
     <div className="home">
       <Helmet>
@@ -56,18 +46,6 @@ export default function Home() {
             <h3><FontAwesomeIcon icon={faPiggyBank} fixedWidth /> Open Source</h3>
             <p>This software is free to use.</p>
           </div>
-        </div>
-      </div>
-      <div className="blue">
-        <div className="share" id="share">
-          <h2>Do you like this?</h2>
-          <p>Please help me out by sharing this page on Social Media</p>
-          <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20Zwift%20Workout%20%20Editor%20https://www.zwiftworkout.com/">
-            <img src={Twitter} alt="Twitter" width="80" />
-          </a>
-          <a href="#share" onClick={shareOnFacebook}>
-            <img src={Facebook} alt="Facebook" width="80" />
-          </a>
         </div>
       </div>
       <div className="black">
