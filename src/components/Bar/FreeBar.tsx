@@ -1,11 +1,21 @@
 import React, { useState } from 'react'
-import './FreeBar.css'
+import styled from 'styled-components';
 import { Resizable } from 're-resizable'
 import 'moment-duration-format'
 import Label from '../Label/Label'
 import { FreeInterval } from '../../types/Interval'
 import { durationMultiplier } from './multipliers'
 import { WorkoutMode } from '../../modes/WorkoutMode'
+import freerideSvg from '../../assets/freeride.svg';
+
+const Container = styled.div`
+  position: relative;
+`;
+
+const ResizableFreeBar = styled(Resizable)`
+  border: 1px solid white;
+  background-image: url('${freerideSvg}');
+`;
 
 interface FreeBarProps {
   interval: FreeInterval;
@@ -37,7 +47,7 @@ const FreeBar = ({interval, mode, ...props}: FreeBarProps) => {
   }
 
   return (
-    <div className='segment'
+    <Container
       onMouseEnter={() => setShowLabel(true)}
       onMouseLeave={() => setShowLabel(false)}
       style={props.selected ? {zIndex:1}: {}}
@@ -50,8 +60,7 @@ const FreeBar = ({interval, mode, ...props}: FreeBarProps) => {
           onCadenceChange={(cadence: number)=> handleCadenceChange(cadence)}
         />
       }
-      <Resizable
-        className='freeRide'
+      <ResizableFreeBar
         size={{
           width: mode.lengthToWidth(interval.length),
           height: height,
@@ -64,8 +73,8 @@ const FreeBar = ({interval, mode, ...props}: FreeBarProps) => {
         onResizeStop={(e, direction, ref, d) => handleResizeStop(d.width)}
         onResize={(e, direction, ref, d) => notifyChange(d.width)}        
       >
-      </Resizable>
-    </div>
+      </ResizableFreeBar>
+    </Container>
   )
 
 }
