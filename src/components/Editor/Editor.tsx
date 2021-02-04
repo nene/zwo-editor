@@ -48,7 +48,7 @@ import { addInterval, selectIntervals, setIntervals } from '../../rdx/intervals'
 import { addInstruction, selectInstructions, setInstructions } from '../../rdx/instructions';
 import { WorkoutMode } from '../../modes/WorkoutMode';
 import { selectMode } from '../../rdx/mode';
-import { clearWorkout } from '../../rdx/workout';
+import { clearWorkout, loadWorkout } from '../../rdx/workout';
 
 interface EditorProps {
   name: string;
@@ -77,6 +77,7 @@ interface EditorProps {
   setInstructions: (instructions: Instruction[]) => void;
   addInstruction: (instruction: Instruction) => void;
   clearWorkout: () => void;
+  loadWorkout: (workout: Workout) => void;
 }
 
 const Editor = (props: EditorProps) => {
@@ -95,7 +96,7 @@ const Editor = (props: EditorProps) => {
   const {runningTimes, setRunningTimes} = props;
 
   const {mode} = props;
-  const {addInterval, addInstruction, clearWorkout} = props;
+  const {addInterval, addInstruction, clearWorkout, loadWorkout} = props;
 
   const [selectedId, setSelectedId] = useState<string | undefined>(undefined)
 
@@ -108,17 +109,6 @@ const Editor = (props: EditorProps) => {
   useEffect(() => {
     setXAxisWidth(segmentsRef.current?.scrollWidth || 1320)
   }, [segmentsRef])
-
-  function loadWorkout(workout: Workout) {
-    setSportType(workout.sportType)
-    setLengthType(workout.lengthType)
-    setAuthor(workout.author)
-    setName(workout.name)
-    setDescription(workout.description)
-    setIntervals(workout.intervals)
-    setInstructions(workout.instructions)
-    setTags(workout.tags)
-  }
 
   function updateInterval(updatedInterval: Interval) {
     const index = intervals.findIndex(interval => interval.id === updatedInterval.id)
@@ -416,6 +406,7 @@ const mapDispatchToProps = {
   setInstructions,
   addInstruction,
   clearWorkout,
+  loadWorkout,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor)

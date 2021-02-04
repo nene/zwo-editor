@@ -3,7 +3,7 @@ import { REHYDRATE } from 'redux-persist';
 import { Interval } from '../types/Interval';
 import { RootState } from './store';
 import { rehydrateLengths } from './rehydrate';
-import { clearWorkout } from './workout';
+import { clearWorkout, loadWorkout } from './workout';
 
 const initialState: Interval[] = [];
 
@@ -19,6 +19,7 @@ const slice = createSlice({
       return rehydrateLengths(action.payload?.intervals);
     },
     [clearWorkout.type]: () => [],
+    [loadWorkout.type]: (state, action) => action.payload.intervals,
   },
 });
 

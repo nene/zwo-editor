@@ -1,8 +1,9 @@
 import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit';
 import { LengthType } from '../types/LengthType';
 import { SportType } from '../types/SportType';
+import { Workout } from '../types/Workout';
 import { RootState } from './store';
-import { clearWorkout } from './workout';
+import { clearWorkout, loadWorkout } from './workout';
 
 interface MetaState {
   name: string;
@@ -41,7 +42,15 @@ const slice = createSlice({
       description: "",
       tags: [],
     }),
-  }
+    [loadWorkout.type]: (state, { payload }: PayloadAction<Workout>) => ({
+      name: payload.name,
+      author: payload.author,
+      description: payload.description,
+      tags: payload.tags,
+      sportType: payload.sportType,
+      lengthType: payload.lengthType,
+    }),
+  },
 });
 
 export const reducer = slice.reducer;
