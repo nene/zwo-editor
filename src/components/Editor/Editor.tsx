@@ -24,7 +24,7 @@ import { Interval } from '../../types/Interval'
 import { createInstruction, Instruction } from '../../types/Instruction'
 import intervalFactory from '../../interval/intervalFactory'
 import parseWorkoutXml from '../../xml/parseWorkoutXml'
-import { createEmptyWorkout, Workout } from '../../types/Workout'
+import { Workout } from '../../types/Workout'
 import { moveInterval, updateIntervalDuration, updateIntervalIntensity } from '../../interval/intervalUtils'
 import Keyboard from '../Keyboard/Keyboard'
 import Stats from './Stats'
@@ -48,6 +48,7 @@ import { addInterval, selectIntervals, setIntervals } from '../../rdx/intervals'
 import { addInstruction, selectInstructions, setInstructions } from '../../rdx/instructions';
 import { WorkoutMode } from '../../modes/WorkoutMode';
 import { selectMode } from '../../rdx/mode';
+import { clearWorkout } from '../../rdx/workout';
 
 interface EditorProps {
   name: string;
@@ -75,6 +76,7 @@ interface EditorProps {
   addInterval: (interval: Interval) => void;
   setInstructions: (instructions: Instruction[]) => void;
   addInstruction: (instruction: Instruction) => void;
+  clearWorkout: () => void;
 }
 
 const Editor = (props: EditorProps) => {
@@ -93,7 +95,7 @@ const Editor = (props: EditorProps) => {
   const {runningTimes, setRunningTimes} = props;
 
   const {mode} = props;
-  const {addInterval, addInstruction} = props;
+  const {addInterval, addInstruction, clearWorkout} = props;
 
   const [selectedId, setSelectedId] = useState<string | undefined>(undefined)
 
@@ -116,10 +118,6 @@ const Editor = (props: EditorProps) => {
     setIntervals(workout.intervals)
     setInstructions(workout.instructions)
     setTags(workout.tags)
-  }
-
-  function newWorkout() {
-    loadWorkout(createEmptyWorkout(sportType, lengthType))
   }
 
   function updateInterval(updatedInterval: Interval) {
@@ -200,7 +198,7 @@ const Editor = (props: EditorProps) => {
       }
     }
 
-    newWorkout()
+    clearWorkout()
 
     try {
       loadWorkout(parseWorkoutXml(await file.text(), mode));
@@ -259,14 +257,14 @@ const Editor = (props: EditorProps) => {
 
   function switchSportType(newSportType: SportType) {
     if (window.confirm(`Switching from ${sportType} to ${newSportType} will clear current workout. Are you sure?`)) {
-      newWorkout();
+      clearWorkout();
       setSportType(newSportType);
     }
   }
 
   function switchLengthType(newLengthType: LengthType) {
     if (window.confirm(`Switching from ${lengthType} to ${newLengthType} will clear current workout. Are you sure?`)) {
-      newWorkout();
+      clearWorkout();
       setLengthType(newLengthType);
     }
   }
@@ -379,7 +377,7 @@ const Editor = (props: EditorProps) => {
         {sportType === "bike" &&
           <NumberField name="weight" label={"Body Weight (kg)"} value={weight} onChange={setWeight} />
         }
-        <IconButton label="New" icon={faFile} onClick={() => { if (window.confirm('Are you sure you want to create a new workout?')) newWorkout() }} />
+        <IconButton label="New" icon={faFile} onClick={() => { if (window.confirm('Are you sure you want to create a new workout?')) clearWorkout() }} />
         <IconButton label="Download" icon={faDownload} onClick={downloadWorkout} />
         <UploadButton onUpload={handleUpload} />
       </div>
@@ -417,6 +415,7 @@ const mapDispatchToProps = {
   addInterval,
   setInstructions,
   addInstruction,
+  clearWorkout,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor)

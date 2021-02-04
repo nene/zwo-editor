@@ -2,6 +2,7 @@ import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit';
 import { LengthType } from '../types/LengthType';
 import { SportType } from '../types/SportType';
 import { RootState } from './store';
+import { clearWorkout } from './workout';
 
 interface MetaState {
   name: string;
@@ -32,6 +33,15 @@ const slice = createSlice({
     setSportType: (state, action: PayloadAction<SportType>) => ({ ...state, sportType: action.payload }),
     setLengthType: (state, action: PayloadAction<LengthType>) => ({ ...state, lengthType: action.payload }),
   },
+  extraReducers: {
+    [clearWorkout.type]: (state) => ({
+      ...state,
+      name: "",
+      author: "",
+      description: "",
+      tags: [],
+    }),
+  }
 });
 
 export const reducer = slice.reducer;
