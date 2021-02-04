@@ -34,22 +34,23 @@ const slice = createSlice({
     setSportType: (state, action: PayloadAction<SportType>) => ({ ...state, sportType: action.payload }),
     setLengthType: (state, action: PayloadAction<LengthType>) => ({ ...state, lengthType: action.payload }),
   },
-  extraReducers: {
-    [clearWorkout.type]: (state) => ({
-      ...state,
-      name: "",
-      author: "",
-      description: "",
-      tags: [],
-    }),
-    [loadWorkout.type]: (state, { payload }: PayloadAction<Workout>) => ({
-      name: payload.name,
-      author: payload.author,
-      description: payload.description,
-      tags: payload.tags,
-      sportType: payload.sportType,
-      lengthType: payload.lengthType,
-    }),
+  extraReducers: (builder) => {
+    builder
+      .addCase(clearWorkout, (state) => ({
+        ...state,
+        name: "",
+        author: "",
+        description: "",
+        tags: [],
+      }))
+      .addCase(loadWorkout, (state, { payload }) => ({
+        name: payload.name,
+        author: payload.author,
+        description: payload.description,
+        tags: payload.tags,
+        sportType: payload.sportType,
+        lengthType: payload.lengthType,
+      }));
   },
 });
 

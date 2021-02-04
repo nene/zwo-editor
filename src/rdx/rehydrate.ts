@@ -1,3 +1,7 @@
+import { PayloadAction } from '@reduxjs/toolkit';
+import { REHYDRATE, } from 'redux-persist';
+import { Instruction } from '../types/Instruction';
+import { Interval } from '../types/Interval';
 import { Distance, Duration } from '../types/Length';
 
 function convertLengths(obj: {[k: string]: any}) {
@@ -18,3 +22,8 @@ export function rehydrateLengths<T extends object>(arr?: T[]): T[] {
   }
   return arr.map(convertLengths) as T[];
 }
+
+export type RehydrateAction = PayloadAction<{
+  intervals: Interval[],
+  instructions: Instruction[]
+}, typeof REHYDRATE>;
