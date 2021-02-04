@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { reducer as workoutReducer } from './workout';
+import { reducer as metaReducer } from './meta';
 import { reducer as athleteReducer } from './athlete';
 import { reducer as intervalsReducer } from './intervals';
 import { reducer as instructionsReducer } from './instructions';
@@ -10,7 +10,7 @@ const rootReducer = persistCombineReducers({
   key: 'root',
   storage,
 }, {
-  workout: workoutReducer,
+  meta: metaReducer,
   athlete: athleteReducer,
   intervals: intervalsReducer,
   instructions: instructionsReducer,

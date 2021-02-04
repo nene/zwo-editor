@@ -40,7 +40,7 @@ import { workoutDuration } from '../../utils/duration'
 import { Duration } from '../../types/Length'
 import DistanceAxis from '../Axis/DistanceAxis'
 import { LengthType } from '../../types/LengthType'
-import { selectAuthor, selectDescription, selectName, setName, setAuthor, setDescription, selectTags, setTags, selectSportType, selectLengthType, setSportType, setLengthType } from '../../rdx/workout'
+import { selectAuthor, selectDescription, selectName, setName, setAuthor, setDescription, selectTags, setTags, selectSportType, selectLengthType, setSportType, setLengthType } from '../../rdx/meta'
 import { RootState } from '../../rdx/store';
 import { selectFtp, selectRunningTimes, selectWeight, setFtp, setRunningTimes, setWeight } from '../../rdx/athlete';
 import { RunningTimes } from '../../types/RunningTimes';

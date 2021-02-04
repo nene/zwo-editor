@@ -3,7 +3,7 @@ import { LengthType } from '../types/LengthType';
 import { SportType } from '../types/SportType';
 import { RootState } from './store';
 
-interface WorkoutState {
+interface MetaState {
   name: string;
   author: string;
   description: string;
@@ -12,7 +12,7 @@ interface WorkoutState {
   lengthType: LengthType;
 }
 
-const initialState: WorkoutState = {
+const initialState: MetaState = {
   name: "",
   author: "",
   description: "",
@@ -22,7 +22,7 @@ const initialState: WorkoutState = {
 };
 
 const slice = createSlice({
-  name: 'workout',
+  name: 'meta',
   initialState,
   reducers: {
     setName: (state, action: PayloadAction<string>) => ({ ...state, name: action.payload }),
@@ -37,10 +37,10 @@ const slice = createSlice({
 export const reducer = slice.reducer;
 export const { setName, setAuthor, setDescription, setTags, setSportType, setLengthType } = slice.actions;
 
-const selectWorkout = (state: RootState) => state.workout;
-export const selectName = createSelector(selectWorkout, (w) => w.name);
-export const selectAuthor = createSelector(selectWorkout, (w) => w.author);
-export const selectDescription = createSelector(selectWorkout, (w) => w.description);
-export const selectTags = createSelector(selectWorkout, (w) => w.tags);
-export const selectSportType = createSelector(selectWorkout, (w) => w.sportType);
-export const selectLengthType = createSelector(selectWorkout, (w) => w.lengthType);
+const selectMeta = (state: RootState) => state.meta;
+export const selectName = createSelector(selectMeta, (m) => m.name);
+export const selectAuthor = createSelector(selectMeta, (m) => m.author);
+export const selectDescription = createSelector(selectMeta, (m) => m.description);
+export const selectTags = createSelector(selectMeta, (m) => m.tags);
+export const selectSportType = createSelector(selectMeta, (m) => m.sportType);
+export const selectLengthType = createSelector(selectMeta, (m) => m.lengthType);
