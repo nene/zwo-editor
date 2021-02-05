@@ -1,7 +1,6 @@
 import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit';
 import { LengthType } from '../types/LengthType';
 import { SportType } from '../types/SportType';
-import { Workout } from '../types/Workout';
 import { RootState } from './store';
 import { clearWorkout, loadWorkout } from './workout';
 
