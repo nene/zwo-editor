@@ -25,6 +25,7 @@ import { WorkoutMode } from '../../modes/WorkoutMode';
 import { selectMode } from '../../rdx/mode';
 import { clearWorkout, loadWorkout } from '../../rdx/workout';
 import DownloadButton from './DownloadButton';
+import styled from 'styled-components';
 
 interface ToolbarProps {
   sportType: SportType;
@@ -41,7 +42,7 @@ interface ToolbarProps {
 
 const Toolbar = ({mode, addInterval, addInstruction, ...props}: ToolbarProps) => {
   return (
-    <div className='cta'>
+    <Container>
       {props.sportType === "bike" ?
         <div>
           <ColorButton label="Z1" color={ZoneColor.GRAY} onClick={() => addInterval(intervalFactory.steady({ intensity: 0.5 }, mode))} />
@@ -71,9 +72,27 @@ const Toolbar = ({mode, addInterval, addInstruction, ...props}: ToolbarProps) =>
       <IconButton label="New" icon={faFile} onClick={() => { if (window.confirm('Are you sure you want to create a new workout?')) props.clearWorkout() }} />
       <DownloadButton />
       <UploadButton mode={mode} onUpload={props.loadWorkout} />
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 10px auto;
+  padding: 20px;
+  background-color: white;
+
+  -webkit-box-shadow: 0px 0px 27px -9px rgba(0,0,0,0.35);
+  -moz-box-shadow: 0px 0px 27px -9px rgba(0,0,0,0.35);
+  box-shadow: 0px 0px 27px -9px rgba(0,0,0,0.35);
+  border-radius: 5px;
+
+  & > .form-input {
+    max-width: 100px;
+  }
+`;
 
 const mapStateToProps = (state: RootState) => ({
   sportType: selectSportType(state),
