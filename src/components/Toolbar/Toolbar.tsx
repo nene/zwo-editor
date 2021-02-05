@@ -6,39 +6,41 @@ import { ReactComponent as WarmdownLogo } from '../../assets/warmdown.svg'
 import { ReactComponent as WarmupLogo } from '../../assets/warmup.svg'
 import { ReactComponent as IntervalLogo } from '../../assets/interval.svg'
 import { ReactComponent as SteadyLogo } from '../../assets/steady.svg'
-import { Interval } from '../../types/Interval'
-import { createInstruction, Instruction } from '../../types/Instruction'
+import { createInstruction } from '../../types/Instruction'
 import intervalFactory from '../../interval/intervalFactory'
-import { Workout } from '../../types/Workout'
 import NumberField from '../Editor/NumberField'
 import UploadButton from './UploadButton'
 import IconButton from '../Button/IconButton'
 import ColorButton from '../Button/ColorButton'
 import Button from '../Button/Button'
-import { SportType } from '../../types/SportType'
 import { selectSportType } from '../../rdx/meta'
 import { RootState } from '../../rdx/store';
 import { selectFtp, selectWeight, setFtp, setWeight } from '../../rdx/athlete';
 import { addInterval } from '../../rdx/intervals';
 import { addInstruction } from '../../rdx/instructions';
-import { WorkoutMode } from '../../modes/WorkoutMode';
 import { selectMode } from '../../rdx/mode';
 import { clearWorkout, loadWorkout } from '../../rdx/workout';
 import DownloadButton from './DownloadButton';
 import styled from 'styled-components';
+import { ConnectedProps } from '../../types/ConnectedProps';
 
-interface ToolbarProps {
-  sportType: SportType;
-  ftp: number;
-  weight: number;
-  mode: WorkoutMode,
-  setFtp: (ftp: number) => void;
-  setWeight: (weight: number) => void;
-  addInterval: (interval: Interval) => void;
-  addInstruction: (instruction: Instruction) => void;
-  clearWorkout: () => void;
-  loadWorkout: (workout: Workout) => void;
-}
+const mapStateToProps = (state: RootState) => ({
+  sportType: selectSportType(state),
+  ftp: selectFtp(state),
+  weight: selectWeight(state),
+  mode: selectMode(state),
+});
+
+const mapDispatchToProps = {
+  setFtp,
+  setWeight,
+  addInterval,
+  addInstruction,
+  clearWorkout,
+  loadWorkout,
+};
+
+type ToolbarProps = ConnectedProps<typeof mapStateToProps, typeof mapDispatchToProps>;
 
 const Toolbar = ({mode, addInterval, addInstruction, ...props}: ToolbarProps) => {
   return (
@@ -93,21 +95,5 @@ const Container = styled.div`
     max-width: 100px;
   }
 `;
-
-const mapStateToProps = (state: RootState) => ({
-  sportType: selectSportType(state),
-  ftp: selectFtp(state),
-  weight: selectWeight(state),
-  mode: selectMode(state),
-});
-
-const mapDispatchToProps = {
-  setFtp,
-  setWeight,
-  addInterval,
-  addInstruction,
-  clearWorkout,
-  loadWorkout,
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Toolbar);

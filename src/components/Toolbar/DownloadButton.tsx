@@ -2,29 +2,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import createWorkoutXml from '../../xml/createWorkoutXml';
-import { Interval } from '../../types/Interval';
-import { Instruction } from '../../types/Instruction';
 import IconButton from '../Button/IconButton';
-import { SportType } from '../../types/SportType';
-import { LengthType } from '../../types/LengthType';
 import { selectAuthor, selectDescription, selectName, selectTags, selectSportType, selectLengthType } from '../../rdx/meta';
 import { RootState } from '../../rdx/store';
 import { selectIntervals } from '../../rdx/intervals';
 import { selectInstructions } from '../../rdx/instructions';
-import { WorkoutMode } from '../../modes/WorkoutMode';
 import { selectMode } from '../../rdx/mode';
+import { ConnectedProps } from '../../types/ConnectedProps';
 
-interface DownloadButtonProps {
-  name: string;
-  author: string;
-  description: string;
-  tags: string[];
-  sportType: SportType;
-  lengthType: LengthType;
-  intervals: Interval[];
-  instructions: Instruction[];
-  mode: WorkoutMode,
-}
+const mapStateToProps = (state: RootState) => ({
+  name: selectName(state),
+  author: selectAuthor(state),
+  description: selectDescription(state),
+  tags: selectTags(state),
+  sportType: selectSportType(state),
+  lengthType: selectLengthType(state),
+  intervals: selectIntervals(state),
+  instructions: selectInstructions(state),
+  mode: selectMode(state),
+});
+
+type DownloadButtonProps = ConnectedProps<typeof mapStateToProps>;
 
 const DownloadButton = (props: DownloadButtonProps) => {
   function createZwoFile() {
@@ -59,17 +57,5 @@ const DownloadButton = (props: DownloadButtonProps) => {
     <IconButton label="Download" icon={faDownload} onClick={downloadWorkout} />
   );
 };
-
-const mapStateToProps = (state: RootState) => ({
-  name: selectName(state),
-  author: selectAuthor(state),
-  description: selectDescription(state),
-  tags: selectTags(state),
-  sportType: selectSportType(state),
-  lengthType: selectLengthType(state),
-  intervals: selectIntervals(state),
-  instructions: selectInstructions(state),
-  mode: selectMode(state),
-});
 
 export default connect(mapStateToProps)(DownloadButton);
