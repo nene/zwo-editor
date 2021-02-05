@@ -17,7 +17,7 @@ import PaceSelector from './PaceSelector'
 import { Interval } from '../../types/Interval'
 import { Instruction } from '../../types/Instruction'
 import intervalFactory from '../../interval/intervalFactory'
-import { moveInterval, updateIntervalDuration, updateIntervalIntensity } from '../../interval/intervalUtils'
+import { moveInterval, updateIntervalDuration } from '../../interval/intervalUtils'
 import Keyboard from '../Keyboard/Keyboard'
 import Stats from './Stats'
 import Title from './Title'
@@ -31,7 +31,7 @@ import { selectAuthor, selectDescription, selectName, setName, setAuthor, setDes
 import { RootState } from '../../rdx/store';
 import { selectFtp, selectRunningTimes, setRunningTimes } from '../../rdx/athlete';
 import { RunningTimes } from '../../types/RunningTimes';
-import { addInterval, selectIntervals, setIntervals } from '../../rdx/intervals';
+import { addInterval, selectIntervals, setIntervals, adjustIntensity } from '../../rdx/intervals';
 import { selectInstructions, setInstructions } from '../../rdx/instructions';
 import { WorkoutMode } from '../../modes/WorkoutMode';
 import { selectMode } from '../../rdx/mode';
@@ -61,6 +61,7 @@ interface EditorProps {
   addInterval: (interval: Interval) => void;
   setInstructions: (instructions: Instruction[]) => void;
   clearWorkout: () => void;
+  adjustIntensity: (payload: {id: string, amount: number}) => void;
 }
 
 const Editor = (props: EditorProps) => {
@@ -78,7 +79,7 @@ const Editor = (props: EditorProps) => {
   const {runningTimes, setRunningTimes} = props;
 
   const {mode} = props;
-  const {addInterval, clearWorkout} = props;
+  const {addInterval, clearWorkout, adjustIntensity} = props;
 
   const [selectedId, setSelectedId] = useState<string | undefined>(undefined)
 
@@ -200,8 +201,8 @@ const Editor = (props: EditorProps) => {
     <Keyboard
       className="container"
       onBackspacePress={() => selectedId && removeInterval(selectedId)}
-      onUpPress={() => selectedId && setIntervals(updateIntervalIntensity(selectedId, 0.01, intervals))}
-      onDownPress={() => selectedId && setIntervals(updateIntervalIntensity(selectedId, -0.01, intervals))}
+      onUpPress={() => selectedId && adjustIntensity({id: selectedId, amount: 0.01})}
+      onDownPress={() => selectedId && adjustIntensity({id: selectedId, amount: -0.01})}
       onLeftPress={() => selectedId && setIntervals(updateIntervalDuration(selectedId, new Duration(-5), intervals, mode))}
       onRightPress={() => selectedId && setIntervals(updateIntervalDuration(selectedId, new Duration(5), intervals, mode))}
     >
@@ -309,6 +310,7 @@ const mapDispatchToProps = {
   addInterval,
   setInstructions,
   clearWorkout,
+  adjustIntensity,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor)
