@@ -32,7 +32,7 @@ import { RootState } from '../../rdx/store';
 import { selectFtp, selectRunningTimes, setRunningTimes } from '../../rdx/athlete';
 import { RunningTimes } from '../../types/RunningTimes';
 import { addInterval, selectIntervals, setIntervals, adjustIntensity, updateInterval } from '../../rdx/intervals';
-import { selectInstructions, setInstructions } from '../../rdx/instructions';
+import { selectInstructions, setInstructions, updateInstruction } from '../../rdx/instructions';
 import { WorkoutMode } from '../../modes/WorkoutMode';
 import { selectMode } from '../../rdx/mode';
 import { clearWorkout } from '../../rdx/workout';
@@ -63,6 +63,7 @@ interface EditorProps {
   clearWorkout: () => void;
   adjustIntensity: (payload: {id: string, amount: number}) => void;
   updateInterval: (interval: Interval) => void;
+  updateInstruction: (instruction: Instruction) => void;
 }
 
 const Editor = (props: EditorProps) => {
@@ -80,7 +81,7 @@ const Editor = (props: EditorProps) => {
   const {runningTimes, setRunningTimes} = props;
 
   const {mode} = props;
-  const {addInterval, clearWorkout, adjustIntensity, updateInterval} = props;
+  const {addInterval, clearWorkout, adjustIntensity, updateInterval, updateInstruction} = props;
 
   const [selectedId, setSelectedId] = useState<string | undefined>(undefined)
 
@@ -100,14 +101,6 @@ const Editor = (props: EditorProps) => {
     } else {
       setSelectedId(id)
     }
-  }
-
-  function updateInstruction(instruction: Instruction) {
-    const index = instructions.findIndex(instructions => instructions.id === instruction.id)
-
-    const updatedArray = [...instructions]
-    updatedArray[index] = instruction
-    setInstructions(updatedArray)
   }
 
   function deleteInstruction(id: string) {
@@ -304,6 +297,7 @@ const mapDispatchToProps = {
   clearWorkout,
   adjustIntensity,
   updateInterval,
+  updateInstruction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor)

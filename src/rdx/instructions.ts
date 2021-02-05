@@ -12,6 +12,12 @@ const slice = createSlice({
   reducers: {
     setInstructions: (state, action: PayloadAction<Instruction[]>) => action.payload,
     addInstruction: (state, action: PayloadAction<Instruction>) => [...state, action.payload],
+    updateInstruction: (instructions, {payload}: PayloadAction<Instruction>) => {
+      const index = instructions.findIndex(instruction => instruction.id === payload.id);
+      const updatedArray = [...instructions];
+      updatedArray[index] = payload;
+      return updatedArray;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -24,6 +30,6 @@ const slice = createSlice({
 });
 
 export const reducer = slice.reducer;
-export const { setInstructions, addInstruction } = slice.actions;
+export const { setInstructions, addInstruction, updateInstruction } = slice.actions;
 
 export const selectInstructions = (state: RootState) => state.instructions;
