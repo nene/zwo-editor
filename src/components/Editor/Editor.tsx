@@ -30,41 +30,45 @@ import { LengthType } from '../../types/LengthType'
 import { selectAuthor, selectDescription, selectName, setName, setAuthor, setDescription, selectTags, setTags, selectSportType, selectLengthType, setSportType, setLengthType } from '../../rdx/meta'
 import { RootState } from '../../rdx/store';
 import { selectFtp, selectRunningTimes, setRunningTimes } from '../../rdx/athlete';
-import { RunningTimes } from '../../types/RunningTimes';
 import { addInterval, selectIntervals, setIntervals, adjustIntensity, updateInterval } from '../../rdx/intervals';
 import { selectInstructions, setInstructions, updateInstruction } from '../../rdx/instructions';
-import { WorkoutMode } from '../../modes/WorkoutMode';
 import { selectMode } from '../../rdx/mode';
 import { clearWorkout } from '../../rdx/workout';
 import Toolbar from '../Toolbar/Toolbar';
+import { ConnectedProps } from '../../types/ConnectedProps';
 
-interface EditorProps {
-  name: string;
-  author: string;
-  description: string;
-  tags: string[];
-  sportType: SportType;
-  lengthType: LengthType;
-  ftp: number;
-  runningTimes: RunningTimes;
-  intervals: Interval[];
-  instructions: Instruction[];
-  mode: WorkoutMode,
-  setName: (name: string) => void;
-  setAuthor: (author: string) => void;
-  setDescription: (description: string) => void;
-  setTags: (tags: string[]) => void;
-  setSportType: (sportType: SportType) => void;
-  setLengthType: (sportType: LengthType) => void;
-  setRunningTimes: (runningTimes: RunningTimes) => void;
-  setIntervals: (intervals: Interval[]) => void;
-  addInterval: (interval: Interval) => void;
-  setInstructions: (instructions: Instruction[]) => void;
-  clearWorkout: () => void;
-  adjustIntensity: (payload: {id: string, amount: number}) => void;
-  updateInterval: (interval: Interval) => void;
-  updateInstruction: (instruction: Instruction) => void;
-}
+const mapStateToProps = (state: RootState) => ({
+  name: selectName(state),
+  author: selectAuthor(state),
+  description: selectDescription(state),
+  tags: selectTags(state),
+  sportType: selectSportType(state),
+  lengthType: selectLengthType(state),
+  ftp: selectFtp(state),
+  runningTimes: selectRunningTimes(state),
+  intervals: selectIntervals(state),
+  instructions: selectInstructions(state),
+  mode: selectMode(state),
+});
+
+const mapDispatchToProps = {
+  setName,
+  setAuthor,
+  setDescription,
+  setTags,
+  setSportType,
+  setLengthType,
+  setRunningTimes,
+  setIntervals,
+  addInterval,
+  setInstructions,
+  clearWorkout,
+  adjustIntensity,
+  updateInterval,
+  updateInstruction,
+};
+
+type EditorProps = ConnectedProps<typeof mapStateToProps, typeof mapDispatchToProps>;
 
 const Editor = (props: EditorProps) => {
   const {name, setName} = props;
@@ -268,36 +272,5 @@ const Editor = (props: EditorProps) => {
     </Keyboard>
   )
 }
-
-const mapStateToProps = (state: RootState) => ({
-  name: selectName(state),
-  author: selectAuthor(state),
-  description: selectDescription(state),
-  tags: selectTags(state),
-  sportType: selectSportType(state),
-  lengthType: selectLengthType(state),
-  ftp: selectFtp(state),
-  runningTimes: selectRunningTimes(state),
-  intervals: selectIntervals(state),
-  instructions: selectInstructions(state),
-  mode: selectMode(state),
-});
-
-const mapDispatchToProps = {
-  setName,
-  setAuthor,
-  setDescription,
-  setTags,
-  setSportType,
-  setLengthType,
-  setRunningTimes,
-  setIntervals,
-  addInterval,
-  setInstructions,
-  clearWorkout,
-  adjustIntensity,
-  updateInterval,
-  updateInstruction,
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor)
