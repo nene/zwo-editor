@@ -27,7 +27,7 @@ import { workoutDuration } from '../../utils/duration'
 import { Duration } from '../../types/Length'
 import DistanceAxis from '../Axis/DistanceAxis'
 import { LengthType } from '../../types/LengthType'
-import { selectAuthor, selectDescription, selectName, setName, setAuthor, setDescription, selectTags, setTags, selectSportType, selectLengthType, setSportType, setLengthType } from '../../rdx/meta'
+import { selectAuthor, selectDescription, selectName, selectSportType, selectLengthType, setSportType, setLengthType } from '../../rdx/meta'
 import { RootState } from '../../rdx/store';
 import { selectFtp, selectRunningTimes, setRunningTimes } from '../../rdx/athlete';
 import { addInterval, selectIntervals, setIntervals, adjustIntensity, updateInterval } from '../../rdx/intervals';
@@ -41,7 +41,6 @@ const mapStateToProps = (state: RootState) => ({
   name: selectName(state),
   author: selectAuthor(state),
   description: selectDescription(state),
-  tags: selectTags(state),
   sportType: selectSportType(state),
   lengthType: selectLengthType(state),
   ftp: selectFtp(state),
@@ -52,10 +51,6 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = {
-  setName,
-  setAuthor,
-  setDescription,
-  setTags,
   setSportType,
   setLengthType,
   setRunningTimes,
@@ -71,10 +66,9 @@ const mapDispatchToProps = {
 type EditorProps = ConnectedProps<typeof mapStateToProps, typeof mapDispatchToProps>;
 
 const Editor = (props: EditorProps) => {
-  const {name, setName} = props;
-  const {description, setDescription} = props;
-  const {author, setAuthor} = props;
-  const {tags, setTags} = props;
+  const {name} = props;
+  const {description} = props;
+  const {author} = props;
   const {sportType, setSportType} = props;
   const {lengthType, setLengthType} = props;
 
@@ -199,16 +193,7 @@ const Editor = (props: EditorProps) => {
 
       {savePopupIsVisile &&
         <Popup width="500px" dismiss={() => setSavePopupVisibility(false)}>
-          <SaveForm
-            name={name}
-            description={description}
-            author={author}
-            tags={tags}
-            onNameChange={setName}
-            onDescriptionChange={setDescription}
-            onAuthorChange={setAuthor}
-            onTagsChange={setTags}
-          />
+          <SaveForm />
         </Popup>
       }
       <div className="info">
