@@ -9,7 +9,6 @@ import { ReactComponent as SteadyLogo } from '../../assets/steady.svg'
 import { Interval } from '../../types/Interval'
 import { createInstruction, Instruction } from '../../types/Instruction'
 import intervalFactory from '../../interval/intervalFactory'
-import parseWorkoutXml from '../../xml/parseWorkoutXml'
 import { Workout } from '../../types/Workout'
 import NumberField from '../Editor/NumberField'
 import UploadButton from '../Button/UploadButton'
@@ -17,10 +16,10 @@ import IconButton from '../Button/IconButton'
 import ColorButton from '../Button/ColorButton'
 import Button from '../Button/Button'
 import { SportType } from '../../types/SportType'
-import { selectAuthor, selectDescription, selectName, selectTags, selectSportType } from '../../rdx/meta'
+import { selectSportType } from '../../rdx/meta'
 import { RootState } from '../../rdx/store';
 import { selectFtp, selectWeight, setFtp, setWeight } from '../../rdx/athlete';
-import { addInterval, selectIntervals } from '../../rdx/intervals';
+import { addInterval } from '../../rdx/intervals';
 import { addInstruction } from '../../rdx/instructions';
 import { WorkoutMode } from '../../modes/WorkoutMode';
 import { selectMode } from '../../rdx/mode';
@@ -31,7 +30,6 @@ interface ToolbarProps {
   sportType: SportType;
   ftp: number;
   weight: number;
-  intervals: Interval[];
   mode: WorkoutMode,
   setFtp: (ftp: number) => void;
   setWeight: (weight: number) => void;
@@ -42,23 +40,6 @@ interface ToolbarProps {
 }
 
 const Toolbar = ({mode, addInterval, addInstruction, ...props}: ToolbarProps) => {
-  async function handleUpload(file: Blob) {
-    // ask user if they want to overwrite current workout first
-    if (props.intervals.length > 0) {
-      if (!window.confirm('Are you sure you want to create a new workout?')) {
-        return false;
-      }
-    }
-
-    props.clearWorkout();
-
-    try {
-      props.loadWorkout(parseWorkoutXml(await file.text(), mode));
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
   return (
     <div className='cta'>
       {props.sportType === "bike" ?
@@ -89,20 +70,15 @@ const Toolbar = ({mode, addInterval, addInstruction, ...props}: ToolbarProps) =>
       }
       <IconButton label="New" icon={faFile} onClick={() => { if (window.confirm('Are you sure you want to create a new workout?')) props.clearWorkout() }} />
       <DownloadButton />
-      <UploadButton onUpload={handleUpload} />
+      <UploadButton mode={mode} onUpload={props.loadWorkout} />
     </div>
   );
 };
 
 const mapStateToProps = (state: RootState) => ({
-  name: selectName(state),
-  author: selectAuthor(state),
-  description: selectDescription(state),
-  tags: selectTags(state),
   sportType: selectSportType(state),
   ftp: selectFtp(state),
   weight: selectWeight(state),
-  intervals: selectIntervals(state),
   mode: selectMode(state),
 });
 
