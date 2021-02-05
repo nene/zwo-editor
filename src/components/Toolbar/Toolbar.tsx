@@ -1,12 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { ZoneColor, Zones } from '../../types/Zones'
-import { faFile, faDownload, faComment, faBicycle } from '@fortawesome/free-solid-svg-icons'
+import { faFile, faComment, faBicycle } from '@fortawesome/free-solid-svg-icons'
 import { ReactComponent as WarmdownLogo } from '../../assets/warmdown.svg'
 import { ReactComponent as WarmupLogo } from '../../assets/warmup.svg'
 import { ReactComponent as IntervalLogo } from '../../assets/interval.svg'
 import { ReactComponent as SteadyLogo } from '../../assets/steady.svg'
-import createWorkoutXml from '../../xml/createWorkoutXml'
 import { Interval } from '../../types/Interval'
 import { createInstruction, Instruction } from '../../types/Instruction'
 import intervalFactory from '../../interval/intervalFactory'
@@ -18,27 +17,21 @@ import IconButton from '../Button/IconButton'
 import ColorButton from '../Button/ColorButton'
 import Button from '../Button/Button'
 import { SportType } from '../../types/SportType'
-import { LengthType } from '../../types/LengthType'
-import { selectAuthor, selectDescription, selectName, selectTags, selectSportType, selectLengthType } from '../../rdx/meta'
+import { selectAuthor, selectDescription, selectName, selectTags, selectSportType } from '../../rdx/meta'
 import { RootState } from '../../rdx/store';
 import { selectFtp, selectWeight, setFtp, setWeight } from '../../rdx/athlete';
 import { addInterval, selectIntervals } from '../../rdx/intervals';
-import { addInstruction, selectInstructions } from '../../rdx/instructions';
+import { addInstruction } from '../../rdx/instructions';
 import { WorkoutMode } from '../../modes/WorkoutMode';
 import { selectMode } from '../../rdx/mode';
 import { clearWorkout, loadWorkout } from '../../rdx/workout';
+import DownloadButton from './DownloadButton';
 
 interface ToolbarProps {
-  name: string;
-  author: string;
-  description: string;
-  tags: string[];
   sportType: SportType;
-  lengthType: LengthType;
   ftp: number;
   weight: number;
   intervals: Interval[];
-  instructions: Instruction[];
   mode: WorkoutMode,
   setFtp: (ftp: number) => void;
   setWeight: (weight: number) => void;
@@ -49,34 +42,6 @@ interface ToolbarProps {
 }
 
 const Toolbar = ({mode, addInterval, addInstruction, ...props}: ToolbarProps) => {
-  function createZwoFile() {
-    const xml = createWorkoutXml({
-      author: props.author,
-      name: props.name,
-      description: props.description,
-      sportType: props.sportType,
-      lengthType: props.lengthType,
-      tags: props.tags,
-      intervals: props.intervals,
-      instructions: props.instructions,
-    }, mode);
-
-    return new Blob([xml], { type: 'application/xml' });
-  }
-
-  function downloadWorkout() {
-    const tempFile = createZwoFile();
-    const url = window.URL.createObjectURL(tempFile);
-
-    var a = document.createElement("a");
-    document.body.appendChild(a);
-    a.style.display = "none";
-    a.href = url;
-    a.download = `workout.zwo`;
-    a.click();
-    window.URL.revokeObjectURL(url);
-  }
-
   async function handleUpload(file: Blob) {
     // ask user if they want to overwrite current workout first
     if (props.intervals.length > 0) {
@@ -123,7 +88,7 @@ const Toolbar = ({mode, addInterval, addInstruction, ...props}: ToolbarProps) =>
         <NumberField name="weight" label={"Body Weight (kg)"} value={props.weight} onChange={props.setWeight} />
       }
       <IconButton label="New" icon={faFile} onClick={() => { if (window.confirm('Are you sure you want to create a new workout?')) props.clearWorkout() }} />
-      <IconButton label="Download" icon={faDownload} onClick={downloadWorkout} />
+      <DownloadButton />
       <UploadButton onUpload={handleUpload} />
     </div>
   );
@@ -135,11 +100,9 @@ const mapStateToProps = (state: RootState) => ({
   description: selectDescription(state),
   tags: selectTags(state),
   sportType: selectSportType(state),
-  lengthType: selectLengthType(state),
   ftp: selectFtp(state),
   weight: selectWeight(state),
   intervals: selectIntervals(state),
-  instructions: selectInstructions(state),
   mode: selectMode(state),
 });
 
