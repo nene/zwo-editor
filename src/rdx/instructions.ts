@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { REHYDRATE, } from 'redux-persist';
 import { RootState } from './store';
-import { RehydrateAction, rehydrateLengths } from './rehydrate';
+import { rehydrateAction, rehydrateLengths } from './rehydrate';
 import { Instruction } from '../types/Instruction';
 import { clearWorkout, loadWorkout } from './workout';
 
@@ -16,7 +15,7 @@ const slice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(REHYDRATE, (state, action: RehydrateAction) => {
+      .addCase(rehydrateAction, (state, action) => {
         return rehydrateLengths(action.payload?.instructions);
       })
       .addCase(clearWorkout, () => [])

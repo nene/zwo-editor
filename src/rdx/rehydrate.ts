@@ -1,4 +1,4 @@
-import { PayloadAction } from '@reduxjs/toolkit';
+import { createAction } from '@reduxjs/toolkit';
 import { REHYDRATE, } from 'redux-persist';
 import { Instruction } from '../types/Instruction';
 import { Interval } from '../types/Interval';
@@ -23,7 +23,9 @@ export function rehydrateLengths<T extends object>(arr?: T[]): T[] {
   return arr.map(convertLengths) as T[];
 }
 
-export type RehydrateAction = PayloadAction<{
+// A lookalike of the actual REHYDRATE action,
+// only declered for better type-safety
+export const rehydrateAction = createAction<{
   intervals: Interval[],
   instructions: Instruction[]
-}, typeof REHYDRATE>;
+}>(REHYDRATE);
