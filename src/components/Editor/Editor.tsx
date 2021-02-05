@@ -1,39 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux';
 import './Editor.css'
-import { ZoneColor, Zones } from '../../types/Zones'
 import GenericBar from '../Bar/GenericBar'
 import InstructionEditor from '../InstructionEditor/InstructionEditor'
 import Popup from '../Popup/Popup'
 import Footer from '../Footer/Footer'
 import TimeAxis from '../Axis/TimeAxis'
 import ZoneAxis from '../Axis/ZoneAxis'
-import { faTrash, faArrowRight, faArrowLeft, faFile, faDownload, faComment, faBicycle, faCopy, faBiking, faRunning, faClock, faRuler } from '@fortawesome/free-solid-svg-icons'
-import { ReactComponent as WarmdownLogo } from '../../assets/warmdown.svg'
-import { ReactComponent as WarmupLogo } from '../../assets/warmup.svg'
-import { ReactComponent as IntervalLogo } from '../../assets/interval.svg'
-import { ReactComponent as SteadyLogo } from '../../assets/steady.svg'
+import { faTrash, faArrowRight, faArrowLeft, faCopy, faBiking, faRunning, faClock, faRuler } from '@fortawesome/free-solid-svg-icons'
 import SaveForm from '../Forms/SaveForm'
 import Head from '../Head/Head'
 import RunningTimesEditor from './RunningTimesEditor'
 import LeftRightToggle from './LeftRightToggle'
-import createWorkoutXml from '../../xml/createWorkoutXml'
 import { PaceType } from '../../types/PaceType'
 import PaceSelector from './PaceSelector'
 import { Interval } from '../../types/Interval'
-import { createInstruction, Instruction } from '../../types/Instruction'
+import { Instruction } from '../../types/Instruction'
 import intervalFactory from '../../interval/intervalFactory'
-import parseWorkoutXml from '../../xml/parseWorkoutXml'
-import { Workout } from '../../types/Workout'
 import { moveInterval, updateIntervalDuration, updateIntervalIntensity } from '../../interval/intervalUtils'
 import Keyboard from '../Keyboard/Keyboard'
 import Stats from './Stats'
 import Title from './Title'
-import NumberField from './NumberField'
-import UploadButton from '../Button/UploadButton'
-import IconButton from '../Button/IconButton'
-import ColorButton from '../Button/ColorButton'
-import Button from '../Button/Button'
 import ActionButton from '../Button/ActionButton'
 import { SportType } from '../../types/SportType'
 import { workoutDuration } from '../../utils/duration'
@@ -42,13 +29,14 @@ import DistanceAxis from '../Axis/DistanceAxis'
 import { LengthType } from '../../types/LengthType'
 import { selectAuthor, selectDescription, selectName, setName, setAuthor, setDescription, selectTags, setTags, selectSportType, selectLengthType, setSportType, setLengthType } from '../../rdx/meta'
 import { RootState } from '../../rdx/store';
-import { selectFtp, selectRunningTimes, selectWeight, setFtp, setRunningTimes, setWeight } from '../../rdx/athlete';
+import { selectFtp, selectRunningTimes, setRunningTimes } from '../../rdx/athlete';
 import { RunningTimes } from '../../types/RunningTimes';
 import { addInterval, selectIntervals, setIntervals } from '../../rdx/intervals';
-import { addInstruction, selectInstructions, setInstructions } from '../../rdx/instructions';
+import { selectInstructions, setInstructions } from '../../rdx/instructions';
 import { WorkoutMode } from '../../modes/WorkoutMode';
 import { selectMode } from '../../rdx/mode';
-import { clearWorkout, loadWorkout } from '../../rdx/workout';
+import { clearWorkout } from '../../rdx/workout';
+import Toolbar from '../Toolbar/Toolbar';
 
 interface EditorProps {
   name: string;
@@ -58,7 +46,6 @@ interface EditorProps {
   sportType: SportType;
   lengthType: LengthType;
   ftp: number;
-  weight: number;
   runningTimes: RunningTimes;
   intervals: Interval[];
   instructions: Instruction[];
@@ -69,15 +56,11 @@ interface EditorProps {
   setTags: (tags: string[]) => void;
   setSportType: (sportType: SportType) => void;
   setLengthType: (sportType: LengthType) => void;
-  setFtp: (ftp: number) => void;
-  setWeight: (weight: number) => void;
   setRunningTimes: (runningTimes: RunningTimes) => void;
   setIntervals: (intervals: Interval[]) => void;
   addInterval: (interval: Interval) => void;
   setInstructions: (instructions: Instruction[]) => void;
-  addInstruction: (instruction: Instruction) => void;
   clearWorkout: () => void;
-  loadWorkout: (workout: Workout) => void;
 }
 
 const Editor = (props: EditorProps) => {
@@ -91,12 +74,11 @@ const Editor = (props: EditorProps) => {
   const {intervals, setIntervals} = props;
   const {instructions, setInstructions} = props;
 
-  const {ftp, setFtp} = props;
-  const {weight, setWeight} = props;
+  const {ftp} = props;
   const {runningTimes, setRunningTimes} = props;
 
   const {mode} = props;
-  const {addInterval, addInstruction, clearWorkout, loadWorkout} = props;
+  const {addInterval, clearWorkout} = props;
 
   const [selectedId, setSelectedId] = useState<string | undefined>(undefined)
 
@@ -150,51 +132,6 @@ const Editor = (props: EditorProps) => {
       addInterval(intervalFactory.clone(interval));
     }
     setSelectedId(undefined)
-  }
-
-  function createZwoFile() {
-    const xml = createWorkoutXml({
-      author,
-      name,
-      description,
-      sportType,
-      lengthType,
-      tags,
-      intervals,
-      instructions,
-    }, mode);
-
-    return new Blob([xml], { type: 'application/xml' })
-  }
-
-  function downloadWorkout() {
-    const tempFile = createZwoFile()
-    const url = window.URL.createObjectURL(tempFile)
-
-    var a = document.createElement("a")
-    document.body.appendChild(a)
-    a.style.display = "none"
-    a.href = url
-    a.download = `workout.zwo`
-    a.click()
-    window.URL.revokeObjectURL(url)
-  }
-
-  async function handleUpload(file: Blob) {
-    // ask user if they want to overwrite current workout first
-    if (intervals.length > 0) {
-      if (!window.confirm('Are you sure you want to create a new workout?')) {
-        return false
-      }
-    }
-
-    clearWorkout()
-
-    try {
-      loadWorkout(parseWorkoutXml(await file.text(), mode));
-    } catch (e) {
-      console.error(e);
-    }
   }
 
   const renderInterval = (interval: Interval) => {
@@ -340,37 +277,7 @@ const Editor = (props: EditorProps) => {
         </div>
         <ZoneAxis />
       </div>
-      <div className='cta'>
-        {sportType === "bike" ?
-          <div>
-            <ColorButton label="Z1" color={ZoneColor.GRAY} onClick={() => addInterval(intervalFactory.steady({ intensity: 0.5 }, mode))} />
-            <ColorButton label="Z2" color={ZoneColor.BLUE} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z2.min }, mode))} />
-            <ColorButton label="Z3" color={ZoneColor.GREEN} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z3.min }, mode))} />
-            <ColorButton label="Z4" color={ZoneColor.YELLOW} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z4.min }, mode))} />
-            <ColorButton label="Z5" color={ZoneColor.ORANGE} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z5.min }, mode))} />
-            <ColorButton label="Z6" color={ZoneColor.RED} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z6.min }, mode))} />
-          </div>
-          :
-          <Button onClick={() => addInterval(intervalFactory.steady({}, mode))}><SteadyLogo className="btn-icon" /> Steady Pace</Button>
-        }
-
-        <Button onClick={() => addInterval(intervalFactory.ramp({ startIntensity: 0.25, endIntensity: 0.75 }, mode))}><WarmupLogo className="btn-icon" /> Warm up</Button>
-        <Button onClick={() => addInterval(intervalFactory.ramp({ startIntensity: 0.75, endIntensity: 0.25 }, mode))}><WarmdownLogo className="btn-icon" /> Cool down</Button>
-        <Button onClick={() => addInterval(intervalFactory.repetition({}, mode))}><IntervalLogo className="btn-icon" /> Interval</Button>
-        {sportType === "bike" &&
-          <IconButton label="Free Ride" icon={faBicycle} onClick={() => addInterval(intervalFactory.free({}, mode))} />
-        }
-        <IconButton label="Text Event" icon={faComment} onClick={() => addInstruction(createInstruction({}, mode))} />
-        {sportType === "bike" &&
-          <NumberField name="ftp" label={"FTP (W)"} value={ftp} onChange={setFtp} />
-        }
-        {sportType === "bike" &&
-          <NumberField name="weight" label={"Body Weight (kg)"} value={weight} onChange={setWeight} />
-        }
-        <IconButton label="New" icon={faFile} onClick={() => { if (window.confirm('Are you sure you want to create a new workout?')) clearWorkout() }} />
-        <IconButton label="Download" icon={faDownload} onClick={downloadWorkout} />
-        <UploadButton onUpload={handleUpload} />
-      </div>
+      <Toolbar />
       <Footer />
     </Keyboard>
   )
@@ -384,7 +291,6 @@ const mapStateToProps = (state: RootState) => ({
   sportType: selectSportType(state),
   lengthType: selectLengthType(state),
   ftp: selectFtp(state),
-  weight: selectWeight(state),
   runningTimes: selectRunningTimes(state),
   intervals: selectIntervals(state),
   instructions: selectInstructions(state),
@@ -398,15 +304,11 @@ const mapDispatchToProps = {
   setTags,
   setSportType,
   setLengthType,
-  setFtp,
-  setWeight,
   setRunningTimes,
   setIntervals,
   addInterval,
   setInstructions,
-  addInstruction,
   clearWorkout,
-  loadWorkout,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor)
