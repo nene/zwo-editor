@@ -1,6 +1,6 @@
 import React from "react";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
-import IconButton from "./IconButton";
+import IconButton from "../Button/IconButton";
 import parseWorkoutXml from "../../xml/parseWorkoutXml";
 import { WorkoutMode } from "../../modes/WorkoutMode";
 import { Workout } from "../../types/Workout";
