@@ -4,6 +4,7 @@ import { RootState } from './store';
 import { rehydrateAction, rehydrateLengths } from './rehydrate';
 import { clearWorkout, loadWorkout } from './workout';
 import { updateIntervalIntensity } from '../interval/intervalUtils';
+import { replaceById } from '../utils/array';
 
 const initialState: Interval[] = [];
 
@@ -15,12 +16,8 @@ const slice = createSlice({
     addInterval: (state, action: PayloadAction<Interval>) => [...state, action.payload],
     adjustIntensity: (intervals, {payload}: PayloadAction<{id: string, amount: number}>) =>
       updateIntervalIntensity(payload.id, payload.amount, intervals),
-    updateInterval: (intervals, {payload}: PayloadAction<Interval>) => {
-      const index = intervals.findIndex(interval => interval.id === payload.id);
-      const updatedArray = [...intervals];
-      updatedArray[index] = payload;
-      return updatedArray;
-    },
+    updateInterval: (intervals, {payload}: PayloadAction<Interval>) =>
+      replaceById(payload, intervals),
   },
   extraReducers: (builder) => {
     builder

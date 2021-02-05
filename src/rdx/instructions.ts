@@ -3,6 +3,7 @@ import { RootState } from './store';
 import { rehydrateAction, rehydrateLengths } from './rehydrate';
 import { Instruction } from '../types/Instruction';
 import { clearWorkout, loadWorkout } from './workout';
+import { replaceById } from '../utils/array';
 
 const initialState: Instruction[] = [];
 
@@ -12,12 +13,8 @@ const slice = createSlice({
   reducers: {
     setInstructions: (state, action: PayloadAction<Instruction[]>) => action.payload,
     addInstruction: (state, action: PayloadAction<Instruction>) => [...state, action.payload],
-    updateInstruction: (instructions, {payload}: PayloadAction<Instruction>) => {
-      const index = instructions.findIndex(instruction => instruction.id === payload.id);
-      const updatedArray = [...instructions];
-      updatedArray[index] = payload;
-      return updatedArray;
-    },
+    updateInstruction: (instructions, {payload}: PayloadAction<Instruction>) =>
+      replaceById(payload, instructions),
   },
   extraReducers: (builder) => {
     builder
