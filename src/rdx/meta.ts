@@ -13,8 +13,10 @@ interface MetaState {
   lengthType: LengthType;
 }
 
+const DEFAULT_NAME = "Untitled workout";
+
 const initialState: MetaState = {
-  name: "",
+  name: DEFAULT_NAME,
   author: "",
   description: "",
   tags: [],
@@ -37,7 +39,7 @@ const slice = createSlice({
     builder
       .addCase(clearWorkout, (state) => ({
         ...state,
-        name: "",
+        name: DEFAULT_NAME,
         author: "",
         description: "",
         tags: [],
