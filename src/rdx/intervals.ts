@@ -15,6 +15,12 @@ const slice = createSlice({
     addInterval: (state, action: PayloadAction<Interval>) => [...state, action.payload],
     adjustIntensity: (intervals, {payload}: PayloadAction<{id: string, amount: number}>) =>
       updateIntervalIntensity(payload.id, payload.amount, intervals),
+    updateInterval: (intervals, {payload}: PayloadAction<Interval>) => {
+      const index = intervals.findIndex(interval => interval.id === payload.id);
+      const updatedArray = [...intervals];
+      updatedArray[index] = payload;
+      return updatedArray;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -27,6 +33,6 @@ const slice = createSlice({
 });
 
 export const reducer = slice.reducer;
-export const { setIntervals, addInterval, adjustIntensity } = slice.actions;
+export const { setIntervals, addInterval, adjustIntensity, updateInterval } = slice.actions;
 
 export const selectIntervals = (state: RootState) => state.intervals;

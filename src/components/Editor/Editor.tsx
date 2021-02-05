@@ -31,7 +31,7 @@ import { selectAuthor, selectDescription, selectName, setName, setAuthor, setDes
 import { RootState } from '../../rdx/store';
 import { selectFtp, selectRunningTimes, setRunningTimes } from '../../rdx/athlete';
 import { RunningTimes } from '../../types/RunningTimes';
-import { addInterval, selectIntervals, setIntervals, adjustIntensity } from '../../rdx/intervals';
+import { addInterval, selectIntervals, setIntervals, adjustIntensity, updateInterval } from '../../rdx/intervals';
 import { selectInstructions, setInstructions } from '../../rdx/instructions';
 import { WorkoutMode } from '../../modes/WorkoutMode';
 import { selectMode } from '../../rdx/mode';
@@ -62,6 +62,7 @@ interface EditorProps {
   setInstructions: (instructions: Instruction[]) => void;
   clearWorkout: () => void;
   adjustIntensity: (payload: {id: string, amount: number}) => void;
+  updateInterval: (interval: Interval) => void;
 }
 
 const Editor = (props: EditorProps) => {
@@ -79,7 +80,7 @@ const Editor = (props: EditorProps) => {
   const {runningTimes, setRunningTimes} = props;
 
   const {mode} = props;
-  const {addInterval, clearWorkout, adjustIntensity} = props;
+  const {addInterval, clearWorkout, adjustIntensity, updateInterval} = props;
 
   const [selectedId, setSelectedId] = useState<string | undefined>(undefined)
 
@@ -92,15 +93,6 @@ const Editor = (props: EditorProps) => {
   useEffect(() => {
     setXAxisWidth(segmentsRef.current?.scrollWidth || 1320)
   }, [segmentsRef])
-
-  function updateInterval(updatedInterval: Interval) {
-    const index = intervals.findIndex(interval => interval.id === updatedInterval.id)
-
-    const updatedArray = [...intervals]
-    updatedArray[index] = updatedInterval
-
-    setIntervals(updatedArray)
-  }
 
   function toggleSelection(id: string) {
     if (id === selectedId) {
@@ -311,6 +303,7 @@ const mapDispatchToProps = {
   setInstructions,
   clearWorkout,
   adjustIntensity,
+  updateInterval,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor)
