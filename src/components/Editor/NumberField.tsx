@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 // Displays workut name, description & author
 
@@ -13,8 +14,7 @@ const NumberField: React.FC<NumberFieldProps> = ({ name, label, value, onChange}
   return (
     <div className="form-input">
       <label htmlFor={name}>{label}</label>
-      <input
-        className="textInput"
+      <TextInput
         type="number"
         name={name}
         value={value}
@@ -23,5 +23,11 @@ const NumberField: React.FC<NumberFieldProps> = ({ name, label, value, onChange}
     </div>
   );
 };
+
+const TextInput = styled.input`
+  font-size: 20px;
+  border: 1px solid lightgray;  
+  text-align: center;
+`;
 
 export default NumberField;
