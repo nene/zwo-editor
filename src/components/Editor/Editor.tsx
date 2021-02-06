@@ -7,19 +7,16 @@ import Popup from '../Popup/Popup'
 import Footer from '../Footer/Footer'
 import TimeAxis from '../Axis/TimeAxis'
 import ZoneAxis from '../Axis/ZoneAxis'
-import { faTrash, faArrowRight, faArrowLeft, faCopy, faBiking, faRunning, faClock, faRuler } from '@fortawesome/free-solid-svg-icons'
+import { faBiking, faRunning, faClock, faRuler } from '@fortawesome/free-solid-svg-icons'
 import SaveForm from '../Forms/SaveForm'
 import Head from '../Head/Head'
 import RunningTimesEditor from './RunningTimesEditor'
 import LeftRightToggle from './LeftRightToggle'
-import { PaceType } from '../../types/PaceType'
-import PaceSelector from './PaceSelector'
 import { Interval } from '../../types/Interval'
 import { Instruction } from '../../types/Instruction'
 import Keyboard from '../Keyboard/Keyboard'
 import Stats from './Stats'
 import Title from './Title'
-import ActionButton from '../Button/ActionButton'
 import { SportType } from '../../types/SportType'
 import { workoutDuration } from '../../utils/duration'
 import { Duration } from '../../types/Length'
@@ -28,13 +25,14 @@ import { LengthType } from '../../types/LengthType'
 import { selectAuthor, selectDescription, selectName, selectSportType, selectLengthType, setSportType, setLengthType } from '../../rdx/state/meta'
 import { RootState } from '../../rdx/store';
 import { selectFtp, selectRunningTimes, setRunningTimes } from '../../rdx/state/athlete';
-import { selectIntervals, setIntervals, adjustSelectedIntervalIntensity, adjustSelectedIntervalDuration, updateInterval, removeSelectedInterval, duplicateSelectedInterval, moveSelectedInterval, selectSelectedIntervalPace } from '../../rdx/state/intervals';
+import { selectIntervals, adjustSelectedIntervalIntensity, adjustSelectedIntervalDuration, updateInterval, removeSelectedInterval } from '../../rdx/state/intervals';
 import { selectInstructions, updateInstruction, removeInstruction } from '../../rdx/state/instructions';
 import { selectMode } from '../../rdx/state/mode';
 import { clearWorkout } from '../../rdx/state/workout';
 import Toolbar from '../Toolbar/Toolbar';
 import { ConnectedProps } from '../../types/ConnectedProps';
 import { selectSelectedId, clearSelection, setSelectedId } from '../../rdx/state/selectedId';
+import SelectionToolbar from '../SelectionToolbar/SelectionToolbar';
 
 const mapStateToProps = (state: RootState) => ({
   name: selectName(state),
@@ -48,14 +46,12 @@ const mapStateToProps = (state: RootState) => ({
   instructions: selectInstructions(state),
   mode: selectMode(state),
   selectedId: selectSelectedId(state),
-  selectedIntervalPace: selectSelectedIntervalPace(state),
 });
 
 const mapDispatchToProps = {
   setSportType,
   setLengthType,
   setRunningTimes,
-  setIntervals,
   clearWorkout,
   adjustSelectedIntervalIntensity,
   adjustSelectedIntervalDuration,
@@ -64,8 +60,6 @@ const mapDispatchToProps = {
   setSelectedId,
   clearSelection,
   removeSelectedInterval,
-  duplicateSelectedInterval,
-  moveSelectedInterval,
   removeInstruction,
 };
 
@@ -78,7 +72,7 @@ const Editor = (props: EditorProps) => {
   const {sportType, setSportType} = props;
   const {lengthType, setLengthType} = props;
 
-  const {intervals, setIntervals} = props;
+  const {intervals} = props;
   const {instructions} = props;
 
   const {ftp} = props;
@@ -92,12 +86,10 @@ const Editor = (props: EditorProps) => {
     updateInterval,
     updateInstruction,
     removeSelectedInterval,
-    duplicateSelectedInterval,
-    moveSelectedInterval,
     removeInstruction,
   } = props;
 
-  const {selectedId, setSelectedId, clearSelection, selectedIntervalPace} = props;
+  const {selectedId, setSelectedId, clearSelection} = props;
 
   const [savePopupIsVisile, setSavePopupVisibility] = useState(false)
 
@@ -141,20 +133,6 @@ const Editor = (props: EditorProps) => {
       mode={mode}
     />
   )
-
-  function setPace(pace: PaceType, id: string) {
-    const index = intervals.findIndex(interval => interval.id === id)
-
-    if (index !== -1) {
-      const updatedArray = [...intervals]
-      const interval = updatedArray[index]
-      if (interval.type !== 'steady') { // TODO: Only steady?
-        return;
-      }
-      interval.pace = pace
-      setIntervals(updatedArray)
-    }
-  }
 
   function switchSportType(newSportType: SportType) {
     if (window.confirm(`Switching from ${sportType} to ${newSportType} will clear current workout. Are you sure?`)) {
@@ -215,17 +193,7 @@ const Editor = (props: EditorProps) => {
       {sportType === "run" && <RunningTimesEditor times={runningTimes} onChange={setRunningTimes} />}
 
       <div id="editor" className='editor'>
-        {selectedId &&
-          <div className='actions'>
-            <ActionButton title='Move Left' icon={faArrowLeft} onClick={() => moveSelectedInterval(-1)} />
-            <ActionButton title='Move Right' icon={faArrowRight} onClick={() => moveSelectedInterval(+1)} />
-            <ActionButton title='Delete' icon={faTrash} onClick={removeSelectedInterval} />
-            <ActionButton title='Duplicate' icon={faCopy} onClick={duplicateSelectedInterval} />
-            {sportType === "run" &&
-              <PaceSelector value={selectedIntervalPace} onChange={(pace) => setPace(pace, selectedId)} />
-            }
-          </div>
-        }
+        {selectedId && <SelectionToolbar />}
         <div className='canvas' ref={canvasRef}>          
           {selectedId &&
             <div className='fader' style={{width: canvasRef.current?.scrollWidth}} onClick={() => clearSelection()}></div>

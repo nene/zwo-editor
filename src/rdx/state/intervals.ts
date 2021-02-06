@@ -9,6 +9,7 @@ import { clearSelection, selectSelectedId } from './selectedId';
 import intervalFactory from '../../interval/intervalFactory';
 import { Duration } from '../../types/Length';
 import { selectMode } from './mode';
+import { PaceType } from '../../types/PaceType';
 
 const initialState: Interval[] = [];
 
@@ -86,6 +87,16 @@ export const moveSelectedInterval = createAsyncThunk(
     if (selectedId) {
       const intervals = selectIntervals(getState() as RootState);
       dispatch(setIntervals(moveInterval(selectedId, direction, intervals)));
+    }
+  },
+);
+
+export const setSelectedIntervalPace = createAsyncThunk(
+  'intervals/setSelectedIntervalPace',
+  (pace: PaceType, {getState, dispatch}) => {
+    const interval = selectSelectedInterval(getState() as RootState);
+    if (interval && interval.type === 'steady') { // TODO: Only steady?
+      dispatch(updateInterval({...interval, pace}));
     }
   },
 );
