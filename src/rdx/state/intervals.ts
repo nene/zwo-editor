@@ -95,3 +95,7 @@ export const selectIntervals = (state: RootState) => state.intervals;
 export const selectSelectedInterval = createSelector(selectSelectedId, selectIntervals, (selectedId, intervals) => {
   return intervals.find((interval) => interval.id === selectedId);
 });
+
+export const selectSelectedIntervalPace = createSelector(selectSelectedInterval, (interval) => {
+  return interval && interval.type !== 'free' ? interval.pace : undefined;
+});
