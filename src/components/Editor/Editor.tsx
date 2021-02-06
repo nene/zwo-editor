@@ -16,7 +16,7 @@ import { PaceType } from '../../types/PaceType'
 import PaceSelector from './PaceSelector'
 import { Interval } from '../../types/Interval'
 import { Instruction } from '../../types/Instruction'
-import { moveInterval, updateIntervalDuration } from '../../interval/intervalUtils'
+import { moveInterval } from '../../interval/intervalUtils'
 import Keyboard from '../Keyboard/Keyboard'
 import Stats from './Stats'
 import Title from './Title'
@@ -29,7 +29,7 @@ import { LengthType } from '../../types/LengthType'
 import { selectAuthor, selectDescription, selectName, selectSportType, selectLengthType, setSportType, setLengthType } from '../../rdx/state/meta'
 import { RootState } from '../../rdx/store';
 import { selectFtp, selectRunningTimes, setRunningTimes } from '../../rdx/state/athlete';
-import { selectIntervals, setIntervals, adjustSelectedIntervalIntensity, updateInterval, removeSelectedInterval, duplicateSelectedInterval } from '../../rdx/state/intervals';
+import { selectIntervals, setIntervals, adjustSelectedIntervalIntensity, adjustSelectedIntervalDuration, updateInterval, removeSelectedInterval, duplicateSelectedInterval } from '../../rdx/state/intervals';
 import { selectInstructions, updateInstruction, removeInstruction } from '../../rdx/state/instructions';
 import { selectMode } from '../../rdx/state/mode';
 import { clearWorkout } from '../../rdx/state/workout';
@@ -58,6 +58,7 @@ const mapDispatchToProps = {
   setIntervals,
   clearWorkout,
   adjustSelectedIntervalIntensity,
+  adjustSelectedIntervalDuration,
   updateInterval,
   updateInstruction,
   setSelectedId,
@@ -86,6 +87,7 @@ const Editor = (props: EditorProps) => {
   const {
     clearWorkout,
     adjustSelectedIntervalIntensity,
+    adjustSelectedIntervalDuration,
     updateInterval,
     updateInstruction,
     removeSelectedInterval,
@@ -181,8 +183,8 @@ const Editor = (props: EditorProps) => {
       onBackspacePress={removeSelectedInterval}
       onUpPress={() => adjustSelectedIntervalIntensity(0.01)}
       onDownPress={() => adjustSelectedIntervalIntensity(-0.01)}
-      onLeftPress={() => selectedId && setIntervals(updateIntervalDuration(selectedId, new Duration(-5), intervals, mode))}
-      onRightPress={() => selectedId && setIntervals(updateIntervalDuration(selectedId, new Duration(5), intervals, mode))}
+      onLeftPress={() => adjustSelectedIntervalDuration(new Duration(-5))}
+      onRightPress={() => adjustSelectedIntervalDuration(new Duration(5))}
     >
       <Head name={name} description={description} />
 

@@ -3,10 +3,12 @@ import { Interval } from '../../types/Interval';
 import { RootState } from '../store';
 import { rehydrateAction, rehydrateLengths } from '../rehydrate';
 import { clearWorkout, loadWorkout } from './workout';
-import { updateIntervalIntensity } from '../../interval/intervalUtils';
+import { updateIntervalIntensity, updateIntervalDuration } from '../../interval/intervalUtils';
 import { replaceById } from '../../utils/array';
 import { clearSelection, selectSelectedId } from './selectedId';
 import intervalFactory from '../../interval/intervalFactory';
+import { Duration } from '../../types/Length';
+import { selectMode } from './mode';
 
 const initialState: Interval[] = [];
 
@@ -61,6 +63,18 @@ export const adjustSelectedIntervalIntensity = createAsyncThunk(
     if (selectedId) {
       const intervals = selectIntervals(getState() as RootState);
       dispatch(setIntervals(updateIntervalIntensity(selectedId, amount, intervals)));
+    }
+  },
+);
+
+export const adjustSelectedIntervalDuration = createAsyncThunk(
+  'intervals/adjustSelectedIntervalDuration',
+  (amount: Duration, {getState, dispatch}) => {
+    const selectedId = selectSelectedId(getState() as RootState);
+    if (selectedId) {
+      const intervals = selectIntervals(getState() as RootState);
+      const mode = selectMode(getState() as RootState);
+      dispatch(setIntervals(updateIntervalDuration(selectedId, amount, intervals, mode)));
     }
   },
 );
