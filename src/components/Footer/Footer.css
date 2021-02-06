@@ -3,7 +3,8 @@
   font-size: 12px;
   text-align: center;
 
-  color: black;
+  background-color: black;
+  color: white;
 }
 .footer > ul{
   list-style: none;
