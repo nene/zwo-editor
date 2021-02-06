@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import GenericBar from '../Bar/GenericBar'
-import InstructionEditor from '../InstructionEditor/InstructionEditor'
-import TimeAxis from '../Axis/TimeAxis'
-import ZoneAxis from '../Axis/ZoneAxis'
-import { workoutDuration } from '../../utils/duration'
-import DistanceAxis from '../Axis/DistanceAxis'
-import { selectLengthType } from '../../rdx/state/meta'
+import GenericBar from '../Bar/GenericBar';
+import InstructionEditor from '../InstructionEditor/InstructionEditor';
+import TimeAxis from '../Axis/TimeAxis';
+import ZoneAxis from '../Axis/ZoneAxis';
+import { workoutDuration } from '../../utils/duration';
+import DistanceAxis from '../Axis/DistanceAxis';
+import { selectLengthType } from '../../rdx/state/meta';
 import { RootState } from '../../rdx/store';
 import { selectIntervals, updateInterval } from '../../rdx/state/intervals';
 import { selectInstructions, updateInstruction, removeInstruction } from '../../rdx/state/instructions';
@@ -51,14 +51,14 @@ const Editor = ({
   const [xAxisWidth, setXAxisWidth] = useState(1320);
 
   useEffect(() => {
-    setXAxisWidth(segmentsRef.current?.scrollWidth || 1320)
-  }, [segmentsRef])
+    setXAxisWidth(segmentsRef.current?.scrollWidth || 1320);
+  }, [segmentsRef]);
 
   function toggleSelection(id: string) {
     if (id === selectedId) {
-      clearSelection()
+      clearSelection();
     } else {
-      setSelectedId(id)
+      setSelectedId(id);
     }
   }
 
@@ -101,8 +101,8 @@ const Editor = ({
       </Canvas>
       <ZoneAxis />
     </Container>
-  )
-}
+  );
+};
 
 const Container = styled.div`
   flex: 1;
@@ -160,4 +160,4 @@ const Slider = styled.div`
   left: 0px;
 `;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Editor)
+export default connect(mapStateToProps, mapDispatchToProps)(Editor);
