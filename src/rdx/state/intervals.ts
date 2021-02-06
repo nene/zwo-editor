@@ -3,7 +3,7 @@ import { Interval } from '../../types/Interval';
 import { RootState } from '../store';
 import { rehydrateAction, rehydrateLengths } from '../rehydrate';
 import { clearWorkout, loadWorkout } from './workout';
-import { updateIntervalIntensity, updateIntervalDuration } from '../../interval/intervalUtils';
+import { updateIntervalIntensity, updateIntervalDuration, moveInterval } from '../../interval/intervalUtils';
 import { replaceById } from '../../utils/array';
 import { clearSelection, selectSelectedId } from './selectedId';
 import intervalFactory from '../../interval/intervalFactory';
@@ -75,6 +75,17 @@ export const adjustSelectedIntervalDuration = createAsyncThunk(
       const intervals = selectIntervals(getState() as RootState);
       const mode = selectMode(getState() as RootState);
       dispatch(setIntervals(updateIntervalDuration(selectedId, amount, intervals, mode)));
+    }
+  },
+);
+
+export const moveSelectedInterval = createAsyncThunk(
+  'intervals/moveSelectedInterval',
+  (direction: -1 | 1, {getState, dispatch}) => {
+    const selectedId = selectSelectedId(getState() as RootState);
+    if (selectedId) {
+      const intervals = selectIntervals(getState() as RootState);
+      dispatch(setIntervals(moveInterval(selectedId, direction, intervals)));
     }
   },
 );

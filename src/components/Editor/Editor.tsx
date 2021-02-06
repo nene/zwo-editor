@@ -16,7 +16,6 @@ import { PaceType } from '../../types/PaceType'
 import PaceSelector from './PaceSelector'
 import { Interval } from '../../types/Interval'
 import { Instruction } from '../../types/Instruction'
-import { moveInterval } from '../../interval/intervalUtils'
 import Keyboard from '../Keyboard/Keyboard'
 import Stats from './Stats'
 import Title from './Title'
@@ -29,7 +28,7 @@ import { LengthType } from '../../types/LengthType'
 import { selectAuthor, selectDescription, selectName, selectSportType, selectLengthType, setSportType, setLengthType } from '../../rdx/state/meta'
 import { RootState } from '../../rdx/store';
 import { selectFtp, selectRunningTimes, setRunningTimes } from '../../rdx/state/athlete';
-import { selectIntervals, setIntervals, adjustSelectedIntervalIntensity, adjustSelectedIntervalDuration, updateInterval, removeSelectedInterval, duplicateSelectedInterval } from '../../rdx/state/intervals';
+import { selectIntervals, setIntervals, adjustSelectedIntervalIntensity, adjustSelectedIntervalDuration, updateInterval, removeSelectedInterval, duplicateSelectedInterval, moveSelectedInterval } from '../../rdx/state/intervals';
 import { selectInstructions, updateInstruction, removeInstruction } from '../../rdx/state/instructions';
 import { selectMode } from '../../rdx/state/mode';
 import { clearWorkout } from '../../rdx/state/workout';
@@ -65,6 +64,7 @@ const mapDispatchToProps = {
   clearSelection,
   removeSelectedInterval,
   duplicateSelectedInterval,
+  moveSelectedInterval,
   removeInstruction,
 };
 
@@ -92,6 +92,7 @@ const Editor = (props: EditorProps) => {
     updateInstruction,
     removeSelectedInterval,
     duplicateSelectedInterval,
+    moveSelectedInterval,
     removeInstruction,
   } = props;
 
@@ -224,8 +225,8 @@ const Editor = (props: EditorProps) => {
       <div id="editor" className='editor'>
         {selectedId &&
           <div className='actions'>
-            <ActionButton title='Move Left' icon={faArrowLeft} onClick={() => selectedId && setIntervals(moveInterval(selectedId, -1, intervals))} />
-            <ActionButton title='Move Right' icon={faArrowRight} onClick={() => selectedId && setIntervals(moveInterval(selectedId, +1, intervals))} />
+            <ActionButton title='Move Left' icon={faArrowLeft} onClick={() => moveSelectedInterval(-1)} />
+            <ActionButton title='Move Right' icon={faArrowRight} onClick={() => moveSelectedInterval(+1)} />
             <ActionButton title='Delete' icon={faTrash} onClick={removeSelectedInterval} />
             <ActionButton title='Duplicate' icon={faCopy} onClick={duplicateSelectedInterval} />
             {sportType === "run" &&
