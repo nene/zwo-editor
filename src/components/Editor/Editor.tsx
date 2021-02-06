@@ -36,6 +36,7 @@ import { selectMode } from '../../rdx/mode';
 import { clearWorkout } from '../../rdx/workout';
 import Toolbar from '../Toolbar/Toolbar';
 import { ConnectedProps } from '../../types/ConnectedProps';
+import { selectSelectedId, clearSelection, setSelectedId } from '../../rdx/selectedId';
 
 const mapStateToProps = (state: RootState) => ({
   name: selectName(state),
@@ -48,6 +49,7 @@ const mapStateToProps = (state: RootState) => ({
   intervals: selectIntervals(state),
   instructions: selectInstructions(state),
   mode: selectMode(state),
+  selectedId: selectSelectedId(state),
 });
 
 const mapDispatchToProps = {
@@ -61,6 +63,8 @@ const mapDispatchToProps = {
   adjustIntensity,
   updateInterval,
   updateInstruction,
+  setSelectedId,
+  clearSelection,
 };
 
 type EditorProps = ConnectedProps<typeof mapStateToProps, typeof mapDispatchToProps>;
@@ -81,7 +85,7 @@ const Editor = (props: EditorProps) => {
   const {mode} = props;
   const {addInterval, clearWorkout, adjustIntensity, updateInterval, updateInstruction} = props;
 
-  const [selectedId, setSelectedId] = useState<string | undefined>(undefined)
+  const {selectedId, setSelectedId, clearSelection} = props;
 
   const [savePopupIsVisile, setSavePopupVisibility] = useState(false)
 
@@ -95,7 +99,7 @@ const Editor = (props: EditorProps) => {
 
   function toggleSelection(id: string) {
     if (id === selectedId) {
-      setSelectedId(undefined)
+      clearSelection()
     } else {
       setSelectedId(id)
     }
@@ -107,7 +111,7 @@ const Editor = (props: EditorProps) => {
 
   function removeInterval(id: string) {
     setIntervals(intervals.filter(item => item.id !== id))
-    setSelectedId(undefined)
+    clearSelection()
   }
 
   function duplicateInterval(id: string) {
@@ -115,7 +119,7 @@ const Editor = (props: EditorProps) => {
     if (interval) {
       addInterval(intervalFactory.clone(interval));
     }
-    setSelectedId(undefined)
+    clearSelection()
   }
 
   const renderInterval = (interval: Interval) => {
@@ -238,7 +242,7 @@ const Editor = (props: EditorProps) => {
         }
         <div className='canvas' ref={canvasRef}>          
           {selectedId &&
-            <div className='fader' style={{width: canvasRef.current?.scrollWidth}} onClick={() => setSelectedId(undefined)}></div>
+            <div className='fader' style={{width: canvasRef.current?.scrollWidth}} onClick={() => clearSelection()}></div>
           }
           <div className='segments' ref={segmentsRef}>
             {intervals.map(renderInterval)}

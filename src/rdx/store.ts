@@ -3,6 +3,7 @@ import { reducer as metaReducer } from './meta';
 import { reducer as athleteReducer } from './athlete';
 import { reducer as intervalsReducer } from './intervals';
 import { reducer as instructionsReducer } from './instructions';
+import { reducer as selectedIdReducer } from './selectedId';
 import { persistStore, persistCombineReducers } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -14,6 +15,7 @@ const rootReducer = persistCombineReducers({
   athlete: athleteReducer,
   intervals: intervalsReducer,
   instructions: instructionsReducer,
+  selectedId: selectedIdReducer,
 }); 
 
 export type RootState = ReturnType<typeof rootReducer>;
