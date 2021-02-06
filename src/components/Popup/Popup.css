@@ -69,8 +69,13 @@
 }
 
 .close {
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  float: right;
+  color: white;
   position: absolute;
   top: 10px;
   right: 10px;
   color: black;  
 }
+

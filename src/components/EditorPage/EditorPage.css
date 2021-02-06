@@ -83,13 +83,6 @@ label {
   padding: 5px;
 }
 
-.close {
-  background-color: rgba(0, 0, 0, 0);
-  border: 0;
-  float: right;
-  color: white;
-}
-
 .info {  
   margin: 0 auto;
   text-align: left;
