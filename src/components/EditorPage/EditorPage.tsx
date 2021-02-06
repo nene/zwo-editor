@@ -101,7 +101,7 @@ const EditorPage = ({
       <Head name={name} description={description} />
 
       {savePopupIsVisile &&
-        <Popup width="500px" dismiss={() => setSavePopupVisibility(false)}>
+        <Popup width="500px" onClose={() => setSavePopupVisibility(false)}>
           <SaveForm />
         </Popup>
       }
