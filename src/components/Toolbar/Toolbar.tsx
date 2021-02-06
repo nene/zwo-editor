@@ -90,10 +90,6 @@ const Container = styled.div`
   -moz-box-shadow: 0px 0px 27px -9px rgba(0,0,0,0.35);
   box-shadow: 0px 0px 27px -9px rgba(0,0,0,0.35);
   border-radius: 5px;
-
-  & > .form-input {
-    max-width: 100px;
-  }
 `;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Toolbar);

@@ -60,11 +60,6 @@ a {
   height: 50px;
 }
 
-.form-input {
-  display: flex;
-  flex-direction: column;
-}
-
 label {
   font-size: 10px;
   text-align: center;
@@ -86,8 +81,4 @@ label {
   padding: 10px;
   display: flex;
   flex-direction: row; 
-}
-.info > .workout > .form-input{
-  max-width: 120px;  
-  padding: 0 10px;
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Column } from "../Layout/Column";
 
 // Displays workut name, description & author
 
@@ -12,7 +13,7 @@ interface NumberFieldProps {
 
 const NumberField: React.FC<NumberFieldProps> = ({ name, label, value, onChange}) => {
   return (
-    <div className="form-input">
+    <Col>
       <label htmlFor={name}>{label}</label>
       <TextInput
         type="number"
@@ -20,7 +21,7 @@ const NumberField: React.FC<NumberFieldProps> = ({ name, label, value, onChange}
         value={value}
         onChange={(e) => onChange(parseInt(e.target.value))}
       />
-    </div>
+    </Col>
   );
 };
 
@@ -28,6 +29,10 @@ const TextInput = styled.input`
   font-size: 20px;
   border: 1px solid lightgray;  
   text-align: center;
+`;
+
+const Col = styled(Column)`
+  max-width: 100px;
 `;
 
 export default NumberField;

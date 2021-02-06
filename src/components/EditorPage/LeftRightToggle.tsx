@@ -2,6 +2,8 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Switch from "react-switch";
+import styled from "styled-components";
+import { Column } from "../Layout/Column";
 import "./LeftRightToggle.css";
 
 interface LeftRightToggleProps<TLeft,TRight> {
@@ -17,7 +19,7 @@ interface LeftRightToggleProps<TLeft,TRight> {
 const COLOR = "#00C46A";
 
 const LeftRightToggle = <TLeft,TRight>({ label, leftValue, rightValue, leftIcon, rightIcon, selected, onChange }: LeftRightToggleProps<TLeft,TRight>) => (
-  <div className="form-input">
+  <Col>
     <label>{label}</label>
     <div className="left-right-toggle">
       <FontAwesomeIcon
@@ -41,7 +43,12 @@ const LeftRightToggle = <TLeft,TRight>({ label, leftValue, rightValue, leftIcon,
         fixedWidth
       />
     </div>
-  </div>
+  </Col>
 );
+
+const Col = styled(Column)`
+  max-width: 120px;  
+  padding: 0 10px;
+`;
 
 export default LeftRightToggle;

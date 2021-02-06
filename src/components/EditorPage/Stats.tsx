@@ -8,6 +8,7 @@ import { Interval } from "../../types/Interval";
 import { workoutDistance } from "../../utils/distance";
 import { workoutDuration } from "../../utils/duration";
 import * as format from "../../utils/format";
+import { Column } from "../Layout/Column";
 
 // Displays summary statistics: workout length and TSS
 
@@ -20,25 +21,30 @@ interface StatsProps {
 const Stats: React.FC<StatsProps> = ({ intervals, ftp, mode }) => {
   return (
     <>
-      <div className="form-input">
+      <Col>
         <label>Workout Time</label>
         <TextInput value={format.duration(workoutDuration(intervals, mode))} disabled />
-      </div>
+      </Col>
       {mode instanceof RunMode &&
-        <div className="form-input">
+        <Col>
           <label>Workout Distance</label>
           <TextInput value={format.distance(workoutDistance(intervals, mode))} disabled />
-        </div>
+        </Col>
       }
       {mode instanceof BikeMode &&
-        <div className="form-input">
+        <Col>
           <label>TSS</label>
           <TextInput value={getStressScore(intervals, ftp, mode)} disabled />
-        </div>
+        </Col>
       }
     </>
   );
 };
+
+const Col = styled(Column)`
+  max-width: 120px;  
+  padding: 0 10px;
+`;
 
 const TextInput = styled.input`
   font-size: 20px;

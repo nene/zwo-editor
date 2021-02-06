@@ -6,6 +6,7 @@ import { RunningTimes } from '../../types/RunningTimes';
 import { PaceType } from '../../types/PaceType';
 import { runningDistances } from '../../types/runningDistances';
 import styled, { createGlobalStyle } from 'styled-components';
+import { Column } from '../Layout/Column';
 
 interface RunningTimesEditorProps {
   times: RunningTimes;
@@ -40,9 +41,9 @@ export default function RunningTimesEditor({ times, onChange }: RunningTimesEdit
       <RunTimeInput time={times[PaceType.marathon]} onChange={t => handleInputChange(PaceType.marathon,  t)}>
         Marathon Time
       </RunTimeInput>
-      <div className="form-input">
+      <Col>
         <button onClick={estimateRunningTimes} className="btn">Estimate missing times</button>
-      </div>
+      </Col>
     </Container>
   );
 }
@@ -53,15 +54,15 @@ const Container = styled.div`
   flex-direction: row;  
   width: 100%;
   max-width: 1360px;
+`;
 
-  & > .form-input {
-    padding-right: 10px;
-    align-self: flex-end;
-  }
+const Col = styled(Column)`
+  padding-right: 10px;
+  align-self: flex-end;
 `;
 
 const RunTimeInput: React.FC<{time: number, onChange: (time: number) => void}> = ({time, onChange, children}) => (
-  <div className="form-input">
+  <Col>
     <label><abbr title="hh:mm:ss">{children}</abbr></label>
     <TimePickerStyleOverrides />
     <StyledTimePicker
@@ -70,7 +71,7 @@ const RunTimeInput: React.FC<{time: number, onChange: (time: number) => void}> =
       defaultOpenValue={moment("00:00:00")}
       onChange={(value) => onChange(value ? moment.duration(value.format('HH:mm:ss')).asSeconds() : 0)}
     />
-  </div>
+  </Col>
 );
 
 const TimePickerStyleOverrides = createGlobalStyle`
