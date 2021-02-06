@@ -4,8 +4,6 @@ import GenericBar from '../Bar/GenericBar'
 import InstructionEditor from '../InstructionEditor/InstructionEditor'
 import TimeAxis from '../Axis/TimeAxis'
 import ZoneAxis from '../Axis/ZoneAxis'
-import { Interval } from '../../types/Interval'
-import { Instruction } from '../../types/Instruction'
 import { workoutDuration } from '../../utils/duration'
 import DistanceAxis from '../Axis/DistanceAxis'
 import { selectLengthType } from '../../rdx/state/meta'
@@ -64,31 +62,6 @@ const Editor = ({
     }
   }
 
-  const renderInterval = (interval: Interval) => {
-    return (
-      <GenericBar
-        key={interval.id}
-        interval={interval}
-        mode={mode}
-        onChange={updateInterval}
-        onClick={toggleSelection}
-        selected={interval.id === selectedId}
-      />
-    );
-  }
-
-  const renderInstruction = (instruction: Instruction, index: number) => (
-    <InstructionEditor
-      key={instruction.id}
-      instruction={instruction}
-      width={workoutDuration(intervals, mode).seconds / 3}
-      onChange={updateInstruction}
-      onDelete={removeInstruction}
-      index={index}
-      mode={mode}
-    />
-  )
-
   return (
     <Container>
       {selectedId && <SelectionToolbar />}
@@ -98,11 +71,30 @@ const Editor = ({
           <Fader style={{width: canvasRef.current?.scrollWidth}} onClick={clearSelection} />
         }
         <Segments ref={segmentsRef}>
-          {intervals.map(renderInterval)}
+          {intervals.map((interval) => (
+            <GenericBar
+              key={interval.id}
+              interval={interval}
+              mode={mode}
+              onChange={updateInterval}
+              onClick={toggleSelection}
+              selected={interval.id === selectedId}
+            />
+          ))}
         </Segments>
 
         <Slider>
-          {instructions.map((instruction, index) => renderInstruction(instruction, index))}
+          {instructions.map((instruction, index) => (
+            <InstructionEditor
+              key={instruction.id}
+              instruction={instruction}
+              width={workoutDuration(intervals, mode).seconds / 3}
+              onChange={updateInstruction}
+              onDelete={removeInstruction}
+              index={index}
+              mode={mode}
+            />
+          ))}
         </Slider>
 
         {lengthType === "time" ? <TimeAxis width={xAxisWidth} /> : <DistanceAxis width={xAxisWidth} />}
