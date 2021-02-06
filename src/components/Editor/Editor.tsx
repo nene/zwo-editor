@@ -46,7 +46,6 @@ const Editor = ({
   clearSelection,
   removeInstruction,
 }: EditorProps) => {
-  const canvasRef = useRef<HTMLInputElement>(null);
   const segmentsRef = useRef<HTMLInputElement>(null);
   const [xAxisWidth, setXAxisWidth] = useState(1320);
 
@@ -66,9 +65,9 @@ const Editor = ({
     <Container>
       {selectedId && <SelectionToolbar />}
 
-      <Canvas ref={canvasRef}>
+      <Canvas>
         {selectedId &&
-          <Fader style={{width: canvasRef.current?.scrollWidth}} onClick={clearSelection} />
+          <Fader style={{width: xAxisWidth}} onClick={clearSelection} />
         }
         <Segments ref={segmentsRef}>
           {intervals.map((interval) => (
