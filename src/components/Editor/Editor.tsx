@@ -46,7 +46,7 @@ const Editor = ({
   clearSelection,
   removeInstruction,
 }: EditorProps) => {
-  const segmentsRef = useRef<HTMLInputElement>(null);
+  const segmentsRef = useRef<HTMLDivElement>(null);
   const [xAxisWidth, setXAxisWidth] = useState(1320);
 
   useEffect(() => {
