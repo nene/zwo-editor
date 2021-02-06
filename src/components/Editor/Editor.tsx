@@ -29,7 +29,7 @@ import { LengthType } from '../../types/LengthType'
 import { selectAuthor, selectDescription, selectName, selectSportType, selectLengthType, setSportType, setLengthType } from '../../rdx/state/meta'
 import { RootState } from '../../rdx/store';
 import { selectFtp, selectRunningTimes, setRunningTimes } from '../../rdx/state/athlete';
-import { selectIntervals, setIntervals, adjustIntensity, updateInterval, removeSelectedInterval, duplicateSelectedInterval } from '../../rdx/state/intervals';
+import { selectIntervals, setIntervals, adjustSelectedIntervalIntensity, updateInterval, removeSelectedInterval, duplicateSelectedInterval } from '../../rdx/state/intervals';
 import { selectInstructions, updateInstruction, removeInstruction } from '../../rdx/state/instructions';
 import { selectMode } from '../../rdx/state/mode';
 import { clearWorkout } from '../../rdx/state/workout';
@@ -57,7 +57,7 @@ const mapDispatchToProps = {
   setRunningTimes,
   setIntervals,
   clearWorkout,
-  adjustIntensity,
+  adjustSelectedIntervalIntensity,
   updateInterval,
   updateInstruction,
   setSelectedId,
@@ -85,7 +85,7 @@ const Editor = (props: EditorProps) => {
   const {mode} = props;
   const {
     clearWorkout,
-    adjustIntensity,
+    adjustSelectedIntervalIntensity,
     updateInterval,
     updateInstruction,
     removeSelectedInterval,
@@ -179,8 +179,8 @@ const Editor = (props: EditorProps) => {
     <Keyboard
       className="container"
       onBackspacePress={removeSelectedInterval}
-      onUpPress={() => selectedId && adjustIntensity({id: selectedId, amount: 0.01})}
-      onDownPress={() => selectedId && adjustIntensity({id: selectedId, amount: -0.01})}
+      onUpPress={() => adjustSelectedIntervalIntensity(0.01)}
+      onDownPress={() => adjustSelectedIntervalIntensity(-0.01)}
       onLeftPress={() => selectedId && setIntervals(updateIntervalDuration(selectedId, new Duration(-5), intervals, mode))}
       onRightPress={() => selectedId && setIntervals(updateIntervalDuration(selectedId, new Duration(5), intervals, mode))}
     >

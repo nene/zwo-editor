@@ -16,8 +16,6 @@ const slice = createSlice({
   reducers: {
     setIntervals: (state, action: PayloadAction<Interval[]>) => action.payload,
     addInterval: (state, action: PayloadAction<Interval>) => [...state, action.payload],
-    adjustIntensity: (intervals, {payload}: PayloadAction<{id: string, amount: number}>) =>
-      updateIntervalIntensity(payload.id, payload.amount, intervals),
     updateInterval: (intervals, {payload}: PayloadAction<Interval>) =>
       replaceById(payload, intervals),
     removeInterval: (intervals, {payload: id}: PayloadAction<string | undefined>) =>
@@ -34,7 +32,7 @@ const slice = createSlice({
 });
 
 export const reducer = slice.reducer;
-export const { setIntervals, addInterval, adjustIntensity, updateInterval, removeInterval } = slice.actions;
+export const { setIntervals, addInterval, updateInterval, removeInterval } = slice.actions;
 
 export const removeSelectedInterval = createAsyncThunk(
   'intervals/removeSelectedInterval',
@@ -53,6 +51,17 @@ export const duplicateSelectedInterval = createAsyncThunk(
       dispatch(addInterval(intervalFactory.clone(interval)));
     }
     dispatch(clearSelection());
+  },
+);
+
+export const adjustSelectedIntervalIntensity = createAsyncThunk(
+  'intervals/adjustSelectedIntervalIntensity',
+  (amount: number, {getState, dispatch}) => {
+    const selectedId = selectSelectedId(getState() as RootState);
+    if (selectedId) {
+      const intervals = selectIntervals(getState() as RootState);
+      dispatch(setIntervals(updateIntervalIntensity(selectedId, amount, intervals)));
+    }
   },
 );
 
