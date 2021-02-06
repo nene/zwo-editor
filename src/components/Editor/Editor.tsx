@@ -16,7 +16,6 @@ import { PaceType } from '../../types/PaceType'
 import PaceSelector from './PaceSelector'
 import { Interval } from '../../types/Interval'
 import { Instruction } from '../../types/Instruction'
-import intervalFactory from '../../interval/intervalFactory'
 import { moveInterval, updateIntervalDuration } from '../../interval/intervalUtils'
 import Keyboard from '../Keyboard/Keyboard'
 import Stats from './Stats'
@@ -30,7 +29,7 @@ import { LengthType } from '../../types/LengthType'
 import { selectAuthor, selectDescription, selectName, selectSportType, selectLengthType, setSportType, setLengthType } from '../../rdx/state/meta'
 import { RootState } from '../../rdx/store';
 import { selectFtp, selectRunningTimes, setRunningTimes } from '../../rdx/state/athlete';
-import { addInterval, selectIntervals, setIntervals, adjustIntensity, updateInterval, removeSelectedInterval } from '../../rdx/state/intervals';
+import { selectIntervals, setIntervals, adjustIntensity, updateInterval, removeSelectedInterval, duplicateSelectedInterval } from '../../rdx/state/intervals';
 import { selectInstructions, setInstructions, updateInstruction } from '../../rdx/state/instructions';
 import { selectMode } from '../../rdx/state/mode';
 import { clearWorkout } from '../../rdx/state/workout';
@@ -57,7 +56,6 @@ const mapDispatchToProps = {
   setLengthType,
   setRunningTimes,
   setIntervals,
-  addInterval,
   setInstructions,
   clearWorkout,
   adjustIntensity,
@@ -66,6 +64,7 @@ const mapDispatchToProps = {
   setSelectedId,
   clearSelection,
   removeSelectedInterval,
+  duplicateSelectedInterval,
 };
 
 type EditorProps = ConnectedProps<typeof mapStateToProps, typeof mapDispatchToProps>;
@@ -84,7 +83,14 @@ const Editor = (props: EditorProps) => {
   const {runningTimes, setRunningTimes} = props;
 
   const {mode} = props;
-  const {addInterval, clearWorkout, adjustIntensity, updateInterval, updateInstruction, removeSelectedInterval} = props;
+  const {
+    clearWorkout,
+    adjustIntensity,
+    updateInterval,
+    updateInstruction,
+    removeSelectedInterval,
+    duplicateSelectedInterval,
+  } = props;
 
   const {selectedId, setSelectedId, clearSelection} = props;
 
@@ -108,14 +114,6 @@ const Editor = (props: EditorProps) => {
 
   function deleteInstruction(id: string) {
     setInstructions(instructions.filter(item => item.id !== id))
-  }
-
-  function duplicateInterval(id: string) {
-    const interval = intervals.find(interval => interval.id === id)
-    if (interval) {
-      addInterval(intervalFactory.clone(interval));
-    }
-    clearSelection()
   }
 
   const renderInterval = (interval: Interval) => {
@@ -230,7 +228,7 @@ const Editor = (props: EditorProps) => {
             <ActionButton title='Move Left' icon={faArrowLeft} onClick={() => selectedId && setIntervals(moveInterval(selectedId, -1, intervals))} />
             <ActionButton title='Move Right' icon={faArrowRight} onClick={() => selectedId && setIntervals(moveInterval(selectedId, +1, intervals))} />
             <ActionButton title='Delete' icon={faTrash} onClick={removeSelectedInterval} />
-            <ActionButton title='Duplicate' icon={faCopy} onClick={() => selectedId && duplicateInterval(selectedId)} />
+            <ActionButton title='Duplicate' icon={faCopy} onClick={duplicateSelectedInterval} />
             {sportType === "run" &&
               <PaceSelector value={getPace(selectedId)} onChange={(pace) => setPace(pace, selectedId)} />
             }

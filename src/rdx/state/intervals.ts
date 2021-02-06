@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Interval } from '../../types/Interval';
 import { RootState } from '../store';
 import { rehydrateAction, rehydrateLengths } from '../rehydrate';
@@ -6,6 +6,7 @@ import { clearWorkout, loadWorkout } from './workout';
 import { updateIntervalIntensity } from '../../interval/intervalUtils';
 import { replaceById } from '../../utils/array';
 import { clearSelection, selectSelectedId } from './selectedId';
+import intervalFactory from '../../interval/intervalFactory';
 
 const initialState: Interval[] = [];
 
@@ -44,4 +45,19 @@ export const removeSelectedInterval = createAsyncThunk(
   },
 );
 
+export const duplicateSelectedInterval = createAsyncThunk(
+  'intervals/duplicateSelectedInterval',
+  (_: void, {getState, dispatch}) => {
+    const interval = selectSelectedInterval(getState() as RootState);
+    if (interval) {
+      dispatch(addInterval(intervalFactory.clone(interval)));
+    }
+    dispatch(clearSelection());
+  },
+);
+
 export const selectIntervals = (state: RootState) => state.intervals;
+
+export const selectSelectedInterval = createSelector(selectSelectedId, selectIntervals, (selectedId, intervals) => {
+  return intervals.find((interval) => interval.id === selectedId);
+});
