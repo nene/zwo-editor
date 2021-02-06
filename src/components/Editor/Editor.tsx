@@ -30,7 +30,7 @@ import { selectAuthor, selectDescription, selectName, selectSportType, selectLen
 import { RootState } from '../../rdx/store';
 import { selectFtp, selectRunningTimes, setRunningTimes } from '../../rdx/state/athlete';
 import { selectIntervals, setIntervals, adjustIntensity, updateInterval, removeSelectedInterval, duplicateSelectedInterval } from '../../rdx/state/intervals';
-import { selectInstructions, setInstructions, updateInstruction } from '../../rdx/state/instructions';
+import { selectInstructions, updateInstruction, removeInstruction } from '../../rdx/state/instructions';
 import { selectMode } from '../../rdx/state/mode';
 import { clearWorkout } from '../../rdx/state/workout';
 import Toolbar from '../Toolbar/Toolbar';
@@ -56,7 +56,6 @@ const mapDispatchToProps = {
   setLengthType,
   setRunningTimes,
   setIntervals,
-  setInstructions,
   clearWorkout,
   adjustIntensity,
   updateInterval,
@@ -65,6 +64,7 @@ const mapDispatchToProps = {
   clearSelection,
   removeSelectedInterval,
   duplicateSelectedInterval,
+  removeInstruction,
 };
 
 type EditorProps = ConnectedProps<typeof mapStateToProps, typeof mapDispatchToProps>;
@@ -77,7 +77,7 @@ const Editor = (props: EditorProps) => {
   const {lengthType, setLengthType} = props;
 
   const {intervals, setIntervals} = props;
-  const {instructions, setInstructions} = props;
+  const {instructions} = props;
 
   const {ftp} = props;
   const {runningTimes, setRunningTimes} = props;
@@ -90,6 +90,7 @@ const Editor = (props: EditorProps) => {
     updateInstruction,
     removeSelectedInterval,
     duplicateSelectedInterval,
+    removeInstruction,
   } = props;
 
   const {selectedId, setSelectedId, clearSelection} = props;
@@ -112,10 +113,6 @@ const Editor = (props: EditorProps) => {
     }
   }
 
-  function deleteInstruction(id: string) {
-    setInstructions(instructions.filter(item => item.id !== id))
-  }
-
   const renderInterval = (interval: Interval) => {
     return (
       <GenericBar
@@ -135,7 +132,7 @@ const Editor = (props: EditorProps) => {
       instruction={instruction}
       width={workoutDuration(intervals, mode).seconds / 3}
       onChange={updateInstruction}
-      onDelete={deleteInstruction}
+      onDelete={removeInstruction}
       index={index}
       mode={mode}
     />

@@ -15,6 +15,8 @@ const slice = createSlice({
     addInstruction: (state, action: PayloadAction<Instruction>) => [...state, action.payload],
     updateInstruction: (instructions, {payload}: PayloadAction<Instruction>) =>
       replaceById(payload, instructions),
+    removeInstruction: (instructions, {payload: id}: PayloadAction<string>) =>
+      instructions.filter((item) => item.id !== id),
   },
   extraReducers: (builder) => {
     builder
@@ -27,6 +29,6 @@ const slice = createSlice({
 });
 
 export const reducer = slice.reducer;
-export const { setInstructions, addInstruction, updateInstruction } = slice.actions;
+export const { setInstructions, addInstruction, updateInstruction, removeInstruction } = slice.actions;
 
 export const selectInstructions = (state: RootState) => state.instructions;
