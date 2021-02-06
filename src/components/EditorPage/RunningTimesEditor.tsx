@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
-import './RunningTimesEditor.css';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css'
 import moment from 'moment'
 import { RunningTimes } from '../../types/RunningTimes';
 import { PaceType } from '../../types/PaceType';
 import { runningDistances } from '../../types/runningDistances';
+import styled, { createGlobalStyle } from 'styled-components';
 
 interface RunningTimesEditorProps {
   times: RunningTimes;
@@ -24,7 +24,7 @@ export default function RunningTimesEditor({ times, onChange }: RunningTimesEdit
   };
 
   return (
-    <div className="run-workout">
+    <Container>
       <RunTimeInput time={times[PaceType.oneMile]} onChange={t => handleInputChange(PaceType.oneMile,  t)}>
         1 Mile Time
       </RunTimeInput>
@@ -43,22 +43,57 @@ export default function RunningTimesEditor({ times, onChange }: RunningTimesEdit
       <div className="form-input">
         <button onClick={estimateRunningTimes} className="btn">Estimate missing times</button>
       </div>
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;  
+  margin: 0 auto;
+  flex-direction: row;  
+  width: 100%;
+  max-width: 1360px;
+
+  & > .form-input {
+    padding-right: 10px;
+    align-self: flex-end;
+  }
+`;
 
 const RunTimeInput: React.FC<{time: number, onChange: (time: number) => void}> = ({time, onChange, children}) => (
   <div className="form-input">
     <label><abbr title="hh:mm:ss">{children}</abbr></label>
-    <TimePicker
+    <TimePickerStyleOverrides />
+    <StyledTimePicker
       value={time === 0 ? undefined : moment.utc(time * 1000)}
       placeholder="00:00:00"
       defaultOpenValue={moment("00:00:00")}
-      className="timePicker"
       onChange={(value) => onChange(value ? moment.duration(value.format('HH:mm:ss')).asSeconds() : 0)}
     />
   </div>
 );
+
+const TimePickerStyleOverrides = createGlobalStyle`
+  .rc-time-picker-panel-input {
+    font-size: 18px;  
+    font-family: monospace;
+  }
+
+  .rc-time-picker-panel-select > ul > li {
+    font-size: 16px;  
+    font-family: monospace;
+  }
+`;
+
+const StyledTimePicker = styled(TimePicker)`
+  width: 120px;
+
+  & > input {
+    font-size: 18px;  
+    font-family: monospace;
+    color: black;
+  }
+`;
 
 const defaultDistance = 1609.34; // one mile in meters
 const defaultTime = 11 * 60 + 20; // 00:11:20
