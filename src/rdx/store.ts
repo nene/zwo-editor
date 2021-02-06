@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { reducer as metaReducer } from './meta';
-import { reducer as athleteReducer } from './athlete';
-import { reducer as intervalsReducer } from './intervals';
-import { reducer as instructionsReducer } from './instructions';
-import { reducer as selectedIdReducer } from './selectedId';
+import { reducer as metaReducer } from './state/meta';
+import { reducer as athleteReducer } from './state/athlete';
+import { reducer as intervalsReducer } from './state/intervals';
+import { reducer as instructionsReducer } from './state/instructions';
+import { reducer as selectedIdReducer } from './state/selectedId';
 import { persistStore, persistCombineReducers } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 

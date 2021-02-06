@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Interval } from '../types/Interval';
-import { RootState } from './store';
-import { rehydrateAction, rehydrateLengths } from './rehydrate';
+import { Interval } from '../../types/Interval';
+import { RootState } from '../store';
+import { rehydrateAction, rehydrateLengths } from '../rehydrate';
 import { clearWorkout, loadWorkout } from './workout';
-import { updateIntervalIntensity } from '../interval/intervalUtils';
-import { replaceById } from '../utils/array';
+import { updateIntervalIntensity } from '../../interval/intervalUtils';
+import { replaceById } from '../../utils/array';
 
 const initialState: Interval[] = [];
 

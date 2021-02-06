@@ -1,6 +1,6 @@
 import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit';
-import { RunningTimes } from '../types/RunningTimes';
-import { RootState } from './store';
+import { RunningTimes } from '../../types/RunningTimes';
+import { RootState } from '../store';
 
 interface AthleteState {
   ftp: number;

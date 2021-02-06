@@ -1,7 +1,7 @@
 import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit';
-import { LengthType } from '../types/LengthType';
-import { SportType } from '../types/SportType';
-import { RootState } from './store';
+import { LengthType } from '../../types/LengthType';
+import { SportType } from '../../types/SportType';
+import { RootState } from '../store';
 import { clearWorkout, loadWorkout } from './workout';
 
 interface MetaState {

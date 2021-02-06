@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { selectAuthor, selectDescription, selectName, selectTags, setName, setAuthor, setDescription, setTags } from "../../rdx/meta";
+import { selectAuthor, selectDescription, selectName, selectTags, setName, setAuthor, setDescription, setTags } from "../../rdx/state/meta";
 import { RootState } from "../../rdx/store";
 import { ConnectedProps } from "../../types/ConnectedProps";
 import Checkbox from "./Checkbox";

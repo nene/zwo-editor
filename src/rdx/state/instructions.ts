@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from './store';
-import { rehydrateAction, rehydrateLengths } from './rehydrate';
-import { Instruction } from '../types/Instruction';
+import { RootState } from '../store';
+import { rehydrateAction, rehydrateLengths } from '../rehydrate';
+import { Instruction } from '../../types/Instruction';
 import { clearWorkout, loadWorkout } from './workout';
-import { replaceById } from '../utils/array';
+import { replaceById } from '../../utils/array';
 
 const initialState: Instruction[] = [];
 

@@ -27,16 +27,16 @@ import { workoutDuration } from '../../utils/duration'
 import { Duration } from '../../types/Length'
 import DistanceAxis from '../Axis/DistanceAxis'
 import { LengthType } from '../../types/LengthType'
-import { selectAuthor, selectDescription, selectName, selectSportType, selectLengthType, setSportType, setLengthType } from '../../rdx/meta'
+import { selectAuthor, selectDescription, selectName, selectSportType, selectLengthType, setSportType, setLengthType } from '../../rdx/state/meta'
 import { RootState } from '../../rdx/store';
-import { selectFtp, selectRunningTimes, setRunningTimes } from '../../rdx/athlete';
-import { addInterval, selectIntervals, setIntervals, adjustIntensity, updateInterval } from '../../rdx/intervals';
-import { selectInstructions, setInstructions, updateInstruction } from '../../rdx/instructions';
-import { selectMode } from '../../rdx/mode';
-import { clearWorkout } from '../../rdx/workout';
+import { selectFtp, selectRunningTimes, setRunningTimes } from '../../rdx/state/athlete';
+import { addInterval, selectIntervals, setIntervals, adjustIntensity, updateInterval } from '../../rdx/state/intervals';
+import { selectInstructions, setInstructions, updateInstruction } from '../../rdx/state/instructions';
+import { selectMode } from '../../rdx/state/mode';
+import { clearWorkout } from '../../rdx/state/workout';
 import Toolbar from '../Toolbar/Toolbar';
 import { ConnectedProps } from '../../types/ConnectedProps';
-import { selectSelectedId, clearSelection, setSelectedId } from '../../rdx/selectedId';
+import { selectSelectedId, clearSelection, setSelectedId } from '../../rdx/state/selectedId';
 
 const mapStateToProps = (state: RootState) => ({
   name: selectName(state),

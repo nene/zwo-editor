@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import createWorkoutXml from '../../xml/createWorkoutXml';
 import IconButton from '../Button/IconButton';
-import { selectAuthor, selectDescription, selectName, selectTags, selectSportType, selectLengthType } from '../../rdx/meta';
+import { selectAuthor, selectDescription, selectName, selectTags, selectSportType, selectLengthType } from '../../rdx/state/meta';
 import { RootState } from '../../rdx/store';
-import { selectIntervals } from '../../rdx/intervals';
-import { selectInstructions } from '../../rdx/instructions';
-import { selectMode } from '../../rdx/mode';
+import { selectIntervals } from '../../rdx/state/intervals';
+import { selectInstructions } from '../../rdx/state/instructions';
+import { selectMode } from '../../rdx/state/mode';
 import { ConnectedProps } from '../../types/ConnectedProps';
 
 const mapStateToProps = (state: RootState) => ({

@@ -13,13 +13,13 @@ import UploadButton from './UploadButton'
 import IconButton from '../Button/IconButton'
 import ColorButton from '../Button/ColorButton'
 import Button from '../Button/Button'
-import { selectSportType } from '../../rdx/meta'
+import { selectSportType } from '../../rdx/state/meta'
 import { RootState } from '../../rdx/store';
-import { selectFtp, selectWeight, setFtp, setWeight } from '../../rdx/athlete';
-import { addInterval } from '../../rdx/intervals';
-import { addInstruction } from '../../rdx/instructions';
-import { selectMode } from '../../rdx/mode';
-import { clearWorkout, loadWorkout } from '../../rdx/workout';
+import { selectFtp, selectWeight, setFtp, setWeight } from '../../rdx/state/athlete';
+import { addInterval } from '../../rdx/state/intervals';
+import { addInstruction } from '../../rdx/state/instructions';
+import { selectMode } from '../../rdx/state/mode';
+import { clearWorkout, loadWorkout } from '../../rdx/state/workout';
 import DownloadButton from './DownloadButton';
 import styled from 'styled-components';
 import { ConnectedProps } from '../../types/ConnectedProps';
