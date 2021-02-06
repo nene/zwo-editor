@@ -10,23 +10,6 @@
   
 }
 
-.editor {
-  flex: 1;
-  position: relative;  
-  white-space: nowrap;
-  background-color: white;
-
-  padding: 0px 40px;  
-  margin: 10px auto;
-  overflow-x: hidden;
-  width: 100%;
-  max-width: 1280px;
-  -webkit-box-shadow: 0px 0px 27px -9px rgba(0,0,0,0.35);
-  -moz-box-shadow: 0px 0px 27px -9px rgba(0,0,0,0.35);
-  box-shadow: 0px 0px 27px -9px rgba(0,0,0,0.35);
-  border-radius: 5px;
-}
-
 .container > .footer {
   background-color: black;
   color: white;
@@ -34,44 +17,6 @@
 
 a {
   color: #00C46A;
-}
-
-.canvas {
-  position: absolute;
-  width: 100%;
-  max-width: 1320px;
-  height: 100%;
-  overflow-y: hidden;
-  overflow-x: visible;
-  
-  bottom: 10px;
-  
-}
-
-.segments {
-
-  position: absolute;
-
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-items: flex-end;  
-  bottom: 0px;
-  padding-bottom: 40px;
-
-  margin-right: 100px;
-}
-
-.fader {
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0.9);
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 50000px;
-  height: 100%;
-  z-index: 1;
 }
 
 .btn {
@@ -136,12 +81,6 @@ label {
   font-size: 10px;
   text-align: center;
   padding: 5px;
-}
-
-.slider {  
-  position: absolute;  
-  top: 10px;
-  left: 0px;
 }
 
 .workoutLength {
