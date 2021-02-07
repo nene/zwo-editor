@@ -40,35 +40,35 @@ const RampBar = ({ interval, mode, ...props }: RampBarProps) => {
     props.onChange({ ...interval, cadence: cadence });
   };
 
-  const [width, setWidth] = useState(mode.lengthToWidth(interval.length));
+  const width = mode.lengthToWidth(interval.length);
+  const [resizableWidth, setResizableWidth] = useState(width);
 
-  const [startHeight, setStartHeight] = useState(
-    mode.intensityToHeight(interval.startIntensity)
-  );
-  const [endHeight, setEndHeight] = useState(
-    mode.intensityToHeight(interval.endIntensity)
-  );
+  const startHeight = mode.intensityToHeight(interval.startIntensity);
+  const [resizableStartHeight, setResizableStartHeight] = useState(startHeight);
+
+  const endHeight = mode.intensityToHeight(interval.endIntensity);
+  const [resizableEndHeight, setResizableEndHeight] = useState(endHeight);
 
   const handleStartResizeStop = (dHeight: number) => {
-    setStartHeight(startHeight + dHeight);
+    setResizableStartHeight(resizableStartHeight + dHeight);
   };
   const handleEndResizeStop = (dWidth: number, dHeight: number) => {
-    setWidth(width + dWidth);
-    setEndHeight(endHeight + dHeight);
+    setResizableWidth(resizableWidth + dWidth);
+    setResizableEndHeight(resizableEndHeight + dHeight);
   };
 
   const handleStartResize = (dHeight: number) => {
     props.onChange({
       ...interval,
-      startIntensity: mode.heightToIntensity(startHeight + dHeight),
+      startIntensity: mode.heightToIntensity(resizableStartHeight + dHeight),
     });
   };
   const handleEndResize = (dWidth: number, dHeight: number) => {
     props.onChange({
       ...interval,
-      length: mode.widthToLength(width + dWidth),
-      startIntensity: mode.heightToIntensity(startHeight),
-      endIntensity: mode.heightToIntensity(endHeight + dHeight),
+      length: mode.widthToLength(resizableWidth + dWidth),
+      startIntensity: mode.heightToIntensity(resizableStartHeight),
+      endIntensity: mode.heightToIntensity(resizableEndHeight + dHeight),
     });
   };
 
@@ -89,8 +89,8 @@ const RampBar = ({ interval, mode, ...props }: RampBarProps) => {
       <Ramp onClick={() => props.onClick(interval.id)}>
         <ResizableRamp
           size={{
-            width: width / 2,
-            height: startHeight,
+            width: resizableWidth / 2,
+            height: resizableStartHeight,
           }}
           minWidth={3}
           minHeight={intensityMultiplier * Zones.Z1.min}
@@ -104,8 +104,8 @@ const RampBar = ({ interval, mode, ...props }: RampBarProps) => {
         ></ResizableRamp>
         <ResizableRamp
           size={{
-            width: width / 2,
-            height: endHeight,
+            width: resizableWidth / 2,
+            height: resizableEndHeight,
           }}
           minWidth={3}
           minHeight={intensityMultiplier * Zones.Z1.min}
