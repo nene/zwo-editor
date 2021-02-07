@@ -7,15 +7,6 @@ import { SteadyInterval } from "../../types/Interval";
 import { intensityMultiplier } from "./multipliers";
 import { WorkoutMode } from "../../modes/WorkoutMode";
 
-const Container = styled.div`
-  position: relative;
-`;
-
-const RoundedResizable = styled(Resizable)`
-  border-radius: 10px;
-  border: 1px solid white;
-`;
-
 interface SteadyBarProps {
   interval: SteadyInterval;
   mode: WorkoutMode;
@@ -94,5 +85,14 @@ const SteadyBar = ({ interval, mode, ...props }: SteadyBarProps) => {
     </Container>
   );
 };
+
+const Container = styled.div`
+  position: relative;
+`;
+
+const RoundedResizable = styled(Resizable)`
+  border-radius: 10px;
+  border: 1px solid white;
+`;
 
 export default SteadyBar;

@@ -6,17 +6,6 @@ import { WorkoutMode } from "../../modes/WorkoutMode";
 import intervalFactory from "../../interval/intervalFactory";
 import { range } from "ramda";
 
-const Buttons = styled.div`
-  position: absolute;
-  margin-top: -30px;
-`;
-
-const SubIntervals = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-`;
-
 interface RepetitionBarProps {
   interval: RepetitionInterval;
   mode: WorkoutMode;
@@ -128,5 +117,16 @@ const RepetitionBar = ({ interval, ...props }: RepetitionBarProps) => {
     </div>
   );
 };
+
+const Buttons = styled.div`
+  position: absolute;
+  margin-top: -30px;
+`;
+
+const SubIntervals = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+`;
 
 export default RepetitionBar;

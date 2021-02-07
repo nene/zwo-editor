@@ -7,20 +7,6 @@ import { RampInterval } from "../../types/Interval";
 import { intensityMultiplier } from "./multipliers";
 import { WorkoutMode } from "../../modes/WorkoutMode";
 
-const Container = styled.div`
-  position: relative;
-`;
-
-const Ramp = styled.div`
-  display: flex;
-  align-items: flex-end;
-`;
-
-const ResizableRamp = styled(Resizable)`
-  border-top: 1px dotted gray;
-  z-index: 5;
-`;
-
 interface IDictionary {
   [index: string]: number;
 }
@@ -134,21 +120,18 @@ const RampBar = ({ interval, mode, ...props }: RampBarProps) => {
   );
 };
 
-const RampColors = styled.div`
-  position: absolute;
-  bottom: 0px;
-  left: 0;
-  width: 100%;
-  display: flex;
+const Container = styled.div`
+  position: relative;
 `;
 
-const Color = styled.div`
-  &:first-child {
-    border-bottom-left-radius: 5px;
-  }
-  &:last-child {
-    border-bottom-right-radius: 5px;
-  }
+const Ramp = styled.div`
+  display: flex;
+  align-items: flex-end;
+`;
+
+const ResizableRamp = styled(Resizable)`
+  border-top: 1px dotted gray;
+  z-index: 5;
 `;
 
 const Rainbow: React.FC<{
@@ -229,6 +212,23 @@ const Rainbow: React.FC<{
   );
 };
 
+const RampColors = styled.div`
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  display: flex;
+`;
+
+const Color = styled.div`
+  &:first-child {
+    border-bottom-left-radius: 5px;
+  }
+  &:last-child {
+    border-bottom-right-radius: 5px;
+  }
+`;
+
 function calculateColors(start: number, end: number): IDictionary {
   const bars = {} as IDictionary;
 
@@ -245,21 +245,6 @@ function calculateColors(start: number, end: number): IDictionary {
   });
   return bars;
 }
-
-const RampSvg = styled.svg`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-`;
-
-const TransparentPolygon = styled.polygon`
-  fill: transparent;
-`;
-
-const HiddenPolygon = styled.polygon`
-  fill: white;
-  display: hidden;
-`;
 
 const SvgPolygons: React.FC<{
   width: number;
@@ -283,5 +268,20 @@ const SvgPolygons: React.FC<{
     </RampSvg>
   );
 };
+
+const RampSvg = styled.svg`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+`;
+
+const TransparentPolygon = styled.polygon`
+  fill: transparent;
+`;
+
+const HiddenPolygon = styled.polygon`
+  fill: white;
+  display: hidden;
+`;
 
 export default RampBar;

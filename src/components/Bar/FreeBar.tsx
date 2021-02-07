@@ -8,15 +8,6 @@ import { durationMultiplier } from "./multipliers";
 import { WorkoutMode } from "../../modes/WorkoutMode";
 import freerideSvg from "../../assets/freeride.svg";
 
-const Container = styled.div`
-  position: relative;
-`;
-
-const ResizableFreeBar = styled(Resizable)`
-  border: 1px solid white;
-  background-image: url("${freerideSvg}");
-`;
-
 interface FreeBarProps {
   interval: FreeInterval;
   mode: WorkoutMode;
@@ -76,5 +67,14 @@ const FreeBar = ({ interval, mode, ...props }: FreeBarProps) => {
     </Container>
   );
 };
+
+const Container = styled.div`
+  position: relative;
+`;
+
+const ResizableFreeBar = styled(Resizable)`
+  border: 1px solid white;
+  background-image: url("${freerideSvg}");
+`;
 
 export default FreeBar;
