@@ -24,7 +24,7 @@ const GenericBar = ({ interval, mode, selected, onChange, onClick }: GenericBarP
           onChange={onChange}
           onClick={onClick}
           selected={selected}
-          showLabel={true}
+          showTooltip={true}
         />
       );
     case 'ramp':

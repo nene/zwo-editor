@@ -96,7 +96,7 @@ const RepetitionBar = ({interval, ...props}: RepetitionBarProps) => {
     }
   }
 
-  const renderBar = (subInterval: SteadyInterval, withLabel: boolean) => (
+  const renderBar = (subInterval: SteadyInterval, withTooltip: boolean) => (
     <SteadyBar
       key={subInterval.id}
       interval={subInterval}
@@ -104,7 +104,7 @@ const RepetitionBar = ({interval, ...props}: RepetitionBarProps) => {
       onChange={handleOnChange}
       onClick={() => props.onClick(interval.id)}
       selected={props.selected}
-      showLabel={withLabel}
+      showTooltip={withTooltip}
     />
   )
 

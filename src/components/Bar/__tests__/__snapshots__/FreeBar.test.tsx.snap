@@ -45,7 +45,7 @@ exports[`<FreeBar> renders 1`] = `
 </div>
 `;
 
-exports[`<FreeBar> renders with label when selected 1`] = `
+exports[`<FreeBar> renders with tooltip when selected 1`] = `
 .c0 {
   position: relative;
 }
@@ -66,7 +66,7 @@ exports[`<FreeBar> renders with label when selected 1`] = `
     }
   }
 >
-  <Label
+  <Tooltip
     interval={
       Object {
         "cadence": 0,

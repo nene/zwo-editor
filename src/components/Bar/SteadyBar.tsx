@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import { zoneColor, Zones } from '../../types/Zones'
 import { Resizable } from 're-resizable'
-import Label from '../Label/Label'
+import Tooltip from '../Tooltip/Tooltip'
 import { SteadyInterval } from '../../types/Interval'
 import { intensityMultiplier } from './multipliers'
 import { WorkoutMode } from '../../modes/WorkoutMode'
@@ -22,7 +22,7 @@ interface SteadyBarProps {
   onChange: (interval: SteadyInterval) => void;
   onClick: (id: string) => void;
   selected: boolean;
-  showLabel: boolean;
+  showTooltip: boolean;
 }
 
 const SteadyBar = ({interval, mode, ...props}: SteadyBarProps) => {
@@ -32,7 +32,7 @@ const SteadyBar = ({interval, mode, ...props}: SteadyBarProps) => {
 
   const [height, setHeight] = useState(mode.intensityToHeight(interval.intensity))
 
-  const [showLabel, setShowLabel] = useState(false)
+  const [showTooltip, setShowTooltip] = useState(false)
 
   const [selected, setSelected] = useState(props.selected)
 
@@ -61,13 +61,13 @@ const SteadyBar = ({interval, mode, ...props}: SteadyBarProps) => {
 
   return (
     <Container
-      onMouseEnter={() => setShowLabel(true)}
-      onMouseLeave={() => setShowLabel(false)}
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
       onClick={() => props.onClick(interval.id)}
       style={props.selected ? { zIndex: 10 } : {}}
     >
-      {((selected || showLabel) && (props.showLabel)) &&
-        <Label
+      {((selected || showTooltip) && (props.showTooltip)) &&
+        <Tooltip
           interval={interval}
           mode={mode}
           onCadenceChange={(cadence: number)=> handleCadenceChange(cadence)}

@@ -9,8 +9,8 @@ import { Duration } from '../../../types/Length';
 
 const MockReact = React;
 
-jest.mock('../../Label/Label', () => (props: any) =>
-  MockReact.createElement("Label", props));
+jest.mock('../../Tooltip/Tooltip', () => (props: any) =>
+  MockReact.createElement("Tooltip", props));
 
 jest.mock('re-resizable', () => ({
   Resizable: (props: any) => MockReact.createElement("Resizable", props),
@@ -33,7 +33,7 @@ describe('<SteadyBar>', () => {
         interval={interval}
         mode={mode}
         selected={false}
-        showLabel={false}
+        showTooltip={false}
         onChange={() => { }}
         onClick={() => { }}
       />
@@ -42,7 +42,7 @@ describe('<SteadyBar>', () => {
     expect(component).toMatchSnapshot();
   });
 
-  it('renders without Label when selected, but showLabel=false', () => {
+  it('renders without Tooltip when selected, but showTooltip=false', () => {
     const mode = createMode({sportType: "bike", ftp: 250, weight: 75, runningTimes: [], lengthType: "time"});
     const interval = intervalFactory.steady({
       length: new Duration(50),
@@ -54,7 +54,7 @@ describe('<SteadyBar>', () => {
         interval={interval}
         mode={mode}
         selected={true}
-        showLabel={false}
+        showTooltip={false}
         onChange={() => { }}
         onClick={() => { }}
       />
@@ -63,7 +63,7 @@ describe('<SteadyBar>', () => {
     expect(component).toMatchSnapshot();
   });
 
-  it('renders with Label when selected and showLabel=true', () => {
+  it('renders with Tooltip when selected and showTooltip=true', () => {
     const mode = createMode({sportType: "bike", ftp: 250, weight: 75, runningTimes: [], lengthType: "time"});
     const interval = intervalFactory.steady({
       length: new Duration(50),
@@ -75,7 +75,7 @@ describe('<SteadyBar>', () => {
         interval={interval}
         mode={mode}
         selected={true}
-        showLabel={true}
+        showTooltip={true}
         onChange={() => { }}
         onClick={() => { }}
       />

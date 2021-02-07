@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Label> for cycling ramp, renders: duration, power-range, %FTP-range, cadence 1`] = `
+exports[`<Tooltip> for cycling ramp, renders: duration, power-range, %FTP-range, cadence 1`] = `
 .c0 {
   position: absolute;
   z-index: 100;
@@ -92,7 +92,7 @@ exports[`<Label> for cycling ramp, renders: duration, power-range, %FTP-range, c
 </div>
 `;
 
-exports[`<Label> for cycling, renders: duration, power, w/kg, %FTP, cadence 1`] = `
+exports[`<Tooltip> for cycling, renders: duration, power, w/kg, %FTP, cadence 1`] = `
 .c0 {
   position: absolute;
   z-index: 100;
@@ -182,7 +182,7 @@ exports[`<Label> for cycling, renders: duration, power, w/kg, %FTP, cadence 1`] 
 </div>
 `;
 
-exports[`<Label> for running (in distance mode), renders: duration, distance, %pace, pace type 1`] = `
+exports[`<Tooltip> for running (in distance mode), renders: duration, distance, %pace, pace type 1`] = `
 .c0 {
   position: absolute;
   z-index: 100;
@@ -225,7 +225,7 @@ exports[`<Label> for running (in distance mode), renders: duration, distance, %p
 </div>
 `;
 
-exports[`<Label> for running ramp, renders: duration, distance, %pace-range, pace type 1`] = `
+exports[`<Tooltip> for running ramp, renders: duration, distance, %pace-range, pace type 1`] = `
 .c0 {
   position: absolute;
   z-index: 100;
@@ -270,7 +270,7 @@ exports[`<Label> for running ramp, renders: duration, distance, %pace-range, pac
 </div>
 `;
 
-exports[`<Label> for running, renders: duration, distance, %pace, pace type 1`] = `
+exports[`<Tooltip> for running, renders: duration, distance, %pace, pace type 1`] = `
 .c0 {
   position: absolute;
   z-index: 100;

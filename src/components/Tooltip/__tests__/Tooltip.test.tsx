@@ -1,5 +1,5 @@
 import React from 'react';
-import Label from '../Label';
+import Tooltip from '../Tooltip';
 import renderer from 'react-test-renderer';
 import { PaceType } from '../../../types/PaceType';
 import intervalFactory from '../../../interval/intervalFactory';
@@ -20,12 +20,12 @@ jest.mock('@fortawesome/free-solid-svg-icons', () => ({
   faRuler: "faRuler",
 }));
 
-describe('<Label>', () => {
+describe('<Tooltip>', () => {
   test('for cycling, renders: duration, power, w/kg, %FTP, cadence', () => {
     const mode = createMode({sportType: "bike", ftp: 200, weight: 75, runningTimes: [], lengthType: "time"});
     const interval = intervalFactory.steady({ length: new Duration(100), intensity: 1.25, cadence: 0 }, mode);
     const component = renderer.create(
-      <Label interval={interval} mode={mode} onCadenceChange={() => {}} />
+      <Tooltip interval={interval} mode={mode} onCadenceChange={() => {}} />
     );
     expect(component).toMatchSnapshot();
   });
@@ -34,7 +34,7 @@ describe('<Label>', () => {
     const mode = createMode({sportType: "bike", ftp: 200, weight: 75, runningTimes: [], lengthType: "time"});
     const interval = intervalFactory.ramp({ length: new Duration(100), startIntensity: 0.5, endIntensity: 1.0, cadence: 0 }, mode);
     const component = renderer.create(
-      <Label interval={interval} mode={mode} onCadenceChange={() => {}} />
+      <Tooltip interval={interval} mode={mode} onCadenceChange={() => {}} />
     );
     expect(component).toMatchSnapshot();
   });
@@ -43,7 +43,7 @@ describe('<Label>', () => {
     const mode = createMode({sportType: "run", ftp: 1234, weight: 75, runningTimes: [0, 0, 1000, 0, 0], lengthType: "time"});
     const interval = intervalFactory.steady({ length: new Duration(100), intensity: 1.25, cadence: 0, pace: PaceType.tenKm }, mode);
     const component = renderer.create(
-      <Label interval={interval} mode={mode} onCadenceChange={() => {}} />
+      <Tooltip interval={interval} mode={mode} onCadenceChange={() => {}} />
     );
     expect(component).toMatchSnapshot();
   });
@@ -54,7 +54,7 @@ describe('<Label>', () => {
     // and expecting to get the same 1:40 duration calculated from it
     const interval = intervalFactory.steady({ length: new Distance(1250), intensity: 1.25, cadence: 0, pace: PaceType.tenKm }, mode);
     const component = renderer.create(
-      <Label interval={interval} mode={mode} onCadenceChange={() => {}} />
+      <Tooltip interval={interval} mode={mode} onCadenceChange={() => {}} />
     );
     expect(component).toMatchSnapshot();
   });
@@ -63,7 +63,7 @@ describe('<Label>', () => {
     const mode = createMode({sportType: "run", ftp: 1234, weight: 75, runningTimes: [0, 0, 1000, 0, 0], lengthType: "time"});
     const interval = intervalFactory.ramp({ length: new Duration(100), startIntensity: 0.5, endIntensity: 1.0, cadence: 0, pace: PaceType.tenKm }, mode);
     const component = renderer.create(
-      <Label interval={interval} mode={mode} onCadenceChange={() => {}} />
+      <Tooltip interval={interval} mode={mode} onCadenceChange={() => {}} />
     );
     expect(component).toMatchSnapshot();
   });

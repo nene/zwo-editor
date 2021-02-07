@@ -1,31 +1,31 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBolt, faClock, faRuler } from '@fortawesome/free-solid-svg-icons'
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBolt, faClock, faRuler } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
-import { FreeInterval, RampInterval, SteadyInterval } from '../../types/Interval'
-import { WorkoutMode } from '../../modes/WorkoutMode'
-import BikeMode from '../../modes/BikeMode'
-import RunMode from '../../modes/RunMode'
-import * as format from '../../utils/format'
+import { FreeInterval, RampInterval, SteadyInterval } from '../../types/Interval';
+import { WorkoutMode } from '../../modes/WorkoutMode';
+import BikeMode from '../../modes/BikeMode';
+import RunMode from '../../modes/RunMode';
+import * as format from '../../utils/format';
 
-interface LabelProps {
+interface TooltipProps {
   interval: SteadyInterval | RampInterval | FreeInterval;
   mode: WorkoutMode;
   onCadenceChange: (cadence: number) => void;
 }
 
-const Label = ({ mode, ...props }: LabelProps) => {
+const Tooltip = ({ mode, ...props }: TooltipProps) => {
   return (
-    <LabelContainer>
+    <TooltipContainer>
       <div>
         <FontAwesomeIcon icon={faClock} fixedWidth /> {format.duration(mode.intervalDuration(props.interval))}
       </div>
       {mode instanceof BikeMode ? <BikeData mode={mode} {...props} /> : <RunData mode={mode} {...props} />}
-    </LabelContainer>
+    </TooltipContainer>
   );
 };
 
-const LabelContainer = styled.div`
+const TooltipContainer = styled.div`
   position: absolute;
   z-index: 100;
   top: -95px;
@@ -40,7 +40,7 @@ const LabelContainer = styled.div`
   padding: 5px;
 `;
 
-function BikeData({ interval, mode, onCadenceChange }: LabelProps & { mode: BikeMode }) {
+function BikeData({ interval, mode, onCadenceChange }: TooltipProps & { mode: BikeMode }) {
   return (
     <>
       {interval.type === "steady" &&
@@ -71,7 +71,7 @@ function BikeData({ interval, mode, onCadenceChange }: LabelProps & { mode: Bike
   );
 }
 
-function RunData({ interval, mode }: LabelProps & { mode: RunMode }) {
+function RunData({ interval, mode }: TooltipProps & { mode: RunMode }) {
   return (
     <>
       <div>
@@ -120,4 +120,4 @@ const CadenceInput = styled.input.attrs<CadenceInputProps>((props) => ({
   flex: 1;
 `;
 
-export default Label
+export default Tooltip;

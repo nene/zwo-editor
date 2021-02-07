@@ -201,7 +201,7 @@ exports[`<SteadyBar> renders 1`] = `
 </div>
 `;
 
-exports[`<SteadyBar> renders with Label when selected 1`] = `
+exports[`<SteadyBar> renders with Tooltip when selected 1`] = `
 .c0 {
   position: relative;
 }
@@ -267,7 +267,7 @@ exports[`<SteadyBar> renders with Label when selected 1`] = `
     }
   }
 >
-  <Label
+  <Tooltip
     interval={
       Object {
         "cadence": 0,

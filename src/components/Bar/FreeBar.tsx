@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components';
 import { Resizable } from 're-resizable'
 import 'moment-duration-format'
-import Label from '../Label/Label'
+import Tooltip from '../Tooltip/Tooltip'
 import { FreeInterval } from '../../types/Interval'
 import { durationMultiplier } from './multipliers'
 import { WorkoutMode } from '../../modes/WorkoutMode'
@@ -28,7 +28,7 @@ interface FreeBarProps {
 const FreeBar = ({interval, mode, ...props}: FreeBarProps) => {
   const [width, setWidth] = useState(mode.lengthToWidth(interval.length))
 
-  const [showLabel, setShowLabel] = useState(false)
+  const [showTooltip, setShowTooltip] = useState(false)
 
   const handleCadenceChange = (cadence: number) => {
     props.onChange({ ...interval, cadence })
@@ -48,13 +48,13 @@ const FreeBar = ({interval, mode, ...props}: FreeBarProps) => {
 
   return (
     <Container
-      onMouseEnter={() => setShowLabel(true)}
-      onMouseLeave={() => setShowLabel(false)}
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
       style={props.selected ? {zIndex:1}: {}}
       onClick={() => props.onClick(interval.id)}
     >
-      {(props.selected || showLabel) &&
-        <Label
+      {(props.selected || showTooltip) &&
+        <Tooltip
           interval={interval}
           mode={mode}
           onCadenceChange={(cadence: number)=> handleCadenceChange(cadence)}

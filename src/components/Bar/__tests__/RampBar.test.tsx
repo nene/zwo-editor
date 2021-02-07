@@ -8,8 +8,8 @@ import { Duration } from '../../../types/Length';
 
 const MockReact = React;
 
-jest.mock('../../Label/Label', () => (props: any) =>
-  MockReact.createElement("Label", props));
+jest.mock('../../Tooltip/Tooltip', () => (props: any) =>
+  MockReact.createElement("Tooltip", props));
 
 jest.mock('re-resizable', () => ({
   Resizable: (props: any) => MockReact.createElement("Resizable", props),
@@ -41,7 +41,7 @@ describe('<SteadyBar>', () => {
     expect(component).toMatchSnapshot();
   });
 
-  it('renders with Label when selected', () => {
+  it('renders with Tooltip when selected', () => {
     const mode = createMode({sportType: "bike", ftp: 250, weight: 75, runningTimes: [], lengthType: "time"});
     const interval = intervalFactory.ramp({
       length: new Duration(50),

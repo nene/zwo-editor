@@ -51,7 +51,7 @@ exports[`<SteadyBar> renders 1`] = `
 </div>
 `;
 
-exports[`<SteadyBar> renders with Label when selected and showLabel=true 1`] = `
+exports[`<SteadyBar> renders with Tooltip when selected and showTooltip=true 1`] = `
 .c0 {
   position: relative;
 }
@@ -72,7 +72,7 @@ exports[`<SteadyBar> renders with Label when selected and showLabel=true 1`] = `
     }
   }
 >
-  <Label
+  <Tooltip
     interval={
       Object {
         "cadence": 0,
@@ -129,7 +129,7 @@ exports[`<SteadyBar> renders with Label when selected and showLabel=true 1`] = `
 </div>
 `;
 
-exports[`<SteadyBar> renders without Label when selected, but showLabel=false 1`] = `
+exports[`<SteadyBar> renders without Tooltip when selected, but showTooltip=false 1`] = `
 .c0 {
   position: relative;
 }

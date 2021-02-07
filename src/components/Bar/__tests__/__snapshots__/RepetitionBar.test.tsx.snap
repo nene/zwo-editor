@@ -62,7 +62,7 @@ exports[`<RepetitionBar> renders using SteadyBar components 1`] = `
       onChange={[Function]}
       onClick={[Function]}
       selected={false}
-      showLabel={true}
+      showTooltip={true}
     />
     <SteadyBar
       interval={
@@ -88,7 +88,7 @@ exports[`<RepetitionBar> renders using SteadyBar components 1`] = `
       onChange={[Function]}
       onClick={[Function]}
       selected={false}
-      showLabel={false}
+      showTooltip={false}
     />
     <SteadyBar
       interval={
@@ -114,7 +114,7 @@ exports[`<RepetitionBar> renders using SteadyBar components 1`] = `
       onChange={[Function]}
       onClick={[Function]}
       selected={false}
-      showLabel={false}
+      showTooltip={false}
     />
     <SteadyBar
       interval={
@@ -140,7 +140,7 @@ exports[`<RepetitionBar> renders using SteadyBar components 1`] = `
       onChange={[Function]}
       onClick={[Function]}
       selected={false}
-      showLabel={false}
+      showTooltip={false}
     />
     <SteadyBar
       interval={
@@ -166,7 +166,7 @@ exports[`<RepetitionBar> renders using SteadyBar components 1`] = `
       onChange={[Function]}
       onClick={[Function]}
       selected={false}
-      showLabel={false}
+      showTooltip={false}
     />
     <SteadyBar
       interval={
@@ -192,7 +192,7 @@ exports[`<RepetitionBar> renders using SteadyBar components 1`] = `
       onChange={[Function]}
       onClick={[Function]}
       selected={false}
-      showLabel={true}
+      showTooltip={true}
     />
   </div>
 </div>
