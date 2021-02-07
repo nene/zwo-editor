@@ -1,12 +1,17 @@
 import React from "react";
-import "./XAxis.css";
+import styled from "styled-components";
+import { XAxis, XAxisValue } from "./XAxis";
 
 const DistanceAxis = ({ width }: { width: number }) => (
-  <div className="x-axis x-axis-distance" style={{ width }}>
+  <XAxis width={width}>
     {[...new Array(44)].map((e, i) => (
-      <span key={i}>{i}K</span>
+      <DistanceAxisValue key={i}>{i}K</DistanceAxisValue>
     ))}
-  </div>
+  </XAxis>
 );
+
+const DistanceAxisValue = styled(XAxisValue)`
+  width: 100px;
+`;
 
 export default DistanceAxis;

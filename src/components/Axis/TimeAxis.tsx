@@ -1,5 +1,6 @@
 import React from "react";
-import "./XAxis.css";
+import styled from "styled-components";
+import { XAxis, XAxisValue } from "./XAxis";
 
 const hoursBy10Minutes = (hours: number): string[] =>
   [...new Array(hours)].flatMap((v, h) =>
@@ -7,11 +8,15 @@ const hoursBy10Minutes = (hours: number): string[] =>
   );
 
 const TimeAxis = ({ width }: { width: number }) => (
-  <div className="x-axis x-axis-time" style={{ width }}>
+  <XAxis width={width}>
     {hoursBy10Minutes(6).map((time) => (
-      <span key={time}>{time}</span>
+      <TimeAxisValue key={time}>{time}</TimeAxisValue>
     ))}
-  </div>
+  </XAxis>
 );
+
+const TimeAxisValue = styled(XAxisValue)`
+  width: 200px;
+`;
 
 export default TimeAxis;
