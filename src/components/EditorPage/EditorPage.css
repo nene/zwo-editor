@@ -12,11 +12,6 @@ a {
   min-width: 50px;
 }
 
-.btn-icon {
-  width: 30px;
-  margin: 0 auto;
-}
-
 .btn-primary {
   background-color: #00C46A;
   color: white;

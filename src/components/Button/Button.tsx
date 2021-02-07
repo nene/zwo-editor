@@ -8,11 +8,6 @@ const Button = styled.button`
   font-size: 13px;
   border-radius: 5px;
   min-width: 50px;
-
-  & > svg {
-    display: block;
-    margin: 0 auto;
-  }
 `;
 
 export default Button;

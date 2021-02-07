@@ -12,7 +12,6 @@ import NumberField from '../Editor/NumberField'
 import UploadButton from './UploadButton'
 import IconButton from '../Button/IconButton'
 import ColorButton from '../Button/ColorButton'
-import Button from '../Button/Button'
 import { selectSportType } from '../../rdx/state/meta'
 import { RootState } from '../../rdx/store';
 import { selectFtp, selectWeight, setFtp, setWeight } from '../../rdx/state/athlete';
@@ -23,6 +22,7 @@ import { clearWorkout, loadWorkout } from '../../rdx/state/workout';
 import DownloadButton from './DownloadButton';
 import styled from 'styled-components';
 import { ConnectedProps } from '../../types/ConnectedProps';
+import SvgButton from '../Button/SvgButton';
 
 const mapStateToProps = (state: RootState) => ({
   sportType: selectSportType(state),
@@ -55,12 +55,12 @@ const Toolbar = ({mode, addInterval, addInstruction, ...props}: ToolbarProps) =>
           <ColorButton color={ZoneColor.RED} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z6.min }, mode))}>Z6</ColorButton>
         </div>
         :
-        <Button onClick={() => addInterval(intervalFactory.steady({}, mode))}><SteadyLogo className="btn-icon" /> Steady Pace</Button>
+        <SvgButton svg={SteadyLogo} onClick={() => addInterval(intervalFactory.steady({}, mode))}>Steady Pace</SvgButton>
       }
 
-      <Button onClick={() => addInterval(intervalFactory.ramp({ startIntensity: 0.25, endIntensity: 0.75 }, mode))}><WarmupLogo className="btn-icon" /> Warm up</Button>
-      <Button onClick={() => addInterval(intervalFactory.ramp({ startIntensity: 0.75, endIntensity: 0.25 }, mode))}><WarmdownLogo className="btn-icon" /> Cool down</Button>
-      <Button onClick={() => addInterval(intervalFactory.repetition({}, mode))}><IntervalLogo className="btn-icon" /> Interval</Button>
+      <SvgButton svg={WarmupLogo} onClick={() => addInterval(intervalFactory.ramp({ startIntensity: 0.25, endIntensity: 0.75 }, mode))}>Warm up</SvgButton>
+      <SvgButton svg={WarmdownLogo} onClick={() => addInterval(intervalFactory.ramp({ startIntensity: 0.75, endIntensity: 0.25 }, mode))}>Cool down</SvgButton>
+      <SvgButton svg={IntervalLogo} onClick={() => addInterval(intervalFactory.repetition({}, mode))}>Interval</SvgButton>
       {props.sportType === "bike" &&
         <IconButton icon={faBicycle} onClick={() => addInterval(intervalFactory.free({}, mode))}>Free Ride</IconButton>
       }
