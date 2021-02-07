@@ -7,6 +7,7 @@ import { PaceType } from '../../types/PaceType';
 import { runningDistances } from '../../types/runningDistances';
 import styled, { createGlobalStyle } from 'styled-components';
 import { Column } from '../Layout/Column';
+import { Label } from '../Label/Label';
 
 interface RunningTimesEditorProps {
   times: RunningTimes;
@@ -63,7 +64,7 @@ const Col = styled(Column)`
 
 const RunTimeInput: React.FC<{time: number, onChange: (time: number) => void}> = ({time, onChange, children}) => (
   <Col>
-    <label><abbr title="hh:mm:ss">{children}</abbr></label>
+    <Label><abbr title="hh:mm:ss">{children}</abbr></Label>
     <TimePickerStyleOverrides />
     <StyledTimePicker
       value={time === 0 ? undefined : moment.utc(time * 1000)}

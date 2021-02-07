@@ -4,6 +4,7 @@ import React from "react";
 import Switch from "react-switch";
 import styled from "styled-components";
 import { Column } from "../Layout/Column";
+import { Label } from "../Label/Label";
 
 interface LeftRightToggleProps<TLeft,TRight> {
   label: string;
@@ -19,7 +20,7 @@ const COLOR = "#00C46A";
 
 const LeftRightToggle = <TLeft,TRight>({ label, leftValue, rightValue, leftIcon, rightIcon, selected, onChange }: LeftRightToggleProps<TLeft,TRight>) => (
   <Col>
-    <label>{label}</label>
+    <Label>{label}</Label>
     <LeftRight>
       <ToggleIcon
         active={selected === leftValue}

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { selectAuthor, selectDescription, selectName, selectTags, setName, setAuthor, setDescription, setTags } from "../../rdx/state/meta";
 import { RootState } from "../../rdx/store";
 import { ConnectedProps } from "../../types/ConnectedProps";
+import { Label } from "../Label/Label";
 import Checkbox from "./Checkbox";
 
 const DEFAULT_TAGS = ["Recovery", "Intervals", "FTP", "TT"]
@@ -28,19 +29,19 @@ function SaveForm(props: SaveFormProps) {
     <div>
       <h2>Workout metadata</h2>
       <div className="form-control">
-        <label htmlFor="name">Workout Title</label>
+        <Label htmlFor="name">Workout Title</Label>
         <input type="text" name="name" placeholder="Workout title" value={props.name} onChange={(e) => props.setName(e.target.value)} />
       </div>
       <div className="form-control">
-        <label htmlFor="description">Workout description</label>
+        <Label htmlFor="description">Workout description</Label>
         <textarea name="description" placeholder="Workout description" value={props.description} onChange={(e) => props.setDescription(e.target.value)}></textarea>
       </div>
       <div className="form-control">
-        <label htmlFor="author">Workout Author</label>
+        <Label htmlFor="author">Workout Author</Label>
         <input type="text" name="author" placeholder="Workout Author" value={props.author} onChange={(e) => props.setAuthor(e.target.value)} />
       </div>
       <div className="form-control">
-        <label htmlFor="author">Workout Tags</label>
+        <Label htmlFor="author">Workout Tags</Label>
         {DEFAULT_TAGS.map(tagName => (
           <Checkbox
             key={tagName}

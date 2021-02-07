@@ -1,9 +1,10 @@
 import React from "react";
+import { Label } from "../Label/Label";
 import './Checkbox.css'
 
 const Checkbox = (props: { label: string, isSelected: boolean, onCheckboxChange: Function }) => (
   <div className="form-check">
-    <label>
+    <Label>
       <input
         type="checkbox"
         name={props.label}
@@ -12,7 +13,7 @@ const Checkbox = (props: { label: string, isSelected: boolean, onCheckboxChange:
         className="form-check-input"
       />
       {props.label}
-    </label>
+    </Label>
   </div>
 );
 

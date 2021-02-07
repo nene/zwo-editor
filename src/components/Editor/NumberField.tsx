@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Label } from "../Label/Label";
 import { Column } from "../Layout/Column";
 
 // Displays workut name, description & author
@@ -14,7 +15,7 @@ interface NumberFieldProps {
 const NumberField: React.FC<NumberFieldProps> = ({ name, label, value, onChange}) => {
   return (
     <Col>
-      <label htmlFor={name}>{label}</label>
+      <Label htmlFor={name}>{label}</Label>
       <TextInput
         type="number"
         name={name}
