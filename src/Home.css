@@ -22,6 +22,36 @@ a {
   text-decoration: none;
 }
 
+.btn {
+  display: inline-block;
+  background-color: white;
+  border: 1px solid lightgray;
+  text-align: center;
+  font-size: 13px;
+  border-radius: 5px;
+  min-width: 50px;
+}
+
+.btn-primary {
+  background-color: #00C46A;
+  color: white;
+  padding: 5px 20px;
+}
+
+.btn-primary:hover {
+  background-color: #27ae60;
+}
+
+.btn-secondary {
+  background-color: white;
+  color: black;
+  padding: 5px 20px;
+}
+
+.btn-secondary:hover {
+  background-color: #EEEEEE;
+}
+
 .btn-xl {
   font-size: 20px;
   padding: 20px 60px;
