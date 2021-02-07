@@ -1,3 +1,19 @@
 html, body, #root {
   height: 100%;
 }
+
+h2 {
+  font-size: 34px;
+  font-weight: 200;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-weight: 500;
+}
+
+a {
+  text-decoration: none;
+  color: #00C46A;
+}

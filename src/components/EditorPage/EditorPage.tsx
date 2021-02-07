@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import './EditorPage.css';
 import Popup from '../Popup/Popup';
 import Footer from '../Footer/Footer';
 import { faBiking, faRunning, faClock, faRuler } from '@fortawesome/free-solid-svg-icons';
