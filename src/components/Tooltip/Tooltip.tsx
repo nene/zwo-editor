@@ -1,12 +1,16 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBolt, faClock, faRuler } from '@fortawesome/free-solid-svg-icons';
-import styled from 'styled-components';
-import { FreeInterval, RampInterval, SteadyInterval } from '../../types/Interval';
-import { WorkoutMode } from '../../modes/WorkoutMode';
-import BikeMode from '../../modes/BikeMode';
-import RunMode from '../../modes/RunMode';
-import * as format from '../../utils/format';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBolt, faClock, faRuler } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+import {
+  FreeInterval,
+  RampInterval,
+  SteadyInterval,
+} from "../../types/Interval";
+import { WorkoutMode } from "../../modes/WorkoutMode";
+import BikeMode from "../../modes/BikeMode";
+import RunMode from "../../modes/RunMode";
+import * as format from "../../utils/format";
 
 interface TooltipProps {
   interval: SteadyInterval | RampInterval | FreeInterval;
@@ -18,9 +22,14 @@ const Tooltip = ({ mode, ...props }: TooltipProps) => {
   return (
     <TooltipContainer>
       <div>
-        <FontAwesomeIcon icon={faClock} fixedWidth /> {format.duration(mode.intervalDuration(props.interval))}
+        <FontAwesomeIcon icon={faClock} fixedWidth />{" "}
+        {format.duration(mode.intervalDuration(props.interval))}
       </div>
-      {mode instanceof BikeMode ? <BikeData mode={mode} {...props} /> : <RunData mode={mode} {...props} />}
+      {mode instanceof BikeMode ? (
+        <BikeData mode={mode} {...props} />
+      ) : (
+        <RunData mode={mode} {...props} />
+      )}
     </TooltipContainer>
   );
 };
@@ -36,36 +45,48 @@ const TooltipContainer = styled.div`
   border-radius: 5px;
   margin: 5px 0;
   text-align: center;
-  font-size: 14px; 
+  font-size: 14px;
   padding: 5px;
 `;
 
-function BikeData({ interval, mode, onCadenceChange }: TooltipProps & { mode: BikeMode }) {
+function BikeData({
+  interval,
+  mode,
+  onCadenceChange,
+}: TooltipProps & { mode: BikeMode }) {
   return (
     <>
-      {interval.type === "steady" &&
+      {interval.type === "steady" && (
         <>
           <div>
-            <FontAwesomeIcon icon={faBolt} fixedWidth /> {format.power(mode.power(interval.intensity))}
+            <FontAwesomeIcon icon={faBolt} fixedWidth />{" "}
+            {format.power(mode.power(interval.intensity))}
           </div>
           <div>
-            {format.wkg(mode.wkg(interval.intensity))} &middot; {format.percentage(interval.intensity)} FTP
+            {format.wkg(mode.wkg(interval.intensity))} &middot;{" "}
+            {format.percentage(interval.intensity)} FTP
           </div>
         </>
-      }
-      {interval.type === "ramp" &&
+      )}
+      {interval.type === "ramp" && (
         <>
           <div>
-            <FontAwesomeIcon icon={faBolt} fixedWidth /> {format.power(mode.power(interval.startIntensity))} - {format.power(mode.power(interval.endIntensity))}
+            <FontAwesomeIcon icon={faBolt} fixedWidth />{" "}
+            {format.power(mode.power(interval.startIntensity))} -{" "}
+            {format.power(mode.power(interval.endIntensity))}
           </div>
           <div>
-            {format.percentage(interval.startIntensity)} - {format.percentage(interval.endIntensity)} FTP
+            {format.percentage(interval.startIntensity)} -{" "}
+            {format.percentage(interval.endIntensity)} FTP
           </div>
         </>
-      }
+      )}
       <CadenceRow>
         <CadenceLabel>Cadence</CadenceLabel>
-        <CadenceInput cadence={interval.cadence} onCadenceChange={onCadenceChange} />
+        <CadenceInput
+          cadence={interval.cadence}
+          onCadenceChange={onCadenceChange}
+        />
       </CadenceRow>
     </>
   );
@@ -75,18 +96,22 @@ function RunData({ interval, mode }: TooltipProps & { mode: RunMode }) {
   return (
     <>
       <div>
-        <FontAwesomeIcon icon={faRuler} fixedWidth /> {format.distance(mode.intervalDistance(interval))}
+        <FontAwesomeIcon icon={faRuler} fixedWidth />{" "}
+        {format.distance(mode.intervalDistance(interval))}
       </div>
-      {interval.type === "steady" &&
+      {interval.type === "steady" && (
         <div>
-          {format.percentage(interval.intensity)} {format.shortPaceName(interval.pace)}
+          {format.percentage(interval.intensity)}{" "}
+          {format.shortPaceName(interval.pace)}
         </div>
-      }
-      {interval.type === "ramp" &&
+      )}
+      {interval.type === "ramp" && (
         <div>
-          {format.percentage(interval.startIntensity)} to {format.percentage(interval.endIntensity)} {format.shortPaceName(interval.pace)}
+          {format.percentage(interval.startIntensity)} to{" "}
+          {format.percentage(interval.endIntensity)}{" "}
+          {format.shortPaceName(interval.pace)}
         </div>
-      }
+      )}
     </>
   );
 }
@@ -100,16 +125,23 @@ const CadenceLabel = styled.label`
   flex: 1;
 `;
 
-type CadenceInputProps = { cadence: number, onCadenceChange: (v: number) => void };
+type CadenceInputProps = {
+  cadence: number;
+  onCadenceChange: (v: number) => void;
+};
 
 const CadenceInput = styled.input.attrs<CadenceInputProps>((props) => ({
   type: "number",
   min: "40",
   max: "150",
   step: "5",
-  value: props.cadence || '',
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => {props.onCadenceChange(parseInt(e.target.value))},
-  onClick: (e: React.MouseEvent<HTMLInputElement>)=> {e.stopPropagation()},
+  value: props.cadence || "",
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+    props.onCadenceChange(parseInt(e.target.value));
+  },
+  onClick: (e: React.MouseEvent<HTMLInputElement>) => {
+    e.stopPropagation();
+  },
 }))<CadenceInputProps>`
   background-color: rgba(255, 255, 255, 0.1);
   color: white;

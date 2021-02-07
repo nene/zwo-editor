@@ -1,10 +1,8 @@
-const chromium = require('chrome-aws-lambda');
-
+const chromium = require("chrome-aws-lambda");
 
 exports.handler = async (event, context, callback) => {
-
   const browser = await chromium.puppeteer.launch();
-  
+
   const page = await browser.newPage();
 
   // Set the viewport to your preferred og:image size
@@ -15,14 +13,15 @@ exports.handler = async (event, context, callback) => {
     deviceScaleFactor: 1,
   });
 
-  
-  await page.goto('http://localhost:8888/editor/xvb7zq2cmo', { "waitUntil": "networkidle0" });  
-  const element = await page.$('#editor');
+  await page.goto("http://localhost:8888/editor/xvb7zq2cmo", {
+    waitUntil: "networkidle0",
+  });
+  const element = await page.$("#editor");
 
-  await element.screenshot({ 
-    path: 'xvb7zq2cmo.jpeg',
-    type: 'jpeg',
-    quality: 100
+  await element.screenshot({
+    path: "xvb7zq2cmo.jpeg",
+    type: "jpeg",
+    quality: 100,
   });
 
   await browser.close();
@@ -30,8 +29,7 @@ exports.handler = async (event, context, callback) => {
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: `Complete screenshot`
-    })
-  }
-
-}
+      message: `Complete screenshot`,
+    }),
+  };
+};

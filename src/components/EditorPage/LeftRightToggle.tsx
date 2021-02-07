@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { Column } from "../Layout/Column";
 import { Label } from "../Label/Label";
 
-interface LeftRightToggleProps<TLeft,TRight> {
+interface LeftRightToggleProps<TLeft, TRight> {
   label: string;
   leftValue: TLeft;
   rightValue: TRight;
@@ -18,7 +18,15 @@ interface LeftRightToggleProps<TLeft,TRight> {
 
 const COLOR = "#00C46A";
 
-const LeftRightToggle = <TLeft,TRight>({ label, leftValue, rightValue, leftIcon, rightIcon, selected, onChange }: LeftRightToggleProps<TLeft,TRight>) => (
+const LeftRightToggle = <TLeft, TRight>({
+  label,
+  leftValue,
+  rightValue,
+  leftIcon,
+  rightIcon,
+  selected,
+  onChange,
+}: LeftRightToggleProps<TLeft, TRight>) => (
   <Col>
     <Label>{label}</Label>
     <LeftRight>
@@ -29,7 +37,9 @@ const LeftRightToggle = <TLeft,TRight>({ label, leftValue, rightValue, leftIcon,
         fixedWidth
       />
       <Switch
-        onChange={() => onChange(selected === leftValue ? rightValue : leftValue)}
+        onChange={() =>
+          onChange(selected === leftValue ? rightValue : leftValue)
+        }
         checked={selected === rightValue}
         checkedIcon={false}
         uncheckedIcon={false}
@@ -47,7 +57,7 @@ const LeftRightToggle = <TLeft,TRight>({ label, leftValue, rightValue, leftIcon,
 );
 
 const Col = styled(Column)`
-  max-width: 120px;  
+  max-width: 120px;
   padding: 0 10px;
 `;
 
@@ -57,9 +67,9 @@ const LeftRight = styled.div`
   color: lightgray;
 `;
 
-const ToggleIcon = styled(FontAwesomeIcon)<{active: boolean}>`
+const ToggleIcon = styled(FontAwesomeIcon)<{ active: boolean }>`
   padding: 5px;
-  color: ${({active}) => active ? '#00C46A' : 'inherit'};
+  color: ${({ active }) => (active ? "#00C46A" : "inherit")};
 `;
 
 export default LeftRightToggle;

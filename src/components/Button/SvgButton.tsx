@@ -2,7 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import Button from "./Button";
 
-type SvgComponent = React.FunctionComponent<React.SVGProps<SVGSVGElement> & { title?: string }>;
+type SvgComponent = React.FunctionComponent<
+  React.SVGProps<SVGSVGElement> & { title?: string }
+>;
 
 interface SvgButtonProps {
   svg: SvgComponent;

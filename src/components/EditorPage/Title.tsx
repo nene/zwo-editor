@@ -10,12 +10,17 @@ interface TitleProps {
   onClick: () => void;
 }
 
-const Title: React.FC<TitleProps> = ({ name, author, description, onClick }) => {
+const Title: React.FC<TitleProps> = ({
+  name,
+  author,
+  description,
+  onClick,
+}) => {
   return (
     <Container onClick={onClick}>
       <Heading>{name}</Heading>
       <div>{description}</div>
-      <Author>{author ? `by ${author}` : ''}</Author>
+      <Author>{author ? `by ${author}` : ""}</Author>
     </Container>
   );
 };

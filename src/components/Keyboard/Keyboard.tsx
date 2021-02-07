@@ -13,7 +13,10 @@ interface KeyboardProps {
 
 const Keyboard: React.FC<KeyboardProps> = (props) => {
   function handleKeyPress(event: React.KeyboardEvent<HTMLDivElement>) {
-    if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {
+    if (
+      event.target instanceof HTMLInputElement ||
+      event.target instanceof HTMLTextAreaElement
+    ) {
       // Ignore key presses coming from input elements
       return;
     }
@@ -22,7 +25,7 @@ const Keyboard: React.FC<KeyboardProps> = (props) => {
       case 8:
         props.onBackspacePress();
         // Prevent navigation to previous page
-        event.preventDefault()
+        event.preventDefault();
         break;
       case 37:
         props.onLeftPress();
@@ -41,7 +44,9 @@ const Keyboard: React.FC<KeyboardProps> = (props) => {
 
   return (
     // Adding tabIndex allows div element to receive keyboard events
-    <div className={props.className} onKeyDown={handleKeyPress} tabIndex={0}>{props.children}</div>
+    <div className={props.className} onKeyDown={handleKeyPress} tabIndex={0}>
+      {props.children}
+    </div>
   );
 };
 

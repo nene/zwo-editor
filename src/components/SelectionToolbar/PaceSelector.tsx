@@ -8,7 +8,11 @@ interface PaceSelectorProps {
 }
 
 const PaceSelector = ({ value, onChange }: PaceSelectorProps) => (
-  <StyledSelect name="pace" value={value} onChange={(e) => onChange(parseInt(e.target.value))}>
+  <StyledSelect
+    name="pace"
+    value={value}
+    onChange={(e) => onChange(parseInt(e.target.value))}
+  >
     <option value="0">1 Mile Pace</option>
     <option value="1">5K Pace</option>
     <option value="2">10K Pace</option>

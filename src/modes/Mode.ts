@@ -1,4 +1,8 @@
-import { distanceMultiplier, durationMultiplier, intensityMultiplier } from "../components/Bar/multipliers";
+import {
+  distanceMultiplier,
+  durationMultiplier,
+  intensityMultiplier,
+} from "../components/Bar/multipliers";
 import { Distance, Duration, Length } from "../types/Length";
 import { LengthType } from "../types/LengthType";
 import { SportType } from "../types/SportType";
@@ -22,7 +26,10 @@ export default abstract class Mode {
     }
   }
 
-  widthToLength(width: number, precision: Precision = { meters: 200, seconds: 5 }): Length {
+  widthToLength(
+    width: number,
+    precision: Precision = { meters: 200, seconds: 5 }
+  ): Length {
     if (this.lengthType === "time") {
       return new Duration(floor(width * durationMultiplier, precision.seconds));
     } else {
@@ -37,5 +44,4 @@ export default abstract class Mode {
   heightToIntensity(height: number): number {
     return height / intensityMultiplier;
   }
-
 }

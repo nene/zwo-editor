@@ -12,7 +12,12 @@ interface NumberFieldProps {
   onChange: (value: number) => void;
 }
 
-const NumberField: React.FC<NumberFieldProps> = ({ name, label, value, onChange}) => {
+const NumberField: React.FC<NumberFieldProps> = ({
+  name,
+  label,
+  value,
+  onChange,
+}) => {
   return (
     <Col>
       <Label htmlFor={name}>{label}</Label>
@@ -28,7 +33,7 @@ const NumberField: React.FC<NumberFieldProps> = ({ name, label, value, onChange}
 
 const TextInput = styled.input`
   font-size: 20px;
-  border: 1px solid lightgray;  
+  border: 1px solid lightgray;
   text-align: center;
 `;
 

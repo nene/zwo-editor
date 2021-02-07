@@ -25,10 +25,15 @@ const UploadButton: React.FC<UploadButtonProps> = ({ mode, onUpload }) => {
         accept=".xml,.zwo"
         id="contained-button-file"
         type="file"
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
         onChange={(e) => handleUpload(e.target.files![0])}
       />
-      <IconButton icon={faUpload} onClick={() => document.getElementById("contained-button-file")!.click()}>
+      <IconButton
+        icon={faUpload}
+        onClick={() =>
+          document.getElementById("contained-button-file")!.click()
+        }
+      >
         Upload
       </IconButton>
     </>

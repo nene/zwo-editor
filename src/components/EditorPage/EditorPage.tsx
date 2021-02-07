@@ -1,30 +1,56 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import Popup from '../Popup/Popup';
-import Footer from '../Footer/Footer';
-import { faBiking, faRunning, faClock, faRuler } from '@fortawesome/free-solid-svg-icons';
-import SaveForm from '../Forms/SaveForm';
-import Head from '../Head/Head';
-import RunningTimesEditor from './RunningTimesEditor';
-import LeftRightToggle from './LeftRightToggle';
-import Keyboard from '../Keyboard/Keyboard';
-import Stats from './Stats';
-import Title from './Title';
-import { SportType } from '../../types/SportType';
-import { Duration } from '../../types/Length';
-import { LengthType } from '../../types/LengthType';
-import { selectAuthor, selectDescription, selectName, selectSportType, selectLengthType, setSportType, setLengthType } from '../../rdx/state/meta';
-import { RootState } from '../../rdx/store';
-import { selectFtp, selectRunningTimes, setRunningTimes } from '../../rdx/state/athlete';
-import { selectIntervals, adjustSelectedIntervalIntensity, adjustSelectedIntervalDuration, updateInterval, removeSelectedInterval } from '../../rdx/state/intervals';
-import { updateInstruction, removeInstruction } from '../../rdx/state/instructions';
-import { selectMode } from '../../rdx/state/mode';
-import { clearWorkout } from '../../rdx/state/workout';
-import Toolbar from '../Toolbar/Toolbar';
-import { ConnectedProps } from '../../types/ConnectedProps';
-import { clearSelection, setSelectedId } from '../../rdx/state/selectedId';
-import Editor from '../Editor/Editor';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import Popup from "../Popup/Popup";
+import Footer from "../Footer/Footer";
+import {
+  faBiking,
+  faRunning,
+  faClock,
+  faRuler,
+} from "@fortawesome/free-solid-svg-icons";
+import SaveForm from "../Forms/SaveForm";
+import Head from "../Head/Head";
+import RunningTimesEditor from "./RunningTimesEditor";
+import LeftRightToggle from "./LeftRightToggle";
+import Keyboard from "../Keyboard/Keyboard";
+import Stats from "./Stats";
+import Title from "./Title";
+import { SportType } from "../../types/SportType";
+import { Duration } from "../../types/Length";
+import { LengthType } from "../../types/LengthType";
+import {
+  selectAuthor,
+  selectDescription,
+  selectName,
+  selectSportType,
+  selectLengthType,
+  setSportType,
+  setLengthType,
+} from "../../rdx/state/meta";
+import { RootState } from "../../rdx/store";
+import {
+  selectFtp,
+  selectRunningTimes,
+  setRunningTimes,
+} from "../../rdx/state/athlete";
+import {
+  selectIntervals,
+  adjustSelectedIntervalIntensity,
+  adjustSelectedIntervalDuration,
+  updateInterval,
+  removeSelectedInterval,
+} from "../../rdx/state/intervals";
+import {
+  updateInstruction,
+  removeInstruction,
+} from "../../rdx/state/instructions";
+import { selectMode } from "../../rdx/state/mode";
+import { clearWorkout } from "../../rdx/state/workout";
+import Toolbar from "../Toolbar/Toolbar";
+import { ConnectedProps } from "../../types/ConnectedProps";
+import { clearSelection, setSelectedId } from "../../rdx/state/selectedId";
+import Editor from "../Editor/Editor";
+import styled from "styled-components";
 
 const mapStateToProps = (state: RootState) => ({
   name: selectName(state),
@@ -53,7 +79,10 @@ const mapDispatchToProps = {
   removeInstruction,
 };
 
-type EditorPageProps = ConnectedProps<typeof mapStateToProps, typeof mapDispatchToProps>;
+type EditorPageProps = ConnectedProps<
+  typeof mapStateToProps,
+  typeof mapDispatchToProps
+>;
 
 const EditorPage = ({
   name,
@@ -76,14 +105,22 @@ const EditorPage = ({
   const [savePopupIsVisile, setSavePopupVisibility] = useState(false);
 
   function switchSportType(newSportType: SportType) {
-    if (window.confirm(`Switching from ${sportType} to ${newSportType} will clear current workout. Are you sure?`)) {
+    if (
+      window.confirm(
+        `Switching from ${sportType} to ${newSportType} will clear current workout. Are you sure?`
+      )
+    ) {
       clearWorkout();
       setSportType(newSportType);
     }
   }
 
   function switchLengthType(newLengthType: LengthType) {
-    if (window.confirm(`Switching from ${lengthType} to ${newLengthType} will clear current workout. Are you sure?`)) {
+    if (
+      window.confirm(
+        `Switching from ${lengthType} to ${newLengthType} will clear current workout. Are you sure?`
+      )
+    ) {
       clearWorkout();
       setLengthType(newLengthType);
     }
@@ -99,17 +136,22 @@ const EditorPage = ({
     >
       <Head name={name} description={description} />
 
-      {savePopupIsVisile &&
+      {savePopupIsVisile && (
         <Popup width="500px" onClose={() => setSavePopupVisibility(false)}>
           <SaveForm />
         </Popup>
-      }
+      )}
       <Header>
-        <Title name={name} author={author} description={description} onClick={() => setSavePopupVisibility(true)} />
+        <Title
+          name={name}
+          author={author}
+          description={description}
+          onClick={() => setSavePopupVisibility(true)}
+        />
         <HeaderRight>
           <Stats intervals={intervals} ftp={ftp} mode={mode} />
-          {sportType === 'run' &&
-            <LeftRightToggle<"time","distance">
+          {sportType === "run" && (
+            <LeftRightToggle<"time", "distance">
               label="Duration Type"
               leftValue="time"
               rightValue="distance"
@@ -118,8 +160,8 @@ const EditorPage = ({
               selected={lengthType}
               onChange={switchLengthType}
             />
-          }
-          <LeftRightToggle<"bike","run">
+          )}
+          <LeftRightToggle<"bike", "run">
             label="Sport Type"
             leftValue="bike"
             rightValue="run"
@@ -130,7 +172,9 @@ const EditorPage = ({
           />
         </HeaderRight>
       </Header>
-      {sportType === "run" && <RunningTimesEditor times={runningTimes} onChange={setRunningTimes} />}
+      {sportType === "run" && (
+        <RunningTimesEditor times={runningTimes} onChange={setRunningTimes} />
+      )}
 
       <Editor />
 
@@ -144,7 +188,7 @@ const KeyboardContainer = styled(Keyboard)`
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  margin: 0px;  
+  margin: 0px;
   background-color: #eaeaea;
   overflow-x: hidden;
 `;
@@ -161,7 +205,7 @@ const Header = styled.div`
 const HeaderRight = styled.div`
   padding: 10px;
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
 `;
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditorPage);

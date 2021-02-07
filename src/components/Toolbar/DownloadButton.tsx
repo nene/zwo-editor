@@ -1,14 +1,21 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
-import createWorkoutXml from '../../xml/createWorkoutXml';
-import IconButton from '../Button/IconButton';
-import { selectAuthor, selectDescription, selectName, selectTags, selectSportType, selectLengthType } from '../../rdx/state/meta';
-import { RootState } from '../../rdx/store';
-import { selectIntervals } from '../../rdx/state/intervals';
-import { selectInstructions } from '../../rdx/state/instructions';
-import { selectMode } from '../../rdx/state/mode';
-import { ConnectedProps } from '../../types/ConnectedProps';
+import React from "react";
+import { connect } from "react-redux";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import createWorkoutXml from "../../xml/createWorkoutXml";
+import IconButton from "../Button/IconButton";
+import {
+  selectAuthor,
+  selectDescription,
+  selectName,
+  selectTags,
+  selectSportType,
+  selectLengthType,
+} from "../../rdx/state/meta";
+import { RootState } from "../../rdx/store";
+import { selectIntervals } from "../../rdx/state/intervals";
+import { selectInstructions } from "../../rdx/state/instructions";
+import { selectMode } from "../../rdx/state/mode";
+import { ConnectedProps } from "../../types/ConnectedProps";
 
 const mapStateToProps = (state: RootState) => ({
   name: selectName(state),
@@ -26,18 +33,21 @@ type DownloadButtonProps = ConnectedProps<typeof mapStateToProps>;
 
 const DownloadButton = (props: DownloadButtonProps) => {
   function createZwoFile() {
-    const xml = createWorkoutXml({
-      name: props.name,
-      author: props.author,
-      description: props.description,
-      tags: props.tags,
-      sportType: props.sportType,
-      lengthType: props.lengthType,
-      intervals: props.intervals,
-      instructions: props.instructions,
-    }, props.mode);
+    const xml = createWorkoutXml(
+      {
+        name: props.name,
+        author: props.author,
+        description: props.description,
+        tags: props.tags,
+        sportType: props.sportType,
+        lengthType: props.lengthType,
+        intervals: props.intervals,
+        instructions: props.instructions,
+      },
+      props.mode
+    );
 
-    return new Blob([xml], { type: 'application/xml' });
+    return new Blob([xml], { type: "application/xml" });
   }
 
   function downloadWorkout() {
@@ -54,7 +64,9 @@ const DownloadButton = (props: DownloadButtonProps) => {
   }
 
   return (
-    <IconButton icon={faDownload} onClick={downloadWorkout}>Download</IconButton>
+    <IconButton icon={faDownload} onClick={downloadWorkout}>
+      Download
+    </IconButton>
   );
 };
 

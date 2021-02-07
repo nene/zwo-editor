@@ -34,14 +34,16 @@ export default class BikeMode extends Mode {
 
   intervalDuration(interval: Interval): Duration {
     switch (interval.type) {
-      case 'free':
-      case 'steady':
-      case 'ramp':
+      case "free":
+      case "steady":
+      case "ramp":
         return this.duration(interval.length);
-      case 'repetition': {
+      case "repetition": {
         const onDuration = this.duration(interval.onLength);
         const offDuration = this.duration(interval.offLength);
-        return new Duration(interval.repeat * (onDuration.seconds + offDuration.seconds));
+        return new Duration(
+          interval.repeat * (onDuration.seconds + offDuration.seconds)
+        );
       }
     }
   }

@@ -1,8 +1,12 @@
 import React from "react";
 import { Label } from "../Label/Label";
-import './Checkbox.css'
+import "./Checkbox.css";
 
-const Checkbox = (props: { label: string, isSelected: boolean, onCheckboxChange: Function }) => (
+const Checkbox = (props: {
+  label: string;
+  isSelected: boolean;
+  onCheckboxChange: Function;
+}) => (
   <div className="form-check">
     <Label>
       <input

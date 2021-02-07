@@ -19,7 +19,7 @@ export default class RunMode extends Mode {
   }
 
   speed(intensity: number, pace: PaceType): number {
-    return runningDistances[pace] / this.runningTimes[pace] * intensity; // in m/s
+    return (runningDistances[pace] / this.runningTimes[pace]) * intensity; // in m/s
   }
 
   distance(length: Length, intensity: number, pace: PaceType): Distance {
@@ -40,35 +40,71 @@ export default class RunMode extends Mode {
 
   intervalDistance(interval: Interval): Distance {
     switch (interval.type) {
-      case 'free': {
+      case "free": {
         throw new Error("Run workout may not contain FreeRide");
       }
-      case 'steady': {
-        return this.distance(interval.length, interval.intensity, interval.pace);
+      case "steady": {
+        return this.distance(
+          interval.length,
+          interval.intensity,
+          interval.pace
+        );
       }
-      case 'ramp': {
-        return this.distance(interval.length, (interval.startIntensity + interval.endIntensity) / 2, interval.pace);
+      case "ramp": {
+        return this.distance(
+          interval.length,
+          (interval.startIntensity + interval.endIntensity) / 2,
+          interval.pace
+        );
       }
-      case 'repetition': {
-        const onDistance = this.distance(interval.onLength, interval.onIntensity, interval.pace);
-        const offDistance = this.distance(interval.offLength, interval.offIntensity, interval.pace);
-        return new Distance(interval.repeat * (onDistance.meters + offDistance.meters));
+      case "repetition": {
+        const onDistance = this.distance(
+          interval.onLength,
+          interval.onIntensity,
+          interval.pace
+        );
+        const offDistance = this.distance(
+          interval.offLength,
+          interval.offIntensity,
+          interval.pace
+        );
+        return new Distance(
+          interval.repeat * (onDistance.meters + offDistance.meters)
+        );
       }
     }
   }
 
   intervalDuration(interval: Interval): Duration {
     switch (interval.type) {
-      case 'free':
+      case "free":
         throw new Error("Run workout may not contain FreeRide");
-      case 'steady':
-        return this.duration(interval.length, interval.intensity, interval.pace);
-      case 'ramp':
-        return this.duration(interval.length, (interval.startIntensity + interval.endIntensity) / 2, interval.pace);
-      case 'repetition': {
-        const onDuration = this.duration(interval.onLength, interval.onIntensity, interval.pace);
-        const offDuration = this.duration(interval.offLength, interval.offIntensity, interval.pace);
-        return new Duration(interval.repeat * (onDuration.seconds + offDuration.seconds));
+      case "steady":
+        return this.duration(
+          interval.length,
+          interval.intensity,
+          interval.pace
+        );
+      case "ramp":
+        return this.duration(
+          interval.length,
+          (interval.startIntensity + interval.endIntensity) / 2,
+          interval.pace
+        );
+      case "repetition": {
+        const onDuration = this.duration(
+          interval.onLength,
+          interval.onIntensity,
+          interval.pace
+        );
+        const offDuration = this.duration(
+          interval.offLength,
+          interval.offIntensity,
+          interval.pace
+        );
+        return new Duration(
+          interval.repeat * (onDuration.seconds + offDuration.seconds)
+        );
       }
     }
   }

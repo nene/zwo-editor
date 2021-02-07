@@ -1,11 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 const slice = createSlice({
-  name: 'selectedId',
+  name: "selectedId",
   initialState: null as string | null,
   reducers: {
-    setSelectedId: (state, {payload}: PayloadAction<string>) => payload,
+    setSelectedId: (state, { payload }: PayloadAction<string>) => payload,
     clearSelection: () => null,
   },
 });
@@ -13,4 +13,5 @@ const slice = createSlice({
 export const reducer = slice.reducer;
 export const { setSelectedId, clearSelection } = slice.actions;
 
-export const selectSelectedId = (state: RootState) => state.selectedId || undefined;
+export const selectSelectedId = (state: RootState) =>
+  state.selectedId || undefined;

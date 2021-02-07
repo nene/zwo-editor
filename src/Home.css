@@ -1,4 +1,4 @@
-.home {    
+.home {
 }
 
 .hero {
@@ -18,7 +18,7 @@
 }
 
 .btn-primary {
-  background-color: #00C46A;
+  background-color: #00c46a;
   color: white;
   padding: 5px 20px;
 }
@@ -34,7 +34,7 @@
 }
 
 .btn-secondary:hover {
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
 }
 
 .btn-xl {
@@ -53,11 +53,11 @@
   display: flex;
   flex-wrap: wrap;
 }
-.perks > div{
-  width: 25%;  
-  height: 120px;  
+.perks > div {
+  width: 25%;
+  height: 120px;
 }
-.perks > div > p{
+.perks > div > p {
   max-width: 250px;
   margin: 0 auto;
 }
@@ -80,11 +80,11 @@
 }
 .about > div {
   width: 50%;
-  margin: 0; 
+  margin: 0;
 }
 .about > div > p {
   max-width: 300px;
-  margin: 20px auto;  
+  margin: 20px auto;
   margin-top: 0;
 }
 
@@ -92,12 +92,12 @@
   .features {
     padding: 10px;
   }
-  .perks > div{
-    width: 50%;  
-    height: auto;  
+  .perks > div {
+    width: 50%;
+    height: auto;
   }
   .about > div {
     width: 100%;
-    margin: 0; 
+    margin: 0;
   }
 }

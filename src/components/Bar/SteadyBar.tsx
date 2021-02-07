@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import styled from 'styled-components';
-import { zoneColor, Zones } from '../../types/Zones'
-import { Resizable } from 're-resizable'
-import Tooltip from '../Tooltip/Tooltip'
-import { SteadyInterval } from '../../types/Interval'
-import { intensityMultiplier } from './multipliers'
-import { WorkoutMode } from '../../modes/WorkoutMode'
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { zoneColor, Zones } from "../../types/Zones";
+import { Resizable } from "re-resizable";
+import Tooltip from "../Tooltip/Tooltip";
+import { SteadyInterval } from "../../types/Interval";
+import { intensityMultiplier } from "./multipliers";
+import { WorkoutMode } from "../../modes/WorkoutMode";
 
 const Container = styled.div`
   position: relative;
@@ -25,39 +25,41 @@ interface SteadyBarProps {
   showTooltip: boolean;
 }
 
-const SteadyBar = ({interval, mode, ...props}: SteadyBarProps) => {
-  const style = { backgroundColor: zoneColor(interval.intensity) }
+const SteadyBar = ({ interval, mode, ...props }: SteadyBarProps) => {
+  const style = { backgroundColor: zoneColor(interval.intensity) };
 
-  const [width, setWidth] = useState(mode.lengthToWidth(interval.length))
+  const [width, setWidth] = useState(mode.lengthToWidth(interval.length));
 
-  const [height, setHeight] = useState(mode.intensityToHeight(interval.intensity))
+  const [height, setHeight] = useState(
+    mode.intensityToHeight(interval.intensity)
+  );
 
-  const [showTooltip, setShowTooltip] = useState(false)
+  const [showTooltip, setShowTooltip] = useState(false);
 
-  const [selected, setSelected] = useState(props.selected)
+  const [selected, setSelected] = useState(props.selected);
 
-  useEffect(()=>{
-    setSelected(props.selected) 
-  },[props.selected])  
+  useEffect(() => {
+    setSelected(props.selected);
+  }, [props.selected]);
 
   const handleCadenceChange = (cadence: number) => {
-    props.onChange({ ...interval, cadence })
-  }
+    props.onChange({ ...interval, cadence });
+  };
 
   const handleResizeStop = (dWidth: number, dHeight: number) => {
-    setWidth(width + dWidth)
-    setHeight(height + dHeight)
+    setWidth(width + dWidth);
+    setHeight(height + dHeight);
 
-    notifyChange(dWidth, dHeight)
-  }
+    notifyChange(dWidth, dHeight);
+  };
 
   const notifyChange = (dWidth: number, dHeight: number) => {
     props.onChange({
       ...interval,
       length: mode.widthToLength(width + dWidth),
       intensity: mode.heightToIntensity(height + dHeight),
-    })
-  }
+    });
+  };
 
   return (
     <Container
@@ -66,13 +68,13 @@ const SteadyBar = ({interval, mode, ...props}: SteadyBarProps) => {
       onClick={() => props.onClick(interval.id)}
       style={props.selected ? { zIndex: 10 } : {}}
     >
-      {((selected || showTooltip) && (props.showTooltip)) &&
+      {(selected || showTooltip) && props.showTooltip && (
         <Tooltip
           interval={interval}
           mode={mode}
-          onCadenceChange={(cadence: number)=> handleCadenceChange(cadence)}
+          onCadenceChange={(cadence: number) => handleCadenceChange(cadence)}
         />
-      }
+      )}
       <RoundedResizable
         size={{
           width: mode.lengthToWidth(interval.length),
@@ -83,13 +85,14 @@ const SteadyBar = ({interval, mode, ...props}: SteadyBarProps) => {
         maxHeight={intensityMultiplier * Zones.Z6.max}
         enable={{ top: true, right: true }}
         grid={[1, 1]}
-        onResizeStop={(e, direction, ref, d) => handleResizeStop(d.width, d.height)}
+        onResizeStop={(e, direction, ref, d) =>
+          handleResizeStop(d.width, d.height)
+        }
         onResize={(e, direction, ref, d) => notifyChange(d.width, d.height)}
         style={style}
-      >
-      </RoundedResizable>
+      ></RoundedResizable>
     </Container>
   );
-}
+};
 
-export default SteadyBar
+export default SteadyBar;

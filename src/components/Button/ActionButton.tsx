@@ -9,7 +9,11 @@ interface ActionButtonProps {
   onClick: () => void;
 }
 
-const ActionButton: React.FC<ActionButtonProps> = ({ title, icon, onClick }) => {
+const ActionButton: React.FC<ActionButtonProps> = ({
+  title,
+  icon,
+  onClick,
+}) => {
   return (
     <RoundButton onClick={onClick} title={title}>
       <FontAwesomeIcon icon={icon} size="lg" fixedWidth />

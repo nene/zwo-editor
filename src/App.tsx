@@ -1,19 +1,18 @@
-import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './Home';
-import EditorPage from './components/EditorPage/EditorPage';
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./Home";
+import EditorPage from "./components/EditorPage/EditorPage";
 
 export default function App() {
-  
   return (
     <Router>
-      <Switch>      
+      <Switch>
         <Route path="/editor/:id" component={EditorPage} />
         <Route path="/">
           <Home />
-        </Route>        
+        </Route>
       </Switch>
     </Router>
-  )
+  );
 }

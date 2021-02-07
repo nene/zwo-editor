@@ -14,9 +14,17 @@ interface CreateModeParams {
 }
 
 // Creates appropriate type of mode for current sport type
-export default function createMode({sportType, ftp, weight, runningTimes, lengthType}: CreateModeParams): WorkoutMode {
+export default function createMode({
+  sportType,
+  ftp,
+  weight,
+  runningTimes,
+  lengthType,
+}: CreateModeParams): WorkoutMode {
   switch (sportType) {
-    case "bike": return new BikeMode(ftp, weight);
-    case "run": return new RunMode(runningTimes, lengthType);
+    case "bike":
+      return new BikeMode(ftp, weight);
+    case "run":
+      return new RunMode(runningTimes, lengthType);
   }
 }

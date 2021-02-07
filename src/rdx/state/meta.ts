@@ -1,14 +1,14 @@
-import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit';
-import { LengthType } from '../../types/LengthType';
-import { SportType } from '../../types/SportType';
-import { RootState } from '../store';
-import { clearWorkout, loadWorkout } from './workout';
+import { createSlice, createSelector, PayloadAction } from "@reduxjs/toolkit";
+import { LengthType } from "../../types/LengthType";
+import { SportType } from "../../types/SportType";
+import { RootState } from "../store";
+import { clearWorkout, loadWorkout } from "./workout";
 
 interface MetaState {
   name: string;
   author: string;
   description: string;
-  tags: string[],
+  tags: string[];
   sportType: SportType;
   lengthType: LengthType;
 }
@@ -25,15 +25,33 @@ const initialState: MetaState = {
 };
 
 const slice = createSlice({
-  name: 'meta',
+  name: "meta",
   initialState,
   reducers: {
-    setName: (state, action: PayloadAction<string>) => ({ ...state, name: action.payload }),
-    setAuthor: (state, action: PayloadAction<string>) => ({ ...state, author: action.payload }),
-    setDescription: (state, action: PayloadAction<string>) => ({ ...state, description: action.payload }),
-    setTags: (state, action: PayloadAction<string[]>) => ({ ...state, tags: action.payload }),
-    setSportType: (state, action: PayloadAction<SportType>) => ({ ...state, sportType: action.payload }),
-    setLengthType: (state, action: PayloadAction<LengthType>) => ({ ...state, lengthType: action.payload }),
+    setName: (state, action: PayloadAction<string>) => ({
+      ...state,
+      name: action.payload,
+    }),
+    setAuthor: (state, action: PayloadAction<string>) => ({
+      ...state,
+      author: action.payload,
+    }),
+    setDescription: (state, action: PayloadAction<string>) => ({
+      ...state,
+      description: action.payload,
+    }),
+    setTags: (state, action: PayloadAction<string[]>) => ({
+      ...state,
+      tags: action.payload,
+    }),
+    setSportType: (state, action: PayloadAction<SportType>) => ({
+      ...state,
+      sportType: action.payload,
+    }),
+    setLengthType: (state, action: PayloadAction<LengthType>) => ({
+      ...state,
+      lengthType: action.payload,
+    }),
   },
   extraReducers: (builder) => {
     builder
@@ -56,12 +74,22 @@ const slice = createSlice({
 });
 
 export const reducer = slice.reducer;
-export const { setName, setAuthor, setDescription, setTags, setSportType, setLengthType } = slice.actions;
+export const {
+  setName,
+  setAuthor,
+  setDescription,
+  setTags,
+  setSportType,
+  setLengthType,
+} = slice.actions;
 
 const selectMeta = (state: RootState) => state.meta;
 export const selectName = createSelector(selectMeta, (m) => m.name);
 export const selectAuthor = createSelector(selectMeta, (m) => m.author);
-export const selectDescription = createSelector(selectMeta, (m) => m.description);
+export const selectDescription = createSelector(
+  selectMeta,
+  (m) => m.description
+);
 export const selectTags = createSelector(selectMeta, (m) => m.tags);
 export const selectSportType = createSelector(selectMeta, (m) => m.sportType);
 export const selectLengthType = createSelector(selectMeta, (m) => m.lengthType);

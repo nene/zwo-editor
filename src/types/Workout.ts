@@ -14,7 +14,10 @@ export interface Workout {
   instructions: Array<Instruction>;
 }
 
-export function createEmptyWorkout(sportType: SportType, lengthType: LengthType): Workout {
+export function createEmptyWorkout(
+  sportType: SportType,
+  lengthType: LengthType
+): Workout {
   return {
     author: "",
     name: "",

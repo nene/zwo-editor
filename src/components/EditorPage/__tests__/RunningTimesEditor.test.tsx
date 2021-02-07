@@ -1,19 +1,25 @@
-import moment from 'moment';
-import { calculateEstimatedTimes } from '../RunningTimesEditor';
+import moment from "moment";
+import { calculateEstimatedTimes } from "../RunningTimesEditor";
 
 const readTimes = (times: string[]) =>
-  times.map(t => moment.duration(t).asSeconds());
+  times.map((t) => moment.duration(t).asSeconds());
 
 const writeTimes = (times: number[]) =>
-  times.map(t => moment.utc(t * 1000).format('HH:mm:ss'));
+  times.map((t) => moment.utc(t * 1000).format("HH:mm:ss"));
 
-describe('calculateEstimatedTimes()', () => {
-  test('changes nothing estimates, when all times present', () => {
-    const times = readTimes(["00:05:00", "00:30:00", "01:10:00", "02:30:00", "05:20:00"]);
+describe("calculateEstimatedTimes()", () => {
+  test("changes nothing estimates, when all times present", () => {
+    const times = readTimes([
+      "00:05:00",
+      "00:30:00",
+      "01:10:00",
+      "02:30:00",
+      "05:20:00",
+    ]);
     expect(calculateEstimatedTimes(times)).toEqual(times);
   });
 
-  test('estimates all times, when none provided', () => {
+  test("estimates all times, when none provided", () => {
     const times = readTimes(["", "", "", "", ""]);
     expect(writeTimes(calculateEstimatedTimes(times))).toEqual([
       "00:12:00",
@@ -24,7 +30,7 @@ describe('calculateEstimatedTimes()', () => {
     ]);
   });
 
-  test('estimates only missing times', () => {
+  test("estimates only missing times", () => {
     const times = readTimes(["", "00:20:00", "", "", "04:00:00"]);
     expect(writeTimes(calculateEstimatedTimes(times))).toEqual([
       "00:06:49",
@@ -35,7 +41,7 @@ describe('calculateEstimatedTimes()', () => {
     ]);
   });
 
-  test('estimates only missing times vol2', () => {
+  test("estimates only missing times vol2", () => {
     const times = readTimes(["00:05:00", "", "", "02:00:00", ""]);
     expect(writeTimes(calculateEstimatedTimes(times))).toEqual([
       "00:05:00",
@@ -46,7 +52,7 @@ describe('calculateEstimatedTimes()', () => {
     ]);
   });
 
-  test('estimates all other times from one time', () => {
+  test("estimates all other times from one time", () => {
     const times = readTimes(["", "", "", "", "04:00:00"]);
     expect(writeTimes(calculateEstimatedTimes(times))).toEqual([
       "00:09:42",

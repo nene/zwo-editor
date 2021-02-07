@@ -1,8 +1,14 @@
-import { v4 as uuidv4 } from 'uuid'
-import { PaceType } from '../types/PaceType';
-import { FreeInterval, Interval, RampInterval, RepetitionInterval, SteadyInterval } from "../types/Interval";
-import { Distance, Duration, Length } from '../types/Length';
-import { WorkoutMode } from '../modes/WorkoutMode';
+import { v4 as uuidv4 } from "uuid";
+import { PaceType } from "../types/PaceType";
+import {
+  FreeInterval,
+  Interval,
+  RampInterval,
+  RepetitionInterval,
+  SteadyInterval,
+} from "../types/Interval";
+import { Distance, Duration, Length } from "../types/Length";
+import { WorkoutMode } from "../modes/WorkoutMode";
 
 const defaultDuration = new Duration(300);
 const defaultDistance = new Distance(1000);
@@ -16,7 +22,7 @@ const defaultLength = (mode: WorkoutMode): Length =>
 export default {
   steady(interval: Partial<SteadyInterval>, mode: WorkoutMode): SteadyInterval {
     return {
-      type: 'steady',
+      type: "steady",
       id: uuidv4(),
       length: defaultLength(mode),
       intensity: defaultIntensity,
@@ -28,7 +34,7 @@ export default {
 
   ramp(interval: Partial<RampInterval>, mode: WorkoutMode): RampInterval {
     return {
-      type: 'ramp',
+      type: "ramp",
       id: uuidv4(),
       length: defaultLength(mode),
       startIntensity: defaultIntensity / 2,
@@ -41,23 +47,28 @@ export default {
 
   free(interval: Partial<FreeInterval>, mode: WorkoutMode): FreeInterval {
     return {
-      type: 'free',
+      type: "free",
       id: uuidv4(),
       length: defaultLength(mode),
       cadence: defaultCadence,
-      ...interval
+      ...interval,
     };
   },
 
-  repetition(interval: Partial<RepetitionInterval>, mode: WorkoutMode): RepetitionInterval {
+  repetition(
+    interval: Partial<RepetitionInterval>,
+    mode: WorkoutMode
+  ): RepetitionInterval {
     return {
-      type: 'repetition',
+      type: "repetition",
       id: uuidv4(),
       onCadence: defaultCadence,
       offCadence: defaultCadence,
       repeat: 3,
-      onLength: mode.lengthType === "time" ? new Duration(30) : new Distance(200),
-      offLength: mode.lengthType === "time" ? new Duration(120) : new Distance(200),
+      onLength:
+        mode.lengthType === "time" ? new Duration(30) : new Distance(200),
+      offLength:
+        mode.lengthType === "time" ? new Duration(120) : new Distance(200),
       onIntensity: defaultIntensity,
       offIntensity: defaultIntensity / 2,
       pace: defaultPace,

@@ -1,12 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
-import { selectAuthor, selectDescription, selectName, selectTags, setName, setAuthor, setDescription, setTags } from "../../rdx/state/meta";
+import {
+  selectAuthor,
+  selectDescription,
+  selectName,
+  selectTags,
+  setName,
+  setAuthor,
+  setDescription,
+  setTags,
+} from "../../rdx/state/meta";
 import { RootState } from "../../rdx/store";
 import { ConnectedProps } from "../../types/ConnectedProps";
 import { Label } from "../Label/Label";
 import Checkbox from "./Checkbox";
 
-const DEFAULT_TAGS = ["Recovery", "Intervals", "FTP", "TT"]
+const DEFAULT_TAGS = ["Recovery", "Intervals", "FTP", "TT"];
 
 const mapStateToProps = (state: RootState) => ({
   name: selectName(state),
@@ -22,7 +31,10 @@ const mapDispatchToProps = {
   setTags,
 };
 
-type SaveFormProps = ConnectedProps<typeof mapStateToProps, typeof mapDispatchToProps>;
+type SaveFormProps = ConnectedProps<
+  typeof mapStateToProps,
+  typeof mapDispatchToProps
+>;
 
 function SaveForm(props: SaveFormProps) {
   return (
@@ -30,36 +42,55 @@ function SaveForm(props: SaveFormProps) {
       <h2>Workout metadata</h2>
       <div className="form-control">
         <Label htmlFor="name">Workout Title</Label>
-        <input type="text" name="name" placeholder="Workout title" value={props.name} onChange={(e) => props.setName(e.target.value)} />
+        <input
+          type="text"
+          name="name"
+          placeholder="Workout title"
+          value={props.name}
+          onChange={(e) => props.setName(e.target.value)}
+        />
       </div>
       <div className="form-control">
         <Label htmlFor="description">Workout description</Label>
-        <textarea name="description" placeholder="Workout description" value={props.description} onChange={(e) => props.setDescription(e.target.value)}></textarea>
+        <textarea
+          name="description"
+          placeholder="Workout description"
+          value={props.description}
+          onChange={(e) => props.setDescription(e.target.value)}
+        ></textarea>
       </div>
       <div className="form-control">
         <Label htmlFor="author">Workout Author</Label>
-        <input type="text" name="author" placeholder="Workout Author" value={props.author} onChange={(e) => props.setAuthor(e.target.value)} />
+        <input
+          type="text"
+          name="author"
+          placeholder="Workout Author"
+          value={props.author}
+          onChange={(e) => props.setAuthor(e.target.value)}
+        />
       </div>
       <div className="form-control">
         <Label htmlFor="author">Workout Tags</Label>
-        {DEFAULT_TAGS.map(tagName => (
+        {DEFAULT_TAGS.map((tagName) => (
           <Checkbox
             key={tagName}
             label={tagName}
             isSelected={props.tags.includes(tagName)}
-            onCheckboxChange={() => props.setTags(addOrRemoveTag(props.tags, tagName))}
+            onCheckboxChange={() =>
+              props.setTags(addOrRemoveTag(props.tags, tagName))
+            }
           />
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 function addOrRemoveTag(tags: string[], tagName: string): string[] {
   if (tags.includes(tagName)) {
-    return tags.filter(item => item !== tagName)
+    return tags.filter((item) => item !== tagName);
   } else {
-    return [...tags, tagName]
+    return [...tags, tagName];
   }
 }
 

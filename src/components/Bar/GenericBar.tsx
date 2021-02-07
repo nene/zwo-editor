@@ -1,10 +1,10 @@
-import React from 'react';
-import { Interval } from '../../types/Interval';
-import FreeBar from './FreeBar';
-import SteadyBar from './SteadyBar';
-import RampBar from './RampBar';
-import RepetitionBar from './RepetitionBar';
-import { WorkoutMode } from '../../modes/WorkoutMode';
+import React from "react";
+import { Interval } from "../../types/Interval";
+import FreeBar from "./FreeBar";
+import SteadyBar from "./SteadyBar";
+import RampBar from "./RampBar";
+import RepetitionBar from "./RepetitionBar";
+import { WorkoutMode } from "../../modes/WorkoutMode";
 
 interface GenericBarProps {
   interval: Interval;
@@ -14,9 +14,15 @@ interface GenericBarProps {
   onClick: (id: string) => void;
 }
 
-const GenericBar = ({ interval, mode, selected, onChange, onClick }: GenericBarProps) => {
+const GenericBar = ({
+  interval,
+  mode,
+  selected,
+  onChange,
+  onClick,
+}: GenericBarProps) => {
   switch (interval.type) {
-    case 'steady':
+    case "steady":
       return (
         <SteadyBar
           interval={interval}
@@ -27,7 +33,7 @@ const GenericBar = ({ interval, mode, selected, onChange, onClick }: GenericBarP
           showTooltip={true}
         />
       );
-    case 'ramp':
+    case "ramp":
       return (
         <RampBar
           interval={interval}
@@ -37,7 +43,7 @@ const GenericBar = ({ interval, mode, selected, onChange, onClick }: GenericBarP
           selected={selected}
         />
       );
-    case 'free':
+    case "free":
       return (
         <FreeBar
           interval={interval}
@@ -47,7 +53,7 @@ const GenericBar = ({ interval, mode, selected, onChange, onClick }: GenericBarP
           selected={selected}
         />
       );
-    case 'repetition':
+    case "repetition":
       return (
         <RepetitionBar
           interval={interval}

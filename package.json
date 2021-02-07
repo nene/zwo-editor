@@ -51,7 +51,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "pretty": "prettier --write ."
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -73,6 +74,7 @@
     "@babel/preset-react": "^7.10.1",
     "@types/react-test-renderer": "^16.9.3",
     "jest-styled-components": "^7.0.3",
+    "prettier": "2.2.1",
     "puppeteer": "^5.4.1",
     "react-test-renderer": "^16.13.1"
   },

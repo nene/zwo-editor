@@ -1,4 +1,6 @@
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
 }
 
@@ -15,5 +17,5 @@ h3 {
 
 a {
   text-decoration: none;
-  color: #00C46A;
+  color: #00c46a;
 }
