@@ -4,14 +4,14 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 
 interface IconButtonProps {
   icon: IconDefinition;
-  label: string;
+  children: string;
   onClick: () => void;
 }
 
-const IconButton: React.FC<IconButtonProps> = ({ icon, label, onClick }) => {
+const IconButton: React.FC<IconButtonProps> = ({ icon, children, onClick }) => {
   return (
     <button className="btn" onClick={onClick}>
-      <FontAwesomeIcon icon={icon} size="lg" fixedWidth /> {label}
+      <FontAwesomeIcon icon={icon} size="lg" fixedWidth /> {children}
     </button>
   );
 };

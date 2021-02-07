@@ -2,14 +2,14 @@ import React from "react";
 
 interface ColorButtonProps {
   color: string;
-  label: string;
+  children: string;
   onClick: () => void;
 }
 
-const ColorButton: React.FC<ColorButtonProps> = ({ color, label, onClick }) => {
+const ColorButton: React.FC<ColorButtonProps> = ({ color, children, onClick }) => {
   return (
     <button className="btn btn-square" onClick={onClick} style={{ backgroundColor: color }}>
-      {label}
+      {children}
     </button>
   );
 };

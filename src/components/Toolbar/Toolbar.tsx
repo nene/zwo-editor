@@ -47,12 +47,12 @@ const Toolbar = ({mode, addInterval, addInstruction, ...props}: ToolbarProps) =>
     <Container>
       {props.sportType === "bike" ?
         <div>
-          <ColorButton label="Z1" color={ZoneColor.GRAY} onClick={() => addInterval(intervalFactory.steady({ intensity: 0.5 }, mode))} />
-          <ColorButton label="Z2" color={ZoneColor.BLUE} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z2.min }, mode))} />
-          <ColorButton label="Z3" color={ZoneColor.GREEN} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z3.min }, mode))} />
-          <ColorButton label="Z4" color={ZoneColor.YELLOW} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z4.min }, mode))} />
-          <ColorButton label="Z5" color={ZoneColor.ORANGE} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z5.min }, mode))} />
-          <ColorButton label="Z6" color={ZoneColor.RED} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z6.min }, mode))} />
+          <ColorButton color={ZoneColor.GRAY} onClick={() => addInterval(intervalFactory.steady({ intensity: 0.5 }, mode))}>Z1</ColorButton>
+          <ColorButton color={ZoneColor.BLUE} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z2.min }, mode))}>Z2</ColorButton>
+          <ColorButton color={ZoneColor.GREEN} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z3.min }, mode))}>Z3</ColorButton>
+          <ColorButton color={ZoneColor.YELLOW} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z4.min }, mode))}>Z4</ColorButton>
+          <ColorButton color={ZoneColor.ORANGE} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z5.min }, mode))}>Z5</ColorButton>
+          <ColorButton color={ZoneColor.RED} onClick={() => addInterval(intervalFactory.steady({ intensity: Zones.Z6.min }, mode))}>Z6</ColorButton>
         </div>
         :
         <Button onClick={() => addInterval(intervalFactory.steady({}, mode))}><SteadyLogo className="btn-icon" /> Steady Pace</Button>
@@ -62,16 +62,16 @@ const Toolbar = ({mode, addInterval, addInstruction, ...props}: ToolbarProps) =>
       <Button onClick={() => addInterval(intervalFactory.ramp({ startIntensity: 0.75, endIntensity: 0.25 }, mode))}><WarmdownLogo className="btn-icon" /> Cool down</Button>
       <Button onClick={() => addInterval(intervalFactory.repetition({}, mode))}><IntervalLogo className="btn-icon" /> Interval</Button>
       {props.sportType === "bike" &&
-        <IconButton label="Free Ride" icon={faBicycle} onClick={() => addInterval(intervalFactory.free({}, mode))} />
+        <IconButton icon={faBicycle} onClick={() => addInterval(intervalFactory.free({}, mode))}>Free Ride</IconButton>
       }
-      <IconButton label="Text Event" icon={faComment} onClick={() => addInstruction(createInstruction({}, mode))} />
+      <IconButton icon={faComment} onClick={() => addInstruction(createInstruction({}, mode))}>Text Event</IconButton>
       {props.sportType === "bike" &&
         <NumberField name="ftp" label={"FTP (W)"} value={props.ftp} onChange={props.setFtp} />
       }
       {props.sportType === "bike" &&
         <NumberField name="weight" label={"Body Weight (kg)"} value={props.weight} onChange={props.setWeight} />
       }
-      <IconButton label="New" icon={faFile} onClick={() => { if (window.confirm('Are you sure you want to create a new workout?')) props.clearWorkout() }} />
+      <IconButton icon={faFile} onClick={() => { if (window.confirm('Are you sure you want to create a new workout?')) props.clearWorkout() }}>New</IconButton>
       <DownloadButton />
       <UploadButton mode={mode} onUpload={props.loadWorkout} />
     </Container>

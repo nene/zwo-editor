@@ -28,7 +28,9 @@ const UploadButton: React.FC<UploadButtonProps> = ({ mode, onUpload }) => {
         style={{ display: 'none' }}
         onChange={(e) => handleUpload(e.target.files![0])}
       />
-      <IconButton label="Upload" icon={faUpload} onClick={() => document.getElementById("contained-button-file")!.click()} />
+      <IconButton icon={faUpload} onClick={() => document.getElementById("contained-button-file")!.click()}>
+        Upload
+      </IconButton>
     </>
   );
 };

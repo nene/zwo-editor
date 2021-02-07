@@ -54,7 +54,7 @@ const DownloadButton = (props: DownloadButtonProps) => {
   }
 
   return (
-    <IconButton label="Download" icon={faDownload} onClick={downloadWorkout} />
+    <IconButton icon={faDownload} onClick={downloadWorkout}>Download</IconButton>
   );
 };
 
