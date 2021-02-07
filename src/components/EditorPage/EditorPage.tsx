@@ -25,6 +25,7 @@ import Toolbar from '../Toolbar/Toolbar';
 import { ConnectedProps } from '../../types/ConnectedProps';
 import { clearSelection, setSelectedId } from '../../rdx/state/selectedId';
 import Editor from '../Editor/Editor';
+import styled from 'styled-components';
 
 const mapStateToProps = (state: RootState) => ({
   name: selectName(state),
@@ -90,8 +91,7 @@ const EditorPage = ({
   }
 
   return (
-    <Keyboard
-      className="container"
+    <KeyboardContainer
       onBackspacePress={removeSelectedInterval}
       onUpPress={() => adjustSelectedIntervalIntensity(0.01)}
       onDownPress={() => adjustSelectedIntervalIntensity(-0.01)}
@@ -105,9 +105,9 @@ const EditorPage = ({
           <SaveForm />
         </Popup>
       }
-      <div className="info">
+      <Header>
         <Title name={name} author={author} description={description} onClick={() => setSavePopupVisibility(true)} />
-        <div className="workout">
+        <HeaderRight>
           <Stats intervals={intervals} ftp={ftp} mode={mode} />
           {sportType === 'run' &&
             <LeftRightToggle<"time","distance">
@@ -129,16 +129,40 @@ const EditorPage = ({
             selected={sportType}
             onChange={switchSportType}
           />
-        </div>
-      </div>
+        </HeaderRight>
+      </Header>
       {sportType === "run" && <RunningTimesEditor times={runningTimes} onChange={setRunningTimes} />}
 
       <Editor />
 
       <Toolbar />
       <Footer />
-    </Keyboard>
+    </KeyboardContainer>
   );
 };
+
+const KeyboardContainer = styled(Keyboard)`
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  margin: 0px;  
+  background-color: #eaeaea;
+  overflow-x: hidden;
+`;
+
+const Header = styled.div`
+  margin: 0 auto;
+  text-align: left;
+  max-width: 1360px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+`;
+
+const HeaderRight = styled.div`
+  padding: 10px;
+  display: flex;
+  flex-direction: row; 
+`;
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditorPage);
