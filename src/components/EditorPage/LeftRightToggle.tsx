@@ -4,7 +4,6 @@ import React from "react";
 import Switch from "react-switch";
 import styled from "styled-components";
 import { Column } from "../Layout/Column";
-import "./LeftRightToggle.css";
 
 interface LeftRightToggleProps<TLeft,TRight> {
   label: string;
@@ -21,9 +20,9 @@ const COLOR = "#00C46A";
 const LeftRightToggle = <TLeft,TRight>({ label, leftValue, rightValue, leftIcon, rightIcon, selected, onChange }: LeftRightToggleProps<TLeft,TRight>) => (
   <Col>
     <label>{label}</label>
-    <div className="left-right-toggle">
-      <FontAwesomeIcon
-        className={`icon ${selected === leftValue ? "active" : ""}`}
+    <LeftRight>
+      <ToggleIcon
+        active={selected === leftValue}
         icon={leftIcon}
         size="lg"
         fixedWidth
@@ -36,19 +35,30 @@ const LeftRightToggle = <TLeft,TRight>({ label, leftValue, rightValue, leftIcon,
         onColor={COLOR}
         offColor={COLOR}
       />
-      <FontAwesomeIcon
-        className={`icon ${selected === rightValue ? "active" : ""}`}
+      <ToggleIcon
+        active={selected === rightValue}
         icon={rightIcon}
         size="lg"
         fixedWidth
       />
-    </div>
+    </LeftRight>
   </Col>
 );
 
 const Col = styled(Column)`
   max-width: 120px;  
   padding: 0 10px;
+`;
+
+const LeftRight = styled.div`
+  display: flex;
+  flex-direction: row;
+  color: lightgray;
+`;
+
+const ToggleIcon = styled(FontAwesomeIcon)<{active: boolean}>`
+  padding: 5px;
+  color: ${({active}) => active ? '#00C46A' : 'inherit'};
 `;
 
 export default LeftRightToggle;
