@@ -1,17 +1,11 @@
-import React from "react";
+import styled from "styled-components";
+import Button from "./Button";
 
-interface ColorButtonProps {
-  color: string;
-  children: string;
-  onClick: () => void;
-}
-
-const ColorButton: React.FC<ColorButtonProps> = ({ color, children, onClick }) => {
-  return (
-    <button className="btn btn-square" onClick={onClick} style={{ backgroundColor: color }}>
-      {children}
-    </button>
-  );
-};
+const ColorButton = styled(Button)<{color: string}>`
+  color: white;
+  width: 50px;
+  height: 50px;
+  background-color: ${(props) => props.color};
+`;
 
 export default ColorButton;
