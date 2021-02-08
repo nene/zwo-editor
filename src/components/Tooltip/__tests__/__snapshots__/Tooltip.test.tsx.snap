@@ -185,7 +185,7 @@ exports[`<Tooltip> for cycling, renders: duration, power, w/kg, %FTP, cadence 1`
 </div>
 `;
 
-exports[`<Tooltip> for running (in distance mode), renders: duration, distance, %pace, pace type 1`] = `
+exports[`<Tooltip> for running (in distance mode), renders: duration, distance, %pace, pace type, speed 1`] = `
 .c0 {
   position: absolute;
   z-index: 100;
@@ -225,10 +225,13 @@ exports[`<Tooltip> for running (in distance mode), renders: duration, distance, 
      
     10K pace
   </div>
+  <div>
+    1:20/km
+  </div>
 </div>
 `;
 
-exports[`<Tooltip> for running ramp, renders: duration, distance, %pace-range, pace type 1`] = `
+exports[`<Tooltip> for running ramp, renders: duration, distance, %pace-range, pace type, speed-range 1`] = `
 .c0 {
   position: absolute;
   z-index: 100;
@@ -271,10 +274,17 @@ exports[`<Tooltip> for running ramp, renders: duration, distance, %pace-range, p
      
     10K pace
   </div>
+  <div>
+    3:20/km
+     
+    to
+     
+    1:40/km
+  </div>
 </div>
 `;
 
-exports[`<Tooltip> for running, renders: duration, distance, %pace, pace type 1`] = `
+exports[`<Tooltip> for running, renders: duration, distance, %pace, pace type, speed 1`] = `
 .c0 {
   position: absolute;
   z-index: 100;
@@ -313,6 +323,9 @@ exports[`<Tooltip> for running, renders: duration, distance, %pace, pace type 1`
     125%
      
     10K pace
+  </div>
+  <div>
+    1:20/km
   </div>
 </div>
 `;

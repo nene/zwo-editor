@@ -20,3 +20,11 @@ export const shortPaceName = (pace: PaceType): string => {
   const paces = ["1M", "5K", "10K", "HM", "M"];
   return paces[pace] + " pace";
 };
+
+export const runningPace = (speed: number): string => {
+  if (speed === 0) {
+    return "";
+  }
+  const secondsPerKm = 1000 / speed;
+  return moment.duration(secondsPerKm, "seconds").format("m:ss") + "/km";
+};

@@ -100,17 +100,33 @@ function RunData({ interval, mode }: TooltipProps & { mode: RunMode }) {
         {format.distance(mode.intervalDistance(interval))}
       </div>
       {interval.type === "steady" && (
-        <div>
-          {format.percentage(interval.intensity)}{" "}
-          {format.shortPaceName(interval.pace)}
-        </div>
+        <>
+          <div>
+            {format.percentage(interval.intensity)}{" "}
+            {format.shortPaceName(interval.pace)}
+          </div>
+          <div>
+            {format.runningPace(mode.speed(interval.intensity, interval.pace))}
+          </div>
+        </>
       )}
       {interval.type === "ramp" && (
-        <div>
-          {format.percentage(interval.startIntensity)} to{" "}
-          {format.percentage(interval.endIntensity)}{" "}
-          {format.shortPaceName(interval.pace)}
-        </div>
+        <>
+          <div>
+            {format.percentage(interval.startIntensity)} to{" "}
+            {format.percentage(interval.endIntensity)}{" "}
+            {format.shortPaceName(interval.pace)}
+          </div>
+          <div>
+            {format.runningPace(
+              mode.speed(interval.startIntensity, interval.pace)
+            )}{" "}
+            to{" "}
+            {format.runningPace(
+              mode.speed(interval.endIntensity, interval.pace)
+            )}
+          </div>
+        </>
       )}
     </>
   );

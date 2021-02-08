@@ -62,7 +62,7 @@ describe("<Tooltip>", () => {
     expect(component).toMatchSnapshot();
   });
 
-  test("for running, renders: duration, distance, %pace, pace type", () => {
+  test("for running, renders: duration, distance, %pace, pace type, speed", () => {
     const mode = createMode({
       sportType: "run",
       ftp: 1234,
@@ -85,7 +85,7 @@ describe("<Tooltip>", () => {
     expect(component).toMatchSnapshot();
   });
 
-  test("for running (in distance mode), renders: duration, distance, %pace, pace type", () => {
+  test("for running (in distance mode), renders: duration, distance, %pace, pace type, speed", () => {
     const mode = createMode({
       sportType: "run",
       ftp: 1234,
@@ -110,7 +110,7 @@ describe("<Tooltip>", () => {
     expect(component).toMatchSnapshot();
   });
 
-  test("for running ramp, renders: duration, distance, %pace-range, pace type", () => {
+  test("for running ramp, renders: duration, distance, %pace-range, pace type, speed-range", () => {
     const mode = createMode({
       sportType: "run",
       ftp: 1234,

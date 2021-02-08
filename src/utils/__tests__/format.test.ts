@@ -71,4 +71,15 @@ describe("format", () => {
       expect(format.shortPaceName(pace)).toEqual(expectedOutput);
     });
   });
+
+  it("runningPace() converts m/s to mm:ss/km", () => {
+    ([
+      [0, ""],
+      [2, "8:20/km"],
+      [5, "3:20/km"],
+      [10, "1:40/km"],
+    ] as [number, string][]).forEach(([speed, expectedOutput]) => {
+      expect(format.runningPace(speed)).toEqual(expectedOutput);
+    });
+  });
 });
