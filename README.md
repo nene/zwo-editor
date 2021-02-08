@@ -1,4 +1,4 @@
-# Zwift Workout Editor
+# Zwift Workout Editor (fork)
 
 [Website](https://nene.github.io/zwo-editor/)
 
@@ -33,11 +33,14 @@ the inner workings of the app have been substantially changed:
 
 Plans going forward:
 
-- Come up with a better way of editing instruction.
+- Come up with a better way of editing instructions.
 - Integrate with [zwiftout][] text-based editor.
+- Fix more [bugs from the original][orig-bugs].
+- Pick a different name and logo to distinguish from the original.
 
 [zwo-editor]: https://github.com/breiko83/zwo-editor
 [zwiftworkout.com]: https://www.zwiftworkout.com/
+[orig-bugs]: https://github.com/breiko83/zwo-editor/issues/
 [38]: https://github.com/breiko83/zwo-editor/issues/38
 [39]: https://github.com/breiko83/zwo-editor/issues/39
 [zwiftout]: https://github.com/nene/zwiftout
