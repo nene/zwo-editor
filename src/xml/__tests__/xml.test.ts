@@ -289,6 +289,8 @@ describe("XML", () => {
           },
           mode
         ),
+        // Free run: 20:00
+        intervalFactory.free({ length: new Duration(20 * 60) }, mode),
         // Cooldown: 10:00 30%..30% of 10 km pace
         intervalFactory.ramp(
           {
@@ -338,10 +340,18 @@ describe("XML", () => {
           },
           mode
         ),
-        // @ 31:50 - almost at the very end of cooldown
+        // @ 32:00 - inside freeride
         createInstruction(
           {
-            offset: new Duration(31 * 60 + 50),
+            offset: new Duration(32 * 60),
+            text: "Ride as hard as you can for 20 minutes!",
+          },
+          mode
+        ),
+        // @ 51:50 - almost at the very end of cooldown
+        createInstruction(
+          {
+            offset: new Duration(51 * 60 + 50),
             text: "This was it. See you next time.",
           },
           mode
@@ -411,6 +421,8 @@ describe("XML", () => {
           },
           mode
         ),
+        // Free run: 1000m
+        intervalFactory.free({ length: new Distance(1000) }, mode),
         // Cooldown: 1000m 30%..30% of 10 km pace
         intervalFactory.ramp(
           {
@@ -457,10 +469,18 @@ describe("XML", () => {
           },
           mode
         ),
-        // @ 5400 - almost at the very end of cooldown
+        // @ 4800m - inside freeride
         createInstruction(
           {
-            offset: new Distance(5400),
+            offset: new Distance(4800),
+            text: "Ride as hard as you can for 20 minutes!",
+          },
+          mode
+        ),
+        // @ 6400m - almost at the very end of cooldown
+        createInstruction(
+          {
+            offset: new Distance(6400),
             text: "This was it. See you next time.",
           },
           mode
