@@ -1,72 +1,41 @@
 # Zwift Workout Editor
 
-Zwift Workout editor is a web based tool to edit ZWO files (Zwift workouts). It's developed in React.
+This is a fork of the [zwo-editor][] for [zwiftworkout.com][] originally written by Carlo Schiesaro.
 
-[Website](https://www.zwiftworkout.com/)
+Compared to the original, some functionality has been dropped (at least for now):
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/0379dca2-6a91-4d51-af55-ea3fa0489520/deploy-status)](https://app.netlify.com/sites/zwiftworkout/deploys)
+- No server-side features (which aren't fully open-sourced in the original).
+- No text-based editor (which has lots of bugs in the original).
+- No conversion between running and cycling workouts (which is buggy in the original).
 
-## Changelog
+On the other hand, bunch of bugs have been fixed:
 
-### V1.7 (28/12/2020)
+- Fixed various issues with data consistency.
+- Fixed visual bugs in resizing of ramp intervals.
+- Fixed several bugs in reading & writing of ZWO files.
+- Fixed occasional Infinity distance [38][]
+- Removed TSS from running workouts [39][]
 
-- [bugfix] Added missing cadence values to intervals and free ride
-- [bugfix] Moved cadence input field next to segment
-- [bugfix] Minor fixes and refactoring
+These fixes might seem like minor things, but to pull them off,
+the inner workings of the app have been substantially changed:
 
-### V1.6 (14/11/2020)
+- Substantial changes for the internal representation of the intervals.
+- Adopted Redux for managing the state.
+- Replaced plain CSS with styled-components.
+- Refactored away most of the code in 1300-line tightly coupled Editor component.
+- Added lots of tests.
+- Stricter use of types.
+- Enforced consistent code-style rules.
 
-- [feature] You can now create workouts as long as 43 Km / 6 hours
-- [bugfix] Fixed an issue with duplicating length based segments
+## TODO
 
-### V1.5 (12/11/2020)
+Plans going forward:
 
-- [bugfix] Replaced time picker for browser and multiple locale compatibility
-- [bugfix] Fixed layout issue with Text Events
+- Come up with a better way of editing instruction.
+- Integrate with [zwiftout][] text-based editor.
 
-### V1.4 (28/10/2020)
-
-- [feature] Added Workout Duration Type for Running Workouts (specify a workout in time or distance)
-- [bugfix] Fixed issue with total workout distance / total workout time
-
-### V1.3 (28/10/2020)
-
-- [feature] Added Run Workout creator
-
-### V1.2 (6/10/2020)
-
-- [feature] Added intervals (beta)
-
-### V1.1 (5/10/2020)
-
-- [feature] Add tags to your workout
-- [feature] Delete a segment via keyboard backspace
-- [feature] Resize a segment via keyboard arrows (◀️ reduce time, ▶️ add time, 🔼 add power, ⬇️ reduce power)
-- [feature] Showing %ftp range on warmup / cooldown
-- [feature] Moved total workout time and TSS to top right screen
-- [bugfix] Duplicating segments also copy cadance value
-- [bugfix] Warmup / Cooldown default values set to 25%-75% FTP
-
-### V1.0 (1/10/2020)
-
-Initial Release
-
-## Support
-
-Click [Issues](https://github.com/breiko83/zwo-editor/issues) to open a support ticket
-
-## Installation
-
-    $ yarn
-
-## Usage
-
-    $ yarn start
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+[zwo-editor]: https://github.com/breiko83/zwo-editor
+[zwiftworkout.com]: https://www.zwiftworkout.com/
+[38]: https://github.com/breiko83/zwo-editor/issues/38
+[39]: https://github.com/breiko83/zwo-editor/issues/39
+[zwiftout]: https://github.com/nene/zwiftout
