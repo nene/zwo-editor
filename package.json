@@ -7,6 +7,10 @@
     "type": "git",
     "url": "https://github.com/nene/zwo-editor.git"
   },
+  "contributors": [
+    "Carlo Schiesaro",
+    "Rene Saarsoo"
+  ],
   "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
