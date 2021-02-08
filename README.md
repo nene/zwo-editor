@@ -15,8 +15,8 @@ On the other hand, bunch of bugs have been fixed:
 - Fixed various issues with data consistency.
 - Fixed visual bugs in resizing of ramp intervals.
 - Fixed several bugs in reading & writing of ZWO files.
-- Fixed occasional Infinity distance [38][]
-- Removed TSS from running workouts [39][]
+- Fixed occasional Infinity distance [#38][]
+- Removed TSS from running workouts [#39][]
 
 These fixes might seem like minor things, but to pull them off,
 the inner workings of the app have been substantially changed:
@@ -41,6 +41,6 @@ Plans going forward:
 [zwo-editor]: https://github.com/breiko83/zwo-editor
 [zwiftworkout.com]: https://www.zwiftworkout.com/
 [orig-bugs]: https://github.com/breiko83/zwo-editor/issues/
-[38]: https://github.com/breiko83/zwo-editor/issues/38
-[39]: https://github.com/breiko83/zwo-editor/issues/39
+[#38]: https://github.com/breiko83/zwo-editor/issues/38
+[#39]: https://github.com/breiko83/zwo-editor/issues/39
 [zwiftout]: https://github.com/nene/zwiftout
