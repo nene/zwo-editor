@@ -39,13 +39,15 @@ import {
   adjustSelectedIntervalDuration,
   updateInterval,
   removeSelectedInterval,
+  setIntervals,
 } from "../../rdx/state/intervals";
 import {
   updateInstruction,
   removeInstruction,
+  selectInstructions,
+  setInstructions,
 } from "../../rdx/state/instructions";
 import { selectMode } from "../../rdx/state/mode";
-import { clearWorkout } from "../../rdx/state/workout";
 import Toolbar from "../Toolbar/Toolbar";
 import { ConnectedProps } from "../../types/ConnectedProps";
 import { clearSelection, setSelectedId } from "../../rdx/state/selectedId";
@@ -61,6 +63,7 @@ const mapStateToProps = (state: RootState) => ({
   ftp: selectFtp(state),
   runningTimes: selectRunningTimes(state),
   intervals: selectIntervals(state),
+  instructions: selectInstructions(state),
   mode: selectMode(state),
 });
 
@@ -68,7 +71,8 @@ const mapDispatchToProps = {
   setSportType,
   setLengthType,
   setRunningTimes,
-  clearWorkout,
+  setIntervals,
+  setInstructions,
   adjustSelectedIntervalIntensity,
   adjustSelectedIntervalDuration,
   updateInterval,
@@ -93,35 +97,43 @@ const EditorPage = ({
   ftp,
   runningTimes,
   intervals,
+  instructions,
   mode,
   setSportType,
   setLengthType,
   setRunningTimes,
-  clearWorkout,
+  setIntervals,
+  setInstructions,
   adjustSelectedIntervalIntensity,
   adjustSelectedIntervalDuration,
   removeSelectedInterval,
 }: EditorPageProps) => {
   const [savePopupIsVisile, setSavePopupVisibility] = useState(false);
 
+  const isEmpty = () => intervals.length === 0 && instructions.length === 0;
+
   function switchSportType(newSportType: SportType) {
     if (
+      isEmpty() ||
       window.confirm(
         `Switching from ${sportType} to ${newSportType} will clear current workout. Are you sure?`
       )
     ) {
-      clearWorkout();
+      setIntervals([]);
+      setInstructions([]);
       setSportType(newSportType);
     }
   }
 
   function switchLengthType(newLengthType: LengthType) {
     if (
+      isEmpty() ||
       window.confirm(
         `Switching from ${lengthType} to ${newLengthType} will clear current workout. Are you sure?`
       )
     ) {
-      clearWorkout();
+      setIntervals([]);
+      setInstructions([]);
       setLengthType(newLengthType);
     }
   }
