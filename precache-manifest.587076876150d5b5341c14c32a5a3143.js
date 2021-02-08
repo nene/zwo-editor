@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ea7447ea1db72e83f9d97cc7d619ed40",
+    "revision": "57499103e7eaace2f67d74df60a4572c",
     "url": "/zwo-editor/index.html"
   },
   {
-    "revision": "b6cb5f5f95b7379ee577",
+    "revision": "498a09b00826d6cdd141",
     "url": "/zwo-editor/static/css/2.6780e105.chunk.css"
   },
   {
-    "revision": "14f19a9c6b9fcd461d18",
+    "revision": "f4560c287e68f57b70c0",
     "url": "/zwo-editor/static/css/main.c95c7188.chunk.css"
   },
   {
-    "revision": "b6cb5f5f95b7379ee577",
-    "url": "/zwo-editor/static/js/2.97c30303.chunk.js"
+    "revision": "498a09b00826d6cdd141",
+    "url": "/zwo-editor/static/js/2.43c6d5ee.chunk.js"
   },
   {
     "revision": "2979a3022cd3d9958d12e9050e83b940",
-    "url": "/zwo-editor/static/js/2.97c30303.chunk.js.LICENSE.txt"
+    "url": "/zwo-editor/static/js/2.43c6d5ee.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "14f19a9c6b9fcd461d18",
-    "url": "/zwo-editor/static/js/main.7ef9bdce.chunk.js"
+    "revision": "f4560c287e68f57b70c0",
+    "url": "/zwo-editor/static/js/main.f29c4c35.chunk.js"
   },
   {
     "revision": "6849853918a2d3c80474",
