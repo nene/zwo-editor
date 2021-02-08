@@ -60,12 +60,14 @@ exports[`<Tooltip> for cycling ramp, renders: duration, power-range, %FTP-range,
     />
      
     100 W
-     - 
+     -
+     
     200 W
   </div>
   <div>
     50%
-     - 
+     -
+     
     100%
      FTP
   </div>
@@ -155,7 +157,8 @@ exports[`<Tooltip> for cycling, renders: duration, power, w/kg, %FTP, cadence 1`
   </div>
   <div>
     3.3 W/kg
-     · 
+     ·
+     
     125%
      FTP
   </div>
@@ -262,7 +265,8 @@ exports[`<Tooltip> for running ramp, renders: duration, distance, %pace-range, p
   </div>
   <div>
     50%
-     to 
+     to
+     
     100%
      
     10K pace

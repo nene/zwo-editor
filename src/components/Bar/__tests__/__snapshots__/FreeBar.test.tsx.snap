@@ -7,7 +7,7 @@ exports[`<FreeBar> renders 1`] = `
 
 .c1 {
   border: 1px solid white;
-  background-image: url('test-file-stub');
+  background-image: url("test-file-stub");
 }
 
 <div
@@ -52,7 +52,7 @@ exports[`<FreeBar> renders with tooltip when selected 1`] = `
 
 .c1 {
   border: 1px solid white;
-  background-image: url('test-file-stub');
+  background-image: url("test-file-stub");
 }
 
 <div
