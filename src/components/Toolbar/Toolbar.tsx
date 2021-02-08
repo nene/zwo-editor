@@ -5,6 +5,7 @@ import {
   faFile,
   faComment,
   faBicycle,
+  faRunning,
 } from "@fortawesome/free-solid-svg-icons";
 import { ReactComponent as WarmdownLogo } from "../../assets/warmdown.svg";
 import { ReactComponent as WarmupLogo } from "../../assets/warmup.svg";
@@ -164,14 +165,12 @@ const Toolbar = ({
       >
         Interval
       </SvgButton>
-      {props.sportType === "bike" && (
-        <IconButton
-          icon={faBicycle}
-          onClick={() => addInterval(intervalFactory.free({}, mode))}
-        >
-          Free Ride
-        </IconButton>
-      )}
+      <IconButton
+        icon={props.sportType === "bike" ? faBicycle : faRunning}
+        onClick={() => addInterval(intervalFactory.free({}, mode))}
+      >
+        {props.sportType === "bike" ? "Free Ride" : "Free Run"}
+      </IconButton>
       <IconButton
         icon={faComment}
         onClick={() => addInstruction(createInstruction({}, mode))}

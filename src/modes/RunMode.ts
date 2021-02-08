@@ -41,7 +41,9 @@ export default class RunMode extends Mode {
   intervalDistance(interval: Interval): Distance {
     switch (interval.type) {
       case "free": {
-        throw new Error("Run workout may not contain FreeRide");
+        return interval.length instanceof Distance
+          ? interval.length
+          : new Distance(0);
       }
       case "steady": {
         return this.distance(
@@ -78,7 +80,9 @@ export default class RunMode extends Mode {
   intervalDuration(interval: Interval): Duration {
     switch (interval.type) {
       case "free":
-        throw new Error("Run workout may not contain FreeRide");
+        return interval.length instanceof Duration
+          ? interval.length
+          : new Duration(0);
       case "steady":
         return this.duration(
           interval.length,
