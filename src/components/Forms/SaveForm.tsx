@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import styled from "styled-components";
 import {
   selectAuthor,
   selectDescription,
@@ -40,37 +41,40 @@ function SaveForm(props: SaveFormProps) {
   return (
     <div>
       <h2>Workout metadata</h2>
-      <div className="form-control">
-        <Label htmlFor="name">Workout Title</Label>
-        <input
+      <Field>
+        <FieldLabel htmlFor="name">Workout Title</FieldLabel>
+        <TextInput
           type="text"
-          name="name"
+          id="name"
           placeholder="Workout title"
           value={props.name}
           onChange={(e) => props.setName(e.target.value)}
         />
-      </div>
-      <div className="form-control">
-        <Label htmlFor="description">Workout description</Label>
-        <textarea
-          name="description"
+      </Field>
+      <Field>
+        <FieldLabel htmlFor="description">Workout description</FieldLabel>
+        <TextInput
+          as="textarea"
+          id="description"
           placeholder="Workout description"
           value={props.description}
-          onChange={(e) => props.setDescription(e.target.value)}
-        ></textarea>
-      </div>
-      <div className="form-control">
-        <Label htmlFor="author">Workout Author</Label>
-        <input
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+            props.setDescription(e.target.value)
+          }
+        />
+      </Field>
+      <Field>
+        <FieldLabel htmlFor="author">Workout Author</FieldLabel>
+        <TextInput
           type="text"
-          name="author"
+          id="author"
           placeholder="Workout Author"
           value={props.author}
           onChange={(e) => props.setAuthor(e.target.value)}
         />
-      </div>
-      <div className="form-control">
-        <Label htmlFor="author">Workout Tags</Label>
+      </Field>
+      <Field>
+        <FieldLabel>Workout Tags</FieldLabel>
         {DEFAULT_TAGS.map((tagName) => (
           <Checkbox
             key={tagName}
@@ -81,7 +85,7 @@ function SaveForm(props: SaveFormProps) {
             }
           />
         ))}
-      </div>
+      </Field>
     </div>
   );
 }
@@ -93,5 +97,29 @@ function addOrRemoveTag(tags: string[], tagName: string): string[] {
     return [...tags, tagName];
   }
 }
+
+const Field = styled.div`
+  margin: 10px 0;
+  width: 100%;
+`;
+
+const FieldLabel = styled(Label)`
+  font-size: 14px;
+  color: gray;
+  display: block;
+  text-align: left;
+`;
+
+const TextInput = styled.input`
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+
+  font-size: 16px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  box-sizing: border-box;
+`;
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaveForm);
