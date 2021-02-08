@@ -1,6 +1,6 @@
 {
-  "name": "zwo-generator",
-  "version": "0.1.0",
+  "name": "zwo-editor",
+  "version": "2.0.0",
   "private": true,
   "homepage": "https://nene.github.io/zwo-editor",
   "repository": {

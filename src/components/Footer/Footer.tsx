@@ -7,7 +7,7 @@ export default function Footer() {
     <Container>
       <List>
         <Item>
-          Zwift Workout v1.7 (
+          Zwift Workout v2.0 (
           <Hyperlink
             href={`${GITHUB_URL}/blob/master/LICENSE.md`}
             target="blank"
