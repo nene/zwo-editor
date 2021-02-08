@@ -12,7 +12,7 @@ import { ReactComponent as IntervalLogo } from "../../assets/interval.svg";
 import { ReactComponent as SteadyLogo } from "../../assets/steady.svg";
 import { createInstruction } from "../../types/Instruction";
 import intervalFactory from "../../interval/intervalFactory";
-import NumberField from "../Editor/NumberField";
+import NumberField from "./NumberField";
 import UploadButton from "./UploadButton";
 import IconButton from "../Button/IconButton";
 import ColorButton from "../Button/ColorButton";
