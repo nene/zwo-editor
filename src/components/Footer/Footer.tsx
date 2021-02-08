@@ -8,15 +8,18 @@ export default function Footer() {
       <List>
         <Item>
           Zwift Workout v1.7 (
-          <a href={`${GITHUB_URL}/blob/master/LICENSE.md`} target="blank">
+          <Hyperlink
+            href={`${GITHUB_URL}/blob/master/LICENSE.md`}
+            target="blank"
+          >
             open source / MIT license
-          </a>
+          </Hyperlink>
           )
         </Item>
         <Item>
-          <a href={`${GITHUB_URL}/issues`} target="blank">
+          <Hyperlink href={`${GITHUB_URL}/issues`} target="blank">
             Report an issue
-          </a>
+          </Hyperlink>
         </Item>
       </List>
     </Container>
@@ -41,4 +44,9 @@ const Item = styled.li`
   display: inline;
   padding: 0 10px;
   margin: 0;
+`;
+
+const Hyperlink = styled.a`
+  text-decoration: none;
+  color: #00c46a;
 `;

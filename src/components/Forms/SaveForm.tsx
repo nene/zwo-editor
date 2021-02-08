@@ -40,7 +40,7 @@ type SaveFormProps = ConnectedProps<
 function SaveForm(props: SaveFormProps) {
   return (
     <div>
-      <h2>Workout metadata</h2>
+      <Heading>Workout metadata</Heading>
       <Field>
         <FieldLabel htmlFor="name">Workout Title</FieldLabel>
         <TextInput
@@ -97,6 +97,13 @@ function addOrRemoveTag(tags: string[], tagName: string): string[] {
     return [...tags, tagName];
   }
 }
+
+const Heading = styled.h2`
+  font-size: 34px;
+  font-weight: 200;
+  margin: 0;
+  text-transform: uppercase;
+`;
 
 const Field = styled.div`
   margin: 10px 0;
