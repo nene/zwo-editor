@@ -1,4 +1,5 @@
-Copyright (c) 2020 Carlo Schiesaro
+Original work Copyright (c) 2020 Carlo Schiesaro
+Modified work Copyright (c) 2021 Rene Saarsoo
 
 MIT License
 
