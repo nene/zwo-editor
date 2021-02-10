@@ -6,6 +6,7 @@ import Tooltip from "../Tooltip/Tooltip";
 import { SteadyInterval } from "../../types/Interval";
 import { intensityMultiplier } from "./multipliers";
 import { WorkoutMode } from "../../modes/WorkoutMode";
+import cadenceImage from "../../assets/cadence.png";
 
 interface SteadyBarProps {
   interval: SteadyInterval;
@@ -17,7 +18,9 @@ interface SteadyBarProps {
 }
 
 const SteadyBar = ({ interval, mode, ...props }: SteadyBarProps) => {
-  const style = { backgroundColor: zoneColor(interval.intensity) };
+  const style = {
+    backgroundColor: zoneColor(interval.intensity),
+  };
 
   const [width, setWidth] = useState(mode.lengthToWidth(interval.length));
 
@@ -80,6 +83,7 @@ const SteadyBar = ({ interval, mode, ...props }: SteadyBarProps) => {
           handleResizeStop(d.width, d.height)
         }
         onResize={(e, direction, ref, d) => notifyChange(d.width, d.height)}
+        $hasCadence={Boolean(interval.cadence)}
         style={style}
       ></RoundedResizable>
     </Container>
@@ -90,9 +94,14 @@ const Container = styled.div`
   position: relative;
 `;
 
-const RoundedResizable = styled(Resizable)`
+const RoundedResizable = styled(Resizable)<{ $hasCadence: boolean }>`
   border-radius: 10px;
   border: 1px solid white;
+  background-image: ${({ $hasCadence }) =>
+    $hasCadence ? "url(" + cadenceImage + ")" : "none"};
+  background-size: 16px;
+  background-position: 2px 2px;
+  background-repeat: no-repeat;
 `;
 
 export default SteadyBar;

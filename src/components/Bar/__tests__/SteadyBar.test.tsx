@@ -111,4 +111,35 @@ describe("<SteadyBar>", () => {
 
     expect(component).toMatchSnapshot();
   });
+
+  it("renders cadence icon when interval has cadence specified", () => {
+    const mode = createMode({
+      sportType: "bike",
+      ftp: 250,
+      weight: 75,
+      runningTimes: [],
+      lengthType: "time",
+    });
+    const interval = intervalFactory.steady(
+      {
+        length: Duration(50),
+        intensity: Zones.Z3.min,
+        cadence: 90,
+      },
+      mode
+    );
+
+    const component = renderer.create(
+      <SteadyBar
+        interval={interval}
+        mode={mode}
+        selected={false}
+        showTooltip={false}
+        onChange={() => {}}
+        onClick={() => {}}
+      />
+    );
+
+    expect(component).toMatchSnapshot();
+  });
 });
