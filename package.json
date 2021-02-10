@@ -64,7 +64,8 @@
     "eject": "react-scripts eject",
     "pretty": "prettier --write .",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "ts:check": "tsc --noEmit"
   },
   "eslintConfig": {
     "extends": "react-app"
