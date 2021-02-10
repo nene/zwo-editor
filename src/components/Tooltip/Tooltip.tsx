@@ -81,16 +81,24 @@ function BikeData({
           </div>
         </>
       )}
-      <CadenceRow>
-        <CadenceLabel>Cadence</CadenceLabel>
-        <CadenceInput
-          cadence={interval.cadence}
-          onCadenceChange={onCadenceChange}
-        />
-      </CadenceRow>
+      <CadenceItem cadence={interval.cadence} onChange={onCadenceChange} />
     </>
   );
 }
+
+type CadenceItemProps = {
+  cadence?: number;
+  onChange: (v: number | undefined) => void;
+};
+
+const CadenceItem: React.FC<CadenceItemProps> = ({ cadence, onChange }) => {
+  return (
+    <CadenceRow>
+      <CadenceLabel>Cadence</CadenceLabel>
+      <CadenceInput cadence={cadence} onCadenceChange={onChange} />
+    </CadenceRow>
+  );
+};
 
 function RunData({ interval, mode }: TooltipProps & { mode: RunMode }) {
   return (
