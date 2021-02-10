@@ -39,6 +39,8 @@ Plans going forward:
 - Integrate with [zwiftout][] text-based editor.
 - Fix more [bugs from the original][orig-bugs].
 - Pick a different name and logo to distinguish from the original.
+- Toggling between showing %FTP / wattage / W/kg.
+- Editing of all values (duration, intensity, cadence) within the tooltip.
 
 [zwo-editor]: https://github.com/breiko83/zwo-editor
 [zwiftworkout.com]: https://www.zwiftworkout.com/
