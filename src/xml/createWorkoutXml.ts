@@ -108,7 +108,7 @@ export default function createWorkoutXml(
       // free ride
       segment = Builder.create("FreeRide")
         .att("Duration", writeLength(interval.length))
-        .att("FlatRoad", 0); // Not sure what this is for
+        .att("FlatRoad", 0); // Without this, Zwift will adjust resistance when gradient changes
       // add cadence if not zero
       interval.cadence !== 0 && segment.att("Cadence", interval.cadence);
     }
