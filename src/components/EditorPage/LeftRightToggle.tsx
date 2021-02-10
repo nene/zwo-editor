@@ -31,7 +31,7 @@ const LeftRightToggle = <TLeft, TRight>({
     <Label>{label}</Label>
     <LeftRight>
       <ToggleIcon
-        active={selected === leftValue}
+        $active={selected === leftValue}
         icon={leftIcon}
         size="lg"
         fixedWidth
@@ -47,7 +47,7 @@ const LeftRightToggle = <TLeft, TRight>({
         offColor={COLOR}
       />
       <ToggleIcon
-        active={selected === rightValue}
+        $active={selected === rightValue}
         icon={rightIcon}
         size="lg"
         fixedWidth
@@ -67,9 +67,9 @@ const LeftRight = styled.div`
   color: lightgray;
 `;
 
-const ToggleIcon = styled(FontAwesomeIcon)<{ active: boolean }>`
+const ToggleIcon = styled(FontAwesomeIcon)<{ $active: boolean }>`
   padding: 5px;
-  color: ${({ active }) => (active ? "#00C46A" : "inherit")};
+  color: ${({ $active }) => ($active ? "#00C46A" : "inherit")};
 `;
 
 export default LeftRightToggle;
