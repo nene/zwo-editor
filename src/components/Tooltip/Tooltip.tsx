@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBolt, faClock, faRuler } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
@@ -92,10 +92,25 @@ type CadenceItemProps = {
 };
 
 const CadenceItem: React.FC<CadenceItemProps> = ({ cadence, onChange }) => {
+  const [hover, setHover] = useState(false);
+  const [focus, setFocus] = useState(false);
+
   return (
-    <CadenceRow>
+    <CadenceRow
+      onMouseOver={() => setHover(true)}
+      onMouseOut={() => setHover(false)}
+    >
       <CadenceLabel>Cadence</CadenceLabel>
-      <CadenceInput cadence={cadence} onCadenceChange={onChange} />
+      {hover || focus ? (
+        <CadenceInput
+          cadence={cadence}
+          onCadenceChange={onChange}
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
+        />
+      ) : (
+        <CadenceValue>{cadence ? cadence + " rpm" : "--"}</CadenceValue>
+      )}
     </CadenceRow>
   );
 };
@@ -176,6 +191,14 @@ const CadenceInput = styled.input.attrs<CadenceInputProps>((props) => ({
   font-size: 14px;
   min-width: 1px;
   flex: 1;
+`;
+
+const CadenceValue = styled.span`
+  flex: 1;
+  display: inline-block;
+  font-size: 14px;
+  height: 19px;
+  text-align: left;
 `;
 
 export default Tooltip;
