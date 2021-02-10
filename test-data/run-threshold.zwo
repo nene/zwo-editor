@@ -1,0 +1,19 @@
+<workout_file>
+    <author>AI Endurance</author>
+    <name>Threshold Run</name>
+    <description>Do 2 Intervals of 8 min at Threshold pace on 4 min recovery. Extend the warmup and cool down if you feel like you need more time. If you need to walk in between intervals, that's ok! </description>
+    <sportType>run</sportType>
+    <durationType>time</durationType>
+    <tags>
+        <tag name="aiendurance.com" />
+        <tag name="INTERVALS" />
+        <tag name="Threshold" />
+    </tags>
+    <workout>
+        <Warmup Duration="300" PowerLow="0.65" PowerHigh="0.8" pace="1" />
+        <SteadyState Duration="480" Power="1.0" pace="1" />
+        <SteadyState Duration="240" Power="0.65" pace="1" />
+        <SteadyState Duration="480" Power="1.0" pace="1" />
+        <Cooldown Duration="300" PowerLow="0.8" PowerHigh="0.65" pace="1" />
+    </workout>
+</workout_file>

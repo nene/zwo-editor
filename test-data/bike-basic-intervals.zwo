@@ -1,0 +1,12 @@
+<workout_file>
+  <name>No author</name>
+  <description>Test loading of textevents.</description>
+  <author>Me</author>
+  <sportType>bike</sportType>
+  <workout>
+    <IntervalsT Repeat="2" OnDuration="600" OnPower="0.8" OffDuration="600" OffPower="0.5">
+      <textevent timeoffset="300" message="Intervals message 1"></textevent>
+      <textevent timeoffset="900" message="Intervals message 2"></textevent>
+    </IntervalsT>
+  </workout>
+</workout_file>

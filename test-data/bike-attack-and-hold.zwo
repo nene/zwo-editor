@@ -1,0 +1,47 @@
+<workout_file>
+	<author>Andy Sexton</author>
+	<name>Attack and hold</name>
+	<description>A session to work on building your ability to ride at threshold. After a 15 minute warm up, we perform 5 &quot;Attack and Hold&quot; intervals. 30s of hard effort to build the levels of fatigue in the legs, followed by 4mins30 on sweet spot effort, just under threshold. Rest and repeat!</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<Warmup Duration="600" PowerHigh="0.6" PowerLow="0.4">
+		</Warmup>
+		<IntervalsT Repeat="3" OnDuration="30" OnPower="1" OffDuration="30" OffPower="0.5">
+		</IntervalsT>
+		<SteadyState Duration="120" Power="0.5">
+		</SteadyState>
+		<SteadyState Duration="30" Power="1.5">
+		</SteadyState>
+		<SteadyState Duration="270" Power="0.92">
+		</SteadyState>
+		<SteadyState Duration="150" Power="0.4">
+		</SteadyState>
+		<SteadyState Duration="30" Power="1.5">
+		</SteadyState>
+		<SteadyState Duration="270" Power="0.92">
+		</SteadyState>
+		<SteadyState Duration="150" Power="0.4">
+		</SteadyState>
+		<SteadyState Duration="30" Power="1.5">
+		</SteadyState>
+		<SteadyState Duration="270" Power="0.92">
+		</SteadyState>
+		<SteadyState Duration="150" Power="0.4">
+		</SteadyState>
+		<SteadyState Duration="30" Power="1.5">
+		</SteadyState>
+		<SteadyState Duration="270" Power="0.92">
+		</SteadyState>
+		<SteadyState Duration="150" Power="0.4">
+		</SteadyState>
+		<SteadyState Duration="30" Power="1.5">
+		</SteadyState>
+		<SteadyState Duration="270" Power="0.92">
+		</SteadyState>
+		<SteadyState Duration="150" Power="0.4">
+		</SteadyState>
+		<Cooldown Duration="450" PowerHigh="0.35" PowerLow="0.55">
+		</Cooldown>
+	</workout>
+</workout_file>

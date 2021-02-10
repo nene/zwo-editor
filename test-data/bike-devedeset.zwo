@@ -1,0 +1,134 @@
+<workout_file>
+  <name>Devedeset</name>
+  <author>Zwift</author>
+  <description>Named after the number 90 in Croatian, this workout is focused sweet spot training, centered around 90% of FTP. This pairs with Halvfems (90 in Danish) and Novanta (90 in Italian) to make up the sweet spot trifecta in this plan. The workouts are alphabetically ordered from easiest to hardest, so enjoy the easiest of these three challenging workouts today...</description>
+  <tags>
+  </tags>
+  <sportType>bike</sportType>
+  <workout>
+    <Warmup Duration="600" PowerLow="0.25" PowerHigh="0.75">
+      <textevent timeoffset="20" message="Welcome to Devedeset workout!">
+      </textevent>
+      <textevent timeoffset="30" message="Named after the number 90 in Croatian.">
+      </textevent>
+      <textevent timeoffset="180" message="We&apos;ll start off by doing some warmup efforts">
+      </textevent>
+      <textevent timeoffset="190" message="First 30 seconds at 95% FTP (95rpm)">
+      </textevent>
+      <textevent timeoffset="200" message="Next 30 seconds at 105% FTP (105rpm)">
+      </textevent>
+      <textevent timeoffset="210" message="Finally 30 seconds at 115% FTP (115rpm)">
+      </textevent>
+      <textevent timeoffset="220" message="Then we&apos;ll continue with the main body of the workout">
+      </textevent>
+      <textevent timeoffset="230" message="3 x 10 minutes at sweet-spot :)">
+      </textevent>
+      <textevent timeoffset="240" message="As simple as that...">
+      </textevent>
+      <textevent timeoffset="250" message="Sprinkled with some cadence variations">
+      </textevent>
+      <textevent timeoffset="260" message="That&apos;s about it.">
+      </textevent>
+      <textevent timeoffset="270" message="For now, enjoy the rest of this warmup.">
+      </textevent>
+    </Warmup>
+    <SteadyState Duration="30" Power="0.95" Cadence="95">
+    </SteadyState>
+    <SteadyState Duration="30" Power="0.5" Cadence="85">
+    </SteadyState>
+    <SteadyState Duration="30" Power="1.05" Cadence="105">
+    </SteadyState>
+    <SteadyState Duration="30" Power="0.5" Cadence="85">
+    </SteadyState>
+    <SteadyState Duration="30" Power="1.15" Cadence="115">
+    </SteadyState>
+    <SteadyState Duration="30" Power="0.5" Cadence="85">
+    </SteadyState>
+    <SteadyState Duration="120" Power="0.5" Cadence="85">
+      <textevent timeoffset="0" message="Good!">
+      </textevent>
+      <textevent timeoffset="60" message="3 x 10 min sweet-spot coming up right away">
+      </textevent>
+      <textevent timeoffset="70" message="The first set we&apos;ll be doing steady 90 RPM">
+      </textevent>
+      <textevent timeoffset="80" message="Get ready...">
+      </textevent>
+      <textevent timeoffset="110" message="It&apos;s coming up...">
+      </textevent>
+    </SteadyState>
+    <SteadyState Duration="600" Power="0.9" Cadence="90">
+    </SteadyState>
+    <SteadyState Duration="240" Power="0.55" Cadence="85">
+      <textevent timeoffset="0" message="Wooh!">
+      </textevent>
+      <textevent timeoffset="10" message="Nice effort!">
+      </textevent>
+      <textevent timeoffset="120" message="For the next effort we&apos;ll lower the cadence a notch">
+      </textevent>
+      <textevent timeoffset="130" message="...to 80 RPM.">
+      </textevent>
+    </SteadyState>
+    <SteadyState Duration="600" Power="0.9" Cadence="80">
+    </SteadyState>
+    <SteadyState Duration="240" Power="0.55" Cadence="85">
+      <textevent timeoffset="0" message="Well done!">
+      </textevent>
+      <textevent timeoffset="10" message="You&apos;re awesome!">
+      </textevent>
+      <textevent timeoffset="150" message="In the next set we&apos;ll be varying our cadence between 70..100 RPM">
+      </textevent>
+    </SteadyState>
+    <IntervalsT Repeat="2" OnDuration="120" OnPower="0.9" Cadence="90" OffDuration="60" OffPower="0.9" CadenceResting="70">
+      <textevent timeoffset="0" message="Starting off with normal cadence">
+      </textevent>
+      <textevent timeoffset="10" message="2 minutes here.">
+      </textevent>
+      <textevent timeoffset="60" message="Half way this first set">
+      </textevent>
+      <textevent timeoffset="110" message="Next we&apos;ll be dropping to slower cadence">
+      </textevent>
+      <textevent timeoffset="120" message="One minute at 70 RPM">
+      </textevent>
+      <textevent timeoffset="170" message="Next back to 90 RPM">
+      </textevent>
+      <textevent timeoffset="180" message="Get the legs spinning again">
+      </textevent>
+      <textevent timeoffset="190" message="We&apos;re here for 2 minutes">
+      </textevent>
+      <textevent timeoffset="240" message="One more minute of spinning left">
+      </textevent>
+      <textevent timeoffset="290" message="Be ready to drop that cadence...">
+      </textevent>
+      <textevent timeoffset="300" message="...down to 70 RPM">
+      </textevent>
+      <textevent timeoffset="310" message="We&apos;ll grid for another minute here.">
+      </textevent>
+      <textevent timeoffset="340" message="Now we&apos;ll switch to high-cadence mode">
+      </textevent>
+      <textevent timeoffset="350" message="For the remaining 4 minutes">
+      </textevent>
+    </IntervalsT>
+    <SteadyState Duration="240" Power="0.9" Cadence="100">
+      <textevent timeoffset="0" message="Spin it up">
+      </textevent>
+      <textevent timeoffset="10" message="The last 4 minutes are ahead">
+      </textevent>
+      <textevent timeoffset="20" message="They&apos;ll be passing by quickly enough">
+      </textevent>
+      <textevent timeoffset="120" message="Just the final 2 minutes of spinning">
+      </textevent>
+      <textevent timeoffset="180" message="Stay solid for the last minute">
+      </textevent>
+      <textevent timeoffset="230" message="Take it to the line!">
+      </textevent>
+    </SteadyState>
+    <Cooldown Duration="420" PowerLow="0.55" PowerHigh="0.25">
+      <textevent timeoffset="0" message="YEAH!">
+      </textevent>
+      <textevent timeoffset="30" message="This was one bloody workout">
+      </textevent>
+      <textevent timeoffset="40" message="Pat yourself on the back">
+      </textevent>
+    </Cooldown>
+  </workout>
+</workout_file>

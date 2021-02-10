@@ -1,0 +1,12 @@
+<workout_file>
+    <author>Rachel "Ruby" Zambrano</author>
+    <name>4 minute threshold intervals</name>
+    <description>Threshold interval workout similar to a 4 x (800 meter threshold/400 meter recovery) utilizing Zambrano Power Zones and the Stryd power meter for running.   Workout by Rachel 'Ruby' Zambrano of Peaks Coaching Group.</description>
+    <sportType>run</sportType>
+    <tags/>
+    <workout>
+        <Warmup Duration="600" PowerLow="0.75449997" PowerHigh="0.8545"/>
+        <IntervalsT Repeat="4" OnDuration="240" OffDuration="150" OnPower="1.0044999" OffPower="0.75449997"/>
+        <Cooldown Duration="600" PowerLow="0.82449996" PowerHigh="0.75449997"/>
+    </workout>
+</workout_file>

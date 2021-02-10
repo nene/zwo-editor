@@ -1,0 +1,32 @@
+<workout_file>
+    <author>AI Endurance</author>
+    <name>Anaerobic Run</name>
+    <description>Do 8 Intervals of 20 sec at Anaerobic pace on 1 min recovery. Extend the warmup and cool down if you feel like you need more time. If you need to walk between intervals, that's ok! </description>
+    <sportType>run</sportType>
+    <durationType>time</durationType>
+    <tags>
+        <tag name="aiendurance.com" />
+        <tag name="INTERVALS" />
+        <tag name="Anaerobic" />
+        <tag name="Sprint" />
+    </tags>
+    <workout>
+        <Warmup Duration="620" PowerLow="0.65" PowerHigh="0.8" pace="1" />
+        <SteadyState Duration="20" Power="1.15" pace="1" />
+        <SteadyState Duration="60" Power="0.65" pace="1" />
+        <SteadyState Duration="20" Power="1.15" pace="1" />
+        <SteadyState Duration="60" Power="0.65" pace="1" />
+        <SteadyState Duration="20" Power="1.15" pace="1" />
+        <SteadyState Duration="60" Power="0.65" pace="1" />
+        <SteadyState Duration="20" Power="1.15" pace="1" />
+        <SteadyState Duration="60" Power="0.65" pace="1" />
+        <SteadyState Duration="20" Power="1.15" pace="1" />
+        <SteadyState Duration="60" Power="0.65" pace="1" />
+        <SteadyState Duration="20" Power="1.15" pace="1" />
+        <SteadyState Duration="60" Power="0.65" pace="1" />
+        <SteadyState Duration="20" Power="1.15" pace="1" />
+        <SteadyState Duration="60" Power="0.65" pace="1" />
+        <SteadyState Duration="20" Power="1.15" pace="1" />
+        <Cooldown Duration="600" PowerLow="0.8" PowerHigh="0.65" pace="1" />
+    </workout>
+</workout_file>

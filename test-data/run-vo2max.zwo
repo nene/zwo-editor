@@ -1,0 +1,25 @@
+<workout_file>
+    <author>AI Endurance</author>
+    <name>VO2Max Run</name>
+    <description>Do 5 Intervals of 2 min at VO2Max pace on 1 min recovery. Extend the warmup and cool down if you feel like you need more time. If you need to walk between intervals, that's ok! </description>
+    <sportType>run</sportType>
+    <durationType>time</durationType>
+    <tags>
+        <tag name="aiendurance.com" />
+        <tag name="INTERVALS" />
+        <tag name="VO2Max" />
+    </tags>
+    <workout>
+        <Warmup Duration="600" PowerLow="0.65" PowerHigh="0.8" pace="1" />
+        <SteadyState Duration="120" Power="1.05" pace="1" />
+        <SteadyState Duration="60" Power="0.65" pace="1" />
+        <SteadyState Duration="120" Power="1.05" pace="1" />
+        <SteadyState Duration="60" Power="0.65" pace="1" />
+        <SteadyState Duration="120" Power="1.05" pace="1" />
+        <SteadyState Duration="60" Power="0.65" pace="1" />
+        <SteadyState Duration="120" Power="1.05" pace="1" />
+        <SteadyState Duration="60" Power="0.65" pace="1" />
+        <SteadyState Duration="120" Power="1.05" pace="1" />
+        <Cooldown Duration="360" PowerLow="0.8" PowerHigh="0.65" pace="1" />
+    </workout>
+</workout_file>

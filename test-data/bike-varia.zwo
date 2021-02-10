@@ -1,0 +1,23 @@
+<workout_file>
+  <author>Rene Saarsoo</author>
+  <name>Varia</name>
+  <description>Demonstrating all types of intervals.</description>
+  <sportType>bike</sportType>
+  <durationType>time</durationType>
+  <tags>
+    <tag name="Intervals"/>
+    <tag name="Recovery"/>
+  </tags>
+  <workout>
+    <Warmup Duration="600" PowerLow="0.25" PowerHigh="0.498" pace="0"/>
+    <SteadyState Duration="360" Power="0.5" pace="0"/>
+    <SteadyState Duration="300" Power="0.605" pace="0"/>
+    <SteadyState Duration="240" Power="0.763" pace="0"/>
+    <SteadyState Duration="180" Power="0.901" pace="0"/>
+    <SteadyState Duration="120" Power="1.053" pace="0"/>
+    <SteadyState Duration="60" Power="1.194" pace="0"/>
+    <IntervalsT Repeat="3" OnDuration="90" OffDuration="30" OnPower="0.744" OffPower="1.004" pace="0"/>
+    <FreeRide Duration="600" FlatRoad="0"/>
+    <Cooldown Duration="780" PowerLow="0.998" PowerHigh="0.154" pace="0"/>
+  </workout>
+</workout_file>
