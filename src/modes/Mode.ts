@@ -3,7 +3,7 @@ import {
   durationMultiplier,
   intensityMultiplier,
 } from "../components/Bar/multipliers";
-import { Distance, Duration, Length } from "../types/Length";
+import { Distance, Duration, isDuration, Length } from "../types/Length";
 import { LengthType } from "../types/LengthType";
 import { SportType } from "../types/SportType";
 import { floor } from "../utils/math";
@@ -19,7 +19,7 @@ export default abstract class Mode {
   public abstract readonly lengthType: LengthType;
 
   lengthToWidth(length: Length): number {
-    if (length instanceof Duration) {
+    if (isDuration(length)) {
       return length.seconds / durationMultiplier;
     } else {
       return length.meters / distanceMultiplier;
@@ -31,9 +31,9 @@ export default abstract class Mode {
     precision: Precision = { meters: 200, seconds: 5 }
   ): Length {
     if (this.lengthType === "time") {
-      return new Duration(floor(width * durationMultiplier, precision.seconds));
+      return Duration(floor(width * durationMultiplier, precision.seconds));
     } else {
-      return new Distance(floor(width * distanceMultiplier, precision.meters));
+      return Distance(floor(width * distanceMultiplier, precision.meters));
     }
   }
 

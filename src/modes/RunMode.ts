@@ -4,7 +4,13 @@ import { RunningTimes } from "../types/RunningTimes";
 import { runningDistances } from "../types/runningDistances";
 import { LengthType } from "../types/LengthType";
 import Mode from "./Mode";
-import { Distance, Duration, Length } from "../types/Length";
+import {
+  Distance,
+  Duration,
+  isDistance,
+  isDuration,
+  Length,
+} from "../types/Length";
 import { Interval } from "../types/Interval";
 
 export default class RunMode extends Mode {
@@ -23,27 +29,25 @@ export default class RunMode extends Mode {
   }
 
   distance(length: Length, intensity: number, pace: PaceType): Distance {
-    if (length instanceof Duration) {
-      return new Distance(this.speed(intensity, pace) * length.seconds);
+    if (isDuration(length)) {
+      return Distance(this.speed(intensity, pace) * length.seconds);
     } else {
       return length;
     }
   }
 
   duration(length: Length, intensity: number, pace: PaceType): Duration {
-    if (length instanceof Duration) {
+    if (isDuration(length)) {
       return length;
     } else {
-      return new Duration(length.meters / this.speed(intensity, pace));
+      return Duration(length.meters / this.speed(intensity, pace));
     }
   }
 
   intervalDistance(interval: Interval): Distance {
     switch (interval.type) {
       case "free": {
-        return interval.length instanceof Distance
-          ? interval.length
-          : new Distance(0);
+        return isDistance(interval.length) ? interval.length : Distance(0);
       }
       case "steady": {
         return this.distance(
@@ -70,7 +74,7 @@ export default class RunMode extends Mode {
           interval.offIntensity,
           interval.pace
         );
-        return new Distance(
+        return Distance(
           interval.repeat * (onDistance.meters + offDistance.meters)
         );
       }
@@ -80,9 +84,7 @@ export default class RunMode extends Mode {
   intervalDuration(interval: Interval): Duration {
     switch (interval.type) {
       case "free":
-        return interval.length instanceof Duration
-          ? interval.length
-          : new Duration(0);
+        return isDuration(interval.length) ? interval.length : Duration(0);
       case "steady":
         return this.duration(
           interval.length,
@@ -106,7 +108,7 @@ export default class RunMode extends Mode {
           interval.offIntensity,
           interval.pace
         );
-        return new Duration(
+        return Duration(
           interval.repeat * (onDuration.seconds + offDuration.seconds)
         );
       }

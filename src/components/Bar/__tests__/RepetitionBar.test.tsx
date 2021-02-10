@@ -28,8 +28,8 @@ describe("<RepetitionBar>", () => {
     const interval = intervalFactory.repetition(
       {
         repeat: 3,
-        onLength: new Duration(50),
-        offLength: new Duration(100),
+        onLength: Duration(50),
+        offLength: Duration(100),
         onIntensity: 1.0,
         offIntensity: 0.5,
       },

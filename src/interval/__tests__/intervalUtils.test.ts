@@ -26,7 +26,7 @@ const defaultIntervals = (mode: WorkoutMode) =>
     intervalFactory.steady(
       {
         id: "#1",
-        length: new Duration(60),
+        length: Duration(60),
         intensity: 0.5,
       },
       mode
@@ -34,7 +34,7 @@ const defaultIntervals = (mode: WorkoutMode) =>
     intervalFactory.steady(
       {
         id: "#2",
-        length: new Duration(120),
+        length: Duration(120),
         intensity: 1.0,
       },
       mode
@@ -42,7 +42,7 @@ const defaultIntervals = (mode: WorkoutMode) =>
     intervalFactory.steady(
       {
         id: "#3",
-        length: new Duration(30),
+        length: Duration(30),
         intensity: 0.75,
       },
       mode
@@ -55,10 +55,10 @@ describe("intervalUtils", () => {
       const mode = defaultBikeMode();
       const intervals = defaultIntervals(mode);
       expect(
-        updateIntervalDuration("#2", new Duration(10), intervals, mode)
+        updateIntervalDuration("#2", Duration(10), intervals, mode)
       ).toMatchSnapshot();
       expect(
-        updateIntervalDuration("#3", new Duration(-10), intervals, mode)
+        updateIntervalDuration("#3", Duration(-10), intervals, mode)
       ).toMatchSnapshot();
     });
 
@@ -66,10 +66,10 @@ describe("intervalUtils", () => {
       const mode = defaultBikeMode();
       const intervals = defaultIntervals(mode);
       expect(
-        updateIntervalDuration("#1", new Duration(-65), intervals, mode)
+        updateIntervalDuration("#1", Duration(-65), intervals, mode)
       ).toEqual(intervals);
       expect(
-        updateIntervalDuration("#1", new Duration(-60), intervals, mode)
+        updateIntervalDuration("#1", Duration(-60), intervals, mode)
       ).toEqual(intervals);
     });
 
@@ -77,7 +77,7 @@ describe("intervalUtils", () => {
       const mode = defaultBikeMode();
       const intervals = defaultIntervals(mode);
       expect(
-        updateIntervalDuration("#blah", new Duration(10), intervals, mode)
+        updateIntervalDuration("#blah", Duration(10), intervals, mode)
       ).toEqual(intervals);
     });
   });

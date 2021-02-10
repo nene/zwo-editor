@@ -15,7 +15,7 @@ export function createInstruction(
   return {
     id: uuidv4(),
     text: "",
-    offset: mode.lengthType === "time" ? new Duration(0) : new Distance(0),
+    offset: mode.lengthType === "time" ? Duration(0) : Distance(0),
     ...fields,
   };
 }

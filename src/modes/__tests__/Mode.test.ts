@@ -27,64 +27,58 @@ describe("Mode", () => {
   describe("lengthToWidth()", () => {
     it("converts duration to pixels", () => {
       allModes().forEach((mode) => {
-        expect(mode.lengthToWidth(new Duration(60))).toEqual(20);
+        expect(mode.lengthToWidth(Duration(60))).toEqual(20);
       });
     });
 
     it("converts distance to pixels in RunMode", () => {
-      expect(defaultRunDistanceMode().lengthToWidth(new Distance(200))).toEqual(
-        20
-      );
+      expect(defaultRunDistanceMode().lengthToWidth(Distance(200))).toEqual(20);
     });
   });
 
   describe("widthToLength()", () => {
     it("converts pixels to duration in BikeMode", () => {
-      expect(defaultBikeMode().widthToLength(20)).toEqual(new Duration(60));
+      expect(defaultBikeMode().widthToLength(20)).toEqual(Duration(60));
     });
 
     it("converts pixels to duration in RunMode", () => {
-      expect(defaultRunMode().widthToLength(20)).toEqual(new Duration(60));
+      expect(defaultRunMode().widthToLength(20)).toEqual(Duration(60));
     });
 
     it("converts pixels to distance in RunMode@distance", () => {
-      expect(defaultRunDistanceMode().widthToLength(20)).toEqual(
-        new Distance(200)
-      );
+      expect(defaultRunDistanceMode().widthToLength(20)).toEqual(Distance(200));
     });
   });
 
   describe("duration()", () => {
     it("returns the value unmodified when given a Duration", () => {
-      expect(defaultBikeMode().duration(new Duration(60))).toEqual(
-        new Duration(60)
-      );
+      expect(defaultBikeMode().duration(Duration(60))).toEqual(Duration(60));
       expect(
-        defaultRunMode().duration(new Duration(60), 1.0, PaceType.fiveKm)
-      ).toEqual(new Duration(60));
+        defaultRunMode().duration(Duration(60), 1.0, PaceType.fiveKm)
+      ).toEqual(Duration(60));
     });
 
     it("converts Distance to Duration in RunMode, using the recorded runningTimes", () => {
       // when distance exactly 5km, ran at 5km pace
       expect(
-        defaultRunMode().duration(new Distance(5000), 1.0, PaceType.fiveKm)
-      ).toEqual(new Duration(300));
+        defaultRunMode().duration(Distance(5000), 1.0, PaceType.fiveKm)
+      ).toEqual(Duration(300));
       // when distance half of 5km, ran at 5km pace
       expect(
-        defaultRunMode().duration(new Distance(2500), 1.0, PaceType.fiveKm)
-      ).toEqual(new Duration(150));
+        defaultRunMode().duration(Distance(2500), 1.0, PaceType.fiveKm)
+      ).toEqual(Duration(150));
       // when distance exactly 5km, ran at 2 x 5km pace
       expect(
-        defaultRunMode().duration(new Distance(5000), 2.0, PaceType.fiveKm)
-      ).toEqual(new Duration(150));
+        defaultRunMode().duration(Distance(5000), 2.0, PaceType.fiveKm)
+      ).toEqual(Duration(150));
       // 0 distance == 0 duration
       expect(
-        defaultRunMode().duration(new Distance(0), 1.0, PaceType.fiveKm)
-      ).toEqual(new Duration(0));
+        defaultRunMode().duration(Distance(0), 1.0, PaceType.fiveKm)
+      ).toEqual(Duration(0));
     });
 
     it("BikeMode does not support Distance", () => {
-      expect(() => defaultBikeMode().duration(new Distance(200))).toThrow(
+      expect(() => defaultBikeMode().duration(Distance(200))).toThrow(
         "Unexpected length:Distance encountered in BikeMode"
       );
     });
@@ -98,23 +92,23 @@ describe("Mode", () => {
         (fname) => {
           const interval = intervalFactory[fname](
             {
-              length: new Duration(60),
+              length: Duration(60),
             },
             mode
           );
-          expect(mode.intervalDuration(interval)).toEqual(new Duration(60));
+          expect(mode.intervalDuration(interval)).toEqual(Duration(60));
         }
       );
 
       const repetition = intervalFactory.repetition(
         {
           repeat: 2,
-          onLength: new Duration(100),
-          offLength: new Duration(200),
+          onLength: Duration(100),
+          offLength: Duration(200),
         },
         mode
       );
-      expect(mode.intervalDuration(repetition)).toEqual(new Duration(600));
+      expect(mode.intervalDuration(repetition)).toEqual(Duration(600));
     });
 
     it("in RunMode returns interval length unmodified when it is of Duration type", () => {
@@ -123,23 +117,23 @@ describe("Mode", () => {
         (fname) => {
           const interval = intervalFactory[fname](
             {
-              length: new Duration(60),
+              length: Duration(60),
             },
             mode
           );
-          expect(mode.intervalDuration(interval)).toEqual(new Duration(60));
+          expect(mode.intervalDuration(interval)).toEqual(Duration(60));
         }
       );
 
       const repetition = intervalFactory.repetition(
         {
           repeat: 2,
-          onLength: new Duration(100),
-          offLength: new Duration(200),
+          onLength: Duration(100),
+          offLength: Duration(200),
         },
         mode
       );
-      expect(mode.intervalDuration(repetition)).toEqual(new Duration(600));
+      expect(mode.intervalDuration(repetition)).toEqual(Duration(600));
     });
 
     it("in RunMode converts Distance to Duration", () => {
@@ -147,55 +141,55 @@ describe("Mode", () => {
 
       const steady = intervalFactory.steady(
         {
-          length: new Distance(5000),
+          length: Distance(5000),
           intensity: 1.0,
           pace: PaceType.fiveKm,
         },
         mode
       );
-      expect(mode.intervalDuration(steady)).toEqual(new Duration(300));
+      expect(mode.intervalDuration(steady)).toEqual(Duration(300));
 
       const ramp = intervalFactory.ramp(
         {
-          length: new Distance(5000),
+          length: Distance(5000),
           startIntensity: 0.5,
           endIntensity: 1.0,
           pace: PaceType.fiveKm,
         },
         mode
       );
-      expect(mode.intervalDuration(ramp)).toEqual(new Duration(400));
+      expect(mode.intervalDuration(ramp)).toEqual(Duration(400));
 
       const repetition = intervalFactory.repetition(
         {
           repeat: 2,
-          onLength: new Distance(2000),
-          offLength: new Distance(3000),
+          onLength: Distance(2000),
+          offLength: Distance(3000),
           onIntensity: 1.0,
           offIntensity: 0.5,
           pace: PaceType.fiveKm,
         },
         mode
       );
-      expect(mode.intervalDuration(repetition)).toEqual(new Duration(960));
+      expect(mode.intervalDuration(repetition)).toEqual(Duration(960));
     });
 
     it("in RunMode converts FreeRide Distance to zero-Duration", () => {
       const mode = defaultRunDistanceMode();
       const free = intervalFactory.free(
         {
-          length: new Distance(2000),
+          length: Distance(2000),
         },
         mode
       );
-      expect(mode.intervalDuration(free)).toEqual(new Duration(0));
+      expect(mode.intervalDuration(free)).toEqual(Duration(0));
     });
 
     it("in BikeMode Distance is not supported", () => {
       const mode = defaultBikeMode();
       const interval = intervalFactory.steady(
         {
-          length: new Distance(400),
+          length: Distance(400),
         },
         mode
       );
@@ -231,20 +225,20 @@ describe("Mode", () => {
     describe("distance()", () => {
       it("converts duration to distance", () => {
         expect(
-          defaultRunMode().distance(new Duration(60), 0, PaceType.fiveKm)
-        ).toEqual(new Distance(0));
+          defaultRunMode().distance(Duration(60), 0, PaceType.fiveKm)
+        ).toEqual(Distance(0));
         expect(
-          defaultRunMode().distance(new Duration(60), 1.0, PaceType.fiveKm)
-        ).toEqual(new Distance(1000.0000000000001));
+          defaultRunMode().distance(Duration(60), 1.0, PaceType.fiveKm)
+        ).toEqual(Distance(1000.0000000000001));
         expect(
-          defaultRunMode().distance(new Duration(59.876), 1.0, PaceType.fiveKm)
-        ).toEqual(new Distance(997.93333333333334));
+          defaultRunMode().distance(Duration(59.876), 1.0, PaceType.fiveKm)
+        ).toEqual(Distance(997.93333333333334));
       });
 
       it("keeps distance unchanged", () => {
         expect(
-          defaultRunMode().distance(new Distance(200), 1.0, PaceType.fiveKm)
-        ).toEqual(new Distance(200));
+          defaultRunMode().distance(Distance(200), 1.0, PaceType.fiveKm)
+        ).toEqual(Distance(200));
       });
     });
 
@@ -254,14 +248,14 @@ describe("Mode", () => {
           const mode = defaultRunMode();
           const interval = intervalFactory.steady(
             {
-              length: new Duration(60),
+              length: Duration(60),
               intensity: 1.0,
               pace: PaceType.fiveKm,
             },
             mode
           );
           expect(mode.intervalDistance(interval)).toEqual(
-            new Distance(1000.0000000000001)
+            Distance(1000.0000000000001)
           );
         });
 
@@ -269,25 +263,25 @@ describe("Mode", () => {
           const mode = defaultRunMode();
           const interval = intervalFactory.ramp(
             {
-              length: new Duration(60),
+              length: Duration(60),
               startIntensity: 0.5,
               endIntensity: 1.0,
               pace: PaceType.fiveKm,
             },
             mode
           );
-          expect(mode.intervalDistance(interval)).toEqual(new Distance(750));
+          expect(mode.intervalDistance(interval)).toEqual(Distance(750));
         });
 
         it("converts free interval duration to zero-distance", () => {
           const mode = defaultRunMode();
           const free = intervalFactory.free(
             {
-              length: new Duration(2000),
+              length: Duration(2000),
             },
             mode
           );
-          expect(mode.intervalDistance(free)).toEqual(new Distance(0));
+          expect(mode.intervalDistance(free)).toEqual(Distance(0));
         });
 
         it("calculates repetition interval distance", () => {
@@ -295,8 +289,8 @@ describe("Mode", () => {
           const interval = intervalFactory.repetition(
             {
               repeat: 3,
-              onLength: new Duration(60),
-              offLength: new Duration(60),
+              onLength: Duration(60),
+              offLength: Duration(60),
               onIntensity: 1.0,
               offIntensity: 0.5,
               pace: PaceType.fiveKm,
@@ -304,7 +298,7 @@ describe("Mode", () => {
             mode
           );
           expect(mode.intervalDistance(interval)).toEqual(
-            new Distance(4500.000000000001)
+            Distance(4500.000000000001)
           );
         });
       });
@@ -314,22 +308,22 @@ describe("Mode", () => {
           const mode = defaultRunDistanceMode();
           const interval = intervalFactory.steady(
             {
-              length: new Distance(200),
+              length: Distance(200),
             },
             mode
           );
-          expect(mode.intervalDistance(interval)).toEqual(new Distance(200));
+          expect(mode.intervalDistance(interval)).toEqual(Distance(200));
         });
 
         it("returns ramp distance as-is", () => {
           const mode = defaultRunDistanceMode();
           const interval = intervalFactory.ramp(
             {
-              length: new Distance(400),
+              length: Distance(400),
             },
             mode
           );
-          expect(mode.intervalDistance(interval)).toEqual(new Distance(400));
+          expect(mode.intervalDistance(interval)).toEqual(Distance(400));
         });
 
         it("sums and multiplies repetition interval distances", () => {
@@ -337,12 +331,12 @@ describe("Mode", () => {
           const interval = intervalFactory.repetition(
             {
               repeat: 5,
-              onLength: new Distance(400),
-              offLength: new Distance(600),
+              onLength: Distance(400),
+              offLength: Distance(600),
             },
             mode
           );
-          expect(mode.intervalDistance(interval)).toEqual(new Distance(5000));
+          expect(mode.intervalDistance(interval)).toEqual(Distance(5000));
         });
       });
     });

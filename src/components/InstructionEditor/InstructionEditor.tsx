@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { Instruction } from "../../types/Instruction";
 import * as format from "../../utils/format";
-import { Duration, Length } from "../../types/Length";
+import { isDuration, Length } from "../../types/Length";
 import { WorkoutMode } from "../../modes/WorkoutMode";
 
 interface InstructionEditorProps {
@@ -60,7 +60,7 @@ const InstructionEditor = (props: InstructionEditorProps) => {
   }
 
   const renderOffset = (offset: Length): string =>
-    offset instanceof Duration ? format.duration(offset) : `${offset.meters} m`;
+    isDuration(offset) ? format.duration(offset) : `${offset.meters} m`;
 
   return (
     <Draggable

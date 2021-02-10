@@ -20,7 +20,7 @@ describe("InstructionEditor", () => {
     const instruction = createInstruction(
       {
         text: "This is a comment",
-        offset: new Duration(300),
+        offset: Duration(300),
       },
       mode
     );

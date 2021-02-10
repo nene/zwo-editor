@@ -143,8 +143,8 @@ const EditorPage = ({
       onBackspacePress={removeSelectedInterval}
       onUpPress={() => adjustSelectedIntervalIntensity(0.01)}
       onDownPress={() => adjustSelectedIntervalIntensity(-0.01)}
-      onLeftPress={() => adjustSelectedIntervalDuration(new Duration(-5))}
-      onRightPress={() => adjustSelectedIntervalDuration(new Duration(5))}
+      onLeftPress={() => adjustSelectedIntervalDuration(Duration(-5))}
+      onRightPress={() => adjustSelectedIntervalDuration(Duration(5))}
     >
       <Head name={name} description={description} />
 

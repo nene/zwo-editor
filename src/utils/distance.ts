@@ -7,7 +7,7 @@ export function workoutDistance(
   intervals: Interval[],
   mode: RunMode
 ): Distance {
-  return new Distance(
+  return Distance(
     sum(
       intervals
         .map((interval) => mode.intervalDistance(interval))

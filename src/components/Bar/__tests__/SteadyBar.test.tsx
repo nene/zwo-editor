@@ -32,7 +32,7 @@ describe("<SteadyBar>", () => {
     });
     const interval = intervalFactory.steady(
       {
-        length: new Duration(50),
+        length: Duration(50),
         intensity: Zones.Z3.min,
       },
       mode
@@ -62,7 +62,7 @@ describe("<SteadyBar>", () => {
     });
     const interval = intervalFactory.steady(
       {
-        length: new Duration(50),
+        length: Duration(50),
         intensity: Zones.Z3.min,
       },
       mode
@@ -92,7 +92,7 @@ describe("<SteadyBar>", () => {
     });
     const interval = intervalFactory.steady(
       {
-        length: new Duration(50),
+        length: Duration(50),
         intensity: Zones.Z3.min,
       },
       mode

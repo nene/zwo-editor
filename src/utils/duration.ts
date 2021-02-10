@@ -8,7 +8,7 @@ export function workoutDuration(
   intervals: Interval[],
   mode: WorkoutMode
 ): Duration {
-  return new Duration(
+  return Duration(
     sum(
       intervals
         .map((interval) => mode.intervalDuration(interval))

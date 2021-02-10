@@ -31,7 +31,7 @@ describe("<SteadyBar>", () => {
     });
     const interval = intervalFactory.ramp(
       {
-        length: new Duration(50),
+        length: Duration(50),
         startIntensity: Zones.Z2.min,
         endIntensity: Zones.Z4.min,
       },
@@ -61,7 +61,7 @@ describe("<SteadyBar>", () => {
     });
     const interval = intervalFactory.ramp(
       {
-        length: new Duration(50),
+        length: Duration(50),
         startIntensity: Zones.Z2.min,
         endIntensity: Zones.Z4.min,
       },

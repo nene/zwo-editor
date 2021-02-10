@@ -30,7 +30,7 @@ describe("<FreeBar>", () => {
     });
     const interval = intervalFactory.free(
       {
-        length: new Duration(50),
+        length: Duration(50),
       },
       mode
     );
@@ -58,7 +58,7 @@ describe("<FreeBar>", () => {
     });
     const interval = intervalFactory.free(
       {
-        length: new Duration(50),
+        length: Duration(50),
       },
       mode
     );

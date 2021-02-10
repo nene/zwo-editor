@@ -56,7 +56,7 @@ describe("XML", () => {
         // Warmup: 10:00 30%..75%
         intervalFactory.ramp(
           {
-            length: new Duration(10 * 60),
+            length: Duration(10 * 60),
             startIntensity: 0.3,
             endIntensity: 0.75,
           },
@@ -64,31 +64,31 @@ describe("XML", () => {
         ),
         // Steady: 5:00 80%
         intervalFactory.steady(
-          { length: new Duration(5 * 60), intensity: 0.8 },
+          { length: Duration(5 * 60), intensity: 0.8 },
           mode
         ),
         // Intervals: 4 x ON 0:30 120%, OFF 1:00 60%
         intervalFactory.repetition(
           {
             repeat: 4,
-            onLength: new Duration(30),
+            onLength: Duration(30),
             onIntensity: 1.2,
-            offLength: new Duration(60),
+            offLength: Duration(60),
             offIntensity: 0.6,
           },
           mode
         ),
         // Ramp 1:00 80%..150%
         intervalFactory.ramp(
-          { length: new Duration(60), startIntensity: 0.8, endIntensity: 1.5 },
+          { length: Duration(60), startIntensity: 0.8, endIntensity: 1.5 },
           mode
         ),
         // Freeride: 20:00
-        intervalFactory.free({ length: new Duration(20 * 60) }, mode),
+        intervalFactory.free({ length: Duration(20 * 60) }, mode),
         // Cooldown: 10:00 30%..30%
         intervalFactory.ramp(
           {
-            length: new Duration(10 * 60),
+            length: Duration(10 * 60),
             startIntensity: 0.7,
             endIntensity: 0.3,
           },
@@ -98,13 +98,13 @@ describe("XML", () => {
       instructions: [
         // @ 00:00 - at the start of warmup
         createInstruction(
-          { offset: new Duration(0), text: "Welcome to the workout!" },
+          { offset: Duration(0), text: "Welcome to the workout!" },
           mode
         ),
         // @ 12:30 - at the middle of second block
         createInstruction(
           {
-            offset: new Duration(12 * 60 + 30),
+            offset: Duration(12 * 60 + 30),
             text: "This is just a warmup still",
           },
           mode
@@ -112,7 +112,7 @@ describe("XML", () => {
         // @ 15:00 - at the start of repetition block
         createInstruction(
           {
-            offset: new Duration(15 * 60),
+            offset: Duration(15 * 60),
             text: "It's the first one of four sprint efforts",
           },
           mode
@@ -120,7 +120,7 @@ describe("XML", () => {
         // @ 19:30 - at the start of last repetition block
         createInstruction(
           {
-            offset: new Duration(19 * 60 + 30),
+            offset: Duration(19 * 60 + 30),
             text: "It's the first one of four sprint efforts",
           },
           mode
@@ -128,7 +128,7 @@ describe("XML", () => {
         // @ 21:00 - at the start of a ramp
         createInstruction(
           {
-            offset: new Duration(21 * 60),
+            offset: Duration(21 * 60),
             text: "As a bonus, we'll ramp up really hard :)",
           },
           mode
@@ -136,7 +136,7 @@ describe("XML", () => {
         // @ 32:00 - inside freeride
         createInstruction(
           {
-            offset: new Duration(32 * 60),
+            offset: Duration(32 * 60),
             text: "Ride as hard as you can for 20 minutes!",
           },
           mode
@@ -144,7 +144,7 @@ describe("XML", () => {
         // @ 51:50 - almost at the very end of cooldown
         createInstruction(
           {
-            offset: new Duration(51 * 60 + 50),
+            offset: Duration(51 * 60 + 50),
             text: "This was it. See you next time.",
           },
           mode
@@ -176,7 +176,7 @@ describe("XML", () => {
         // Warmup: 10:00 30%..75% 80rpm
         intervalFactory.ramp(
           {
-            length: new Duration(10 * 60),
+            length: Duration(10 * 60),
             startIntensity: 0.3,
             endIntensity: 0.75,
             cadence: 80,
@@ -185,17 +185,17 @@ describe("XML", () => {
         ),
         // Steady: 5:00 80% 90rpm
         intervalFactory.steady(
-          { length: new Duration(5 * 60), intensity: 0.8, cadence: 90 },
+          { length: Duration(5 * 60), intensity: 0.8, cadence: 90 },
           mode
         ),
         // Intervals: 4 x ON 0:30 120% 100rpm, OFF 1:00 60% 60rpm
         intervalFactory.repetition(
           {
             repeat: 4,
-            onLength: new Duration(30),
+            onLength: Duration(30),
             onIntensity: 1.2,
             onCadence: 100,
-            offLength: new Duration(60),
+            offLength: Duration(60),
             offIntensity: 0.6,
             offCadence: 60,
           },
@@ -204,7 +204,7 @@ describe("XML", () => {
         // Ramp 1:00 80%..150% 90rpm
         intervalFactory.ramp(
           {
-            length: new Duration(60),
+            length: Duration(60),
             startIntensity: 0.8,
             endIntensity: 1.5,
             cadence: 90,
@@ -212,11 +212,11 @@ describe("XML", () => {
           mode
         ),
         // Freeride: 20:00
-        intervalFactory.free({ length: new Duration(20 * 60) }, mode),
+        intervalFactory.free({ length: Duration(20 * 60) }, mode),
         // Cooldown: 10:00 30%..30% 85rpm
         intervalFactory.ramp(
           {
-            length: new Duration(10 * 60),
+            length: Duration(10 * 60),
             startIntensity: 0.7,
             endIntensity: 0.3,
             cadence: 85,
@@ -251,7 +251,7 @@ describe("XML", () => {
         // Warmup: 10:00 30%..75% of marathon pace
         intervalFactory.ramp(
           {
-            length: new Duration(10 * 60),
+            length: Duration(10 * 60),
             startIntensity: 0.3,
             endIntensity: 0.75,
             pace: PaceType.marathon,
@@ -261,7 +261,7 @@ describe("XML", () => {
         // Steady: 5:00 80% of half-marathon pace
         intervalFactory.steady(
           {
-            length: new Duration(5 * 60),
+            length: Duration(5 * 60),
             intensity: 0.8,
             pace: PaceType.halfMarathon,
           },
@@ -271,9 +271,9 @@ describe("XML", () => {
         intervalFactory.repetition(
           {
             repeat: 4,
-            onLength: new Duration(30),
+            onLength: Duration(30),
             onIntensity: 1.2,
-            offLength: new Duration(60),
+            offLength: Duration(60),
             offIntensity: 0.6,
             pace: PaceType.fiveKm,
           },
@@ -282,7 +282,7 @@ describe("XML", () => {
         // Ramp 1:00 80%..150% of 1 mile pace
         intervalFactory.ramp(
           {
-            length: new Duration(60),
+            length: Duration(60),
             startIntensity: 0.8,
             endIntensity: 1.5,
             pace: PaceType.oneMile,
@@ -290,11 +290,11 @@ describe("XML", () => {
           mode
         ),
         // Free run: 20:00
-        intervalFactory.free({ length: new Duration(20 * 60) }, mode),
+        intervalFactory.free({ length: Duration(20 * 60) }, mode),
         // Cooldown: 10:00 30%..30% of 10 km pace
         intervalFactory.ramp(
           {
-            length: new Duration(10 * 60),
+            length: Duration(10 * 60),
             startIntensity: 0.7,
             endIntensity: 0.3,
             pace: PaceType.tenKm,
@@ -305,13 +305,13 @@ describe("XML", () => {
       instructions: [
         // @ 00:00 - at the start of warmup
         createInstruction(
-          { offset: new Duration(0), text: "Welcome to the workout!" },
+          { offset: Duration(0), text: "Welcome to the workout!" },
           mode
         ),
         // @ 12:30 - at the middle of second block
         createInstruction(
           {
-            offset: new Duration(12 * 60 + 30),
+            offset: Duration(12 * 60 + 30),
             text: "This is just a warmup still",
           },
           mode
@@ -319,7 +319,7 @@ describe("XML", () => {
         // @ 15:00 - at the start of repetition block
         createInstruction(
           {
-            offset: new Duration(15 * 60),
+            offset: Duration(15 * 60),
             text: "It's the first one of four sprint efforts",
           },
           mode
@@ -327,7 +327,7 @@ describe("XML", () => {
         // @ 19:30 - at the start of last repetition block
         createInstruction(
           {
-            offset: new Duration(19 * 60 + 30),
+            offset: Duration(19 * 60 + 30),
             text: "It's the first one of four sprint efforts",
           },
           mode
@@ -335,7 +335,7 @@ describe("XML", () => {
         // @ 21:00 - at the start of a ramp
         createInstruction(
           {
-            offset: new Duration(21 * 60),
+            offset: Duration(21 * 60),
             text: "As a bonus, we'll ramp up really hard :)",
           },
           mode
@@ -343,7 +343,7 @@ describe("XML", () => {
         // @ 32:00 - inside freeride
         createInstruction(
           {
-            offset: new Duration(32 * 60),
+            offset: Duration(32 * 60),
             text: "Ride as hard as you can for 20 minutes!",
           },
           mode
@@ -351,7 +351,7 @@ describe("XML", () => {
         // @ 51:50 - almost at the very end of cooldown
         createInstruction(
           {
-            offset: new Duration(51 * 60 + 50),
+            offset: Duration(51 * 60 + 50),
             text: "This was it. See you next time.",
           },
           mode
@@ -383,7 +383,7 @@ describe("XML", () => {
         // Warmup: 1000m 30%..75% of marathon pace
         intervalFactory.ramp(
           {
-            length: new Distance(1000),
+            length: Distance(1000),
             startIntensity: 0.3,
             endIntensity: 0.75,
             pace: PaceType.marathon,
@@ -393,7 +393,7 @@ describe("XML", () => {
         // Steady: 600m 80% of half-marathon pace
         intervalFactory.steady(
           {
-            length: new Distance(600),
+            length: Distance(600),
             intensity: 0.8,
             pace: PaceType.halfMarathon,
           },
@@ -403,9 +403,9 @@ describe("XML", () => {
         intervalFactory.repetition(
           {
             repeat: 4,
-            onLength: new Distance(200),
+            onLength: Distance(200),
             onIntensity: 1.2,
-            offLength: new Distance(400),
+            offLength: Distance(400),
             offIntensity: 0.6,
             pace: PaceType.fiveKm,
           },
@@ -414,7 +414,7 @@ describe("XML", () => {
         // Ramp 600m 80%..150% of 1 mile pace
         intervalFactory.ramp(
           {
-            length: new Distance(600),
+            length: Distance(600),
             startIntensity: 0.8,
             endIntensity: 1.5,
             pace: PaceType.oneMile,
@@ -422,11 +422,11 @@ describe("XML", () => {
           mode
         ),
         // Free run: 1000m
-        intervalFactory.free({ length: new Distance(1000) }, mode),
+        intervalFactory.free({ length: Distance(1000) }, mode),
         // Cooldown: 1000m 30%..30% of 10 km pace
         intervalFactory.ramp(
           {
-            length: new Distance(1000),
+            length: Distance(1000),
             startIntensity: 0.7,
             endIntensity: 0.3,
             pace: PaceType.tenKm,
@@ -437,18 +437,18 @@ describe("XML", () => {
       instructions: [
         // @ 0m - at the start of warmup
         createInstruction(
-          { offset: new Distance(0), text: "Welcome to the workout!" },
+          { offset: Distance(0), text: "Welcome to the workout!" },
           mode
         ),
         // @ 1300m - at the middle of second block
         createInstruction(
-          { offset: new Distance(1300), text: "This is just a warmup still" },
+          { offset: Distance(1300), text: "This is just a warmup still" },
           mode
         ),
         // @ 1600m - at the start of repetition block
         createInstruction(
           {
-            offset: new Distance(1600),
+            offset: Distance(1600),
             text: "It's the first one of four sprint efforts",
           },
           mode
@@ -456,7 +456,7 @@ describe("XML", () => {
         // @ 3400m - at the start of last repetition block
         createInstruction(
           {
-            offset: new Distance(3400),
+            offset: Distance(3400),
             text: "It's the first one of four sprint efforts",
           },
           mode
@@ -464,7 +464,7 @@ describe("XML", () => {
         // @ 4000m - at the start of a ramp
         createInstruction(
           {
-            offset: new Distance(4000),
+            offset: Distance(4000),
             text: "As a bonus, we'll ramp up really hard :)",
           },
           mode
@@ -472,7 +472,7 @@ describe("XML", () => {
         // @ 4800m - inside freeride
         createInstruction(
           {
-            offset: new Distance(4800),
+            offset: Distance(4800),
             text: "Ride as hard as you can for 20 minutes!",
           },
           mode
@@ -480,7 +480,7 @@ describe("XML", () => {
         // @ 6400m - almost at the very end of cooldown
         createInstruction(
           {
-            offset: new Distance(6400),
+            offset: Distance(6400),
             text: "This was it. See you next time.",
           },
           mode
@@ -511,29 +511,26 @@ describe("XML", () => {
       intervals: [
         // Steady: 5:00 80%
         intervalFactory.steady(
-          { length: new Duration(5 * 60), intensity: 0.8 },
+          { length: Duration(5 * 60), intensity: 0.8 },
           mode
         ),
       ],
       instructions: [
         // @ 00:00 - at the start of workout
         createInstruction(
-          { offset: new Duration(0), text: "Are we there yet?" },
+          { offset: Duration(0), text: "Are we there yet?" },
           mode
         ),
         // @ 04:59 - a second before the end of workout
         createInstruction(
-          { offset: new Duration(4 * 60 + 59), text: "Almost there!" },
+          { offset: Duration(4 * 60 + 59), text: "Almost there!" },
           mode
         ),
         // @ 05:00 - right at the end
-        createInstruction(
-          { offset: new Duration(5 * 60), text: "There!" },
-          mode
-        ),
+        createInstruction({ offset: Duration(5 * 60), text: "There!" }, mode),
         // @ 08:00 - well past the end
         createInstruction(
-          { offset: new Duration(8 * 60), text: "Enough of it!" },
+          { offset: Duration(8 * 60), text: "Enough of it!" },
           mode
         ),
       ],
@@ -546,12 +543,12 @@ describe("XML", () => {
       instructions: [
         // @ 00:00 - at the start of workout
         createInstruction(
-          { offset: new Duration(0), text: "Are we there yet?" },
+          { offset: Duration(0), text: "Are we there yet?" },
           mode
         ),
         // @ 04:59 - a second before the end of workout
         createInstruction(
-          { offset: new Duration(4 * 60 + 59), text: "Almost there!" },
+          { offset: Duration(4 * 60 + 59), text: "Almost there!" },
           mode
         ),
       ],
@@ -599,21 +596,21 @@ describe("XML", () => {
       lengthType: mode.lengthType,
       intervals: [
         intervalFactory.steady(
-          { length: new Duration(5 * 60), intensity: 0.8 },
+          { length: Duration(5 * 60), intensity: 0.8 },
           mode
         ),
         intervalFactory.steady(
-          { length: new Duration(5 * 60), intensity: 0.8 },
+          { length: Duration(5 * 60), intensity: 0.8 },
           mode
         ),
       ],
       instructions: [
         createInstruction(
-          { offset: new Duration(5 * 60), text: "Welcome to the interval" },
+          { offset: Duration(5 * 60), text: "Welcome to the interval" },
           mode
         ),
         createInstruction(
-          { offset: new Duration(9 * 60 + 50), text: "Near the end now" },
+          { offset: Duration(9 * 60 + 50), text: "Near the end now" },
           mode
         ),
       ],

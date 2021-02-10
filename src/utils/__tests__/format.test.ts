@@ -14,7 +14,7 @@ describe("format", () => {
       [60 * 60, "60:00"],
       [100 * 60, "100:00"],
     ] as [number, string][]).forEach(([seconds, expectedOutput]) => {
-      expect(format.duration(new Duration(seconds))).toEqual(expectedOutput);
+      expect(format.duration(Duration(seconds))).toEqual(expectedOutput);
     });
   });
 
@@ -25,7 +25,7 @@ describe("format", () => {
       [1378, "1378 m"],
       [1234.567, "1235 m"],
     ] as [number, string][]).forEach(([meters, expectedOutput]) => {
-      expect(format.distance(new Distance(meters))).toEqual(expectedOutput);
+      expect(format.distance(Distance(meters))).toEqual(expectedOutput);
     });
   });
 

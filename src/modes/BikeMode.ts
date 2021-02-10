@@ -1,5 +1,5 @@
 import { LengthType } from "../types/LengthType";
-import { Duration, Length } from "../types/Length";
+import { Duration, isDuration, Length } from "../types/Length";
 import { SportType } from "../types/SportType";
 import Mode from "./Mode";
 import { Interval } from "../types/Interval";
@@ -25,7 +25,7 @@ export default class BikeMode extends Mode {
   }
 
   duration(length: Length): Duration {
-    if (length instanceof Duration) {
+    if (isDuration(length)) {
       return length;
     } else {
       throw new Error("Unexpected length:Distance encountered in BikeMode");
@@ -41,7 +41,7 @@ export default class BikeMode extends Mode {
       case "repetition": {
         const onDuration = this.duration(interval.onLength);
         const offDuration = this.duration(interval.offLength);
-        return new Duration(
+        return Duration(
           interval.repeat * (onDuration.seconds + offDuration.seconds)
         );
       }

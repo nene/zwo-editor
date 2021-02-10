@@ -30,7 +30,7 @@ describe("<Tooltip>", () => {
       lengthType: "time",
     });
     const interval = intervalFactory.steady(
-      { length: new Duration(100), intensity: 1.25, cadence: 0 },
+      { length: Duration(100), intensity: 1.25, cadence: 0 },
       mode
     );
     const component = renderer.create(
@@ -49,7 +49,7 @@ describe("<Tooltip>", () => {
     });
     const interval = intervalFactory.ramp(
       {
-        length: new Duration(100),
+        length: Duration(100),
         startIntensity: 0.5,
         endIntensity: 1.0,
         cadence: 0,
@@ -72,7 +72,7 @@ describe("<Tooltip>", () => {
     });
     const interval = intervalFactory.steady(
       {
-        length: new Duration(100),
+        length: Duration(100),
         intensity: 1.25,
         cadence: 0,
         pace: PaceType.tenKm,
@@ -97,7 +97,7 @@ describe("<Tooltip>", () => {
     // and expecting to get the same 1:40 duration calculated from it
     const interval = intervalFactory.steady(
       {
-        length: new Distance(1250),
+        length: Distance(1250),
         intensity: 1.25,
         cadence: 0,
         pace: PaceType.tenKm,
@@ -120,7 +120,7 @@ describe("<Tooltip>", () => {
     });
     const interval = intervalFactory.ramp(
       {
-        length: new Duration(100),
+        length: Duration(100),
         startIntensity: 0.5,
         endIntensity: 1.0,
         cadence: 0,

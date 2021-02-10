@@ -3,7 +3,7 @@ import RunMode from "../modes/RunMode";
 import { WorkoutMode } from "../modes/WorkoutMode";
 import { Instruction } from "../types/Instruction";
 import { Interval } from "../types/Interval";
-import { Duration, Length } from "../types/Length";
+import { isDuration, Length } from "../types/Length";
 import { Workout } from "../types/Workout";
 
 export default function createWorkoutXml(
@@ -44,7 +44,7 @@ export default function createWorkoutXml(
   xml = xml.up().ele("workout");
 
   const writeLength = (len: Length): number =>
-    len instanceof Duration ? len.seconds : len.meters;
+    isDuration(len) ? len.seconds : len.meters;
 
   intervals.forEach((interval, index) => {
     var segment: Builder.XMLNode;

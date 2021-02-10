@@ -10,8 +10,8 @@ import {
 import { Distance, Duration, Length } from "../types/Length";
 import { WorkoutMode } from "../modes/WorkoutMode";
 
-const defaultDuration = new Duration(300);
-const defaultDistance = new Distance(1000);
+const defaultDuration = Duration(300);
+const defaultDistance = Distance(1000);
 const defaultIntensity = 1.0;
 const defaultPace = PaceType.oneMile;
 const defaultCadence = 0;
@@ -65,10 +65,8 @@ export default {
       onCadence: defaultCadence,
       offCadence: defaultCadence,
       repeat: 3,
-      onLength:
-        mode.lengthType === "time" ? new Duration(30) : new Distance(200),
-      offLength:
-        mode.lengthType === "time" ? new Duration(120) : new Distance(200),
+      onLength: mode.lengthType === "time" ? Duration(30) : Distance(200),
+      offLength: mode.lengthType === "time" ? Duration(120) : Distance(200),
       onIntensity: defaultIntensity,
       offIntensity: defaultIntensity / 2,
       pace: defaultPace,

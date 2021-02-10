@@ -6,7 +6,6 @@ import {
 } from "@reduxjs/toolkit";
 import { Interval } from "../../types/Interval";
 import { RootState } from "../store";
-import { rehydrateAction, rehydrateLengths } from "../rehydrate";
 import { clearWorkout, loadWorkout } from "./workout";
 import {
   updateIntervalIntensity,
@@ -40,9 +39,6 @@ const slice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(rehydrateAction, (state, action) => {
-        return rehydrateLengths(action.payload?.intervals);
-      })
       .addCase(clearWorkout, () => [])
       .addCase(loadWorkout, (state, { payload }) => payload.intervals);
   },

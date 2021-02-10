@@ -83,7 +83,7 @@ export default function parseWorkoutXml(
   let totalLength = 0;
 
   const readLength = (x: number) =>
-    workout.lengthType === "time" ? new Duration(x) : new Distance(x);
+    workout.lengthType === "time" ? Duration(x) : Distance(x);
 
   workoutEl.elements.map(
     (w: {

@@ -32,7 +32,7 @@ export function updateIntervalDuration(
         const seconds =
           mode.intervalDuration(interval).seconds + dDuration.seconds;
         if (seconds > 0) {
-          return { ...interval, length: new Duration(seconds) };
+          return { ...interval, length: Duration(seconds) };
         }
       }
       return interval;
