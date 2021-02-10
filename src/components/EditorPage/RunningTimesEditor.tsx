@@ -46,7 +46,7 @@ export default function RunningTimesEditor({
         time={times[PaceType.tenKm]}
         onChange={(t) => handleInputChange(PaceType.tenKm, t)}
       >
-        10 Mile Time
+        10 Km Time
       </RunTimeInput>
       <RunTimeInput
         time={times[PaceType.halfMarathon]}
