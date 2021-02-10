@@ -93,8 +93,8 @@ export default function parseWorkoutXml(
         PowerLow: string;
         Duration: string;
         PowerHigh: string;
-        Cadence: string;
-        CadenceResting: string;
+        Cadence?: string;
+        CadenceResting?: string;
         Repeat: string;
         OnDuration: string;
         OffDuration: string;
@@ -114,7 +114,9 @@ export default function parseWorkoutXml(
                 w.attributes.Power || w.attributes.PowerLow
               ),
               length: readLength(parseFloat(w.attributes.Duration)),
-              cadence: parseFloat(w.attributes.Cadence || "0"),
+              cadence: w.attributes.Cadence
+                ? parseFloat(w.attributes.Cadence)
+                : undefined,
               pace: parseInt(w.attributes.pace || "0"),
             },
             mode
@@ -129,7 +131,9 @@ export default function parseWorkoutXml(
               endIntensity: parseFloat(w.attributes.PowerHigh),
               length: readLength(parseFloat(w.attributes.Duration)),
               pace: parseInt(w.attributes.pace || "0"),
-              cadence: parseInt(w.attributes.Cadence || "0"),
+              cadence: w.attributes.Cadence
+                ? parseFloat(w.attributes.Cadence)
+                : undefined,
             },
             mode
           )
@@ -144,8 +148,12 @@ export default function parseWorkoutXml(
               offLength: readLength(parseFloat(w.attributes.OffDuration)),
               onIntensity: parseFloat(w.attributes.OnPower),
               offIntensity: parseFloat(w.attributes.OffPower),
-              onCadence: parseInt(w.attributes.Cadence || "0"),
-              offCadence: parseInt(w.attributes.CadenceResting || "0"),
+              onCadence: w.attributes.Cadence
+                ? parseFloat(w.attributes.Cadence)
+                : undefined,
+              offCadence: w.attributes.CadenceResting
+                ? parseFloat(w.attributes.CadenceResting)
+                : undefined,
               pace: parseInt(w.attributes.pace || "0"),
             },
             mode
@@ -161,7 +169,9 @@ export default function parseWorkoutXml(
           intervalFactory.free(
             {
               length: readLength(parseFloat(w.attributes.Duration)),
-              cadence: parseInt(w.attributes.Cadence || "0"),
+              cadence: w.attributes.Cadence
+                ? parseFloat(w.attributes.Cadence)
+                : undefined,
             },
             mode
           )

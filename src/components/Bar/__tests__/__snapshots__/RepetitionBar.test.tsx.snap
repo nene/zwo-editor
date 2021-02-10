@@ -41,7 +41,7 @@ exports[`<RepetitionBar> renders using SteadyBar components 1`] = `
     <SteadyBar
       interval={
         Object {
-          "cadence": 0,
+          "cadence": undefined,
           "id": "mock-id-2",
           "intensity": 1,
           "length": Object {
@@ -67,7 +67,7 @@ exports[`<RepetitionBar> renders using SteadyBar components 1`] = `
     <SteadyBar
       interval={
         Object {
-          "cadence": 0,
+          "cadence": undefined,
           "id": "mock-id-3",
           "intensity": 0.5,
           "length": Object {
@@ -93,7 +93,7 @@ exports[`<RepetitionBar> renders using SteadyBar components 1`] = `
     <SteadyBar
       interval={
         Object {
-          "cadence": 0,
+          "cadence": undefined,
           "id": "mock-id-4",
           "intensity": 1,
           "length": Object {
@@ -119,7 +119,7 @@ exports[`<RepetitionBar> renders using SteadyBar components 1`] = `
     <SteadyBar
       interval={
         Object {
-          "cadence": 0,
+          "cadence": undefined,
           "id": "mock-id-5",
           "intensity": 0.5,
           "length": Object {
@@ -145,7 +145,7 @@ exports[`<RepetitionBar> renders using SteadyBar components 1`] = `
     <SteadyBar
       interval={
         Object {
-          "cadence": 0,
+          "cadence": undefined,
           "id": "mock-id-6",
           "intensity": 1,
           "length": Object {
@@ -171,7 +171,7 @@ exports[`<RepetitionBar> renders using SteadyBar components 1`] = `
     <SteadyBar
       interval={
         Object {
-          "cadence": 0,
+          "cadence": undefined,
           "id": "mock-id-7",
           "intensity": 0.5,
           "length": Object {

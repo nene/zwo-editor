@@ -22,7 +22,7 @@ interface RampBarProps {
 const RampBar = ({ interval, mode, ...props }: RampBarProps) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
-  const handleCadenceChange = (cadence: number) => {
+  const handleCadenceChange = (cadence: number | undefined) => {
     props.onChange({ ...interval, cadence: cadence });
   };
 
@@ -69,7 +69,7 @@ const RampBar = ({ interval, mode, ...props }: RampBarProps) => {
         <Tooltip
           interval={interval}
           mode={mode}
-          onCadenceChange={(cadence: number) => handleCadenceChange(cadence)}
+          onCadenceChange={(cadence) => handleCadenceChange(cadence)}
         />
       )}
       <Ramp onClick={() => props.onClick(interval.id)}>

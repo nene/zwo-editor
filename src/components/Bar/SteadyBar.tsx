@@ -33,7 +33,7 @@ const SteadyBar = ({ interval, mode, ...props }: SteadyBarProps) => {
     setSelected(props.selected);
   }, [props.selected]);
 
-  const handleCadenceChange = (cadence: number) => {
+  const handleCadenceChange = (cadence: number | undefined) => {
     props.onChange({ ...interval, cadence });
   };
 
@@ -63,7 +63,7 @@ const SteadyBar = ({ interval, mode, ...props }: SteadyBarProps) => {
         <Tooltip
           interval={interval}
           mode={mode}
-          onCadenceChange={(cadence: number) => handleCadenceChange(cadence)}
+          onCadenceChange={(cadence) => handleCadenceChange(cadence)}
         />
       )}
       <RoundedResizable

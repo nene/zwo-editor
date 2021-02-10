@@ -21,7 +21,7 @@ const FreeBar = ({ interval, mode, ...props }: FreeBarProps) => {
 
   const [showTooltip, setShowTooltip] = useState(false);
 
-  const handleCadenceChange = (cadence: number) => {
+  const handleCadenceChange = (cadence: number | undefined) => {
     props.onChange({ ...interval, cadence });
   };
 
@@ -48,7 +48,7 @@ const FreeBar = ({ interval, mode, ...props }: FreeBarProps) => {
         <Tooltip
           interval={interval}
           mode={mode}
-          onCadenceChange={(cadence: number) => handleCadenceChange(cadence)}
+          onCadenceChange={(cadence) => handleCadenceChange(cadence)}
         />
       )}
       <ResizableFreeBar

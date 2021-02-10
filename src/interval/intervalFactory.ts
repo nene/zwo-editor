@@ -14,7 +14,6 @@ const defaultDuration = Duration(300);
 const defaultDistance = Distance(1000);
 const defaultIntensity = 1.0;
 const defaultPace = PaceType.oneMile;
-const defaultCadence = 0;
 
 const defaultLength = (mode: WorkoutMode): Length =>
   mode.lengthType === "time" ? defaultDuration : defaultDistance;
@@ -26,7 +25,7 @@ export default {
       id: uuidv4(),
       length: defaultLength(mode),
       intensity: defaultIntensity,
-      cadence: defaultCadence,
+      cadence: undefined,
       pace: defaultPace,
       ...interval,
     };
@@ -39,7 +38,7 @@ export default {
       length: defaultLength(mode),
       startIntensity: defaultIntensity / 2,
       endIntensity: defaultIntensity,
-      cadence: defaultCadence,
+      cadence: undefined,
       pace: defaultPace,
       ...interval,
     };
@@ -50,7 +49,7 @@ export default {
       type: "free",
       id: uuidv4(),
       length: defaultLength(mode),
-      cadence: defaultCadence,
+      cadence: undefined,
       ...interval,
     };
   },
@@ -62,13 +61,13 @@ export default {
     return {
       type: "repetition",
       id: uuidv4(),
-      onCadence: defaultCadence,
-      offCadence: defaultCadence,
       repeat: 3,
       onLength: mode.lengthType === "time" ? Duration(30) : Distance(200),
       offLength: mode.lengthType === "time" ? Duration(120) : Distance(200),
       onIntensity: defaultIntensity,
       offIntensity: defaultIntensity / 2,
+      onCadence: undefined,
+      offCadence: undefined,
       pace: defaultPace,
       ...interval,
     };

@@ -69,7 +69,7 @@ exports[`<FreeBar> renders with tooltip when selected 1`] = `
   <Tooltip
     interval={
       Object {
-        "cadence": 0,
+        "cadence": undefined,
         "id": "mock-id",
         "length": Object {
           "seconds": 50,

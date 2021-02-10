@@ -15,7 +15,7 @@ import * as format from "../../utils/format";
 interface TooltipProps {
   interval: SteadyInterval | RampInterval | FreeInterval;
   mode: WorkoutMode;
-  onCadenceChange: (cadence: number) => void;
+  onCadenceChange: (cadence: number | undefined) => void;
 }
 
 const Tooltip = ({ mode, ...props }: TooltipProps) => {
@@ -142,8 +142,8 @@ const CadenceLabel = styled.label`
 `;
 
 type CadenceInputProps = {
-  cadence: number;
-  onCadenceChange: (v: number) => void;
+  cadence?: number;
+  onCadenceChange: (v: number | undefined) => void;
 };
 
 const CadenceInput = styled.input.attrs<CadenceInputProps>((props) => ({
@@ -153,7 +153,9 @@ const CadenceInput = styled.input.attrs<CadenceInputProps>((props) => ({
   step: "5",
   value: props.cadence || "",
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-    props.onCadenceChange(parseInt(e.target.value));
+    props.onCadenceChange(
+      e.target.value ? parseInt(e.target.value) : undefined
+    );
   },
   onClick: (e: React.MouseEvent<HTMLInputElement>) => {
     e.stopPropagation();

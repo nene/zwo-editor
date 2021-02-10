@@ -78,8 +78,8 @@ export default function createWorkoutXml(
           .att("PowerLow", interval.startIntensity)
           .att("PowerHigh", interval.endIntensity)
           .att("pace", interval.pace);
-        // add cadence if not zero
-        interval.cadence !== 0 && segment.att("Cadence", interval.cadence);
+        interval.cadence !== undefined &&
+          segment.att("Cadence", interval.cadence);
       } else {
         // cooldown
         segment = Builder.create(ramp)
@@ -87,8 +87,8 @@ export default function createWorkoutXml(
           .att("PowerLow", interval.startIntensity) // these 2 values are inverted
           .att("PowerHigh", interval.endIntensity) // looks like a bug on zwift editor
           .att("pace", interval.pace);
-        // add cadence if not zero
-        interval.cadence !== 0 && segment.att("Cadence", interval.cadence);
+        interval.cadence !== undefined &&
+          segment.att("Cadence", interval.cadence);
       }
     } else if (interval.type === "repetition") {
       // <IntervalsT Repeat="5" OnDuration="60" OffDuration="300" OnPower="0.8844353" OffPower="0.51775455" pace="0"/>
@@ -99,18 +99,17 @@ export default function createWorkoutXml(
         .att("OnPower", interval.onIntensity)
         .att("OffPower", interval.offIntensity)
         .att("pace", interval.pace);
-      // add cadence if not zero
-      interval.onCadence !== 0 && segment.att("Cadence", interval.onCadence);
-      // add cadence resting if not zero
-      interval.offCadence !== 0 &&
+      interval.onCadence !== undefined &&
+        segment.att("Cadence", interval.onCadence);
+      interval.offCadence !== undefined &&
         segment.att("CadenceResting", interval.offCadence);
     } else {
       // free ride
       segment = Builder.create("FreeRide")
         .att("Duration", writeLength(interval.length))
         .att("FlatRoad", 0); // Without this, Zwift will adjust resistance when gradient changes
-      // add cadence if not zero
-      interval.cadence !== 0 && segment.att("Cadence", interval.cadence);
+      interval.cadence !== undefined &&
+        segment.att("Cadence", interval.cadence);
     }
 
     const intervalLength = (interval: Interval): number =>

@@ -6,7 +6,7 @@ export interface SteadyInterval {
   length: Length;
   type: "steady";
   intensity: number;
-  cadence: number;
+  cadence?: number;
   pace: PaceType;
 }
 
@@ -16,7 +16,7 @@ export interface RampInterval {
   type: "ramp";
   startIntensity: number;
   endIntensity: number;
-  cadence: number;
+  cadence?: number;
   pace: PaceType;
 }
 
@@ -24,14 +24,14 @@ export interface FreeInterval {
   id: string;
   length: Length;
   type: "free";
-  cadence: number;
+  cadence?: number;
 }
 
 export interface RepetitionInterval {
   id: string;
   type: "repetition";
-  onCadence: number;
-  offCadence: number;
+  onCadence?: number;
+  offCadence?: number;
   onIntensity: number;
   offIntensity: number;
   onLength: Length;
