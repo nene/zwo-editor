@@ -11,6 +11,7 @@ import { WorkoutMode } from "../../modes/WorkoutMode";
 import BikeMode from "../../modes/BikeMode";
 import RunMode from "../../modes/RunMode";
 import * as format from "../../utils/format";
+import cadenceImage from "../../assets/cadence.png";
 
 interface TooltipProps {
   interval: SteadyInterval | RampInterval | FreeInterval;
@@ -44,7 +45,6 @@ const TooltipContainer = styled.div`
   width: 150px;
   border-radius: 5px;
   margin: 5px 0;
-  text-align: center;
   font-size: 14px;
   padding: 5px;
 `;
@@ -100,7 +100,9 @@ const CadenceItem: React.FC<CadenceItemProps> = ({ cadence, onChange }) => {
       onMouseOver={() => setHover(true)}
       onMouseOut={() => setHover(false)}
     >
-      <CadenceLabel>Cadence</CadenceLabel>
+      <CadenceLabel>
+        <img src={cadenceImage} width="16" alt="Cadence" />
+      </CadenceLabel>
       {hover || focus ? (
         <CadenceInput
           cadence={cadence}
@@ -161,7 +163,7 @@ const CadenceRow = styled.div`
 
 const CadenceLabel = styled.label`
   font-size: 14px;
-  flex: 1;
+  padding-right: 5px;
 `;
 
 type CadenceInputProps = {
@@ -198,7 +200,6 @@ const CadenceValue = styled.span`
   display: inline-block;
   font-size: 14px;
   height: 19px;
-  text-align: left;
 `;
 
 export default Tooltip;
