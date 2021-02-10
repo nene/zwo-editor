@@ -11,7 +11,6 @@ exports[`<Tooltip> for cycling ramp, renders: duration, power-range, %FTP-range,
   width: 150px;
   border-radius: 5px;
   margin: 5px 0;
-  text-align: center;
   font-size: 14px;
   padding: 5px;
 }
@@ -25,21 +24,16 @@ exports[`<Tooltip> for cycling ramp, renders: duration, power-range, %FTP-range,
 
 .c2 {
   font-size: 14px;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
+  padding-right: 5px;
 }
 
 .c3 {
-  background-color: rgba(255,255,255,0.1);
-  color: white;
-  border: 0;
-  border-bottom: 0px solid white;
-  font-size: 14px;
-  min-width: 1px;
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  display: inline-block;
+  font-size: 14px;
+  height: 19px;
 }
 
 <div
@@ -73,23 +67,23 @@ exports[`<Tooltip> for cycling ramp, renders: duration, power-range, %FTP-range,
   </div>
   <div
     className="c1"
+    onMouseOut={[Function]}
+    onMouseOver={[Function]}
   >
     <label
       className="c2"
     >
-      Cadence
+      <img
+        alt="Cadence"
+        src="test-file-stub"
+        width="16"
+      />
     </label>
-    <input
+    <span
       className="c3"
-      max="150"
-      min="40"
-      onCadenceChange={[Function]}
-      onChange={[Function]}
-      onClick={[Function]}
-      step="5"
-      type="number"
-      value=""
-    />
+    >
+      —
+    </span>
   </div>
 </div>
 `;
@@ -105,7 +99,6 @@ exports[`<Tooltip> for cycling, renders: duration, power, w/kg, %FTP, cadence 1`
   width: 150px;
   border-radius: 5px;
   margin: 5px 0;
-  text-align: center;
   font-size: 14px;
   padding: 5px;
 }
@@ -119,21 +112,16 @@ exports[`<Tooltip> for cycling, renders: duration, power, w/kg, %FTP, cadence 1`
 
 .c2 {
   font-size: 14px;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
+  padding-right: 5px;
 }
 
 .c3 {
-  background-color: rgba(255,255,255,0.1);
-  color: white;
-  border: 0;
-  border-bottom: 0px solid white;
-  font-size: 14px;
-  min-width: 1px;
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  display: inline-block;
+  font-size: 14px;
+  height: 19px;
 }
 
 <div
@@ -164,23 +152,23 @@ exports[`<Tooltip> for cycling, renders: duration, power, w/kg, %FTP, cadence 1`
   </div>
   <div
     className="c1"
+    onMouseOut={[Function]}
+    onMouseOver={[Function]}
   >
     <label
       className="c2"
     >
-      Cadence
+      <img
+        alt="Cadence"
+        src="test-file-stub"
+        width="16"
+      />
     </label>
-    <input
+    <span
       className="c3"
-      max="150"
-      min="40"
-      onCadenceChange={[Function]}
-      onChange={[Function]}
-      onClick={[Function]}
-      step="5"
-      type="number"
-      value=""
-    />
+    >
+      —
+    </span>
   </div>
 </div>
 `;
@@ -196,7 +184,6 @@ exports[`<Tooltip> for running (in distance mode), renders: duration, distance, 
   width: 150px;
   border-radius: 5px;
   margin: 5px 0;
-  text-align: center;
   font-size: 14px;
   padding: 5px;
 }
@@ -242,7 +229,6 @@ exports[`<Tooltip> for running ramp, renders: duration, distance, %pace-range, p
   width: 150px;
   border-radius: 5px;
   margin: 5px 0;
-  text-align: center;
   font-size: 14px;
   padding: 5px;
 }
@@ -295,7 +281,6 @@ exports[`<Tooltip> for running, renders: duration, distance, %pace, pace type, s
   width: 150px;
   border-radius: 5px;
   margin: 5px 0;
-  text-align: center;
   font-size: 14px;
   padding: 5px;
 }
