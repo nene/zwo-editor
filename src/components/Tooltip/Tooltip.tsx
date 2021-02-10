@@ -111,7 +111,7 @@ const CadenceItem: React.FC<CadenceItemProps> = ({ cadence, onChange }) => {
           onBlur={() => setFocus(false)}
         />
       ) : (
-        <CadenceValue>{cadence ? cadence + " rpm" : "--"}</CadenceValue>
+        <CadenceValue>{cadence ? cadence + " rpm" : "—"}</CadenceValue>
       )}
     </CadenceRow>
   );
