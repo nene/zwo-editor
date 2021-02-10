@@ -1,19 +1,20 @@
 {
   "files": {
     "main.css": "/zwo-editor/static/css/main.c95c7188.chunk.css",
-    "main.js": "/zwo-editor/static/js/main.e21810ee.chunk.js",
-    "main.js.map": "/zwo-editor/static/js/main.e21810ee.chunk.js.map",
+    "main.js": "/zwo-editor/static/js/main.a6ce06fe.chunk.js",
+    "main.js.map": "/zwo-editor/static/js/main.a6ce06fe.chunk.js.map",
     "runtime-main.js": "/zwo-editor/static/js/runtime-main.e9c11083.js",
     "runtime-main.js.map": "/zwo-editor/static/js/runtime-main.e9c11083.js.map",
     "static/css/2.6780e105.chunk.css": "/zwo-editor/static/css/2.6780e105.chunk.css",
-    "static/js/2.5697a2b2.chunk.js": "/zwo-editor/static/js/2.5697a2b2.chunk.js",
-    "static/js/2.5697a2b2.chunk.js.map": "/zwo-editor/static/js/2.5697a2b2.chunk.js.map",
+    "static/js/2.5a476acb.chunk.js": "/zwo-editor/static/js/2.5a476acb.chunk.js",
+    "static/js/2.5a476acb.chunk.js.map": "/zwo-editor/static/js/2.5a476acb.chunk.js.map",
     "index.html": "/zwo-editor/index.html",
-    "precache-manifest.6c0a18016d47d12b36d873c754f37ec2.js": "/zwo-editor/precache-manifest.6c0a18016d47d12b36d873c754f37ec2.js",
+    "precache-manifest.643f8d5a3869f40935279e484ec3046f.js": "/zwo-editor/precache-manifest.643f8d5a3869f40935279e484ec3046f.js",
     "service-worker.js": "/zwo-editor/service-worker.js",
     "static/css/2.6780e105.chunk.css.map": "/zwo-editor/static/css/2.6780e105.chunk.css.map",
     "static/css/main.c95c7188.chunk.css.map": "/zwo-editor/static/css/main.c95c7188.chunk.css.map",
-    "static/js/2.5697a2b2.chunk.js.LICENSE.txt": "/zwo-editor/static/js/2.5697a2b2.chunk.js.LICENSE.txt",
+    "static/js/2.5a476acb.chunk.js.LICENSE.txt": "/zwo-editor/static/js/2.5a476acb.chunk.js.LICENSE.txt",
+    "static/media/cadence.png": "/zwo-editor/static/media/cadence.b638b56b.png",
     "static/media/freeride.svg": "/zwo-editor/static/media/freeride.d3e319d6.svg",
     "static/media/interval.178113c8.svg": "/zwo-editor/static/media/interval.178113c8.svg",
     "static/media/steady.7e9a2283.svg": "/zwo-editor/static/media/steady.7e9a2283.svg",
@@ -23,8 +24,8 @@
   "entrypoints": [
     "static/js/runtime-main.e9c11083.js",
     "static/css/2.6780e105.chunk.css",
-    "static/js/2.5697a2b2.chunk.js",
+    "static/js/2.5a476acb.chunk.js",
     "static/css/main.c95c7188.chunk.css",
-    "static/js/main.e21810ee.chunk.js"
+    "static/js/main.a6ce06fe.chunk.js"
   ]
 }
