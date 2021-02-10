@@ -156,7 +156,7 @@ export default function parseWorkoutXml(
             parseFloat(w.attributes.OffDuration)) *
           parseFloat(w.attributes.Repeat);
       }
-      if (w.name === "free") {
+      if (w.name === "FreeRide") {
         workout.intervals.push(
           intervalFactory.free(
             {

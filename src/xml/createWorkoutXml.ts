@@ -106,7 +106,7 @@ export default function createWorkoutXml(
         segment.att("CadenceResting", interval.offCadence);
     } else {
       // free ride
-      segment = Builder.create("free")
+      segment = Builder.create("FreeRide")
         .att("Duration", writeLength(interval.length))
         .att("FlatRoad", 0); // Not sure what this is for
       // add cadence if not zero
