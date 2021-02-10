@@ -34,31 +34,31 @@ export default function RunningTimesEditor({
         time={times[PaceType.oneMile]}
         onChange={(t) => handleInputChange(PaceType.oneMile, t)}
       >
-        1 Mile Time
+        1 mile time
       </RunTimeInput>
       <RunTimeInput
         time={times[PaceType.fiveKm]}
         onChange={(t) => handleInputChange(PaceType.fiveKm, t)}
       >
-        5 Km Time
+        5 km time
       </RunTimeInput>
       <RunTimeInput
         time={times[PaceType.tenKm]}
         onChange={(t) => handleInputChange(PaceType.tenKm, t)}
       >
-        10 Km Time
+        10 km time
       </RunTimeInput>
       <RunTimeInput
         time={times[PaceType.halfMarathon]}
         onChange={(t) => handleInputChange(PaceType.halfMarathon, t)}
       >
-        Half Marathon Time
+        Half marathon time
       </RunTimeInput>
       <RunTimeInput
         time={times[PaceType.marathon]}
         onChange={(t) => handleInputChange(PaceType.marathon, t)}
       >
-        Marathon Time
+        Marathon time
       </RunTimeInput>
       <Col>
         <button onClick={estimateRunningTimes} className="btn">
