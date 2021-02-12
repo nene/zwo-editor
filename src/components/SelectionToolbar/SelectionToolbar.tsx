@@ -20,12 +20,8 @@ import {
 } from "../../rdx/state/intervals";
 import { ConnectedProps } from "../../types/ConnectedProps";
 import styled from "styled-components";
-import { selectMode } from "../../rdx/state/mode";
-import { createInstruction } from "../../types/Instruction";
-import { addInstruction } from "../../rdx/state/instructions";
 
 const mapStateToProps = (state: RootState) => ({
-  mode: selectMode(state),
   sportType: selectSportType(state),
   selectedIntervalPace: selectSelectedIntervalPace(state),
 });
@@ -35,7 +31,6 @@ const mapDispatchToProps = {
   removeSelectedInterval,
   duplicateSelectedInterval,
   moveSelectedInterval,
-  addInstruction,
 };
 
 type SelectionToolbarProps = ConnectedProps<
@@ -45,14 +40,12 @@ type SelectionToolbarProps = ConnectedProps<
 
 const SelectionToolbar = (props: SelectionToolbarProps) => {
   const {
-    mode,
     sportType,
     selectedIntervalPace,
     setSelectedIntervalPace,
     removeSelectedInterval,
     duplicateSelectedInterval,
     moveSelectedInterval,
-    addInstruction,
   } = props;
 
   return (
@@ -80,7 +73,9 @@ const SelectionToolbar = (props: SelectionToolbarProps) => {
       <ActionButton
         title="Add text event"
         icon={faComment}
-        onClick={() => addInstruction(createInstruction({}, mode))}
+        onClick={() => {
+          /* addInstruction(createInstruction({}, mode)) */
+        }}
       />
       {sportType === "run" && (
         <PaceSelector

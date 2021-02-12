@@ -1,19 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import GenericBar from "../Bar/GenericBar";
-import InstructionEditor from "../InstructionEditor/InstructionEditor";
 import TimeAxis from "../Axis/TimeAxis";
 import ZoneAxis from "../Axis/ZoneAxis";
-import { workoutDuration } from "../../utils/duration";
 import DistanceAxis from "../Axis/DistanceAxis";
 import { selectLengthType } from "../../rdx/state/meta";
 import { RootState } from "../../rdx/store";
 import { selectIntervals, updateInterval } from "../../rdx/state/intervals";
-import {
-  selectInstructions,
-  updateInstruction,
-  removeInstruction,
-} from "../../rdx/state/instructions";
 import { selectMode } from "../../rdx/state/mode";
 import { ConnectedProps } from "../../types/ConnectedProps";
 import {
@@ -27,17 +20,14 @@ import styled from "styled-components";
 const mapStateToProps = (state: RootState) => ({
   lengthType: selectLengthType(state),
   intervals: selectIntervals(state),
-  instructions: selectInstructions(state),
   mode: selectMode(state),
   selectedId: selectSelectedId(state),
 });
 
 const mapDispatchToProps = {
   updateInterval,
-  updateInstruction,
   setSelectedId,
   clearSelection,
-  removeInstruction,
 };
 
 type EditorProps = ConnectedProps<
@@ -48,14 +38,11 @@ type EditorProps = ConnectedProps<
 const Editor = ({
   lengthType,
   intervals,
-  instructions,
   mode,
   selectedId,
   updateInterval,
-  updateInstruction,
   setSelectedId,
   clearSelection,
-  removeInstruction,
 }: EditorProps) => {
   const segmentsRef = useRef<HTMLDivElement>(null);
   const [xAxisWidth, setXAxisWidth] = useState(1320);
@@ -94,7 +81,7 @@ const Editor = ({
         </Segments>
 
         <Slider>
-          {instructions.map((instruction, index) => (
+          {/* {instructions.map((instruction, index) => (
             <InstructionEditor
               key={instruction.id}
               instruction={instruction}
@@ -104,7 +91,7 @@ const Editor = ({
               index={index}
               mode={mode}
             />
-          ))}
+          ))} */}
         </Slider>
 
         {lengthType === "time" ? (

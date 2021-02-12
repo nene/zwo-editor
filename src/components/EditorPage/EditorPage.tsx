@@ -41,12 +41,6 @@ import {
   removeSelectedInterval,
   setIntervals,
 } from "../../rdx/state/intervals";
-import {
-  updateInstruction,
-  removeInstruction,
-  selectInstructions,
-  setInstructions,
-} from "../../rdx/state/instructions";
 import { selectMode } from "../../rdx/state/mode";
 import Toolbar from "../Toolbar/Toolbar";
 import { ConnectedProps } from "../../types/ConnectedProps";
@@ -63,7 +57,6 @@ const mapStateToProps = (state: RootState) => ({
   ftp: selectFtp(state),
   runningTimes: selectRunningTimes(state),
   intervals: selectIntervals(state),
-  instructions: selectInstructions(state),
   mode: selectMode(state),
 });
 
@@ -72,15 +65,12 @@ const mapDispatchToProps = {
   setLengthType,
   setRunningTimes,
   setIntervals,
-  setInstructions,
   adjustSelectedIntervalIntensity,
   adjustSelectedIntervalDuration,
   updateInterval,
-  updateInstruction,
   setSelectedId,
   clearSelection,
   removeSelectedInterval,
-  removeInstruction,
 };
 
 type EditorPageProps = ConnectedProps<
@@ -97,20 +87,18 @@ const EditorPage = ({
   ftp,
   runningTimes,
   intervals,
-  instructions,
   mode,
   setSportType,
   setLengthType,
   setRunningTimes,
   setIntervals,
-  setInstructions,
   adjustSelectedIntervalIntensity,
   adjustSelectedIntervalDuration,
   removeSelectedInterval,
 }: EditorPageProps) => {
   const [savePopupIsVisile, setSavePopupVisibility] = useState(false);
 
-  const isEmpty = () => intervals.length === 0 && instructions.length === 0;
+  const isEmpty = () => intervals.length === 0;
 
   function switchSportType(newSportType: SportType) {
     if (
@@ -120,7 +108,6 @@ const EditorPage = ({
       )
     ) {
       setIntervals([]);
-      setInstructions([]);
       setSportType(newSportType);
     }
   }
@@ -133,7 +120,6 @@ const EditorPage = ({
       )
     ) {
       setIntervals([]);
-      setInstructions([]);
       setLengthType(newLengthType);
     }
   }
