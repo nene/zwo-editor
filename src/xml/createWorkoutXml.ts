@@ -15,12 +15,9 @@ export default function createWorkoutXml(
     lengthType,
     tags,
     intervals,
-    instructions,
   }: Workout,
   mode: WorkoutMode
 ): string {
-  var totalLength = 0;
-
   let xml = Builder.begin()
     .ele("workout_file")
     .ele("author", author)
@@ -118,20 +115,18 @@ export default function createWorkoutXml(
         : mode.intervalDuration(interval).seconds;
 
     const instructionInsideInterval = (instruction: Instruction): boolean =>
-      writeLength(instruction.offset) >= totalLength &&
-      writeLength(instruction.offset) < totalLength + intervalLength(interval);
+      writeLength(instruction.offset) >= 0 &&
+      writeLength(instruction.offset) < intervalLength(interval);
 
     // add instructions if present
-    instructions.filter(instructionInsideInterval).forEach((i) => {
+    interval.instructions.filter(instructionInsideInterval).forEach((i) => {
       segment.ele("textevent", {
-        timeoffset: writeLength(i.offset) - totalLength,
+        timeoffset: writeLength(i.offset),
         message: i.text,
       });
     });
 
     xml.importDocument(segment);
-
-    totalLength += intervalLength(interval);
   });
 
   return xml.end({ pretty: true });

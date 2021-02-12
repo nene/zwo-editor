@@ -2,8 +2,9 @@ import Converter from "xml-js";
 import { v4 as uuidv4 } from "uuid";
 import intervalFactory from "../interval/intervalFactory";
 import { createEmptyWorkout, Workout } from "../types/Workout";
-import { Distance, Duration } from "../types/Length";
+import { Distance, Duration, Length } from "../types/Length";
 import { WorkoutMode } from "../modes/WorkoutMode";
+import { Instruction } from "../types/Instruction";
 
 export default function parseWorkoutXml(
   data: string,
@@ -79,9 +80,6 @@ export default function parseWorkoutXml(
     return workout;
   }
 
-  // either meters (distance) or seconds (duration)
-  let totalLength = 0;
-
   const readLength = (x: number) =>
     workout.lengthType === "time" ? Duration(x) : Distance(x);
 
@@ -104,8 +102,6 @@ export default function parseWorkoutXml(
       };
       elements: any;
     }) => {
-      let length = parseFloat(w.attributes.Duration);
-
       if (w.name === "SteadyState") {
         workout.intervals.push(
           intervalFactory.steady(
@@ -118,6 +114,7 @@ export default function parseWorkoutXml(
                 ? parseFloat(w.attributes.Cadence)
                 : undefined,
               pace: parseInt(w.attributes.pace || "0"),
+              instructions: textEventsToInstructions(w.elements, readLength),
             },
             mode
           )
@@ -134,6 +131,7 @@ export default function parseWorkoutXml(
               cadence: w.attributes.Cadence
                 ? parseFloat(w.attributes.Cadence)
                 : undefined,
+              instructions: textEventsToInstructions(w.elements, readLength),
             },
             mode
           )
@@ -155,14 +153,11 @@ export default function parseWorkoutXml(
                 ? parseFloat(w.attributes.CadenceResting)
                 : undefined,
               pace: parseInt(w.attributes.pace || "0"),
+              instructions: textEventsToInstructions(w.elements, readLength),
             },
             mode
           )
         );
-        length =
-          (parseFloat(w.attributes.OnDuration) +
-            parseFloat(w.attributes.OffDuration)) *
-          parseFloat(w.attributes.Repeat);
       }
       if (w.name === "FreeRide") {
         workout.intervals.push(
@@ -172,37 +167,39 @@ export default function parseWorkoutXml(
               cadence: w.attributes.Cadence
                 ? parseFloat(w.attributes.Cadence)
                 : undefined,
+              instructions: textEventsToInstructions(w.elements, readLength),
             },
             mode
           )
         );
       }
 
-      // check for instructions
-      const textElements = w.elements;
-      if (textElements && textElements.length > 0) {
-        textElements.forEach(
-          (t: {
-            name: string;
-            attributes: { message: string | undefined; timeoffset: string };
-          }) => {
-            if (t.name.toLowerCase() === "textevent")
-              workout.instructions.push({
-                text: t.attributes.message || "",
-                offset: readLength(
-                  totalLength + parseFloat(t.attributes.timeoffset)
-                ),
-                id: uuidv4(),
-              });
-          }
-        );
-      }
-
-      totalLength = totalLength + length;
       // map functions expect return value
       return false;
     }
   );
 
   return workout;
+}
+
+type TextElement = {
+  name: string;
+  attributes: { message: string | undefined; timeoffset: string };
+};
+
+function textEventsToInstructions(
+  textElements: TextElement[] | undefined,
+  readLength: (n: number) => Length
+): Instruction[] {
+  if (!textElements || textElements.length === 0) {
+    return [];
+  }
+
+  return textElements
+    .filter((t) => t.name.toLowerCase() === "textevent")
+    .map((t) => ({
+      text: t.attributes.message || "",
+      offset: readLength(parseFloat(t.attributes.timeoffset)),
+      id: uuidv4(),
+    }));
 }
