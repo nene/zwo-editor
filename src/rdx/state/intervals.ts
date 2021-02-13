@@ -18,6 +18,7 @@ import intervalFactory from "../../interval/intervalFactory";
 import { Duration } from "../../types/Length";
 import { selectMode } from "./mode";
 import { PaceType } from "../../types/PaceType";
+import { not, propEq } from "ramda";
 
 const initialState: Interval[] = [];
 
@@ -36,6 +37,24 @@ const slice = createSlice({
       intervals,
       { payload: id }: PayloadAction<string | undefined>
     ) => intervals.filter((item) => item.id !== id),
+    removeInstruction: (
+      intervals,
+      { payload }: PayloadAction<{ intervalId: string; instructionId: string }>
+    ) => {
+      const interval = intervals.find(propEq("id", payload.intervalId));
+      if (interval) {
+        return replaceById(
+          {
+            ...interval,
+            instructions: interval.instructions.filter(
+              (i) => i.id !== payload.instructionId
+            ),
+          },
+          intervals
+        );
+      }
+      return intervals;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -50,6 +69,7 @@ export const {
   addInterval,
   updateInterval,
   removeInterval,
+  removeInstruction,
 } = slice.actions;
 
 export const removeSelectedInterval = createAsyncThunk(

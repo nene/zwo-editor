@@ -1,5 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`intervals reducer removeInstruction() removes instruction with given ID 1`] = `
+Array [
+  Object {
+    "cadence": undefined,
+    "id": "#1",
+    "instructions": Array [
+      Object {
+        "id": "inst-1",
+        "offset": Object {
+          "seconds": 0,
+        },
+        "text": "Hello",
+      },
+      Object {
+        "id": "inst-3",
+        "offset": Object {
+          "seconds": 20,
+        },
+        "text": "!",
+      },
+    ],
+    "intensity": 0.5,
+    "length": Object {
+      "seconds": 60,
+    },
+    "pace": 0,
+    "type": "steady",
+  },
+]
+`;
+
 exports[`intervals reducer removeInterval() removes interval with given ID 1`] = `
 Array [
   Object {
