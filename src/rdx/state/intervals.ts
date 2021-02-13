@@ -18,7 +18,8 @@ import intervalFactory from "../../interval/intervalFactory";
 import { Duration } from "../../types/Length";
 import { selectMode } from "./mode";
 import { PaceType } from "../../types/PaceType";
-import { not, propEq } from "ramda";
+import { propEq } from "ramda";
+import { Instruction } from "../../types/Instruction";
 
 const initialState: Interval[] = [];
 
@@ -42,18 +43,36 @@ const slice = createSlice({
       { payload }: PayloadAction<{ intervalId: string; instructionId: string }>
     ) => {
       const interval = intervals.find(propEq("id", payload.intervalId));
-      if (interval) {
-        return replaceById(
-          {
-            ...interval,
-            instructions: interval.instructions.filter(
-              (i) => i.id !== payload.instructionId
-            ),
-          },
-          intervals
-        );
+      if (!interval) {
+        return intervals;
       }
-      return intervals;
+      return replaceById(
+        {
+          ...interval,
+          instructions: interval.instructions.filter(
+            (i) => i.id !== payload.instructionId
+          ),
+        },
+        intervals
+      );
+    },
+    updateInstruction: (
+      intervals,
+      {
+        payload,
+      }: PayloadAction<{ intervalId: string; instruction: Instruction }>
+    ) => {
+      const interval = intervals.find(propEq("id", payload.intervalId));
+      if (!interval) {
+        return intervals;
+      }
+      return replaceById(
+        {
+          ...interval,
+          instructions: replaceById(payload.instruction, interval.instructions),
+        },
+        intervals
+      );
     },
   },
   extraReducers: (builder) => {
@@ -70,6 +89,7 @@ export const {
   updateInterval,
   removeInterval,
   removeInstruction,
+  updateInstruction,
 } = slice.actions;
 
 export const removeSelectedInterval = createAsyncThunk(

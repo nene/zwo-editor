@@ -46,3 +46,41 @@ Array [
   },
 ]
 `;
+
+exports[`intervals reducer updateInstruction() overwrites instruction with same ID 1`] = `
+Array [
+  Object {
+    "cadence": undefined,
+    "id": "#1",
+    "instructions": Array [
+      Object {
+        "id": "inst-1",
+        "offset": Object {
+          "seconds": 0,
+        },
+        "text": "Hello",
+      },
+      Object {
+        "id": "inst-2",
+        "offset": Object {
+          "seconds": 10,
+        },
+        "text": "World",
+      },
+      Object {
+        "id": "inst-3",
+        "offset": Object {
+          "seconds": 30,
+        },
+        "text": "Oh yeah!",
+      },
+    ],
+    "intensity": 0.5,
+    "length": Object {
+      "seconds": 60,
+    },
+    "pace": 0,
+    "type": "steady",
+  },
+]
+`;

@@ -1,7 +1,12 @@
 import intervalFactory from "../../../interval/intervalFactory";
 import BikeMode from "../../../modes/BikeMode";
 import { Duration } from "../../../types/Length";
-import { reducer, removeInterval, removeInstruction } from "../intervals";
+import {
+  reducer,
+  removeInterval,
+  removeInstruction,
+  updateInstruction,
+} from "../intervals";
 
 const defaultMode = () => new BikeMode(200, 75);
 
@@ -65,6 +70,51 @@ describe("intervals reducer", () => {
         reducer(
           state,
           removeInstruction({ intervalId: "#1", instructionId: "inst-2" })
+        )
+      ).toMatchSnapshot();
+    });
+  });
+
+  describe("updateInstruction()", () => {
+    it("overwrites instruction with same ID", () => {
+      const state = [
+        intervalFactory.steady(
+          {
+            id: "#1",
+            length: Duration(60),
+            intensity: 0.5,
+            instructions: [
+              {
+                id: "inst-1",
+                offset: Duration(0),
+                text: "Hello",
+              },
+              {
+                id: "inst-2",
+                offset: Duration(10),
+                text: "World",
+              },
+              {
+                id: "inst-3",
+                offset: Duration(20),
+                text: "!",
+              },
+            ],
+          },
+          defaultMode()
+        ),
+      ];
+      expect(
+        reducer(
+          state,
+          updateInstruction({
+            intervalId: "#1",
+            instruction: {
+              id: "inst-3",
+              offset: Duration(30),
+              text: "Oh yeah!",
+            },
+          })
         )
       ).toMatchSnapshot();
     });
