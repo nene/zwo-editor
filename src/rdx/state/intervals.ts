@@ -42,19 +42,12 @@ const slice = createSlice({
       intervals,
       { payload }: PayloadAction<{ intervalId: string; instructionId: string }>
     ) => {
-      const interval = intervals.find(propEq("id", payload.intervalId));
-      if (!interval) {
-        return intervals;
-      }
-      return replaceById(
-        {
-          ...interval,
-          instructions: interval.instructions.filter(
-            (i) => i.id !== payload.instructionId
-          ),
-        },
-        intervals
-      );
+      return updateInstructionsField({
+        intervals,
+        intervalId: payload.intervalId,
+        update: (instructions) =>
+          instructions.filter((i) => i.id !== payload.instructionId),
+      });
     },
     updateInstruction: (
       intervals,
@@ -62,17 +55,12 @@ const slice = createSlice({
         payload,
       }: PayloadAction<{ intervalId: string; instruction: Instruction }>
     ) => {
-      const interval = intervals.find(propEq("id", payload.intervalId));
-      if (!interval) {
-        return intervals;
-      }
-      return replaceById(
-        {
-          ...interval,
-          instructions: replaceById(payload.instruction, interval.instructions),
-        },
-        intervals
-      );
+      return updateInstructionsField({
+        intervals,
+        intervalId: payload.intervalId,
+        update: (instructions) =>
+          replaceById(payload.instruction, instructions),
+      });
     },
     addInstruction: (
       intervals,
@@ -80,17 +68,11 @@ const slice = createSlice({
         payload,
       }: PayloadAction<{ intervalId: string; instruction: Instruction }>
     ) => {
-      const interval = intervals.find(propEq("id", payload.intervalId));
-      if (!interval) {
-        return intervals;
-      }
-      return replaceById(
-        {
-          ...interval,
-          instructions: [...interval.instructions, payload.instruction],
-        },
-        intervals
-      );
+      return updateInstructionsField({
+        intervals,
+        intervalId: payload.intervalId,
+        update: (instructions) => [...instructions, payload.instruction],
+      });
     },
   },
   extraReducers: (builder) => {
@@ -99,6 +81,30 @@ const slice = createSlice({
       .addCase(loadWorkout, (state, { payload }) => payload.intervals);
   },
 });
+
+type UpdateInstructionsFieldParams = {
+  intervalId: string;
+  update: (instructions: Instruction[]) => Instruction[];
+  intervals: Interval[];
+};
+
+const updateInstructionsField = ({
+  intervals,
+  intervalId,
+  update,
+}: UpdateInstructionsFieldParams): Interval[] => {
+  const interval = intervals.find(propEq("id", intervalId));
+  if (!interval) {
+    return intervals;
+  }
+  return replaceById(
+    {
+      ...interval,
+      instructions: update(interval.instructions),
+    },
+    intervals
+  );
+};
 
 export const reducer = slice.reducer;
 export const {
