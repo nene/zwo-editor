@@ -71,6 +71,7 @@ exports[`<FreeBar> renders with tooltip when selected 1`] = `
       Object {
         "cadence": undefined,
         "id": "mock-id",
+        "instructions": Array [],
         "length": Object {
           "seconds": 50,
         },

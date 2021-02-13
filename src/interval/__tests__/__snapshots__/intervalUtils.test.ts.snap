@@ -5,6 +5,7 @@ Array [
   Object {
     "cadence": undefined,
     "id": "#2",
+    "instructions": Array [],
     "intensity": 1,
     "length": Object {
       "seconds": 120,
@@ -15,6 +16,7 @@ Array [
   Object {
     "cadence": undefined,
     "id": "#1",
+    "instructions": Array [],
     "intensity": 0.5,
     "length": Object {
       "seconds": 60,
@@ -25,6 +27,7 @@ Array [
   Object {
     "cadence": undefined,
     "id": "#3",
+    "instructions": Array [],
     "intensity": 0.75,
     "length": Object {
       "seconds": 30,
@@ -40,6 +43,7 @@ Array [
   Object {
     "cadence": undefined,
     "id": "#1",
+    "instructions": Array [],
     "intensity": 0.5,
     "length": Object {
       "seconds": 60,
@@ -50,6 +54,7 @@ Array [
   Object {
     "cadence": undefined,
     "id": "#3",
+    "instructions": Array [],
     "intensity": 0.75,
     "length": Object {
       "seconds": 30,
@@ -60,6 +65,7 @@ Array [
   Object {
     "cadence": undefined,
     "id": "#2",
+    "instructions": Array [],
     "intensity": 1,
     "length": Object {
       "seconds": 120,
@@ -75,6 +81,7 @@ Array [
   Object {
     "cadence": undefined,
     "id": "#1",
+    "instructions": Array [],
     "intensity": 0.5,
     "length": Object {
       "seconds": 60,
@@ -85,6 +92,7 @@ Array [
   Object {
     "cadence": undefined,
     "id": "#2",
+    "instructions": Array [],
     "intensity": 1,
     "length": Object {
       "seconds": 130,
@@ -95,6 +103,7 @@ Array [
   Object {
     "cadence": undefined,
     "id": "#3",
+    "instructions": Array [],
     "intensity": 0.75,
     "length": Object {
       "seconds": 30,
@@ -110,6 +119,7 @@ Array [
   Object {
     "cadence": undefined,
     "id": "#1",
+    "instructions": Array [],
     "intensity": 0.5,
     "length": Object {
       "seconds": 60,
@@ -120,6 +130,7 @@ Array [
   Object {
     "cadence": undefined,
     "id": "#2",
+    "instructions": Array [],
     "intensity": 1,
     "length": Object {
       "seconds": 120,
@@ -130,6 +141,7 @@ Array [
   Object {
     "cadence": undefined,
     "id": "#3",
+    "instructions": Array [],
     "intensity": 0.75,
     "length": Object {
       "seconds": 20,
@@ -145,6 +157,7 @@ Array [
   Object {
     "cadence": undefined,
     "id": "#1",
+    "instructions": Array [],
     "intensity": 0.5,
     "length": Object {
       "seconds": 60,
@@ -155,6 +168,7 @@ Array [
   Object {
     "cadence": undefined,
     "id": "#2",
+    "instructions": Array [],
     "intensity": 1.05,
     "length": Object {
       "seconds": 120,
@@ -165,6 +179,7 @@ Array [
   Object {
     "cadence": undefined,
     "id": "#3",
+    "instructions": Array [],
     "intensity": 0.75,
     "length": Object {
       "seconds": 30,
@@ -180,6 +195,7 @@ Array [
   Object {
     "cadence": undefined,
     "id": "#1",
+    "instructions": Array [],
     "intensity": 0.5,
     "length": Object {
       "seconds": 60,
@@ -190,6 +206,7 @@ Array [
   Object {
     "cadence": undefined,
     "id": "#2",
+    "instructions": Array [],
     "intensity": 1,
     "length": Object {
       "seconds": 120,
@@ -200,6 +217,7 @@ Array [
   Object {
     "cadence": undefined,
     "id": "#3",
+    "instructions": Array [],
     "intensity": 0.7,
     "length": Object {
       "seconds": 30,

@@ -273,6 +273,7 @@ exports[`<SteadyBar> renders with Tooltip when selected 1`] = `
         "cadence": undefined,
         "endIntensity": 0.901,
         "id": "mock-id",
+        "instructions": Array [],
         "length": Object {
           "seconds": 50,
         },
