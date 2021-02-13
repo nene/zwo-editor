@@ -80,20 +80,6 @@ const Editor = ({
           ))}
         </Segments>
 
-        <Slider>
-          {/* {instructions.map((instruction, index) => (
-            <InstructionEditor
-              key={instruction.id}
-              instruction={instruction}
-              width={workoutDuration(intervals, mode).seconds / 3}
-              onChange={updateInstruction}
-              onDelete={removeInstruction}
-              index={index}
-              mode={mode}
-            />
-          ))} */}
-        </Slider>
-
         {lengthType === "time" ? (
           <TimeAxis width={xAxisWidth} />
         ) : (
@@ -139,6 +125,7 @@ const Segments = styled.div`
   justify-content: flex-start;
   align-items: flex-end;
   bottom: 0px;
+  top: 0px;
   padding-bottom: 40px;
   margin-right: 100px;
 `;
@@ -153,12 +140,6 @@ const Fader = styled.div`
   width: 50000px;
   height: 100%;
   z-index: 1;
-`;
-
-const Slider = styled.div`
-  position: absolute;
-  top: 10px;
-  left: 0px;
 `;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor);

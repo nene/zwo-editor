@@ -5,6 +5,9 @@ import SteadyBar from "./SteadyBar";
 import RampBar from "./RampBar";
 import RepetitionBar from "./RepetitionBar";
 import { WorkoutMode } from "../../modes/WorkoutMode";
+import InstructionEditor from "../InstructionEditor/InstructionEditor";
+import styled from "styled-components";
+import { Instruction } from "../../types/Instruction";
 
 interface GenericBarProps {
   interval: Interval;
@@ -14,7 +17,43 @@ interface GenericBarProps {
   onClick: (id: string) => void;
 }
 
-const GenericBar = ({
+const GenericBar = (props: GenericBarProps) => {
+  return (
+    <div>
+      <IntervalBar {...props} />
+      <InstructionsList
+        instructions={props.interval.instructions}
+        mode={props.mode}
+      />
+    </div>
+  );
+};
+
+const InstructionsList: React.FC<{
+  instructions: Instruction[];
+  mode: WorkoutMode;
+}> = ({ instructions, mode }) => (
+  <InstructionsWrap>
+    {instructions.map((instruction, index) => (
+      <InstructionEditor
+        key={instruction.id}
+        instruction={instruction}
+        width={200}
+        onChange={() => {}}
+        onDelete={() => {}}
+        index={index}
+        mode={mode}
+      />
+    ))}
+  </InstructionsWrap>
+);
+
+const InstructionsWrap = styled.div`
+  position: absolute;
+  top: 10px;
+`;
+
+const IntervalBar = ({
   interval,
   mode,
   selected,
