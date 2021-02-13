@@ -74,6 +74,24 @@ const slice = createSlice({
         intervals
       );
     },
+    addInstruction: (
+      intervals,
+      {
+        payload,
+      }: PayloadAction<{ intervalId: string; instruction: Instruction }>
+    ) => {
+      const interval = intervals.find(propEq("id", payload.intervalId));
+      if (!interval) {
+        return intervals;
+      }
+      return replaceById(
+        {
+          ...interval,
+          instructions: [...interval.instructions, payload.instruction],
+        },
+        intervals
+      );
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -90,6 +108,7 @@ export const {
   removeInterval,
   removeInstruction,
   updateInstruction,
+  addInstruction,
 } = slice.actions;
 
 export const removeSelectedInterval = createAsyncThunk(

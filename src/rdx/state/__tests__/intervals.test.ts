@@ -6,6 +6,7 @@ import {
   removeInterval,
   removeInstruction,
   updateInstruction,
+  addInstruction,
 } from "../intervals";
 
 const defaultMode = () => new BikeMode(200, 75);
@@ -113,6 +114,41 @@ describe("intervals reducer", () => {
               id: "inst-3",
               offset: Duration(30),
               text: "Oh yeah!",
+            },
+          })
+        )
+      ).toMatchSnapshot();
+    });
+  });
+
+  describe("addInstruction()", () => {
+    it("adds instruction to specified interval", () => {
+      const state = [
+        intervalFactory.steady(
+          {
+            id: "#1",
+            length: Duration(60),
+            intensity: 0.5,
+            instructions: [
+              {
+                id: "inst-1",
+                offset: Duration(0),
+                text: "Hello",
+              },
+            ],
+          },
+          defaultMode()
+        ),
+      ];
+      expect(
+        reducer(
+          state,
+          addInstruction({
+            intervalId: "#1",
+            instruction: {
+              id: "inst-2",
+              offset: Duration(40),
+              text: "A new one",
             },
           })
         )
