@@ -15,6 +15,14 @@ interface GenericBarProps {
   selected: boolean;
   onChange: (interval: Interval) => void;
   onClick: (id: string) => void;
+  onInstructionChange: (payload: {
+    intervalId: string;
+    instruction: Instruction;
+  }) => void;
+  onInstructionDelete: (payload: {
+    intervalId: string;
+    instructionId: string;
+  }) => void;
 }
 
 const GenericBar = (props: GenericBarProps) => {
@@ -24,6 +32,18 @@ const GenericBar = (props: GenericBarProps) => {
       <InstructionsList
         instructions={props.interval.instructions}
         mode={props.mode}
+        onChange={(instruction) =>
+          props.onInstructionChange({
+            intervalId: props.interval.id,
+            instruction,
+          })
+        }
+        onDelete={(instructionId) =>
+          props.onInstructionDelete({
+            intervalId: props.interval.id,
+            instructionId,
+          })
+        }
       />
     </div>
   );
@@ -32,15 +52,17 @@ const GenericBar = (props: GenericBarProps) => {
 const InstructionsList: React.FC<{
   instructions: Instruction[];
   mode: WorkoutMode;
-}> = ({ instructions, mode }) => (
+  onChange: (instruction: Instruction) => void;
+  onDelete: (instructionId: string) => void;
+}> = ({ instructions, mode, onChange, onDelete }) => (
   <InstructionsWrap>
     {instructions.map((instruction, index) => (
       <InstructionEditor
         key={instruction.id}
         instruction={instruction}
         width={200}
-        onChange={() => {}}
-        onDelete={() => {}}
+        onChange={onChange}
+        onDelete={onDelete}
         index={index}
         mode={mode}
       />

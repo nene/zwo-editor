@@ -6,7 +6,12 @@ import ZoneAxis from "../Axis/ZoneAxis";
 import DistanceAxis from "../Axis/DistanceAxis";
 import { selectLengthType } from "../../rdx/state/meta";
 import { RootState } from "../../rdx/store";
-import { selectIntervals, updateInterval } from "../../rdx/state/intervals";
+import {
+  removeInstruction,
+  selectIntervals,
+  updateInstruction,
+  updateInterval,
+} from "../../rdx/state/intervals";
 import { selectMode } from "../../rdx/state/mode";
 import { ConnectedProps } from "../../types/ConnectedProps";
 import {
@@ -28,6 +33,8 @@ const mapDispatchToProps = {
   updateInterval,
   setSelectedId,
   clearSelection,
+  updateInstruction,
+  removeInstruction,
 };
 
 type EditorProps = ConnectedProps<
@@ -43,6 +50,8 @@ const Editor = ({
   updateInterval,
   setSelectedId,
   clearSelection,
+  updateInstruction,
+  removeInstruction,
 }: EditorProps) => {
   const segmentsRef = useRef<HTMLDivElement>(null);
   const [xAxisWidth, setXAxisWidth] = useState(1320);
@@ -75,6 +84,8 @@ const Editor = ({
               mode={mode}
               onChange={updateInterval}
               onClick={toggleSelection}
+              onInstructionChange={updateInstruction}
+              onInstructionDelete={removeInstruction}
               selected={interval.id === selectedId}
             />
           ))}
