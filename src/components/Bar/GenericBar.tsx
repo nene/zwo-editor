@@ -32,6 +32,9 @@ const GenericBar = (props: GenericBarProps) => {
       <InstructionsList
         instructions={props.interval.instructions}
         mode={props.mode}
+        width={props.mode.lengthToWidth(
+          props.mode.intervalLength(props.interval)
+        )}
         onChange={(instruction) =>
           props.onInstructionChange({
             intervalId: props.interval.id,
@@ -52,15 +55,16 @@ const GenericBar = (props: GenericBarProps) => {
 const InstructionsList: React.FC<{
   instructions: Instruction[];
   mode: WorkoutMode;
+  width: number;
   onChange: (instruction: Instruction) => void;
   onDelete: (instructionId: string) => void;
-}> = ({ instructions, mode, onChange, onDelete }) => (
+}> = ({ instructions, mode, width, onChange, onDelete }) => (
   <InstructionsWrap>
     {instructions.map((instruction, index) => (
       <InstructionEditor
         key={instruction.id}
         instruction={instruction}
-        width={200}
+        width={width}
         onChange={onChange}
         onDelete={onDelete}
         index={index}

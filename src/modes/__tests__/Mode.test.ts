@@ -197,6 +197,43 @@ describe("Mode", () => {
         "Unexpected length:Distance encountered in BikeMode"
       );
     });
+
+    describe("intervalLength()", () => {
+      it("always returns duration in BikeMode", () => {
+        const mode = defaultBikeMode();
+        const interval = intervalFactory.steady(
+          {
+            length: Duration(120),
+          },
+          mode
+        );
+        expect(mode.intervalLength(interval)).toEqual(Duration(120));
+      });
+
+      it("returns duration in RunMode/lengthType=time", () => {
+        const mode = defaultRunMode();
+        const interval = intervalFactory.steady(
+          {
+            length: Distance(100),
+            pace: PaceType.fiveKm,
+          },
+          mode
+        );
+        expect(mode.intervalLength(interval)).toEqual(Duration(6));
+      });
+
+      it("returns distance in RunMode/lengthType=distance", () => {
+        const mode = defaultRunDistanceMode();
+        const interval = intervalFactory.steady(
+          {
+            length: Duration(6),
+            pace: PaceType.fiveKm,
+          },
+          mode
+        );
+        expect(mode.intervalLength(interval)).toEqual(Distance(100));
+      });
+    });
   });
 
   describe("BikeMode", () => {
