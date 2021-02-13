@@ -17,13 +17,19 @@ import {
   moveSelectedInterval,
   selectSelectedIntervalPace,
   setSelectedIntervalPace,
+  addInstruction,
+  selectSelectedIntervalId,
 } from "../../rdx/state/intervals";
 import { ConnectedProps } from "../../types/ConnectedProps";
 import styled from "styled-components";
+import { createInstruction } from "../../types/Instruction";
+import { selectMode } from "../../rdx/state/mode";
 
 const mapStateToProps = (state: RootState) => ({
+  mode: selectMode(state),
   sportType: selectSportType(state),
   selectedIntervalPace: selectSelectedIntervalPace(state),
+  selectedIntervalId: selectSelectedIntervalId(state),
 });
 
 const mapDispatchToProps = {
@@ -31,6 +37,7 @@ const mapDispatchToProps = {
   removeSelectedInterval,
   duplicateSelectedInterval,
   moveSelectedInterval,
+  addInstruction,
 };
 
 type SelectionToolbarProps = ConnectedProps<
@@ -40,12 +47,15 @@ type SelectionToolbarProps = ConnectedProps<
 
 const SelectionToolbar = (props: SelectionToolbarProps) => {
   const {
+    mode,
     sportType,
     selectedIntervalPace,
+    selectedIntervalId,
     setSelectedIntervalPace,
     removeSelectedInterval,
     duplicateSelectedInterval,
     moveSelectedInterval,
+    addInstruction,
   } = props;
 
   return (
@@ -74,7 +84,11 @@ const SelectionToolbar = (props: SelectionToolbarProps) => {
         title="Add text event"
         icon={faComment}
         onClick={() => {
-          /* addInstruction(createInstruction({}, mode)) */
+          selectedIntervalId &&
+            addInstruction({
+              intervalId: selectedIntervalId,
+              instruction: createInstruction({}, mode),
+            });
         }}
       />
       {sportType === "run" && (

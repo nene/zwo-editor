@@ -204,3 +204,8 @@ export const selectSelectedIntervalPace = createSelector(
     return interval && interval.type !== "free" ? interval.pace : undefined;
   }
 );
+
+export const selectSelectedIntervalId = createSelector(
+  selectSelectedInterval,
+  (interval) => interval?.id
+);
