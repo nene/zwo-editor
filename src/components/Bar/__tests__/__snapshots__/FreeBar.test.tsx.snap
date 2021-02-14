@@ -48,6 +48,7 @@ exports[`<FreeBar> renders 1`] = `
   >
     <BarIcons
       className="c2"
+      height={100}
       instructions={Array []}
     />
   </Resizable>
@@ -128,6 +129,7 @@ exports[`<FreeBar> renders with tooltip when selected 1`] = `
   >
     <BarIcons
       className="c2"
+      height={100}
       instructions={Array []}
     />
   </Resizable>

@@ -66,6 +66,7 @@ const FreeBar = ({ interval, mode, ...props }: FreeBarProps) => {
         onResize={(e, direction, ref, d) => notifyChange(d.width)}
       >
         <FreeBarIcons
+          height={height}
           cadence={interval.cadence}
           instructions={interval.instructions}
         />

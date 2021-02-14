@@ -6,6 +6,7 @@ import Tooltip from "../Tooltip/Tooltip";
 import { RampInterval } from "../../types/Interval";
 import { intensityMultiplier } from "./multipliers";
 import { WorkoutMode } from "../../modes/WorkoutMode";
+import { BarIcons } from "./BarIcons";
 
 interface IDictionary {
   [index: string]: number;
@@ -87,7 +88,13 @@ const RampBar = ({ interval, mode, ...props }: RampBarProps) => {
             handleStartResizeStop(d.height)
           }
           onResize={(e, direction, ref, d) => handleStartResize(d.height)}
-        ></ResizableRamp>
+        >
+          <BarIcons
+            height={startHeight > endHeight ? endHeight : startHeight}
+            cadence={interval.cadence}
+            instructions={interval.instructions}
+          />
+        </ResizableRamp>
         <ResizableRamp
           size={{
             width: resizableWidth / 2,

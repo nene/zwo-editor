@@ -86,6 +86,7 @@ const SteadyBar = ({ interval, mode, ...props }: SteadyBarProps) => {
         style={style}
       >
         <BarIcons
+          height={mode.intensityToHeight(interval.intensity)}
           cadence={interval.cadence}
           instructions={interval.instructions}
         />

@@ -8,9 +8,10 @@ import { faComment } from "@fortawesome/free-solid-svg-icons";
 export const BarIcons: React.FC<{
   cadence?: number;
   instructions: Instruction[];
+  height: number;
   className?: string;
-}> = ({ cadence, instructions, className }) => (
-  <IconsWrap className={className}>
+}> = ({ cadence, instructions, height, className }) => (
+  <IconsWrap className={className} $height={height}>
     {cadence && (
       <IconLine>
         <img src={cadenceImage} alt="Has cadence" width="16" />
@@ -31,9 +32,13 @@ export const BarIcons: React.FC<{
   </IconsWrap>
 );
 
-const IconsWrap = styled.div`
+const IconsWrap = styled.div<{ $height: number }>`
+  position: absolute;
+  bottom: 0;
+  box-sizing: border-box;
   padding: 2px;
   color: white;
+  height: ${(p) => p.$height}px;
 `;
 
 const IconLine = styled.div`

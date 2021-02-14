@@ -49,6 +49,7 @@ exports[`<SteadyBar> renders 1`] = `
     }
   >
     <BarIcons
+      height={190.75}
       instructions={Array []}
     />
   </Resizable>
@@ -105,6 +106,7 @@ exports[`<SteadyBar> renders cadence icon when interval has cadence specified 1`
   >
     <BarIcons
       cadence={90}
+      height={190.75}
       instructions={Array []}
     />
   </Resizable>
@@ -188,6 +190,7 @@ exports[`<SteadyBar> renders with Tooltip when selected and showTooltip=true 1`]
     }
   >
     <BarIcons
+      height={190.75}
       instructions={Array []}
     />
   </Resizable>
@@ -247,6 +250,7 @@ exports[`<SteadyBar> renders without Tooltip when selected, but showTooltip=fals
     }
   >
     <BarIcons
+      height={190.75}
       instructions={Array []}
     />
   </Resizable>
