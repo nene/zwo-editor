@@ -112,25 +112,36 @@ const Icons: React.FC<{ cadence?: number; instructions: Instruction[] }> = ({
 }) => (
   <IconsWrap>
     {cadence && (
-      <div>
+      <IconLine>
         <img src={cadenceImage} alt="Has cadence" width="16" />
-      </div>
+        <span>{cadence}</span>
+      </IconLine>
     )}
     {instructions.length > 0 && (
-      <div>
+      <IconLine>
         <FontAwesomeIcon
           icon={faComment}
           size="sm"
           fixedWidth={true}
           color="white"
         />
-      </div>
+        <span>{instructions.length}</span>
+      </IconLine>
     )}
   </IconsWrap>
 );
 
 const IconsWrap = styled.div`
   padding: 2px;
+  color: white;
+`;
+
+const IconLine = styled.div`
+  display: flex;
+  align-items: center;
+  & > span {
+    padding-left: 5px;
+  }
 `;
 
 export default SteadyBar;
