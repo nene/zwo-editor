@@ -7,6 +7,9 @@ import { SteadyInterval } from "../../types/Interval";
 import { intensityMultiplier } from "./multipliers";
 import { WorkoutMode } from "../../modes/WorkoutMode";
 import cadenceImage from "../../assets/cadence.png";
+import { Instruction } from "../../types/Instruction";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComment } from "@fortawesome/free-solid-svg-icons";
 
 interface SteadyBarProps {
   interval: SteadyInterval;
@@ -85,7 +88,10 @@ const SteadyBar = ({ interval, mode, ...props }: SteadyBarProps) => {
         onResize={(e, direction, ref, d) => notifyChange(d.width, d.height)}
         style={style}
       >
-        <Icons cadence={interval.cadence} />
+        <Icons
+          cadence={interval.cadence}
+          instructions={interval.instructions}
+        />
       </RoundedResizable>
     </Container>
   );
@@ -100,9 +106,26 @@ const RoundedResizable = styled(Resizable)`
   border: 1px solid white;
 `;
 
-const Icons: React.FC<{ cadence?: number }> = ({ cadence }) => (
+const Icons: React.FC<{ cadence?: number; instructions: Instruction[] }> = ({
+  cadence,
+  instructions,
+}) => (
   <IconsWrap>
-    {cadence && <img src={cadenceImage} alt="Has cadence" width="16" />}
+    {cadence && (
+      <div>
+        <img src={cadenceImage} alt="Has cadence" width="16" />
+      </div>
+    )}
+    {instructions.length > 0 && (
+      <div>
+        <FontAwesomeIcon
+          icon={faComment}
+          size="sm"
+          fixedWidth={true}
+          color="white"
+        />
+      </div>
+    )}
   </IconsWrap>
 );
 
