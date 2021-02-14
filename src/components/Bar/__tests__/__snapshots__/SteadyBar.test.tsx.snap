@@ -8,10 +8,11 @@ exports[`<SteadyBar> renders 1`] = `
 .c1 {
   border-radius: 10px;
   border: 1px solid white;
-  background-image: none;
-  background-size: 16px;
-  background-position: 2px 2px;
-  background-repeat: no-repeat;
+}
+
+.c2 {
+  padding: 2px;
+  color: white;
 }
 
 <div
@@ -51,7 +52,11 @@ exports[`<SteadyBar> renders 1`] = `
         "backgroundColor": "#00C46A",
       }
     }
-  />
+  >
+    <div
+      className="c2"
+    />
+  </Resizable>
 </div>
 `;
 
@@ -63,10 +68,26 @@ exports[`<SteadyBar> renders cadence icon when interval has cadence specified 1`
 .c1 {
   border-radius: 10px;
   border: 1px solid white;
-  background-image: url(test-file-stub);
-  background-size: 16px;
-  background-position: 2px 2px;
-  background-repeat: no-repeat;
+}
+
+.c2 {
+  padding: 2px;
+  color: white;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c3 > span {
+  padding-left: 5px;
 }
 
 <div
@@ -106,7 +127,24 @@ exports[`<SteadyBar> renders cadence icon when interval has cadence specified 1`
         "backgroundColor": "#00C46A",
       }
     }
-  />
+  >
+    <div
+      className="c2"
+    >
+      <div
+        className="c3"
+      >
+        <img
+          alt="Has cadence"
+          src="test-file-stub"
+          width="16"
+        />
+        <span>
+          90
+        </span>
+      </div>
+    </div>
+  </Resizable>
 </div>
 `;
 
@@ -118,10 +156,11 @@ exports[`<SteadyBar> renders with Tooltip when selected and showTooltip=true 1`]
 .c1 {
   border-radius: 10px;
   border: 1px solid white;
-  background-image: none;
-  background-size: 16px;
-  background-position: 2px 2px;
-  background-repeat: no-repeat;
+}
+
+.c2 {
+  padding: 2px;
+  color: white;
 }
 
 <div
@@ -189,7 +228,11 @@ exports[`<SteadyBar> renders with Tooltip when selected and showTooltip=true 1`]
         "backgroundColor": "#00C46A",
       }
     }
-  />
+  >
+    <div
+      className="c2"
+    />
+  </Resizable>
 </div>
 `;
 
@@ -201,10 +244,11 @@ exports[`<SteadyBar> renders without Tooltip when selected, but showTooltip=fals
 .c1 {
   border-radius: 10px;
   border: 1px solid white;
-  background-image: none;
-  background-size: 16px;
-  background-position: 2px 2px;
-  background-repeat: no-repeat;
+}
+
+.c2 {
+  padding: 2px;
+  color: white;
 }
 
 <div
@@ -248,6 +292,10 @@ exports[`<SteadyBar> renders without Tooltip when selected, but showTooltip=fals
         "backgroundColor": "#00C46A",
       }
     }
-  />
+  >
+    <div
+      className="c2"
+    />
+  </Resizable>
 </div>
 `;
