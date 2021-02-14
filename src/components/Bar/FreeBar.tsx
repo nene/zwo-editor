@@ -7,6 +7,7 @@ import { FreeInterval } from "../../types/Interval";
 import { durationMultiplier } from "./multipliers";
 import { WorkoutMode } from "../../modes/WorkoutMode";
 import freerideSvg from "../../assets/freeride.svg";
+import { BarIcons } from "./BarIcons";
 
 interface FreeBarProps {
   interval: FreeInterval;
@@ -63,7 +64,12 @@ const FreeBar = ({ interval, mode, ...props }: FreeBarProps) => {
         grid={[1, 1]}
         onResizeStop={(e, direction, ref, d) => handleResizeStop(d.width)}
         onResize={(e, direction, ref, d) => notifyChange(d.width)}
-      ></ResizableFreeBar>
+      >
+        <FreeBarIcons
+          cadence={interval.cadence}
+          instructions={interval.instructions}
+        />
+      </ResizableFreeBar>
     </Container>
   );
 };
@@ -75,6 +81,10 @@ const Container = styled.div`
 const ResizableFreeBar = styled(Resizable)`
   border: 1px solid white;
   background-image: url("${freerideSvg}");
+`;
+
+const FreeBarIcons = styled(BarIcons)`
+  padding-top: 18px;
 `;
 
 export default FreeBar;

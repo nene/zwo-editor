@@ -10,6 +10,10 @@ exports[`<FreeBar> renders 1`] = `
   background-image: url("test-file-stub");
 }
 
+.c2 {
+  padding-top: 18px;
+}
+
 <div
   className="c0"
   onClick={[Function]}
@@ -41,7 +45,12 @@ exports[`<FreeBar> renders 1`] = `
         "width": 16.666666666666668,
       }
     }
-  />
+  >
+    <BarIcons
+      className="c2"
+      instructions={Array []}
+    />
+  </Resizable>
 </div>
 `;
 
@@ -53,6 +62,10 @@ exports[`<FreeBar> renders with tooltip when selected 1`] = `
 .c1 {
   border: 1px solid white;
   background-image: url("test-file-stub");
+}
+
+.c2 {
+  padding-top: 18px;
 }
 
 <div
@@ -112,6 +125,11 @@ exports[`<FreeBar> renders with tooltip when selected 1`] = `
         "width": 16.666666666666668,
       }
     }
-  />
+  >
+    <BarIcons
+      className="c2"
+      instructions={Array []}
+    />
+  </Resizable>
 </div>
 `;

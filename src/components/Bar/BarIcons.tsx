@@ -8,8 +8,9 @@ import { faComment } from "@fortawesome/free-solid-svg-icons";
 export const BarIcons: React.FC<{
   cadence?: number;
   instructions: Instruction[];
-}> = ({ cadence, instructions }) => (
-  <IconsWrap>
+  className?: string;
+}> = ({ cadence, instructions, className }) => (
+  <IconsWrap className={className}>
     {cadence && (
       <IconLine>
         <img src={cadenceImage} alt="Has cadence" width="16" />
