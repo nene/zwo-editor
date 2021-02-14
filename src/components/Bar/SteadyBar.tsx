@@ -83,9 +83,10 @@ const SteadyBar = ({ interval, mode, ...props }: SteadyBarProps) => {
           handleResizeStop(d.width, d.height)
         }
         onResize={(e, direction, ref, d) => notifyChange(d.width, d.height)}
-        $hasCadence={Boolean(interval.cadence)}
         style={style}
-      ></RoundedResizable>
+      >
+        <Icons cadence={interval.cadence} />
+      </RoundedResizable>
     </Container>
   );
 };
@@ -94,14 +95,19 @@ const Container = styled.div`
   position: relative;
 `;
 
-const RoundedResizable = styled(Resizable)<{ $hasCadence: boolean }>`
+const RoundedResizable = styled(Resizable)`
   border-radius: 10px;
   border: 1px solid white;
-  background-image: ${({ $hasCadence }) =>
-    $hasCadence ? "url(" + cadenceImage + ")" : "none"};
-  background-size: 16px;
-  background-position: 2px 2px;
-  background-repeat: no-repeat;
+`;
+
+const Icons: React.FC<{ cadence?: number }> = ({ cadence }) => (
+  <IconsWrap>
+    {cadence && <img src={cadenceImage} alt="Has cadence" width="16" />}
+  </IconsWrap>
+);
+
+const IconsWrap = styled.div`
+  padding: 2px;
 `;
 
 export default SteadyBar;
