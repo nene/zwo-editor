@@ -17,7 +17,7 @@ const RepetitionBar = ({ interval, ...props }: RepetitionBarProps) => {
   const subIntervals = useMemo(() => {
     return repetitionToSteadyIntervals(interval, props.mode);
     // eslint-disable-next-line
-  }, [interval.repeat]);
+  }, [interval.repeat, interval.instructions]);
 
   function handleOnChange(values: SteadyInterval) {
     const index = subIntervals.findIndex((sub) => sub.id === values.id);
