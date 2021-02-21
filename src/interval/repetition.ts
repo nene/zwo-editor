@@ -4,11 +4,10 @@ import { RepetitionInterval, SteadyInterval } from "../types/Interval";
 import intervalFactory from "./intervalFactory";
 
 export function repetitions(
-  repeat: number,
   interval: RepetitionInterval,
   mode: WorkoutMode
 ): SteadyInterval[] {
-  return range(0, repeat).flatMap(() => [
+  return range(0, interval.repeat).flatMap(() => [
     intervalFactory.steady(
       {
         length: interval.onLength,

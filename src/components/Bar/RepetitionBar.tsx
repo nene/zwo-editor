@@ -14,12 +14,10 @@ interface RepetitionBarProps {
 }
 
 const RepetitionBar = ({ interval, ...props }: RepetitionBarProps) => {
-  const [repeat, setRepeat] = useState(interval.repeat);
-
   const subIntervals = useMemo(() => {
-    return repetitions(repeat, interval, props.mode);
+    return repetitions(interval, props.mode);
     // eslint-disable-next-line
-  }, [repeat]);
+  }, [interval.repeat]);
 
   function handleOnChange(values: SteadyInterval) {
     const index = subIntervals.findIndex((sub) => sub.id === values.id);
@@ -36,7 +34,7 @@ const RepetitionBar = ({ interval, ...props }: RepetitionBarProps) => {
       ...interval,
       onCadence: subIntervals[0].cadence,
       offCadence: subIntervals[1].cadence,
-      repeat: repeat,
+      repeat: interval.repeat,
       onLength: subIntervals[0].length,
       offLength: subIntervals[1].length,
       onIntensity: subIntervals[0].intensity,
@@ -45,7 +43,6 @@ const RepetitionBar = ({ interval, ...props }: RepetitionBarProps) => {
   }
 
   function handleAddInterval() {
-    setRepeat(repeat + 1);
     props.onChange({
       ...interval,
       repeat: interval.repeat + 1,
@@ -53,8 +50,7 @@ const RepetitionBar = ({ interval, ...props }: RepetitionBarProps) => {
   }
 
   function handleRemoveInterval() {
-    if (repeat > 1) {
-      setRepeat(repeat - 1);
+    if (interval.repeat > 1) {
       props.onChange({
         ...interval,
         repeat: interval.repeat - 1,
