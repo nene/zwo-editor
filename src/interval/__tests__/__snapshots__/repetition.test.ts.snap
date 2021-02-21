@@ -48,3 +48,91 @@ Array [
   },
 ]
 `;
+
+exports[`repetitionToSteadyIntervals() distributes instructions between SteadyIntervals 1`] = `
+Array [
+  Object {
+    "cadence": 90,
+    "id": "mock-id",
+    "instructions": Array [
+      Object {
+        "id": "mock-id",
+        "offset": Object {
+          "seconds": 10,
+        },
+        "text": "In first interval",
+      },
+    ],
+    "intensity": 0.9,
+    "length": Object {
+      "seconds": 60,
+    },
+    "pace": 0,
+    "type": "steady",
+  },
+  Object {
+    "cadence": undefined,
+    "id": "mock-id",
+    "instructions": Array [
+      Object {
+        "id": "mock-id",
+        "offset": Object {
+          "seconds": 60,
+        },
+        "text": "In second interval #1",
+      },
+      Object {
+        "id": "mock-id",
+        "offset": Object {
+          "seconds": 80,
+        },
+        "text": "In second interval #2",
+      },
+    ],
+    "intensity": 0.75,
+    "length": Object {
+      "seconds": 30,
+    },
+    "pace": 0,
+    "type": "steady",
+  },
+  Object {
+    "cadence": 90,
+    "id": "mock-id",
+    "instructions": Array [
+      Object {
+        "id": "mock-id",
+        "offset": Object {
+          "seconds": 100,
+        },
+        "text": "In third interval",
+      },
+    ],
+    "intensity": 0.9,
+    "length": Object {
+      "seconds": 60,
+    },
+    "pace": 0,
+    "type": "steady",
+  },
+  Object {
+    "cadence": undefined,
+    "id": "mock-id",
+    "instructions": Array [
+      Object {
+        "id": "mock-id",
+        "offset": Object {
+          "seconds": 150,
+        },
+        "text": "In fourth interval",
+      },
+    ],
+    "intensity": 0.75,
+    "length": Object {
+      "seconds": 30,
+    },
+    "pace": 0,
+    "type": "steady",
+  },
+]
+`;
