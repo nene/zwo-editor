@@ -29,25 +29,27 @@ const GenericBar = (props: GenericBarProps) => {
   return (
     <div>
       <IntervalBar {...props} />
-      <InstructionsList
-        instructions={props.interval.instructions}
-        mode={props.mode}
-        width={props.mode.lengthToWidth(
-          props.mode.intervalLength(props.interval)
-        )}
-        onChange={(instruction) =>
-          props.onInstructionChange({
-            intervalId: props.interval.id,
-            instruction,
-          })
-        }
-        onDelete={(instructionId) =>
-          props.onInstructionDelete({
-            intervalId: props.interval.id,
-            instructionId,
-          })
-        }
-      />
+      {props.selected && (
+        <InstructionsList
+          instructions={props.interval.instructions}
+          mode={props.mode}
+          width={props.mode.lengthToWidth(
+            props.mode.intervalLength(props.interval)
+          )}
+          onChange={(instruction) =>
+            props.onInstructionChange({
+              intervalId: props.interval.id,
+              instruction,
+            })
+          }
+          onDelete={(instructionId) =>
+            props.onInstructionDelete({
+              intervalId: props.interval.id,
+              instructionId,
+            })
+          }
+        />
+      )}
     </div>
   );
 };
@@ -77,6 +79,7 @@ const InstructionsList: React.FC<{
 const InstructionsWrap = styled.div`
   position: absolute;
   top: 10px;
+  z-index: 11;
 `;
 
 const IntervalBar = ({
