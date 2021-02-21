@@ -3,7 +3,7 @@ import { WorkoutMode } from "../modes/WorkoutMode";
 import { RepetitionInterval, SteadyInterval } from "../types/Interval";
 import intervalFactory from "./intervalFactory";
 
-export function repetitions(
+export function repetitionToSteadyIntervals(
   interval: RepetitionInterval,
   mode: WorkoutMode
 ): SteadyInterval[] {

@@ -1,9 +1,9 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import SteadyBar from "./SteadyBar";
 import styled from "styled-components";
 import { RepetitionInterval, SteadyInterval } from "../../types/Interval";
 import { WorkoutMode } from "../../modes/WorkoutMode";
-import { repetitions } from "../../interval/repetition";
+import { repetitionToSteadyIntervals } from "../../interval/repetition";
 
 interface RepetitionBarProps {
   interval: RepetitionInterval;
@@ -15,7 +15,7 @@ interface RepetitionBarProps {
 
 const RepetitionBar = ({ interval, ...props }: RepetitionBarProps) => {
   const subIntervals = useMemo(() => {
-    return repetitions(interval, props.mode);
+    return repetitionToSteadyIntervals(interval, props.mode);
     // eslint-disable-next-line
   }, [interval.repeat]);
 
