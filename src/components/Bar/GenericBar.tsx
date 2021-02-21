@@ -78,7 +78,7 @@ const InstructionsList: React.FC<{
 
 const InstructionsWrap = styled.div`
   position: absolute;
-  top: 10px;
+  top: 80px;
   z-index: 11;
 `;
 
