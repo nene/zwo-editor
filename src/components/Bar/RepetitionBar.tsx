@@ -5,6 +5,7 @@ import { RepetitionInterval, SteadyInterval } from "../../types/Interval";
 import { WorkoutMode } from "../../modes/WorkoutMode";
 import intervalFactory from "../../interval/intervalFactory";
 import { range } from "ramda";
+import { repetitions } from "../../interval/repetition";
 
 interface RepetitionBarProps {
   interval: RepetitionInterval;
@@ -21,26 +22,7 @@ const RepetitionBar = ({ interval, ...props }: RepetitionBarProps) => {
   const [offLength, setOffLength] = useState(interval.offLength);
 
   const subIntervals = useMemo(() => {
-    return range(0, repeat).flatMap(() => [
-      intervalFactory.steady(
-        {
-          length: onLength,
-          intensity: interval.onIntensity,
-          cadence: interval.onCadence,
-          pace: interval.pace,
-        },
-        props.mode
-      ),
-      intervalFactory.steady(
-        {
-          length: offLength,
-          intensity: interval.offIntensity,
-          cadence: interval.offCadence,
-          pace: interval.pace,
-        },
-        props.mode
-      ),
-    ]);
+    return repetitions(repeat, onLength, offLength, interval, props.mode);
     // eslint-disable-next-line
   }, [repeat]);
 
