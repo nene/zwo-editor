@@ -37,6 +37,11 @@ export default abstract class Mode {
     }
   }
 
+  // Returns the underlyng number within Length type
+  fromLength(length: Length): number {
+    return isDuration(length) ? length.seconds : length.meters;
+  }
+
   intensityToHeight(intensity: number): number {
     return intensity * intensityMultiplier;
   }

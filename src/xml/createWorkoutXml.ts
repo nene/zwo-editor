@@ -3,7 +3,6 @@ import RunMode from "../modes/RunMode";
 import { WorkoutMode } from "../modes/WorkoutMode";
 import { Instruction } from "../types/Instruction";
 import { Interval } from "../types/Interval";
-import { isDuration, Length } from "../types/Length";
 import { Workout } from "../types/Workout";
 
 export default function createWorkoutXml(
@@ -40,16 +39,13 @@ export default function createWorkoutXml(
 
   xml = xml.up().ele("workout");
 
-  const writeLength = (len: Length): number =>
-    isDuration(len) ? len.seconds : len.meters;
-
   intervals.forEach((interval, index) => {
     var segment: Builder.XMLNode;
     var ramp;
 
     if (interval.type === "steady") {
       segment = Builder.create("SteadyState")
-        .att("Duration", writeLength(interval.length))
+        .att("Duration", mode.fromLength(interval.length))
         .att("Power", interval.intensity)
         .att("pace", interval.pace);
 
@@ -71,7 +67,7 @@ export default function createWorkoutXml(
       if (interval.startIntensity < interval.endIntensity) {
         // warmup
         segment = Builder.create(ramp)
-          .att("Duration", writeLength(interval.length))
+          .att("Duration", mode.fromLength(interval.length))
           .att("PowerLow", interval.startIntensity)
           .att("PowerHigh", interval.endIntensity)
           .att("pace", interval.pace);
@@ -80,7 +76,7 @@ export default function createWorkoutXml(
       } else {
         // cooldown
         segment = Builder.create(ramp)
-          .att("Duration", writeLength(interval.length))
+          .att("Duration", mode.fromLength(interval.length))
           .att("PowerLow", interval.startIntensity) // these 2 values are inverted
           .att("PowerHigh", interval.endIntensity) // looks like a bug on zwift editor
           .att("pace", interval.pace);
@@ -91,8 +87,8 @@ export default function createWorkoutXml(
       // <IntervalsT Repeat="5" OnDuration="60" OffDuration="300" OnPower="0.8844353" OffPower="0.51775455" pace="0"/>
       segment = Builder.create("IntervalsT")
         .att("Repeat", interval.repeat)
-        .att("OnDuration", writeLength(interval.onLength))
-        .att("OffDuration", writeLength(interval.offLength))
+        .att("OnDuration", mode.fromLength(interval.onLength))
+        .att("OffDuration", mode.fromLength(interval.offLength))
         .att("OnPower", interval.onIntensity)
         .att("OffPower", interval.offIntensity)
         .att("pace", interval.pace);
@@ -103,7 +99,7 @@ export default function createWorkoutXml(
     } else {
       // free ride
       segment = Builder.create("FreeRide")
-        .att("Duration", writeLength(interval.length))
+        .att("Duration", mode.fromLength(interval.length))
         .att("FlatRoad", 0); // Without this, Zwift will adjust resistance when gradient changes
       interval.cadence !== undefined &&
         segment.att("Cadence", interval.cadence);
@@ -115,13 +111,13 @@ export default function createWorkoutXml(
         : mode.intervalDuration(interval).seconds;
 
     const instructionInsideInterval = (instruction: Instruction): boolean =>
-      writeLength(instruction.offset) >= 0 &&
-      writeLength(instruction.offset) < intervalLength(interval);
+      mode.fromLength(instruction.offset) >= 0 &&
+      mode.fromLength(instruction.offset) < intervalLength(interval);
 
     // add instructions if present
     interval.instructions.filter(instructionInsideInterval).forEach((i) => {
       segment.ele("textevent", {
-        timeoffset: writeLength(i.offset),
+        timeoffset: mode.fromLength(i.offset),
         message: i.text,
       });
     });

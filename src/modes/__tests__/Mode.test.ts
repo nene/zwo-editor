@@ -50,6 +50,16 @@ describe("Mode", () => {
     });
   });
 
+  describe("fromLength()", () => {
+    it("converts Duration to seconds", () => {
+      expect(defaultBikeMode().fromLength(Duration(60))).toBe(60);
+    });
+
+    it("converts Distance to meters", () => {
+      expect(defaultBikeMode().fromLength(Distance(100))).toBe(100);
+    });
+  });
+
   describe("duration()", () => {
     it("returns the value unmodified when given a Duration", () => {
       expect(defaultBikeMode().duration(Duration(60))).toEqual(Duration(60));

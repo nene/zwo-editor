@@ -2,7 +2,6 @@ import { range } from "ramda";
 import { WorkoutMode } from "../modes/WorkoutMode";
 import { Instruction } from "../types/Instruction";
 import { RepetitionInterval, SteadyInterval } from "../types/Interval";
-import { isDuration, Length } from "../types/Length";
 import intervalFactory from "./intervalFactory";
 
 export function repetitionToSteadyIntervals(
@@ -10,8 +9,8 @@ export function repetitionToSteadyIntervals(
   mode: WorkoutMode
 ): SteadyInterval[] {
   return range(0, interval.repeat).flatMap((n) => {
-    const onSize: number = writeLength(interval.onLength);
-    const offSize: number = writeLength(interval.offLength);
+    const onSize: number = mode.fromLength(interval.onLength);
+    const offSize: number = mode.fromLength(interval.offLength);
     const precedingSize: number = (onSize + offSize) * n;
 
     return [
@@ -22,7 +21,7 @@ export function repetitionToSteadyIntervals(
           cadence: interval.onCadence,
           pace: interval.pace,
           instructions: interval.instructions.filter(
-            withinRange(precedingSize, precedingSize + onSize)
+            withinRange(precedingSize, precedingSize + onSize, mode)
           ),
         },
         mode
@@ -36,7 +35,8 @@ export function repetitionToSteadyIntervals(
           instructions: interval.instructions.filter(
             withinRange(
               precedingSize + onSize,
-              precedingSize + onSize + offSize
+              precedingSize + onSize + offSize,
+              mode
             )
           ),
         },
@@ -46,10 +46,11 @@ export function repetitionToSteadyIntervals(
   });
 }
 
-const writeLength = (len: Length): number =>
-  isDuration(len) ? len.seconds : len.meters;
-
-function withinRange(from: number, to: number): (ins: Instruction) => boolean {
+function withinRange(
+  from: number,
+  to: number,
+  mode: WorkoutMode
+): (ins: Instruction) => boolean {
   return (ins: Instruction) =>
-    writeLength(ins.offset) >= from && writeLength(ins.offset) < to;
+    mode.fromLength(ins.offset) >= from && mode.fromLength(ins.offset) < to;
 }
