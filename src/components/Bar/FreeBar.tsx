@@ -27,7 +27,7 @@ const FreeBar = ({ interval, mode, ...props }: FreeBarProps) => {
   };
 
   // standard height
-  const height = 100;
+  const height = 160;
 
   const handleResizeStop = (dWidth: number) => {
     setWidth(width + dWidth);
@@ -85,7 +85,7 @@ const ResizableFreeBar = styled(Resizable)`
 `;
 
 const FreeBarIcons = styled(BarIcons)`
-  padding-top: 18px;
+  padding-top: 25px;
 `;
 
 export default FreeBar;
