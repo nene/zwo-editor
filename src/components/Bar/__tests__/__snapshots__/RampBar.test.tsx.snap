@@ -1,6 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SteadyBar> renders 1`] = `
+.c3 {
+  position: absolute;
+  bottom: 0;
+  box-sizing: border-box;
+  padding: 2px;
+  color: white;
+  height: 151.25px;
+}
+
 .c0 {
   position: relative;
 }
@@ -21,7 +30,7 @@ exports[`<SteadyBar> renders 1`] = `
   z-index: 5;
 }
 
-.c3 {
+.c4 {
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -32,25 +41,25 @@ exports[`<SteadyBar> renders 1`] = `
   display: flex;
 }
 
-.c4:first-child {
+.c5:first-child {
   border-bottom-left-radius: 5px;
 }
 
-.c4:last-child {
+.c5:last-child {
   border-bottom-right-radius: 5px;
 }
 
-.c5 {
+.c6 {
   position: absolute;
   bottom: 0;
   left: 0;
 }
 
-.c6 {
+.c7 {
   fill: transparent;
 }
 
-.c7 {
+.c8 {
   fill: white;
   display: hidden;
 }
@@ -91,7 +100,11 @@ exports[`<SteadyBar> renders 1`] = `
           "width": 8.333333333333334,
         }
       }
-    />
+    >
+      <div
+        className="c3"
+      />
+    </Resizable>
     <Resizable
       className="c2"
       enable={
@@ -120,7 +133,7 @@ exports[`<SteadyBar> renders 1`] = `
     />
   </div>
   <div
-    className="c3"
+    className="c4"
     style={
       Object {
         "backgroundColor": "#0E90D4",
@@ -130,7 +143,7 @@ exports[`<SteadyBar> renders 1`] = `
     }
   >
     <div
-      className="c4"
+      className="c5"
       style={
         Object {
           "backgroundColor": "#807F80",
@@ -139,7 +152,7 @@ exports[`<SteadyBar> renders 1`] = `
       }
     />
     <div
-      className="c4"
+      className="c5"
       style={
         Object {
           "backgroundColor": "#0E90D4",
@@ -148,7 +161,7 @@ exports[`<SteadyBar> renders 1`] = `
       }
     />
     <div
-      className="c4"
+      className="c5"
       style={
         Object {
           "backgroundColor": "#00C46A",
@@ -157,7 +170,7 @@ exports[`<SteadyBar> renders 1`] = `
       }
     />
     <div
-      className="c4"
+      className="c5"
       style={
         Object {
           "backgroundColor": "#FFCB00",
@@ -166,7 +179,7 @@ exports[`<SteadyBar> renders 1`] = `
       }
     />
     <div
-      className="c4"
+      className="c5"
       style={
         Object {
           "backgroundColor": "#FF6430",
@@ -175,7 +188,7 @@ exports[`<SteadyBar> renders 1`] = `
       }
     />
     <div
-      className="c4"
+      className="c5"
       style={
         Object {
           "backgroundColor": "#E90000",
@@ -185,16 +198,16 @@ exports[`<SteadyBar> renders 1`] = `
     />
   </div>
   <svg
-    className="c5"
+    className="c6"
     height="225.25"
     width="16.666666666666668"
   >
     <polygon
-      className="c6"
+      className="c7"
       points="0,74 0,225.25 16.666666666666668,225.25 16.666666666666668,0"
     />
     <polygon
-      className="c7"
+      className="c8"
       points="0,0 0,74 16.666666666666668,0"
     />
   </svg>
@@ -202,6 +215,15 @@ exports[`<SteadyBar> renders 1`] = `
 `;
 
 exports[`<SteadyBar> renders with Tooltip when selected 1`] = `
+.c3 {
+  position: absolute;
+  bottom: 0;
+  box-sizing: border-box;
+  padding: 2px;
+  color: white;
+  height: 151.25px;
+}
+
 .c0 {
   position: relative;
 }
@@ -222,7 +244,7 @@ exports[`<SteadyBar> renders with Tooltip when selected 1`] = `
   z-index: 5;
 }
 
-.c3 {
+.c4 {
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -233,25 +255,25 @@ exports[`<SteadyBar> renders with Tooltip when selected 1`] = `
   display: flex;
 }
 
-.c4:first-child {
+.c5:first-child {
   border-bottom-left-radius: 5px;
 }
 
-.c4:last-child {
+.c5:last-child {
   border-bottom-right-radius: 5px;
 }
 
-.c5 {
+.c6 {
   position: absolute;
   bottom: 0;
   left: 0;
 }
 
-.c6 {
+.c7 {
   fill: transparent;
 }
 
-.c7 {
+.c8 {
   fill: white;
   display: hidden;
 }
@@ -273,6 +295,7 @@ exports[`<SteadyBar> renders with Tooltip when selected 1`] = `
         "cadence": undefined,
         "endIntensity": 0.901,
         "id": "mock-id",
+        "instructions": Array [],
         "length": Object {
           "seconds": 50,
         },
@@ -320,7 +343,11 @@ exports[`<SteadyBar> renders with Tooltip when selected 1`] = `
           "width": 8.333333333333334,
         }
       }
-    />
+    >
+      <div
+        className="c3"
+      />
+    </Resizable>
     <Resizable
       className="c2"
       enable={
@@ -349,7 +376,7 @@ exports[`<SteadyBar> renders with Tooltip when selected 1`] = `
     />
   </div>
   <div
-    className="c3"
+    className="c4"
     style={
       Object {
         "backgroundColor": "#0E90D4",
@@ -359,7 +386,7 @@ exports[`<SteadyBar> renders with Tooltip when selected 1`] = `
     }
   >
     <div
-      className="c4"
+      className="c5"
       style={
         Object {
           "backgroundColor": "#807F80",
@@ -368,7 +395,7 @@ exports[`<SteadyBar> renders with Tooltip when selected 1`] = `
       }
     />
     <div
-      className="c4"
+      className="c5"
       style={
         Object {
           "backgroundColor": "#0E90D4",
@@ -377,7 +404,7 @@ exports[`<SteadyBar> renders with Tooltip when selected 1`] = `
       }
     />
     <div
-      className="c4"
+      className="c5"
       style={
         Object {
           "backgroundColor": "#00C46A",
@@ -386,7 +413,7 @@ exports[`<SteadyBar> renders with Tooltip when selected 1`] = `
       }
     />
     <div
-      className="c4"
+      className="c5"
       style={
         Object {
           "backgroundColor": "#FFCB00",
@@ -395,7 +422,7 @@ exports[`<SteadyBar> renders with Tooltip when selected 1`] = `
       }
     />
     <div
-      className="c4"
+      className="c5"
       style={
         Object {
           "backgroundColor": "#FF6430",
@@ -404,7 +431,7 @@ exports[`<SteadyBar> renders with Tooltip when selected 1`] = `
       }
     />
     <div
-      className="c4"
+      className="c5"
       style={
         Object {
           "backgroundColor": "#E90000",
@@ -414,16 +441,16 @@ exports[`<SteadyBar> renders with Tooltip when selected 1`] = `
     />
   </div>
   <svg
-    className="c5"
+    className="c6"
     height="225.25"
     width="16.666666666666668"
   >
     <polygon
-      className="c6"
+      className="c7"
       points="0,74 0,225.25 16.666666666666668,225.25 16.666666666666668,0"
     />
     <polygon
-      className="c7"
+      className="c8"
       points="0,0 0,74 16.666666666666668,0"
     />
   </svg>

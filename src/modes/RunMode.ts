@@ -114,4 +114,12 @@ export default class RunMode extends Mode {
       }
     }
   }
+
+  intervalLength(interval: Interval): Length {
+    if (this.lengthType === "time") {
+      return this.intervalDuration(interval);
+    } else {
+      return this.intervalDistance(interval);
+    }
+  }
 }

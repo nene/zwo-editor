@@ -8,10 +8,6 @@ exports[`<SteadyBar> renders 1`] = `
 .c1 {
   border-radius: 10px;
   border: 1px solid white;
-  background-image: none;
-  background-size: 16px;
-  background-position: 2px 2px;
-  background-repeat: no-repeat;
 }
 
 <div
@@ -51,7 +47,12 @@ exports[`<SteadyBar> renders 1`] = `
         "backgroundColor": "#00C46A",
       }
     }
-  />
+  >
+    <BarIcons
+      height={190.75}
+      instructions={Array []}
+    />
+  </Resizable>
 </div>
 `;
 
@@ -63,10 +64,6 @@ exports[`<SteadyBar> renders cadence icon when interval has cadence specified 1`
 .c1 {
   border-radius: 10px;
   border: 1px solid white;
-  background-image: url(test-file-stub);
-  background-size: 16px;
-  background-position: 2px 2px;
-  background-repeat: no-repeat;
 }
 
 <div
@@ -106,7 +103,13 @@ exports[`<SteadyBar> renders cadence icon when interval has cadence specified 1`
         "backgroundColor": "#00C46A",
       }
     }
-  />
+  >
+    <BarIcons
+      cadence={90}
+      height={190.75}
+      instructions={Array []}
+    />
+  </Resizable>
 </div>
 `;
 
@@ -118,10 +121,6 @@ exports[`<SteadyBar> renders with Tooltip when selected and showTooltip=true 1`]
 .c1 {
   border-radius: 10px;
   border: 1px solid white;
-  background-image: none;
-  background-size: 16px;
-  background-position: 2px 2px;
-  background-repeat: no-repeat;
 }
 
 <div
@@ -140,6 +139,7 @@ exports[`<SteadyBar> renders with Tooltip when selected and showTooltip=true 1`]
       Object {
         "cadence": undefined,
         "id": "mock-id",
+        "instructions": Array [],
         "intensity": 0.763,
         "length": Object {
           "seconds": 50,
@@ -188,7 +188,12 @@ exports[`<SteadyBar> renders with Tooltip when selected and showTooltip=true 1`]
         "backgroundColor": "#00C46A",
       }
     }
-  />
+  >
+    <BarIcons
+      height={190.75}
+      instructions={Array []}
+    />
+  </Resizable>
 </div>
 `;
 
@@ -200,10 +205,6 @@ exports[`<SteadyBar> renders without Tooltip when selected, but showTooltip=fals
 .c1 {
   border-radius: 10px;
   border: 1px solid white;
-  background-image: none;
-  background-size: 16px;
-  background-position: 2px 2px;
-  background-repeat: no-repeat;
 }
 
 <div
@@ -247,6 +248,11 @@ exports[`<SteadyBar> renders without Tooltip when selected, but showTooltip=fals
         "backgroundColor": "#00C46A",
       }
     }
-  />
+  >
+    <BarIcons
+      height={190.75}
+      instructions={Array []}
+    />
+  </Resizable>
 </div>
 `;

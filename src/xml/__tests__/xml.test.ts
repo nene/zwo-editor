@@ -28,7 +28,6 @@ describe("XML", () => {
       sportType: mode.sportType,
       lengthType: mode.lengthType,
       intervals: [],
-      instructions: [],
     };
     const xml = createWorkoutXml(workout, mode);
     expect(xml).toMatchSnapshot();
@@ -59,12 +58,32 @@ describe("XML", () => {
             length: Duration(10 * 60),
             startIntensity: 0.3,
             endIntensity: 0.75,
+            instructions: [
+              // @ 00:00 - at the start of warmup
+              createInstruction(
+                { offset: Duration(0), text: "Welcome to the workout!" },
+                mode
+              ),
+            ],
           },
           mode
         ),
         // Steady: 5:00 80%
         intervalFactory.steady(
-          { length: Duration(5 * 60), intensity: 0.8 },
+          {
+            length: Duration(5 * 60),
+            intensity: 0.8,
+            instructions: [
+              // @ 12:30 - at the middle of second block
+              createInstruction(
+                {
+                  offset: Duration(2 * 60 + 30),
+                  text: "This is just a warmup still",
+                },
+                mode
+              ),
+            ],
+          },
           mode
         ),
         // Intervals: 4 x ON 0:30 120%, OFF 1:00 60%
@@ -75,77 +94,79 @@ describe("XML", () => {
             onIntensity: 1.2,
             offLength: Duration(60),
             offIntensity: 0.6,
+            instructions: [
+              // @ 15:00 - at the start of repetition block
+              createInstruction(
+                {
+                  offset: Duration(0),
+                  text: "It's the first one of four sprint efforts",
+                },
+                mode
+              ),
+              // @ 19:30 - at the start of last repetition block
+              createInstruction(
+                {
+                  offset: Duration(4 * 60 + 30),
+                  text: "It's the first one of four sprint efforts",
+                },
+                mode
+              ),
+            ],
           },
           mode
         ),
         // Ramp 1:00 80%..150%
         intervalFactory.ramp(
-          { length: Duration(60), startIntensity: 0.8, endIntensity: 1.5 },
+          {
+            length: Duration(60),
+            startIntensity: 0.8,
+            endIntensity: 1.5,
+            instructions: [
+              // @ 21:00 - at the start of a ramp
+              createInstruction(
+                {
+                  offset: Duration(0),
+                  text: "As a bonus, we'll ramp up really hard :)",
+                },
+                mode
+              ),
+            ],
+          },
           mode
         ),
         // Freeride: 20:00
-        intervalFactory.free({ length: Duration(20 * 60) }, mode),
+        intervalFactory.free(
+          {
+            length: Duration(20 * 60),
+            instructions: [
+              // @ 32:00 - inside freeride
+              createInstruction(
+                {
+                  offset: Duration(10 * 60),
+                  text: "Ride as hard as you can for 20 minutes!",
+                },
+                mode
+              ),
+            ],
+          },
+          mode
+        ),
         // Cooldown: 10:00 30%..30%
         intervalFactory.ramp(
           {
             length: Duration(10 * 60),
             startIntensity: 0.7,
             endIntensity: 0.3,
-          },
-          mode
-        ),
-      ],
-      instructions: [
-        // @ 00:00 - at the start of warmup
-        createInstruction(
-          { offset: Duration(0), text: "Welcome to the workout!" },
-          mode
-        ),
-        // @ 12:30 - at the middle of second block
-        createInstruction(
-          {
-            offset: Duration(12 * 60 + 30),
-            text: "This is just a warmup still",
-          },
-          mode
-        ),
-        // @ 15:00 - at the start of repetition block
-        createInstruction(
-          {
-            offset: Duration(15 * 60),
-            text: "It's the first one of four sprint efforts",
-          },
-          mode
-        ),
-        // @ 19:30 - at the start of last repetition block
-        createInstruction(
-          {
-            offset: Duration(19 * 60 + 30),
-            text: "It's the first one of four sprint efforts",
-          },
-          mode
-        ),
-        // @ 21:00 - at the start of a ramp
-        createInstruction(
-          {
-            offset: Duration(21 * 60),
-            text: "As a bonus, we'll ramp up really hard :)",
-          },
-          mode
-        ),
-        // @ 32:00 - inside freeride
-        createInstruction(
-          {
-            offset: Duration(32 * 60),
-            text: "Ride as hard as you can for 20 minutes!",
-          },
-          mode
-        ),
-        // @ 51:50 - almost at the very end of cooldown
-        createInstruction(
-          {
-            offset: Duration(51 * 60 + 50),
-            text: "This was it. See you next time.",
+            instructions: [
+              // @ 51:50 - almost at the very end of cooldown
+              createInstruction(
+                {
+                  offset: Duration(9 * 60 + 50),
+                  text: "This was it. See you next time.",
+                },
+                mode
+              ),
+            ],
           },
           mode
         ),
@@ -224,7 +245,6 @@ describe("XML", () => {
           mode
         ),
       ],
-      instructions: [],
     };
     const xml = createWorkoutXml(workout, mode);
     expect(xml).toMatchSnapshot();
@@ -255,6 +275,13 @@ describe("XML", () => {
             startIntensity: 0.3,
             endIntensity: 0.75,
             pace: PaceType.marathon,
+            instructions: [
+              // @ 00:00 - at the start of warmup
+              createInstruction(
+                { offset: Duration(0), text: "Welcome to the workout!" },
+                mode
+              ),
+            ],
           },
           mode
         ),
@@ -264,6 +291,16 @@ describe("XML", () => {
             length: Duration(5 * 60),
             intensity: 0.8,
             pace: PaceType.halfMarathon,
+            instructions: [
+              // @ 12:30 - at the middle of second block
+              createInstruction(
+                {
+                  offset: Duration(2 * 60 + 30),
+                  text: "This is just a warmup still",
+                },
+                mode
+              ),
+            ],
           },
           mode
         ),
@@ -276,6 +313,24 @@ describe("XML", () => {
             offLength: Duration(60),
             offIntensity: 0.6,
             pace: PaceType.fiveKm,
+            instructions: [
+              // @ 15:00 - at the start of repetition block
+              createInstruction(
+                {
+                  offset: Duration(0),
+                  text: "It's the first one of four sprint efforts",
+                },
+                mode
+              ),
+              // @ 19:30 - at the start of last repetition block
+              createInstruction(
+                {
+                  offset: Duration(4 * 60 + 30),
+                  text: "It's the first one of four sprint efforts",
+                },
+                mode
+              ),
+            ],
           },
           mode
         ),
@@ -286,11 +341,36 @@ describe("XML", () => {
             startIntensity: 0.8,
             endIntensity: 1.5,
             pace: PaceType.oneMile,
+            instructions: [
+              // @ 21:00 - at the start of a ramp
+              createInstruction(
+                {
+                  offset: Duration(0),
+                  text: "As a bonus, we'll ramp up really hard :)",
+                },
+                mode
+              ),
+            ],
           },
           mode
         ),
         // Free run: 20:00
-        intervalFactory.free({ length: Duration(20 * 60) }, mode),
+        intervalFactory.free(
+          {
+            length: Duration(20 * 60),
+            instructions: [
+              // @ 32:00 - inside freeride
+              createInstruction(
+                {
+                  offset: Duration(10 * 60),
+                  text: "Ride as hard as you can for 20 minutes!",
+                },
+                mode
+              ),
+            ],
+          },
+          mode
+        ),
         // Cooldown: 10:00 30%..30% of 10 km pace
         intervalFactory.ramp(
           {
@@ -298,61 +378,16 @@ describe("XML", () => {
             startIntensity: 0.7,
             endIntensity: 0.3,
             pace: PaceType.tenKm,
-          },
-          mode
-        ),
-      ],
-      instructions: [
-        // @ 00:00 - at the start of warmup
-        createInstruction(
-          { offset: Duration(0), text: "Welcome to the workout!" },
-          mode
-        ),
-        // @ 12:30 - at the middle of second block
-        createInstruction(
-          {
-            offset: Duration(12 * 60 + 30),
-            text: "This is just a warmup still",
-          },
-          mode
-        ),
-        // @ 15:00 - at the start of repetition block
-        createInstruction(
-          {
-            offset: Duration(15 * 60),
-            text: "It's the first one of four sprint efforts",
-          },
-          mode
-        ),
-        // @ 19:30 - at the start of last repetition block
-        createInstruction(
-          {
-            offset: Duration(19 * 60 + 30),
-            text: "It's the first one of four sprint efforts",
-          },
-          mode
-        ),
-        // @ 21:00 - at the start of a ramp
-        createInstruction(
-          {
-            offset: Duration(21 * 60),
-            text: "As a bonus, we'll ramp up really hard :)",
-          },
-          mode
-        ),
-        // @ 32:00 - inside freeride
-        createInstruction(
-          {
-            offset: Duration(32 * 60),
-            text: "Ride as hard as you can for 20 minutes!",
-          },
-          mode
-        ),
-        // @ 51:50 - almost at the very end of cooldown
-        createInstruction(
-          {
-            offset: Duration(51 * 60 + 50),
-            text: "This was it. See you next time.",
+            instructions: [
+              // @ 51:50 - almost at the very end of cooldown
+              createInstruction(
+                {
+                  offset: Duration(9 * 60 + 50),
+                  text: "This was it. See you next time.",
+                },
+                mode
+              ),
+            ],
           },
           mode
         ),
@@ -387,6 +422,13 @@ describe("XML", () => {
             startIntensity: 0.3,
             endIntensity: 0.75,
             pace: PaceType.marathon,
+            instructions: [
+              // @ 0m - at the start of warmup
+              createInstruction(
+                { offset: Distance(0), text: "Welcome to the workout!" },
+                mode
+              ),
+            ],
           },
           mode
         ),
@@ -396,6 +438,13 @@ describe("XML", () => {
             length: Distance(600),
             intensity: 0.8,
             pace: PaceType.halfMarathon,
+            instructions: [
+              // @ 1300m - at the middle of second block
+              createInstruction(
+                { offset: Distance(300), text: "This is just a warmup still" },
+                mode
+              ),
+            ],
           },
           mode
         ),
@@ -408,6 +457,24 @@ describe("XML", () => {
             offLength: Distance(400),
             offIntensity: 0.6,
             pace: PaceType.fiveKm,
+            instructions: [
+              // @ 1600m - at the start of repetition block
+              createInstruction(
+                {
+                  offset: Distance(0),
+                  text: "It's the first one of four sprint efforts",
+                },
+                mode
+              ),
+              // @ 3400m - at the start of last repetition block
+              createInstruction(
+                {
+                  offset: Distance(1800),
+                  text: "It's the first one of four sprint efforts",
+                },
+                mode
+              ),
+            ],
           },
           mode
         ),
@@ -418,70 +485,53 @@ describe("XML", () => {
             startIntensity: 0.8,
             endIntensity: 1.5,
             pace: PaceType.oneMile,
+            instructions: [
+              // @ 4000m - at the start of a ramp
+              createInstruction(
+                {
+                  offset: Distance(0),
+                  text: "As a bonus, we'll ramp up really hard :)",
+                },
+                mode
+              ),
+            ],
           },
           mode
         ),
         // Free run: 1000m
-        intervalFactory.free({ length: Distance(1000) }, mode),
-        // Cooldown: 1000m 30%..30% of 10 km pace
+        intervalFactory.free(
+          {
+            length: Distance(1000),
+            instructions: [
+              // @ 4800m - inside freeride
+              createInstruction(
+                {
+                  offset: Distance(200),
+                  text: "Ride as hard as you can for 20 minutes!",
+                },
+                mode
+              ),
+            ],
+          },
+          mode
+        ),
+        // Cooldown: 1000m 70%..30% of 10 km pace
         intervalFactory.ramp(
           {
             length: Distance(1000),
             startIntensity: 0.7,
             endIntensity: 0.3,
             pace: PaceType.tenKm,
-          },
-          mode
-        ),
-      ],
-      instructions: [
-        // @ 0m - at the start of warmup
-        createInstruction(
-          { offset: Distance(0), text: "Welcome to the workout!" },
-          mode
-        ),
-        // @ 1300m - at the middle of second block
-        createInstruction(
-          { offset: Distance(1300), text: "This is just a warmup still" },
-          mode
-        ),
-        // @ 1600m - at the start of repetition block
-        createInstruction(
-          {
-            offset: Distance(1600),
-            text: "It's the first one of four sprint efforts",
-          },
-          mode
-        ),
-        // @ 3400m - at the start of last repetition block
-        createInstruction(
-          {
-            offset: Distance(3400),
-            text: "It's the first one of four sprint efforts",
-          },
-          mode
-        ),
-        // @ 4000m - at the start of a ramp
-        createInstruction(
-          {
-            offset: Distance(4000),
-            text: "As a bonus, we'll ramp up really hard :)",
-          },
-          mode
-        ),
-        // @ 4800m - inside freeride
-        createInstruction(
-          {
-            offset: Distance(4800),
-            text: "Ride as hard as you can for 20 minutes!",
-          },
-          mode
-        ),
-        // @ 6400m - almost at the very end of cooldown
-        createInstruction(
-          {
-            offset: Distance(6400),
-            text: "This was it. See you next time.",
+            instructions: [
+              // @ 6400m - almost at the very end of cooldown
+              createInstruction(
+                {
+                  offset: Distance(800),
+                  text: "This was it. See you next time.",
+                },
+                mode
+              ),
+            ],
           },
           mode
         ),
@@ -511,26 +561,32 @@ describe("XML", () => {
       intervals: [
         // Steady: 5:00 80%
         intervalFactory.steady(
-          { length: Duration(5 * 60), intensity: 0.8 },
-          mode
-        ),
-      ],
-      instructions: [
-        // @ 00:00 - at the start of workout
-        createInstruction(
-          { offset: Duration(0), text: "Are we there yet?" },
-          mode
-        ),
-        // @ 04:59 - a second before the end of workout
-        createInstruction(
-          { offset: Duration(4 * 60 + 59), text: "Almost there!" },
-          mode
-        ),
-        // @ 05:00 - right at the end
-        createInstruction({ offset: Duration(5 * 60), text: "There!" }, mode),
-        // @ 08:00 - well past the end
-        createInstruction(
-          { offset: Duration(8 * 60), text: "Enough of it!" },
+          {
+            length: Duration(5 * 60),
+            intensity: 0.8,
+            instructions: [
+              // @ 00:00 - at the start of workout
+              createInstruction(
+                { offset: Duration(0), text: "Are we there yet?" },
+                mode
+              ),
+              // @ 04:59 - a second before the end of workout
+              createInstruction(
+                { offset: Duration(4 * 60 + 59), text: "Almost there!" },
+                mode
+              ),
+              // @ 05:00 - right at the end
+              createInstruction(
+                { offset: Duration(5 * 60), text: "There!" },
+                mode
+              ),
+              // @ 08:00 - well past the end
+              createInstruction(
+                { offset: Duration(8 * 60), text: "Enough of it!" },
+                mode
+              ),
+            ],
+          },
           mode
         ),
       ],
@@ -540,15 +596,24 @@ describe("XML", () => {
 
     expect(parseWorkoutXml(xml, mode)).toEqual({
       ...workout,
-      instructions: [
-        // @ 00:00 - at the start of workout
-        createInstruction(
-          { offset: Duration(0), text: "Are we there yet?" },
-          mode
-        ),
-        // @ 04:59 - a second before the end of workout
-        createInstruction(
-          { offset: Duration(4 * 60 + 59), text: "Almost there!" },
+      intervals: [
+        intervalFactory.steady(
+          {
+            length: Duration(5 * 60),
+            intensity: 0.8,
+            instructions: [
+              // @ 00:00 - at the start of workout
+              createInstruction(
+                { offset: Duration(0), text: "Are we there yet?" },
+                mode
+              ),
+              // @ 04:59 - a second before the end of workout
+              createInstruction(
+                { offset: Duration(4 * 60 + 59), text: "Almost there!" },
+                mode
+              ),
+            ],
+          },
           mode
         ),
       ],
@@ -600,17 +665,20 @@ describe("XML", () => {
           mode
         ),
         intervalFactory.steady(
-          { length: Duration(5 * 60), intensity: 0.8 },
-          mode
-        ),
-      ],
-      instructions: [
-        createInstruction(
-          { offset: Duration(5 * 60), text: "Welcome to the interval" },
-          mode
-        ),
-        createInstruction(
-          { offset: Duration(9 * 60 + 50), text: "Near the end now" },
+          {
+            length: Duration(5 * 60),
+            intensity: 0.8,
+            instructions: [
+              createInstruction(
+                { offset: Duration(0), text: "Welcome to the interval" },
+                mode
+              ),
+              createInstruction(
+                { offset: Duration(4 * 60 + 50), text: "Near the end now" },
+                mode
+              ),
+            ],
+          },
           mode
         ),
       ],

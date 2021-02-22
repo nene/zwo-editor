@@ -11,6 +11,10 @@ jest.mock("../../Tooltip/Tooltip", () => (props: any) =>
   MockReact.createElement("Tooltip", props)
 );
 
+jest.mock("../BarIcons", () => ({
+  BarIcons: (props: any) => MockReact.createElement("BarIcons", props),
+}));
+
 jest.mock("re-resizable", () => ({
   Resizable: (props: any) => MockReact.createElement("Resizable", props),
 }));

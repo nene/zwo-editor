@@ -18,6 +18,8 @@ import intervalFactory from "../../interval/intervalFactory";
 import { Duration } from "../../types/Length";
 import { selectMode } from "./mode";
 import { PaceType } from "../../types/PaceType";
+import { propEq } from "ramda";
+import { Instruction } from "../../types/Instruction";
 
 const initialState: Interval[] = [];
 
@@ -36,6 +38,42 @@ const slice = createSlice({
       intervals,
       { payload: id }: PayloadAction<string | undefined>
     ) => intervals.filter((item) => item.id !== id),
+    removeInstruction: (
+      intervals,
+      { payload }: PayloadAction<{ intervalId: string; instructionId: string }>
+    ) => {
+      return updateInstructionsField({
+        intervals,
+        intervalId: payload.intervalId,
+        update: (instructions) =>
+          instructions.filter((i) => i.id !== payload.instructionId),
+      });
+    },
+    updateInstruction: (
+      intervals,
+      {
+        payload,
+      }: PayloadAction<{ intervalId: string; instruction: Instruction }>
+    ) => {
+      return updateInstructionsField({
+        intervals,
+        intervalId: payload.intervalId,
+        update: (instructions) =>
+          replaceById(payload.instruction, instructions),
+      });
+    },
+    addInstruction: (
+      intervals,
+      {
+        payload,
+      }: PayloadAction<{ intervalId: string; instruction: Instruction }>
+    ) => {
+      return updateInstructionsField({
+        intervals,
+        intervalId: payload.intervalId,
+        update: (instructions) => [...instructions, payload.instruction],
+      });
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -44,12 +82,39 @@ const slice = createSlice({
   },
 });
 
+type UpdateInstructionsFieldParams = {
+  intervalId: string;
+  update: (instructions: Instruction[]) => Instruction[];
+  intervals: Interval[];
+};
+
+const updateInstructionsField = ({
+  intervals,
+  intervalId,
+  update,
+}: UpdateInstructionsFieldParams): Interval[] => {
+  const interval = intervals.find(propEq("id", intervalId));
+  if (!interval) {
+    return intervals;
+  }
+  return replaceById(
+    {
+      ...interval,
+      instructions: update(interval.instructions),
+    },
+    intervals
+  );
+};
+
 export const reducer = slice.reducer;
 export const {
   setIntervals,
   addInterval,
   updateInterval,
   removeInterval,
+  removeInstruction,
+  updateInstruction,
+  addInstruction,
 } = slice.actions;
 
 export const removeSelectedInterval = createAsyncThunk(
@@ -138,4 +203,9 @@ export const selectSelectedIntervalPace = createSelector(
   (interval) => {
     return interval && interval.type !== "free" ? interval.pace : undefined;
   }
+);
+
+export const selectSelectedIntervalId = createSelector(
+  selectSelectedInterval,
+  (interval) => interval?.id
 );

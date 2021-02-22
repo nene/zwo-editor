@@ -27,6 +27,7 @@ export default {
       intensity: defaultIntensity,
       cadence: undefined,
       pace: defaultPace,
+      instructions: [],
       ...interval,
     };
   },
@@ -40,6 +41,7 @@ export default {
       endIntensity: defaultIntensity,
       cadence: undefined,
       pace: defaultPace,
+      instructions: [],
       ...interval,
     };
   },
@@ -50,6 +52,7 @@ export default {
       id: uuidv4(),
       length: defaultLength(mode),
       cadence: undefined,
+      instructions: [],
       ...interval,
     };
   },
@@ -69,6 +72,7 @@ export default {
       onCadence: undefined,
       offCadence: undefined,
       pace: defaultPace,
+      instructions: [],
       ...interval,
     };
   },

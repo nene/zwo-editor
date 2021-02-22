@@ -1,10 +1,9 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import SteadyBar from "./SteadyBar";
 import styled from "styled-components";
 import { RepetitionInterval, SteadyInterval } from "../../types/Interval";
 import { WorkoutMode } from "../../modes/WorkoutMode";
-import intervalFactory from "../../interval/intervalFactory";
-import { range } from "ramda";
+import { repetitionToSteadyIntervals } from "../../interval/repetition";
 
 interface RepetitionBarProps {
   interval: RepetitionInterval;
@@ -15,43 +14,13 @@ interface RepetitionBarProps {
 }
 
 const RepetitionBar = ({ interval, ...props }: RepetitionBarProps) => {
-  const [repeat, setRepeat] = useState(interval.repeat);
-
-  const [onLength, setOnLength] = useState(interval.onLength);
-  const [offLength, setOffLength] = useState(interval.offLength);
-
   const subIntervals = useMemo(() => {
-    return range(0, repeat).flatMap(() => [
-      intervalFactory.steady(
-        {
-          length: onLength,
-          intensity: interval.onIntensity,
-          cadence: interval.onCadence,
-          pace: interval.pace,
-        },
-        props.mode
-      ),
-      intervalFactory.steady(
-        {
-          length: offLength,
-          intensity: interval.offIntensity,
-          cadence: interval.offCadence,
-          pace: interval.pace,
-        },
-        props.mode
-      ),
-    ]);
+    return repetitionToSteadyIntervals(interval, props.mode);
     // eslint-disable-next-line
-  }, [repeat]);
+  }, [interval.repeat, interval.instructions]);
 
   function handleOnChange(values: SteadyInterval) {
     const index = subIntervals.findIndex((sub) => sub.id === values.id);
-
-    if (index % 2 === 1) {
-      setOffLength(values.length);
-    } else {
-      setOnLength(values.length);
-    }
 
     for (var i = 0; i < subIntervals.length; i++) {
       if (index % 2 === i % 2) {
@@ -65,7 +34,7 @@ const RepetitionBar = ({ interval, ...props }: RepetitionBarProps) => {
       ...interval,
       onCadence: subIntervals[0].cadence,
       offCadence: subIntervals[1].cadence,
-      repeat: repeat,
+      repeat: interval.repeat,
       onLength: subIntervals[0].length,
       offLength: subIntervals[1].length,
       onIntensity: subIntervals[0].intensity,
@@ -74,7 +43,6 @@ const RepetitionBar = ({ interval, ...props }: RepetitionBarProps) => {
   }
 
   function handleAddInterval() {
-    setRepeat(repeat + 1);
     props.onChange({
       ...interval,
       repeat: interval.repeat + 1,
@@ -82,8 +50,7 @@ const RepetitionBar = ({ interval, ...props }: RepetitionBarProps) => {
   }
 
   function handleRemoveInterval() {
-    if (repeat > 1) {
-      setRepeat(repeat - 1);
+    if (interval.repeat > 1) {
       props.onChange({
         ...interval,
         repeat: interval.repeat - 1,

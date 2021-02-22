@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { ZoneColor, Zones } from "../../types/Zones";
 import {
   faFile,
-  faComment,
   faBicycle,
   faRunning,
 } from "@fortawesome/free-solid-svg-icons";
@@ -11,7 +10,6 @@ import { ReactComponent as WarmdownLogo } from "../../assets/warmdown.svg";
 import { ReactComponent as WarmupLogo } from "../../assets/warmup.svg";
 import { ReactComponent as IntervalLogo } from "../../assets/interval.svg";
 import { ReactComponent as SteadyLogo } from "../../assets/steady.svg";
-import { createInstruction } from "../../types/Instruction";
 import intervalFactory from "../../interval/intervalFactory";
 import NumberField from "./NumberField";
 import UploadButton from "./UploadButton";
@@ -26,7 +24,6 @@ import {
   setWeight,
 } from "../../rdx/state/athlete";
 import { addInterval } from "../../rdx/state/intervals";
-import { addInstruction } from "../../rdx/state/instructions";
 import { selectMode } from "../../rdx/state/mode";
 import { clearWorkout, loadWorkout } from "../../rdx/state/workout";
 import DownloadButton from "./DownloadButton";
@@ -45,7 +42,6 @@ const mapDispatchToProps = {
   setFtp,
   setWeight,
   addInterval,
-  addInstruction,
   clearWorkout,
   loadWorkout,
 };
@@ -55,12 +51,7 @@ type ToolbarProps = ConnectedProps<
   typeof mapDispatchToProps
 >;
 
-const Toolbar = ({
-  mode,
-  addInterval,
-  addInstruction,
-  ...props
-}: ToolbarProps) => {
+const Toolbar = ({ mode, addInterval, ...props }: ToolbarProps) => {
   return (
     <Container>
       {props.sportType === "bike" ? (
@@ -170,12 +161,6 @@ const Toolbar = ({
         onClick={() => addInterval(intervalFactory.free({}, mode))}
       >
         {props.sportType === "bike" ? "Free Ride" : "Free Run"}
-      </IconButton>
-      <IconButton
-        icon={faComment}
-        onClick={() => addInstruction(createInstruction({}, mode))}
-      >
-        Text Event
       </IconButton>
       {props.sportType === "bike" && (
         <NumberField

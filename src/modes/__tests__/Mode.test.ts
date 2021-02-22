@@ -50,6 +50,16 @@ describe("Mode", () => {
     });
   });
 
+  describe("fromLength()", () => {
+    it("converts Duration to seconds", () => {
+      expect(defaultBikeMode().fromLength(Duration(60))).toBe(60);
+    });
+
+    it("converts Distance to meters", () => {
+      expect(defaultBikeMode().fromLength(Distance(100))).toBe(100);
+    });
+  });
+
   describe("duration()", () => {
     it("returns the value unmodified when given a Duration", () => {
       expect(defaultBikeMode().duration(Duration(60))).toEqual(Duration(60));
@@ -196,6 +206,43 @@ describe("Mode", () => {
       expect(() => mode.intervalDuration(interval)).toThrow(
         "Unexpected length:Distance encountered in BikeMode"
       );
+    });
+
+    describe("intervalLength()", () => {
+      it("always returns duration in BikeMode", () => {
+        const mode = defaultBikeMode();
+        const interval = intervalFactory.steady(
+          {
+            length: Duration(120),
+          },
+          mode
+        );
+        expect(mode.intervalLength(interval)).toEqual(Duration(120));
+      });
+
+      it("returns duration in RunMode/lengthType=time", () => {
+        const mode = defaultRunMode();
+        const interval = intervalFactory.steady(
+          {
+            length: Distance(100),
+            pace: PaceType.fiveKm,
+          },
+          mode
+        );
+        expect(mode.intervalLength(interval)).toEqual(Duration(6));
+      });
+
+      it("returns distance in RunMode/lengthType=distance", () => {
+        const mode = defaultRunDistanceMode();
+        const interval = intervalFactory.steady(
+          {
+            length: Duration(6),
+            pace: PaceType.fiveKm,
+          },
+          mode
+        );
+        expect(mode.intervalLength(interval)).toEqual(Distance(100));
+      });
     });
   });
 

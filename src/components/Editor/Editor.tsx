@@ -1,19 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import GenericBar from "../Bar/GenericBar";
-import InstructionEditor from "../InstructionEditor/InstructionEditor";
 import TimeAxis from "../Axis/TimeAxis";
 import ZoneAxis from "../Axis/ZoneAxis";
-import { workoutDuration } from "../../utils/duration";
 import DistanceAxis from "../Axis/DistanceAxis";
 import { selectLengthType } from "../../rdx/state/meta";
 import { RootState } from "../../rdx/store";
-import { selectIntervals, updateInterval } from "../../rdx/state/intervals";
 import {
-  selectInstructions,
-  updateInstruction,
   removeInstruction,
-} from "../../rdx/state/instructions";
+  selectIntervals,
+  updateInstruction,
+  updateInterval,
+} from "../../rdx/state/intervals";
 import { selectMode } from "../../rdx/state/mode";
 import { ConnectedProps } from "../../types/ConnectedProps";
 import {
@@ -27,16 +25,15 @@ import styled from "styled-components";
 const mapStateToProps = (state: RootState) => ({
   lengthType: selectLengthType(state),
   intervals: selectIntervals(state),
-  instructions: selectInstructions(state),
   mode: selectMode(state),
   selectedId: selectSelectedId(state),
 });
 
 const mapDispatchToProps = {
   updateInterval,
-  updateInstruction,
   setSelectedId,
   clearSelection,
+  updateInstruction,
   removeInstruction,
 };
 
@@ -48,13 +45,12 @@ type EditorProps = ConnectedProps<
 const Editor = ({
   lengthType,
   intervals,
-  instructions,
   mode,
   selectedId,
   updateInterval,
-  updateInstruction,
   setSelectedId,
   clearSelection,
+  updateInstruction,
   removeInstruction,
 }: EditorProps) => {
   const segmentsRef = useRef<HTMLDivElement>(null);
@@ -88,24 +84,12 @@ const Editor = ({
               mode={mode}
               onChange={updateInterval}
               onClick={toggleSelection}
+              onInstructionChange={updateInstruction}
+              onInstructionDelete={removeInstruction}
               selected={interval.id === selectedId}
             />
           ))}
         </Segments>
-
-        <Slider>
-          {instructions.map((instruction, index) => (
-            <InstructionEditor
-              key={instruction.id}
-              instruction={instruction}
-              width={workoutDuration(intervals, mode).seconds / 3}
-              onChange={updateInstruction}
-              onDelete={removeInstruction}
-              index={index}
-              mode={mode}
-            />
-          ))}
-        </Slider>
 
         {lengthType === "time" ? (
           <TimeAxis width={xAxisWidth} />
@@ -152,6 +136,7 @@ const Segments = styled.div`
   justify-content: flex-start;
   align-items: flex-end;
   bottom: 0px;
+  top: 0px;
   padding-bottom: 40px;
   margin-right: 100px;
 `;
@@ -166,12 +151,6 @@ const Fader = styled.div`
   width: 50000px;
   height: 100%;
   z-index: 1;
-`;
-
-const Slider = styled.div`
-  position: absolute;
-  top: 10px;
-  left: 0px;
 `;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor);

@@ -1,3 +1,4 @@
+import { Instruction } from "./Instruction";
 import { Length } from "./Length";
 import { PaceType } from "./PaceType";
 
@@ -8,6 +9,7 @@ export interface SteadyInterval {
   intensity: number;
   cadence?: number;
   pace: PaceType;
+  instructions: Instruction[];
 }
 
 export interface RampInterval {
@@ -18,6 +20,7 @@ export interface RampInterval {
   endIntensity: number;
   cadence?: number;
   pace: PaceType;
+  instructions: Instruction[];
 }
 
 export interface FreeInterval {
@@ -25,6 +28,7 @@ export interface FreeInterval {
   length: Length;
   type: "free";
   cadence?: number;
+  instructions: Instruction[];
 }
 
 export interface RepetitionInterval {
@@ -38,6 +42,7 @@ export interface RepetitionInterval {
   offLength: Length;
   repeat: number;
   pace: PaceType;
+  instructions: Instruction[];
 }
 
 export type Interval =

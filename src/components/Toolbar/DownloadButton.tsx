@@ -13,7 +13,6 @@ import {
 } from "../../rdx/state/meta";
 import { RootState } from "../../rdx/store";
 import { selectIntervals } from "../../rdx/state/intervals";
-import { selectInstructions } from "../../rdx/state/instructions";
 import { selectMode } from "../../rdx/state/mode";
 import { ConnectedProps } from "../../types/ConnectedProps";
 
@@ -25,7 +24,6 @@ const mapStateToProps = (state: RootState) => ({
   sportType: selectSportType(state),
   lengthType: selectLengthType(state),
   intervals: selectIntervals(state),
-  instructions: selectInstructions(state),
   mode: selectMode(state),
 });
 
@@ -42,7 +40,6 @@ const DownloadButton = (props: DownloadButtonProps) => {
         sportType: props.sportType,
         lengthType: props.lengthType,
         intervals: props.intervals,
-        instructions: props.instructions,
       },
       props.mode
     );

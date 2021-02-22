@@ -47,4 +47,8 @@ export default class BikeMode extends Mode {
       }
     }
   }
+
+  intervalLength(interval: Interval): Length {
+    return this.intervalDuration(interval);
+  }
 }
