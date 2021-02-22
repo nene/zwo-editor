@@ -80,7 +80,7 @@ export default function parseWorkoutXml(
     return workout;
   }
 
-  const readLength = (x: number) =>
+  const toLength = (x: number) =>
     workout.lengthType === "time" ? Duration(x) : Distance(x);
 
   workoutEl.elements.map(
@@ -109,12 +109,12 @@ export default function parseWorkoutXml(
               intensity: parseFloat(
                 w.attributes.Power || w.attributes.PowerLow
               ),
-              length: readLength(parseFloat(w.attributes.Duration)),
+              length: toLength(parseFloat(w.attributes.Duration)),
               cadence: w.attributes.Cadence
                 ? parseFloat(w.attributes.Cadence)
                 : undefined,
               pace: parseInt(w.attributes.pace || "0"),
-              instructions: textEventsToInstructions(w.elements, readLength),
+              instructions: textEventsToInstructions(w.elements, toLength),
             },
             mode
           )
@@ -126,12 +126,12 @@ export default function parseWorkoutXml(
             {
               startIntensity: parseFloat(w.attributes.PowerLow),
               endIntensity: parseFloat(w.attributes.PowerHigh),
-              length: readLength(parseFloat(w.attributes.Duration)),
+              length: toLength(parseFloat(w.attributes.Duration)),
               pace: parseInt(w.attributes.pace || "0"),
               cadence: w.attributes.Cadence
                 ? parseFloat(w.attributes.Cadence)
                 : undefined,
-              instructions: textEventsToInstructions(w.elements, readLength),
+              instructions: textEventsToInstructions(w.elements, toLength),
             },
             mode
           )
@@ -142,8 +142,8 @@ export default function parseWorkoutXml(
           intervalFactory.repetition(
             {
               repeat: parseFloat(w.attributes.Repeat),
-              onLength: readLength(parseFloat(w.attributes.OnDuration)),
-              offLength: readLength(parseFloat(w.attributes.OffDuration)),
+              onLength: toLength(parseFloat(w.attributes.OnDuration)),
+              offLength: toLength(parseFloat(w.attributes.OffDuration)),
               onIntensity: parseFloat(w.attributes.OnPower),
               offIntensity: parseFloat(w.attributes.OffPower),
               onCadence: w.attributes.Cadence
@@ -153,7 +153,7 @@ export default function parseWorkoutXml(
                 ? parseFloat(w.attributes.CadenceResting)
                 : undefined,
               pace: parseInt(w.attributes.pace || "0"),
-              instructions: textEventsToInstructions(w.elements, readLength),
+              instructions: textEventsToInstructions(w.elements, toLength),
             },
             mode
           )
@@ -163,11 +163,11 @@ export default function parseWorkoutXml(
         workout.intervals.push(
           intervalFactory.free(
             {
-              length: readLength(parseFloat(w.attributes.Duration)),
+              length: toLength(parseFloat(w.attributes.Duration)),
               cadence: w.attributes.Cadence
                 ? parseFloat(w.attributes.Cadence)
                 : undefined,
-              instructions: textEventsToInstructions(w.elements, readLength),
+              instructions: textEventsToInstructions(w.elements, toLength),
             },
             mode
           )
@@ -189,7 +189,7 @@ type TextElement = {
 
 function textEventsToInstructions(
   textElements: TextElement[] | undefined,
-  readLength: (n: number) => Length
+  toLength: (n: number) => Length
 ): Instruction[] {
   if (!textElements || textElements.length === 0) {
     return [];
@@ -199,7 +199,7 @@ function textEventsToInstructions(
     .filter((t) => t.name.toLowerCase() === "textevent")
     .map((t) => ({
       text: t.attributes.message || "",
-      offset: readLength(parseFloat(t.attributes.timeoffset)),
+      offset: toLength(parseFloat(t.attributes.timeoffset)),
       id: uuidv4(),
     }));
 }
