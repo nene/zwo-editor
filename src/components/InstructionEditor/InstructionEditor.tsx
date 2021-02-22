@@ -102,6 +102,9 @@ const DragHandle = styled(FontAwesomeIcon).attrs(() => ({
 }))`
   display: block;
   opacity: 0.7;
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const EditorContainer = styled.div`
@@ -136,6 +139,9 @@ const DeleteButton = styled(FontAwesomeIcon).attrs(() => ({
   fixedWidth: true,
 }))`
   color: gray;
+  &:hover {
+    color: #666;
+  }
 `;
 
 export default InstructionEditor;
