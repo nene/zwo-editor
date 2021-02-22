@@ -21,6 +21,7 @@ import {
 } from "../../rdx/state/selectedId";
 import SelectionToolbar from "../SelectionToolbar/SelectionToolbar";
 import styled from "styled-components";
+import { debounce } from "lodash";
 
 const mapStateToProps = (state: RootState) => ({
   lengthType: selectLengthType(state),
@@ -56,9 +57,12 @@ const Editor = ({
   const segmentsRef = useRef<HTMLDivElement>(null);
   const [xAxisWidth, setXAxisWidth] = useState(1320);
 
-  useEffect(() => {
-    setXAxisWidth(segmentsRef.current?.scrollWidth || 1320);
-  }, [segmentsRef]);
+  useEffect(
+    debounce(() => {
+      setXAxisWidth(segmentsRef.current?.scrollWidth || 1320);
+    }, 200),
+    [segmentsRef, intervals]
+  );
 
   function toggleSelection(id: string) {
     if (id === selectedId) {
