@@ -105,8 +105,8 @@ const CadenceItem: React.FC<CadenceItemProps> = ({ cadence, onChange }) => {
       </CadenceLabel>
       {hover || focus ? (
         <CadenceInput
-          cadence={cadence}
-          onCadenceChange={onChange}
+          $cadence={cadence}
+          $onCadenceChange={onChange}
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
         />
@@ -167,8 +167,8 @@ const CadenceLabel = styled.label`
 `;
 
 type CadenceInputProps = {
-  cadence?: number;
-  onCadenceChange: (v: number | undefined) => void;
+  $cadence?: number;
+  $onCadenceChange: (v: number | undefined) => void;
 };
 
 const CadenceInput = styled.input.attrs<CadenceInputProps>((props) => ({
@@ -176,9 +176,9 @@ const CadenceInput = styled.input.attrs<CadenceInputProps>((props) => ({
   min: "40",
   max: "150",
   step: "5",
-  value: props.cadence || "",
+  value: props.$cadence || "",
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-    props.onCadenceChange(
+    props.$onCadenceChange(
       e.target.value ? parseInt(e.target.value) : undefined
     );
   },
