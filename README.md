@@ -4,7 +4,12 @@
 
 This is a fork of the [zwo-editor][] for [zwiftworkout.com][] originally written by Carlo Schiesaro.
 
-Compared to the original, some functionality has been dropped (at least for now):
+Compared to the original, there's one major difference in editing experience:
+
+- Instructions (text events) are stored within interval blocks
+  (so that moving an interval also moves its instructions).
+
+Some functionality has been dropped (at least for now):
 
 - No server-side features (which aren't fully open-sourced in the original).
 - No text-based editor (which has lots of bugs in the original).
@@ -35,7 +40,6 @@ the inner workings of the app have been substantially changed:
 
 Plans going forward:
 
-- Come up with a better way of editing instructions.
 - Integrate with [zwiftout][] text-based editor.
 - Fix more [bugs from the original][orig-bugs].
 - Pick a different name and logo to distinguish from the original.
