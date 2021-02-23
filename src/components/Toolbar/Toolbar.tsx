@@ -55,7 +55,7 @@ const Toolbar = ({ mode, addInterval, ...props }: ToolbarProps) => {
   return (
     <Container>
       {props.sportType === "bike" ? (
-        <div>
+        <>
           <ColorButton
             color={ZoneColor.GRAY}
             onClick={() =>
@@ -114,7 +114,7 @@ const Toolbar = ({ mode, addInterval, ...props }: ToolbarProps) => {
           >
             Z6
           </ColorButton>
-        </div>
+        </>
       ) : (
         <SvgButton
           svg={SteadyLogo}
