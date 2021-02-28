@@ -27,11 +27,10 @@ export default function Footer() {
 }
 
 const Container = styled.div`
-  padding: 10px;
+  padding: 8px;
   font-size: 12px;
   text-align: center;
-  background-color: black;
-  color: white;
+  color: #484747;
 `;
 
 const List = styled.ul`
@@ -48,5 +47,5 @@ const Item = styled.li`
 
 const Hyperlink = styled.a`
   text-decoration: none;
-  color: #00c46a;
+  color: #299965;
 `;
