@@ -76,82 +76,6 @@ Array [
 ]
 `;
 
-exports[`intervalUtils updateIntervalDuration increases or decreses duration of specified interval 1`] = `
-Array [
-  Object {
-    "cadence": undefined,
-    "id": "#1",
-    "instructions": Array [],
-    "intensity": 0.5,
-    "length": Object {
-      "seconds": 60,
-    },
-    "pace": 0,
-    "type": "steady",
-  },
-  Object {
-    "cadence": undefined,
-    "id": "#2",
-    "instructions": Array [],
-    "intensity": 1,
-    "length": Object {
-      "seconds": 130,
-    },
-    "pace": 0,
-    "type": "steady",
-  },
-  Object {
-    "cadence": undefined,
-    "id": "#3",
-    "instructions": Array [],
-    "intensity": 0.75,
-    "length": Object {
-      "seconds": 30,
-    },
-    "pace": 0,
-    "type": "steady",
-  },
-]
-`;
-
-exports[`intervalUtils updateIntervalDuration increases or decreses duration of specified interval 2`] = `
-Array [
-  Object {
-    "cadence": undefined,
-    "id": "#1",
-    "instructions": Array [],
-    "intensity": 0.5,
-    "length": Object {
-      "seconds": 60,
-    },
-    "pace": 0,
-    "type": "steady",
-  },
-  Object {
-    "cadence": undefined,
-    "id": "#2",
-    "instructions": Array [],
-    "intensity": 1,
-    "length": Object {
-      "seconds": 120,
-    },
-    "pace": 0,
-    "type": "steady",
-  },
-  Object {
-    "cadence": undefined,
-    "id": "#3",
-    "instructions": Array [],
-    "intensity": 0.75,
-    "length": Object {
-      "seconds": 20,
-    },
-    "pace": 0,
-    "type": "steady",
-  },
-]
-`;
-
 exports[`intervalUtils updateIntervalIntensity increases or decreses duration of specified interval 1`] = `
 Array [
   Object {
@@ -221,6 +145,158 @@ Array [
     "intensity": 0.7,
     "length": Object {
       "seconds": 30,
+    },
+    "pace": 0,
+    "type": "steady",
+  },
+]
+`;
+
+exports[`intervalUtils updateIntervalLength increases or decreses distance of specified interval 1`] = `
+Array [
+  Object {
+    "cadence": undefined,
+    "id": "#1",
+    "instructions": Array [],
+    "intensity": 0.5,
+    "length": Object {
+      "meters": 1000,
+    },
+    "pace": 0,
+    "type": "steady",
+  },
+  Object {
+    "cadence": undefined,
+    "id": "#2",
+    "instructions": Array [],
+    "intensity": 1,
+    "length": Object {
+      "meters": 1300,
+    },
+    "pace": 0,
+    "type": "steady",
+  },
+  Object {
+    "cadence": undefined,
+    "id": "#3",
+    "instructions": Array [],
+    "intensity": 0.75,
+    "length": Object {
+      "meters": 3000,
+    },
+    "pace": 0,
+    "type": "steady",
+  },
+]
+`;
+
+exports[`intervalUtils updateIntervalLength increases or decreses distance of specified interval 2`] = `
+Array [
+  Object {
+    "cadence": undefined,
+    "id": "#1",
+    "instructions": Array [],
+    "intensity": 0.5,
+    "length": Object {
+      "meters": 1000,
+    },
+    "pace": 0,
+    "type": "steady",
+  },
+  Object {
+    "cadence": undefined,
+    "id": "#2",
+    "instructions": Array [],
+    "intensity": 1,
+    "length": Object {
+      "meters": 1200,
+    },
+    "pace": 0,
+    "type": "steady",
+  },
+  Object {
+    "cadence": undefined,
+    "id": "#3",
+    "instructions": Array [],
+    "intensity": 0.75,
+    "length": Object {
+      "meters": 2900,
+    },
+    "pace": 0,
+    "type": "steady",
+  },
+]
+`;
+
+exports[`intervalUtils updateIntervalLength increases or decreses duration of specified interval 1`] = `
+Array [
+  Object {
+    "cadence": undefined,
+    "id": "#1",
+    "instructions": Array [],
+    "intensity": 0.5,
+    "length": Object {
+      "seconds": 60,
+    },
+    "pace": 0,
+    "type": "steady",
+  },
+  Object {
+    "cadence": undefined,
+    "id": "#2",
+    "instructions": Array [],
+    "intensity": 1,
+    "length": Object {
+      "seconds": 130,
+    },
+    "pace": 0,
+    "type": "steady",
+  },
+  Object {
+    "cadence": undefined,
+    "id": "#3",
+    "instructions": Array [],
+    "intensity": 0.75,
+    "length": Object {
+      "seconds": 30,
+    },
+    "pace": 0,
+    "type": "steady",
+  },
+]
+`;
+
+exports[`intervalUtils updateIntervalLength increases or decreses duration of specified interval 2`] = `
+Array [
+  Object {
+    "cadence": undefined,
+    "id": "#1",
+    "instructions": Array [],
+    "intensity": 0.5,
+    "length": Object {
+      "seconds": 60,
+    },
+    "pace": 0,
+    "type": "steady",
+  },
+  Object {
+    "cadence": undefined,
+    "id": "#2",
+    "instructions": Array [],
+    "intensity": 1,
+    "length": Object {
+      "seconds": 120,
+    },
+    "pace": 0,
+    "type": "steady",
+  },
+  Object {
+    "cadence": undefined,
+    "id": "#3",
+    "instructions": Array [],
+    "intensity": 0.75,
+    "length": Object {
+      "seconds": 20,
     },
     "pace": 0,
     "type": "steady",

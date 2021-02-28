@@ -1,6 +1,12 @@
 import { Zones } from "../types/Zones";
 import { Interval } from "../types/Interval";
-import { Duration } from "../types/Length";
+import {
+  Distance,
+  Duration,
+  isDistance,
+  isDuration,
+  Length,
+} from "../types/Length";
 import { WorkoutMode } from "../modes/WorkoutMode";
 import { move, propEq, update } from "ramda";
 
@@ -19,9 +25,9 @@ function updateById(
   return update(index, transform(intervals[index]), intervals);
 }
 
-export function updateIntervalDuration(
+export function updateIntervalLength(
   id: string,
-  dDuration: Duration,
+  dLength: Length,
   intervals: Interval[],
   mode: WorkoutMode
 ): Interval[] {
@@ -29,16 +35,25 @@ export function updateIntervalDuration(
     id,
     (interval) => {
       if (interval.type === "steady") {
-        const seconds =
-          mode.intervalDuration(interval).seconds + dDuration.seconds;
-        if (seconds > 0) {
-          return { ...interval, length: Duration(seconds) };
+        const length = addLengths(mode.intervalLength(interval), dLength);
+        if (mode.fromLength(length) > 0) {
+          return { ...interval, length };
         }
       }
       return interval;
     },
     intervals
   );
+}
+
+function addLengths(a: Length, b: Length): Length {
+  if (isDuration(a) && isDuration(b)) {
+    return Duration(a.seconds + b.seconds);
+  } else if (isDistance(a) && isDistance(b)) {
+    return Distance(a.meters + b.meters);
+  } else {
+    throw new Error(`Unable to sum Distance with Duration`);
+  }
 }
 
 export function updateIntervalIntensity(

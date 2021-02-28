@@ -1,14 +1,16 @@
 import {
   moveInterval,
-  updateIntervalDuration,
+  updateIntervalLength,
   updateIntervalIntensity,
 } from "../intervalUtils";
-import { Duration } from "../../types/Length";
+import { Distance, Duration } from "../../types/Length";
 import intervalFactory from "../intervalFactory";
 import BikeMode from "../../modes/BikeMode";
 import { WorkoutMode } from "../../modes/WorkoutMode";
+import RunMode from "../../modes/RunMode";
 
 const defaultBikeMode = () => new BikeMode(200, 75);
+const distanceRunMode = () => new RunMode([], "distance");
 
 function deepFreeze<T>(object: T): T {
   for (const name of Object.getOwnPropertyNames(object)) {
@@ -49,16 +51,55 @@ const defaultIntervals = (mode: WorkoutMode) =>
     ),
   ]);
 
+const defaultRunIntervals = (mode: WorkoutMode) =>
+  deepFreeze([
+    intervalFactory.steady(
+      {
+        id: "#1",
+        length: Distance(1000),
+        intensity: 0.5,
+      },
+      mode
+    ),
+    intervalFactory.steady(
+      {
+        id: "#2",
+        length: Distance(1200),
+        intensity: 1.0,
+      },
+      mode
+    ),
+    intervalFactory.steady(
+      {
+        id: "#3",
+        length: Distance(3000),
+        intensity: 0.75,
+      },
+      mode
+    ),
+  ]);
+
 describe("intervalUtils", () => {
-  describe("updateIntervalDuration", () => {
+  describe("updateIntervalLength", () => {
     it("increases or decreses duration of specified interval", () => {
       const mode = defaultBikeMode();
       const intervals = defaultIntervals(mode);
       expect(
-        updateIntervalDuration("#2", Duration(10), intervals, mode)
+        updateIntervalLength("#2", Duration(10), intervals, mode)
       ).toMatchSnapshot();
       expect(
-        updateIntervalDuration("#3", Duration(-10), intervals, mode)
+        updateIntervalLength("#3", Duration(-10), intervals, mode)
+      ).toMatchSnapshot();
+    });
+
+    it("increases or decreses distance of specified interval", () => {
+      const mode = distanceRunMode();
+      const intervals = defaultRunIntervals(mode);
+      expect(
+        updateIntervalLength("#2", Distance(100), intervals, mode)
+      ).toMatchSnapshot();
+      expect(
+        updateIntervalLength("#3", Distance(-100), intervals, mode)
       ).toMatchSnapshot();
     });
 
@@ -66,10 +107,21 @@ describe("intervalUtils", () => {
       const mode = defaultBikeMode();
       const intervals = defaultIntervals(mode);
       expect(
-        updateIntervalDuration("#1", Duration(-65), intervals, mode)
+        updateIntervalLength("#1", Duration(-65), intervals, mode)
       ).toEqual(intervals);
       expect(
-        updateIntervalDuration("#1", Duration(-60), intervals, mode)
+        updateIntervalLength("#1", Duration(-60), intervals, mode)
+      ).toEqual(intervals);
+    });
+
+    it("does not allow decreasing distance to zero or below it", () => {
+      const mode = distanceRunMode();
+      const intervals = defaultRunIntervals(mode);
+      expect(
+        updateIntervalLength("#1", Distance(-1200), intervals, mode)
+      ).toEqual(intervals);
+      expect(
+        updateIntervalLength("#1", Distance(-1000), intervals, mode)
       ).toEqual(intervals);
     });
 
@@ -77,7 +129,7 @@ describe("intervalUtils", () => {
       const mode = defaultBikeMode();
       const intervals = defaultIntervals(mode);
       expect(
-        updateIntervalDuration("#blah", Duration(10), intervals, mode)
+        updateIntervalLength("#blah", Duration(10), intervals, mode)
       ).toEqual(intervals);
     });
   });

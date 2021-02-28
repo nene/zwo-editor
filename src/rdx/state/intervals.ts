@@ -9,13 +9,13 @@ import { RootState } from "../store";
 import { clearWorkout, loadWorkout } from "./workout";
 import {
   updateIntervalIntensity,
-  updateIntervalDuration,
+  updateIntervalLength,
   moveInterval,
 } from "../../interval/intervalUtils";
 import { replaceById } from "../../utils/array";
 import { clearSelection, selectSelectedId } from "./selectedId";
 import intervalFactory from "../../interval/intervalFactory";
-import { Duration } from "../../types/Length";
+import { Length } from "../../types/Length";
 import { selectMode } from "./mode";
 import { PaceType } from "../../types/PaceType";
 import { propEq } from "ramda";
@@ -150,17 +150,15 @@ export const adjustSelectedIntervalIntensity = createAsyncThunk(
   }
 );
 
-export const adjustSelectedIntervalDuration = createAsyncThunk(
-  "intervals/adjustSelectedIntervalDuration",
-  (amount: Duration, { getState, dispatch }) => {
+export const adjustSelectedIntervalLength = createAsyncThunk(
+  "intervals/adjustSelectedIntervalLength",
+  (amount: Length, { getState, dispatch }) => {
     const selectedId = selectSelectedId(getState() as RootState);
     if (selectedId) {
       const intervals = selectIntervals(getState() as RootState);
       const mode = selectMode(getState() as RootState);
       dispatch(
-        setIntervals(
-          updateIntervalDuration(selectedId, amount, intervals, mode)
-        )
+        setIntervals(updateIntervalLength(selectedId, amount, intervals, mode))
       );
     }
   }

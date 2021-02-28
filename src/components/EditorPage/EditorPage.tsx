@@ -16,7 +16,7 @@ import Keyboard from "../Keyboard/Keyboard";
 import Stats from "./Stats";
 import Title from "./Title";
 import { SportType } from "../../types/SportType";
-import { Duration } from "../../types/Length";
+import { Distance, Duration, Length } from "../../types/Length";
 import { LengthType } from "../../types/LengthType";
 import {
   selectAuthor,
@@ -36,7 +36,7 @@ import {
 import {
   selectIntervals,
   adjustSelectedIntervalIntensity,
-  adjustSelectedIntervalDuration,
+  adjustSelectedIntervalLength,
   updateInterval,
   removeSelectedInterval,
   setIntervals,
@@ -66,7 +66,7 @@ const mapDispatchToProps = {
   setRunningTimes,
   setIntervals,
   adjustSelectedIntervalIntensity,
-  adjustSelectedIntervalDuration,
+  adjustSelectedIntervalLength,
   updateInterval,
   setSelectedId,
   clearSelection,
@@ -93,7 +93,7 @@ const EditorPage = ({
   setRunningTimes,
   setIntervals,
   adjustSelectedIntervalIntensity,
-  adjustSelectedIntervalDuration,
+  adjustSelectedIntervalLength,
   removeSelectedInterval,
 }: EditorPageProps) => {
   const [savePopupIsVisile, setSavePopupVisibility] = useState(false);
@@ -124,13 +124,19 @@ const EditorPage = ({
     }
   }
 
+  function lengthChange(direction: -1 | 1): Length {
+    return mode.lengthType === "time"
+      ? Duration(5 * direction)
+      : Distance(200 * direction);
+  }
+
   return (
     <KeyboardContainer
       onBackspacePress={removeSelectedInterval}
       onUpPress={() => adjustSelectedIntervalIntensity(0.01)}
       onDownPress={() => adjustSelectedIntervalIntensity(-0.01)}
-      onLeftPress={() => adjustSelectedIntervalDuration(Duration(-5))}
-      onRightPress={() => adjustSelectedIntervalDuration(Duration(5))}
+      onLeftPress={() => adjustSelectedIntervalLength(lengthChange(-1))}
+      onRightPress={() => adjustSelectedIntervalLength(lengthChange(1))}
     >
       <Head name={name} description={description} />
 
