@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/zwo-editor/precache-manifest.ce0ec6d7ab2ed0f2b1d1d6616f4c391a.js"
+  "/zwo-editor/precache-manifest.b4579b17e43ebeb4c924c38442596e3a.js"
 );
 
 self.addEventListener('message', (event) => {
