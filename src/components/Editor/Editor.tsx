@@ -54,17 +54,17 @@ const Editor = ({
   updateInstruction,
   removeInstruction,
 }: EditorProps) => {
-  const segmentsRef = useRef<HTMLDivElement>(null);
+  const barsRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
   const [xAxisWidth, setXAxisWidth] = useState(1320);
 
   useEffect(
     debounce(() => {
-      const scrollWidth = segmentsRef.current?.scrollWidth || 0;
+      const barsWidth = barsRef.current?.scrollWidth || 0;
       const canvasWidth = canvasRef.current?.scrollWidth || 0;
-      setXAxisWidth(scrollWidth < canvasWidth ? canvasWidth : scrollWidth);
+      setXAxisWidth(barsWidth < canvasWidth ? canvasWidth : barsWidth);
     }, 200),
-    [segmentsRef, canvasRef, intervals]
+    [barsRef, canvasRef, intervals]
   );
 
   function toggleSelection(id: string) {
@@ -83,7 +83,7 @@ const Editor = ({
         {selectedId && (
           <Fader style={{ width: xAxisWidth }} onClick={clearSelection} />
         )}
-        <Segments ref={segmentsRef}>
+        <Bars ref={barsRef}>
           {intervals.map((interval) => (
             <GenericBar
               key={interval.id}
@@ -96,7 +96,7 @@ const Editor = ({
               selected={interval.id === selectedId}
             />
           ))}
-        </Segments>
+        </Bars>
 
         {lengthType === "time" ? (
           <TimeAxis width={xAxisWidth} />
@@ -136,7 +136,7 @@ const Canvas = styled.div`
   bottom: 10px;
 `;
 
-const Segments = styled.div`
+const Bars = styled.div`
   position: absolute;
   display: flex;
   flex-wrap: nowrap;
