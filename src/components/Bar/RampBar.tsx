@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { zoneColor, ZoneColor, Zones, ZonesArray } from "../../types/Zones";
 import { Resizable } from "re-resizable";
@@ -22,6 +22,7 @@ interface RampBarProps {
 
 const RampBar = ({ interval, mode, ...props }: RampBarProps) => {
   const [showTooltip, setShowTooltip] = useState(false);
+  const [isResizing, setIsResizing] = useState(false);
 
   const handleCadenceChange = (cadence: number | undefined) => {
     props.onChange({ ...interval, cadence: cadence });
@@ -29,6 +30,11 @@ const RampBar = ({ interval, mode, ...props }: RampBarProps) => {
 
   const width = mode.lengthToWidth(interval.length);
   const [resizableWidth, setResizableWidth] = useState(width);
+  useEffect(() => {
+    if (!isResizing) {
+      setResizableWidth(mode.lengthToWidth(interval.length));
+    }
+  }, [isResizing, interval.length, mode]);
 
   const startHeight = mode.intensityToHeight(interval.startIntensity);
   const [resizableStartHeight, setResizableStartHeight] = useState(startHeight);
@@ -95,9 +101,11 @@ const RampBar = ({ interval, mode, ...props }: RampBarProps) => {
           maxHeight={intensityMultiplier * Zones.Z6.max}
           enable={{ top: true, right: true }}
           grid={[1, 1]}
-          onResizeStop={(e, direction, ref, d) =>
-            handleStartResizeStop(d.height)
-          }
+          onResizeStart={() => setIsResizing(true)}
+          onResizeStop={(e, direction, ref, d) => {
+            handleStartResizeStop(d.height);
+            setIsResizing(false);
+          }}
           onResize={(e, direction, ref, d) => handleStartResize(d.height)}
         >
           <BarIcons
@@ -116,9 +124,11 @@ const RampBar = ({ interval, mode, ...props }: RampBarProps) => {
           maxHeight={intensityMultiplier * Zones.Z6.max}
           enable={{ top: true, right: true }}
           grid={[1, 1]}
-          onResizeStop={(e, direction, ref, d) =>
-            handleEndResizeStop(d.width, d.height)
-          }
+          onResizeStart={() => setIsResizing(true)}
+          onResizeStop={(e, direction, ref, d) => {
+            handleEndResizeStop(d.width, d.height);
+            setIsResizing(false);
+          }}
           onResize={(e, direction, ref, d) =>
             handleEndResize(d.width, d.height)
           }

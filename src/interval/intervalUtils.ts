@@ -34,7 +34,11 @@ export function updateIntervalLength(
   return updateById(
     id,
     (interval) => {
-      if (interval.type === "steady" || interval.type === "free") {
+      if (
+        interval.type === "steady" ||
+        interval.type === "free" ||
+        interval.type === "ramp"
+      ) {
         const length = addLengths(mode.intervalLength(interval), dLength);
         if (mode.fromLength(length) > 0) {
           return { ...interval, length };
