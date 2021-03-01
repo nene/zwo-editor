@@ -55,13 +55,16 @@ const Editor = ({
   removeInstruction,
 }: EditorProps) => {
   const segmentsRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLDivElement>(null);
   const [xAxisWidth, setXAxisWidth] = useState(1320);
 
   useEffect(
     debounce(() => {
-      setXAxisWidth(segmentsRef.current?.scrollWidth || 1320);
+      const scrollWidth = segmentsRef.current?.scrollWidth || 0;
+      const canvasWidth = canvasRef.current?.scrollWidth || 0;
+      setXAxisWidth(scrollWidth < canvasWidth ? canvasWidth : scrollWidth);
     }, 200),
-    [segmentsRef, intervals]
+    [segmentsRef, canvasRef, intervals]
   );
 
   function toggleSelection(id: string) {
@@ -76,7 +79,7 @@ const Editor = ({
     <Container>
       {selectedId && <SelectionToolbar />}
 
-      <Canvas>
+      <Canvas ref={canvasRef}>
         {selectedId && (
           <Fader style={{ width: xAxisWidth }} onClick={clearSelection} />
         )}
