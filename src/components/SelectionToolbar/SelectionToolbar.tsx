@@ -106,8 +106,9 @@ const ActionsContainer = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  width: 220px;
-  margin: 0 auto;
+
+  display: flex;
+  justify-content: center;
   padding: 5px;
   z-index: 10;
 `;
