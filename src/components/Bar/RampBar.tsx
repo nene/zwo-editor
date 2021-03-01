@@ -40,8 +40,15 @@ const RampBar = ({ interval, mode, ...props }: RampBarProps) => {
     setResizableStartHeight(resizableStartHeight + dHeight);
   };
   const handleEndResizeStop = (dWidth: number, dHeight: number) => {
-    setResizableWidth(resizableWidth + dWidth);
+    // When resizing finished,
+    // round the length to minimal step precision and recompute resizable width
+    const newLength = mode.widthToLength(resizableWidth + dWidth);
+    setResizableWidth(mode.lengthToWidth(newLength));
     setResizableEndHeight(resizableEndHeight + dHeight);
+    props.onChange({
+      ...interval,
+      length: newLength,
+    });
   };
 
   const handleStartResize = (dHeight: number) => {
@@ -53,7 +60,11 @@ const RampBar = ({ interval, mode, ...props }: RampBarProps) => {
   const handleEndResize = (dWidth: number, dHeight: number) => {
     props.onChange({
       ...interval,
-      length: mode.widthToLength(resizableWidth + dWidth),
+      // During resizing, don't perform rounding to minimal step precision
+      length: mode.widthToLength(resizableWidth + dWidth, {
+        meters: 1,
+        seconds: 1,
+      }),
       startIntensity: mode.heightToIntensity(resizableStartHeight),
       endIntensity: mode.heightToIntensity(resizableEndHeight + dHeight),
     });
