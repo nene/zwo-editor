@@ -61,7 +61,7 @@ const SteadyBar = ({ interval, mode, ...props }: SteadyBarProps) => {
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
       onClick={() => props.onClick(interval.id)}
-      style={props.selected ? { zIndex: ZIndex.selectionToolbar } : {}}
+      style={props.selected ? { zIndex: ZIndex.selected } : {}}
     >
       {(selected || showTooltip) && props.showTooltip && (
         <Tooltip

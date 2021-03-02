@@ -111,7 +111,7 @@ const ActionsContainer = styled.div`
   display: flex;
   justify-content: center;
   padding: 5px;
-  z-index: ${ZIndex.selectionToolbar};
+  z-index: ${ZIndex.selected};
 `;
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectionToolbar);
