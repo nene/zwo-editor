@@ -76,7 +76,7 @@ exports[`<FreeBar> renders with tooltip when selected 1`] = `
   onMouseLeave={[Function]}
   style={
     Object {
-      "zIndex": 1,
+      "zIndex": 5,
     }
   }
 >

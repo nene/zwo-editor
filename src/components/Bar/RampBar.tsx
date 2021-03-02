@@ -81,7 +81,7 @@ const RampBar = ({ interval, mode, ...props }: RampBarProps) => {
     <Container
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
-      style={props.selected ? { zIndex: ZIndex.fader } : {}}
+      style={props.selected ? { zIndex: ZIndex.selected } : {}}
       onClick={() => props.onClick(interval.id)}
     >
       {(props.selected || showTooltip) && (
