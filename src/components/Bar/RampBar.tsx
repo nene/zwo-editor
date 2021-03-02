@@ -161,7 +161,7 @@ const Ramp = styled.div`
 `;
 
 const ResizableRamp = styled(Resizable)<{ $selected: boolean }>`
-  border-top: 1px dotted gray;
+  border-top: 1px dotted black;
   z-index: ${(props) =>
     props.$selected ? ZIndex.selectedResizeHandle : ZIndex.resizeHandle};
 `;
