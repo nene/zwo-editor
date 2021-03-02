@@ -10,6 +10,10 @@ exports[`InstructionEditor renders vertical line and icon 1`] = `
   opacity: 0.7;
 }
 
+.c1:hover {
+  opacity: 0.8;
+}
+
 .c2 {
   position: absolute;
   top: 30px;
@@ -67,6 +71,10 @@ exports[`InstructionEditor shows the editor when icon clicked 1`] = `
   opacity: 0.7;
 }
 
+.c1:hover {
+  opacity: 0.8;
+}
+
 .c2 {
   position: relative;
   padding: 5px;
@@ -96,6 +104,10 @@ exports[`InstructionEditor shows the editor when icon clicked 1`] = `
 
 .c3 {
   color: gray;
+}
+
+.c3:hover {
+  color: #666;
 }
 
 <div

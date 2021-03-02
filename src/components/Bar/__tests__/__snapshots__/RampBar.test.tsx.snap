@@ -93,6 +93,7 @@ exports[`<SteadyBar> renders 1`] = `
       minHeight={25}
       minWidth={3}
       onResize={[Function]}
+      onResizeStart={[Function]}
       onResizeStop={[Function]}
       size={
         Object {
@@ -123,6 +124,7 @@ exports[`<SteadyBar> renders 1`] = `
       minHeight={25}
       minWidth={3}
       onResize={[Function]}
+      onResizeStart={[Function]}
       onResizeStop={[Function]}
       size={
         Object {
@@ -336,6 +338,7 @@ exports[`<SteadyBar> renders with Tooltip when selected 1`] = `
       minHeight={25}
       minWidth={3}
       onResize={[Function]}
+      onResizeStart={[Function]}
       onResizeStop={[Function]}
       size={
         Object {
@@ -366,6 +369,7 @@ exports[`<SteadyBar> renders with Tooltip when selected 1`] = `
       minHeight={25}
       minWidth={3}
       onResize={[Function]}
+      onResizeStart={[Function]}
       onResizeStop={[Function]}
       size={
         Object {
