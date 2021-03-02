@@ -5,7 +5,7 @@ import SteadyBar from "./SteadyBar";
 import RampBar from "./RampBar";
 import RepetitionBar from "./RepetitionBar";
 import { WorkoutMode } from "../../modes/WorkoutMode";
-import InstructionEditor from "../InstructionEditor/InstructionEditor";
+import InstructionItem from "../Instruction/InstructionItem";
 import styled from "styled-components";
 import { Instruction } from "../../types/Instruction";
 import { ZIndex } from "../../types/ZIndex";
@@ -64,7 +64,7 @@ const InstructionsList: React.FC<{
 }> = ({ instructions, mode, width, onChange, onDelete }) => (
   <InstructionsWrap>
     {instructions.map((instruction, index) => (
-      <InstructionEditor
+      <InstructionItem
         key={instruction.id}
         instruction={instruction}
         width={width}

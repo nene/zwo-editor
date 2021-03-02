@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`InstructionEditor renders vertical line and icon 1`] = `
+exports[`InstructionItem renders vertical line and icon 1`] = `
 .c0 {
   position: absolute;
 }
@@ -60,7 +60,7 @@ exports[`InstructionEditor renders vertical line and icon 1`] = `
 </div>
 `;
 
-exports[`InstructionEditor shows the editor when icon clicked 1`] = `
+exports[`InstructionItem shows the editor when icon clicked 1`] = `
 .c0 {
   position: absolute;
 }

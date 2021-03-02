@@ -8,7 +8,7 @@ import * as format from "../../utils/format";
 import { isDuration, Length } from "../../types/Length";
 import { WorkoutMode } from "../../modes/WorkoutMode";
 
-interface InstructionEditorProps {
+interface InstructionItemProps {
   instruction: Instruction;
   width: number;
   onChange: (instruction: Instruction) => void;
@@ -19,7 +19,7 @@ interface InstructionEditorProps {
 
 const roundingPrecision = { meters: 10, seconds: 5 };
 
-const InstructionEditor = (props: InstructionEditorProps) => {
+const InstructionItem = (props: InstructionItemProps) => {
   const [text, setText] = useState(props.instruction.text);
   const [xPosition, setXPosition] = useState(
     props.mode.lengthToWidth(props.instruction.offset)
@@ -143,4 +143,4 @@ const DeleteButton = styled(FontAwesomeIcon).attrs(() => ({
   }
 `;
 
-export default InstructionEditor;
+export default InstructionItem;

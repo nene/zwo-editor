@@ -1,12 +1,12 @@
 import React from "react";
-import InstructionEditor from "../InstructionEditor";
+import InstructionItem from "../InstructionItem";
 import renderer from "react-test-renderer";
 import { createInstruction } from "../../../types/Instruction";
 import createMode from "../../../modes/createMode";
 import { Duration } from "../../../types/Length";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-describe("InstructionEditor", () => {
+describe("InstructionItem", () => {
   let component: renderer.ReactTestRenderer;
 
   beforeEach(() => {
@@ -26,7 +26,7 @@ describe("InstructionEditor", () => {
     );
 
     component = renderer.create(
-      <InstructionEditor
+      <InstructionItem
         instruction={instruction}
         width={500}
         index={0}
