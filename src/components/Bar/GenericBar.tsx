@@ -80,7 +80,7 @@ const InstructionsList: React.FC<{
 const InstructionsWrap = styled.div`
   position: absolute;
   top: 80px;
-  z-index: ${ZIndex.instruction};
+  z-index: ${ZIndex.selected};
 `;
 
 const IntervalBar = ({
