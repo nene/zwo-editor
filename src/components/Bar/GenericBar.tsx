@@ -5,10 +5,8 @@ import SteadyBar from "./SteadyBar";
 import RampBar from "./RampBar";
 import RepetitionBar from "./RepetitionBar";
 import { WorkoutMode } from "../../modes/WorkoutMode";
-import InstructionItem from "../Instruction/InstructionItem";
-import styled from "styled-components";
 import { Instruction } from "../../types/Instruction";
-import { ZIndex } from "../../types/ZIndex";
+import { InstructionList } from "../Instruction/InstructionList";
 
 interface GenericBarProps {
   interval: Interval;
@@ -31,7 +29,7 @@ const GenericBar = (props: GenericBarProps) => {
     <div>
       <IntervalBar {...props} />
       {props.selected && (
-        <InstructionsList
+        <InstructionList
           instructions={props.interval.instructions}
           mode={props.mode}
           width={props.mode.lengthToWidth(
@@ -54,34 +52,6 @@ const GenericBar = (props: GenericBarProps) => {
     </div>
   );
 };
-
-const InstructionsList: React.FC<{
-  instructions: Instruction[];
-  mode: WorkoutMode;
-  width: number;
-  onChange: (instruction: Instruction) => void;
-  onDelete: (instructionId: string) => void;
-}> = ({ instructions, mode, width, onChange, onDelete }) => (
-  <InstructionsWrap>
-    {instructions.map((instruction, index) => (
-      <InstructionItem
-        key={instruction.id}
-        instruction={instruction}
-        width={width}
-        onChange={onChange}
-        onDelete={onDelete}
-        index={index}
-        mode={mode}
-      />
-    ))}
-  </InstructionsWrap>
-);
-
-const InstructionsWrap = styled.div`
-  position: absolute;
-  top: 80px;
-  z-index: ${ZIndex.selected};
-`;
 
 const IntervalBar = ({
   interval,
