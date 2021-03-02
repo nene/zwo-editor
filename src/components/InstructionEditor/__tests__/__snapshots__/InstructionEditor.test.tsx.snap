@@ -22,7 +22,6 @@ exports[`InstructionEditor renders vertical line and icon 1`] = `
   height: 90vh;
   width: 1px;
   border-left: 1px dotted gray;
-  z-index: 0;
 }
 
 <div
@@ -88,7 +87,6 @@ exports[`InstructionEditor shows the editor when icon clicked 1`] = `
   height: 90vh;
   width: 1px;
   border-left: 1px dotted gray;
-  z-index: 0;
 }
 
 .c4 {

@@ -1,5 +1,4 @@
 export enum ZIndex {
-  instructionLine = 0,
   fader = 1,
   selected = 5,
   instruction = 11,

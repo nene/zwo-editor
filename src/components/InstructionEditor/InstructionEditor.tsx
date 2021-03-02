@@ -121,7 +121,6 @@ const VerticalLine = styled.div`
   height: 90vh;
   width: 1px;
   border-left: 1px dotted gray;
-  z-index: ${ZIndex.instructionLine};
 `;
 
 const Offset = styled.span`

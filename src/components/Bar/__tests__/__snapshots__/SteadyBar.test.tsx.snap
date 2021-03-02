@@ -130,7 +130,7 @@ exports[`<SteadyBar> renders with Tooltip when selected and showTooltip=true 1`]
   onMouseLeave={[Function]}
   style={
     Object {
-      "zIndex": 10,
+      "zIndex": 5,
     }
   }
 >
@@ -214,7 +214,7 @@ exports[`<SteadyBar> renders without Tooltip when selected, but showTooltip=fals
   onMouseLeave={[Function]}
   style={
     Object {
-      "zIndex": 10,
+      "zIndex": 5,
     }
   }
 >
