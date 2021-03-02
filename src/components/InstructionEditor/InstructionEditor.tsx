@@ -7,7 +7,6 @@ import { Instruction } from "../../types/Instruction";
 import * as format from "../../utils/format";
 import { isDuration, Length } from "../../types/Length";
 import { WorkoutMode } from "../../modes/WorkoutMode";
-import { ZIndex } from "../../types/ZIndex";
 
 interface InstructionEditorProps {
   instruction: Instruction;
