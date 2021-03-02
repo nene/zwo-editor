@@ -93,6 +93,7 @@ const RampBar = ({ interval, mode, ...props }: RampBarProps) => {
       )}
       <Ramp onClick={() => props.onClick(interval.id)}>
         <ResizableRamp
+          $selected={props.selected}
           size={{
             width: resizableWidth / 2,
             height: resizableStartHeight,
@@ -116,6 +117,7 @@ const RampBar = ({ interval, mode, ...props }: RampBarProps) => {
           />
         </ResizableRamp>
         <ResizableRamp
+          $selected={props.selected}
           size={{
             width: resizableWidth / 2,
             height: resizableEndHeight,
@@ -158,9 +160,10 @@ const Ramp = styled.div`
   align-items: flex-end;
 `;
 
-const ResizableRamp = styled(Resizable)`
+const ResizableRamp = styled(Resizable)<{ $selected: boolean }>`
   border-top: 1px dotted gray;
-  z-index: ${ZIndex.selected};
+  z-index: ${(props) =>
+    props.$selected ? ZIndex.selectedResizeHandle : ZIndex.resizeHandle};
 `;
 
 const Rainbow: React.FC<{

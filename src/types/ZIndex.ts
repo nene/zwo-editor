@@ -1,6 +1,8 @@
 export enum ZIndex {
-  fader = 1,
+  resizeHandle = 1,
+  fader = 3,
   selected = 5,
+  selectedResizeHandle = 6,
   tooltip = 100,
   popup = 1000,
 }
