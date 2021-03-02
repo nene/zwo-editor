@@ -8,6 +8,7 @@ import { durationMultiplier } from "./multipliers";
 import { WorkoutMode } from "../../modes/WorkoutMode";
 import freerideSvg from "../../assets/freeride.svg";
 import { BarIcons } from "./BarIcons";
+import { ZIndex } from "../../types/ZIndex";
 
 interface FreeBarProps {
   interval: FreeInterval;
@@ -42,7 +43,7 @@ const FreeBar = ({ interval, mode, ...props }: FreeBarProps) => {
     <Container
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
-      style={props.selected ? { zIndex: 1 } : {}}
+      style={props.selected ? { zIndex: ZIndex.fader } : {}}
       onClick={() => props.onClick(interval.id)}
     >
       {(props.selected || showTooltip) && (

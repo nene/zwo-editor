@@ -7,6 +7,7 @@ import { RampInterval } from "../../types/Interval";
 import { intensityMultiplier } from "./multipliers";
 import { WorkoutMode } from "../../modes/WorkoutMode";
 import { BarIcons } from "./BarIcons";
+import { ZIndex } from "../../types/ZIndex";
 
 interface IDictionary {
   [index: string]: number;
@@ -80,7 +81,7 @@ const RampBar = ({ interval, mode, ...props }: RampBarProps) => {
     <Container
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
-      style={props.selected ? { zIndex: 1 } : {}}
+      style={props.selected ? { zIndex: ZIndex.fader } : {}}
       onClick={() => props.onClick(interval.id)}
     >
       {(props.selected || showTooltip) && (
@@ -159,7 +160,7 @@ const Ramp = styled.div`
 
 const ResizableRamp = styled(Resizable)`
   border-top: 1px dotted gray;
-  z-index: 5;
+  z-index: ${ZIndex.selected};
 `;
 
 const Rainbow: React.FC<{

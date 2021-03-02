@@ -8,6 +8,7 @@ import { WorkoutMode } from "../../modes/WorkoutMode";
 import InstructionEditor from "../InstructionEditor/InstructionEditor";
 import styled from "styled-components";
 import { Instruction } from "../../types/Instruction";
+import { ZIndex } from "../../types/ZIndex";
 
 interface GenericBarProps {
   interval: Interval;
@@ -79,7 +80,7 @@ const InstructionsList: React.FC<{
 const InstructionsWrap = styled.div`
   position: absolute;
   top: 80px;
-  z-index: 11;
+  z-index: ${ZIndex.instruction};
 `;
 
 const IntervalBar = ({

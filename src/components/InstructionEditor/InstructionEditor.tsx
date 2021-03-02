@@ -7,6 +7,7 @@ import { Instruction } from "../../types/Instruction";
 import * as format from "../../utils/format";
 import { isDuration, Length } from "../../types/Length";
 import { WorkoutMode } from "../../modes/WorkoutMode";
+import { ZIndex } from "../../types/ZIndex";
 
 interface InstructionEditorProps {
   instruction: Instruction;
@@ -120,7 +121,7 @@ const VerticalLine = styled.div`
   height: 90vh;
   width: 1px;
   border-left: 1px dotted gray;
-  z-index: 0;
+  z-index: ${ZIndex.instructionLine};
 `;
 
 const Offset = styled.span`

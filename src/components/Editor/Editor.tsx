@@ -22,6 +22,7 @@ import {
 import SelectionToolbar from "../SelectionToolbar/SelectionToolbar";
 import styled from "styled-components";
 import { debounce } from "lodash";
+import { ZIndex } from "../../types/ZIndex";
 
 const mapStateToProps = (state: RootState) => ({
   lengthType: selectLengthType(state),
@@ -157,7 +158,7 @@ const Fader = styled.div`
   bottom: 0;
   width: 50000px;
   height: 100%;
-  z-index: 1;
+  z-index: ${ZIndex.fader};
 `;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor);

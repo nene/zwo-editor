@@ -7,6 +7,7 @@ import { SteadyInterval } from "../../types/Interval";
 import { intensityMultiplier } from "./multipliers";
 import { WorkoutMode } from "../../modes/WorkoutMode";
 import { BarIcons } from "./BarIcons";
+import { ZIndex } from "../../types/ZIndex";
 
 interface SteadyBarProps {
   interval: SteadyInterval;
@@ -60,7 +61,7 @@ const SteadyBar = ({ interval, mode, ...props }: SteadyBarProps) => {
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
       onClick={() => props.onClick(interval.id)}
-      style={props.selected ? { zIndex: 10 } : {}}
+      style={props.selected ? { zIndex: ZIndex.selectionToolbar } : {}}
     >
       {(selected || showTooltip) && props.showTooltip && (
         <Tooltip

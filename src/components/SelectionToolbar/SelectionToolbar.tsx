@@ -24,6 +24,7 @@ import { ConnectedProps } from "../../types/ConnectedProps";
 import styled from "styled-components";
 import { createInstruction } from "../../types/Instruction";
 import { selectMode } from "../../rdx/state/mode";
+import { ZIndex } from "../../types/ZIndex";
 
 const mapStateToProps = (state: RootState) => ({
   mode: selectMode(state),
@@ -110,7 +111,7 @@ const ActionsContainer = styled.div`
   display: flex;
   justify-content: center;
   padding: 5px;
-  z-index: 10;
+  z-index: ${ZIndex.selectionToolbar};
 `;
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectionToolbar);

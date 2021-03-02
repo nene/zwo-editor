@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import { ZIndex } from "../../types/ZIndex";
 
 const Popup: React.FC<{
   width: string;
@@ -29,7 +30,7 @@ const Background = styled.div`
   right: 0;
   width: 100%;
   height: 100%;
-  z-index: 1000;
+  z-index: ${ZIndex.popup};
 `;
 
 const Window = styled.div`

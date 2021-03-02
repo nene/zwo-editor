@@ -12,6 +12,7 @@ import BikeMode from "../../modes/BikeMode";
 import RunMode from "../../modes/RunMode";
 import * as format from "../../utils/format";
 import cadenceImage from "../../assets/cadence.png";
+import { ZIndex } from "../../types/ZIndex";
 
 interface TooltipProps {
   interval: SteadyInterval | RampInterval | FreeInterval;
@@ -37,7 +38,7 @@ const Tooltip = ({ mode, ...props }: TooltipProps) => {
 
 const TooltipContainer = styled.div`
   position: absolute;
-  z-index: 100;
+  z-index: ${ZIndex.tooltip};
   top: -95px;
   left: 0;
   color: white;
