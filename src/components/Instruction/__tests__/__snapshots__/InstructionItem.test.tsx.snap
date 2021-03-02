@@ -61,32 +61,9 @@ exports[`InstructionItem renders vertical line and icon 1`] = `
 `;
 
 exports[`InstructionItem shows the editor when icon clicked 1`] = `
-.c0 {
-  position: absolute;
-}
-
-.c1 {
-  display: block;
-  opacity: 0.7;
-}
-
-.c1:hover {
-  opacity: 0.8;
-}
-
 .c2 {
   position: relative;
   padding: 5px;
-}
-
-.c6 {
-  position: absolute;
-  top: 30px;
-  left: 0px;
-  right: 0;
-  height: 90vh;
-  width: 1px;
-  border-left: 1px dotted gray;
 }
 
 .c4 {
@@ -106,6 +83,29 @@ exports[`InstructionItem shows the editor when icon clicked 1`] = `
 
 .c3:hover {
   color: #666;
+}
+
+.c0 {
+  position: absolute;
+}
+
+.c1 {
+  display: block;
+  opacity: 0.7;
+}
+
+.c1:hover {
+  opacity: 0.8;
+}
+
+.c6 {
+  position: absolute;
+  top: 30px;
+  left: 0px;
+  right: 0;
+  height: 90vh;
+  width: 1px;
+  border-left: 1px dotted gray;
 }
 
 <div
